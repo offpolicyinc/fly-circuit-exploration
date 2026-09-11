@@ -1,0 +1,537 @@
+<title>Fly Navigation Circuit Atlas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f4f6f8; --panel:#ffffff; --ink:#1a2230; --ink2:#4a5568; --line:#c9d1da;
+  --acc:#3f51c9; --bump:#d6336c; --vec:#0f8b8d; --warn:#b7791f; --soft:#e8ecf1;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  --disp:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141a22; --panel:#1c242e; --ink:#e8edf3; --ink2:#a5b0bd; --line:#3a4653;
+  --acc:#8b97ff; --bump:#ff6b9d; --vec:#3fc3c5; --warn:#e0a94a; --soft:#242e3a;}}
+:root[data-theme="dark"]{
+  --bg:#141a22; --panel:#1c242e; --ink:#e8edf3; --ink2:#a5b0bd; --line:#3a4653;
+  --acc:#8b97ff; --bump:#ff6b9d; --vec:#3fc3c5; --warn:#e0a94a; --soft:#242e3a;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;margin:0}
+main{max-width:1040px;margin:0 auto;padding:40px 24px 80px}
+header{margin-bottom:36px}
+h1{font-family:var(--disp);font-size:40px;font-weight:700;line-height:1.05;margin:0 0 10px;text-wrap:balance}
+.lede{color:var(--ink2);max-width:66ch;font-size:16px;margin:0}
+h2{font-family:var(--disp);font-size:26px;font-weight:700;margin:56px 0 6px;text-wrap:balance}
+h2 .k{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);display:block;margin-bottom:4px}
+p{max-width:70ch}
+section>p:first-of-type{margin-top:0}
+figure{margin:20px 0 8px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px 10px;overflow-x:auto}
+svg{max-width:100%;height:auto;display:block;font-family:var(--sans);color:var(--ink)}
+svg text{fill:currentColor;font-size:12px}
+svg .mono{font-family:var(--mono);font-size:11.5px}
+svg .cap{font-size:11px;fill:var(--ink2)}
+svg .h{font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.02em}
+svg .box{fill:var(--panel);stroke:currentColor;stroke-width:1.2}
+svg .soft{fill:var(--soft);stroke:none}
+svg .ln{stroke:currentColor;stroke-width:1.4;fill:none}
+svg .dash{stroke-dasharray:5 4}
+svg .acc{stroke:var(--acc)}
+svg .accf{fill:var(--acc)}
+svg .bump{stroke:var(--bump)}
+svg .bumpf{fill:var(--bump)}
+svg .vec{stroke:var(--vec)}
+svg .vecf{fill:var(--vec)}
+svg .warn{stroke:var(--warn)}
+svg .warnf{fill:var(--warn)}
+figcaption{font-size:13px;color:var(--ink2);margin-top:8px;max-width:80ch}
+.legend{display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--ink2);margin:14px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.sw{width:30px;height:0;border-top:2px solid var(--ink)}
+.sw.d{border-top-style:dashed}
+.sw.a{border-color:var(--acc)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:16px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+td.c{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:3px;border:1px solid var(--line)}
+.pill.ok{color:var(--vec);border-color:var(--vec)}
+.pill.mid{color:var(--warn);border-color:var(--warn)}
+.pill.no{color:var(--bump);border-color:var(--bump)}
+.toc{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;margin:18px 0 0;padding:0;list-style:none}
+.toc a{color:var(--acc);text-decoration:none;border-bottom:1px solid transparent}
+.toc a:hover,.toc a:focus{border-bottom-color:var(--acc)}
+code{font-family:var(--mono);font-size:.92em;background:var(--soft);padding:1px 5px;border-radius:3px}
+</style>
+
+<main>
+<header>
+  <h1>Fly Navigation Circuit Atlas</h1>
+  <p class="lede">Seven schematics that walk from the whole behavior down to named cell types, drawn from the 60-odd papers now read in the library. Solid arrows have physiological or causal support; dashed arrows are anatomical or proposed. Pick any panel and we can go deeper.</p>
+  <ul class="toc">
+    <li><a href="#s1">1 · The whole loop</a></li>
+    <li><a href="#s2">2 · Compass ring attractor</a></li>
+    <li><a href="#s3">3 · Anchoring the compass</a></li>
+    <li><a href="#s4">4 · Bumps as vectors</a></li>
+    <li><a href="#s5">5 · Body → world velocity</a></li>
+    <li><a href="#s6">6 · Goal → steering → legs</a></li>
+    <li><a href="#s7">7 · Behaviors vs. circuits</a></li>
+  </ul>
+  <div class="legend">
+    <span><i class="sw"></i>established (physiology / perturbation)</span>
+    <span><i class="sw d"></i>anatomical or proposed</span>
+    <span><i class="sw a"></i>the hop under discussion</span>
+  </div>
+</header>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+<h2><span class="k">Panel 1</span>The whole loop, in five stages</h2>
+<p>Everything in the central complex (CX) can be placed on one chain. Sensory cues and self-motion feed a heading estimate; heading is combined with body-relative velocity to make world-relative vectors; a stored goal is compared with heading; the signed error becomes a turn. Memory, the box that would close the loop over time, is the part with the least evidence.</p>
+<figure>
+<svg viewBox="0 0 980 300" role="img" aria-label="Five-stage chain from sensory cues to behavior, with a dashed memory box above the goal stage">
+<defs>
+  <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="currentColor"/></marker>
+  <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="var(--acc)"/></marker>
+  <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="var(--bump)"/></marker>
+  <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="var(--vec)"/></marker>
+</defs>
+<!-- stage boxes -->
+<g>
+  <rect x="20" y="120" width="150" height="90" rx="4" class="box"/>
+  <text x="95" y="145" text-anchor="middle" class="h">Cues &amp; self-motion</text>
+  <text x="95" y="166" text-anchor="middle" class="cap">stripe · sun · wind · optic flow</text>
+  <text x="95" y="182" text-anchor="middle" class="cap">rotation · translation</text>
+  <text x="95" y="198" text-anchor="middle" class="cap">odor · heat · food</text>
+
+  <rect x="215" y="120" width="150" height="90" rx="4" class="box"/>
+  <text x="290" y="145" text-anchor="middle" class="h">Heading</text>
+  <text x="290" y="166" text-anchor="middle" class="mono">EPG · PEN · Δ7 · PEG</text>
+  <text x="290" y="184" text-anchor="middle" class="cap">ring attractor, EB/PB</text>
+
+  <rect x="410" y="120" width="150" height="90" rx="4" class="box"/>
+  <text x="485" y="145" text-anchor="middle" class="h">World vectors</text>
+  <text x="485" y="166" text-anchor="middle" class="mono">PFN → hΔB / FC3</text>
+  <text x="485" y="184" text-anchor="middle" class="cap">travel dir · airflow dir</text>
+
+  <rect x="605" y="120" width="150" height="90" rx="4" class="box"/>
+  <text x="680" y="145" text-anchor="middle" class="h">Goal vs. heading</text>
+  <text x="680" y="166" text-anchor="middle" class="mono">FC2 → PFL3 / PFL2</text>
+  <text x="680" y="184" text-anchor="middle" class="cap">signed error, gain</text>
+
+  <rect x="800" y="120" width="160" height="90" rx="4" class="box"/>
+  <text x="880" y="145" text-anchor="middle" class="h">Steering</text>
+  <text x="880" y="166" text-anchor="middle" class="mono">DNa02 · DNa03 · LAL013</text>
+  <text x="880" y="184" text-anchor="middle" class="cap">DNa11 → six legs</text>
+</g>
+<!-- arrows -->
+<line x1="170" y1="165" x2="213" y2="165" class="ln" marker-end="url(#ar)"/>
+<line x1="365" y1="165" x2="408" y2="165" class="ln" marker-end="url(#ar)"/>
+<line x1="560" y1="165" x2="603" y2="165" class="ln" marker-end="url(#ar)"/>
+<line x1="755" y1="165" x2="798" y2="165" class="ln" marker-end="url(#ar)"/>
+<!-- heading also feeds goal comparison -->
+<path d="M290 210 V245 H680 V212" class="ln" marker-end="url(#ar)"/>
+<text x="485" y="262" text-anchor="middle" class="cap">heading copy to PFL3 (via PB)</text>
+<!-- memory box -->
+<rect x="410" y="20" width="345" height="62" rx="4" class="box dash"/>
+<text x="582" y="45" text-anchor="middle" class="h">Memory: integrate vectors over time, store a goal</text>
+<text x="582" y="66" text-anchor="middle" class="cap">odometer (PFN→hΔB needed) · goal weights · rest-state drift (PFR) — mechanism unknown</text>
+<path d="M485 120 V84" class="ln dash" marker-end="url(#ar)"/>
+<path d="M680 82 V118" class="ln dash" marker-end="url(#ar)"/>
+<!-- behavior feedback -->
+<path d="M880 210 V280 H95 V212" class="ln" marker-end="url(#ar)"/>
+<text x="490" y="296" text-anchor="middle" class="cap">movement changes the cues (closed loop)</text>
+</svg>
+<figcaption>Instantaneous computations (stages 2–5) each have named cells and causal experiments. The dashed memory box is where the library's evidence thins out: flies do integrate distance and do store goal headings, but no accumulator or storage mechanism has been identified.</figcaption>
+</figure>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+<h2><span class="k">Panel 2</span>The compass: a ring attractor with a named velocity input</h2>
+<p>Heading lives as one localized bump of activity in the ~50 EPG neurons tiling the ellipsoid body (EB). Local excitation plus broad inhibition hold the bump; two mirror-image PEN populations, offset by one column, push it left or right in proportion to rotational velocity. The velocity itself arrives through a single pair of GLNO neurons in the noduli.</p>
+<figure>
+<svg viewBox="0 0 980 420" role="img" aria-label="Ring attractor: EPG ring in the EB with a bump, PEN left and right shifting it, Delta7 inhibition, and GLNO velocity input">
+<!-- EB ring -->
+<circle cx="250" cy="200" r="120" fill="none" stroke="currentColor" stroke-width="22" opacity=".18"/>
+<circle cx="250" cy="200" r="120" fill="none" stroke="currentColor" stroke-width="1"/>
+<circle cx="250" cy="200" r="98" fill="none" stroke="currentColor" stroke-width="1"/>
+<!-- wedge spokes -->
+<g stroke="currentColor" stroke-width="1" opacity=".5">
+  <line x1="250" y1="80" x2="250" y2="102"/><line x1="250" y1="298" x2="250" y2="320"/>
+  <line x1="130" y1="200" x2="152" y2="200"/><line x1="348" y1="200" x2="370" y2="200"/>
+  <line x1="165" y1="115" x2="181" y2="131"/><line x1="335" y1="285" x2="319" y2="269"/>
+  <line x1="335" y1="115" x2="319" y2="131"/><line x1="165" y1="285" x2="181" y2="269"/>
+</g>
+<!-- bump arc (top-right) -->
+<path d="M 250 80 A 120 120 0 0 1 354 140" fill="none" stroke="var(--bump)" stroke-width="22" stroke-linecap="round"/>
+<text x="330" y="70" class="h" fill="var(--bump)" style="fill:var(--bump)">EPG bump = heading</text>
+<text x="250" y="204" text-anchor="middle" class="h">EB</text>
+<text x="250" y="222" text-anchor="middle" class="cap">16 wedges · ~50 EPG</text>
+<!-- PEN shift arrows around ring -->
+<path d="M 200 90 A 120 120 0 0 1 150 130" fill="none" stroke="var(--vec)" stroke-width="2" marker-end="url(#arv)"/>
+<text x="120" y="112" text-anchor="end" class="mono" style="fill:var(--vec)">PEN (R) shifts −1 column</text>
+<path d="M 375 250 A 120 120 0 0 1 345 300" fill="none" stroke="var(--vec)" stroke-width="2" marker-end="url(#arv)"/>
+<text x="385" y="285" class="mono" style="fill:var(--vec)">PEN (L) shifts +1 column</text>
+<!-- Δ7 inhibition -->
+<rect x="150" y="345" width="200" height="40" rx="4" class="soft"/>
+<text x="250" y="362" text-anchor="middle" class="mono">Δ7 (glutamatergic)</text>
+<text x="250" y="378" text-anchor="middle" class="cap">broad inhibition, sinusoidal profile in PB</text>
+<path d="M250 320 V343" class="ln" marker-end="url(#ar)"/>
+<!-- right column: mechanics -->
+<g transform="translate(560,40)">
+  <text x="0" y="0" class="h">What holds the bump</text>
+  <text x="0" y="22" class="cap">• EPG→EPG within a wedge; PEG→PEN2→EPG loop (local excitation)</text>
+  <text x="0" y="40" class="cap">• Δ7 and several ring-neuron classes (redundant inhibition)</text>
+  <text x="0" y="58" class="cap">• EPG output blocked → no bump; PEN2 blocked → no bump in the dark</text>
+
+  <text x="0" y="100" class="h">What moves the bump</text>
+  <text x="0" y="122" class="cap">• EPG→PEN in the PB, same column; PEN→EPG in the EB, shifted ±1</text>
+  <text x="0" y="140" class="cap">• L/R PEN amplitude set by rotational velocity → bump rotates</text>
+  <text x="0" y="158" class="cap">• amplitude of the bump can be read as certainty (circular Kalman filter)</text>
+
+  <rect x="0" y="190" width="380" height="120" rx="4" class="box acc" style="stroke:var(--acc)"/>
+  <text x="14" y="212" class="h" style="fill:var(--acc)">Velocity input: the GLNO pair</text>
+  <text x="14" y="234" class="cap">Only lateralised rotational-velocity source to PEN (connectome).</text>
+  <text x="14" y="252" class="cap">Encodes turning from motor signals + optic flow.</text>
+  <text x="14" y="270" class="cap">Congruent: motor wins, vision adds little.</text>
+  <text x="14" y="288" class="cap">Conflict: reciprocal inhibition flips to one or the other (no averaging).</text>
+</g>
+<path d="M560 250 H420" class="ln acc" marker-end="url(#ara)"/>
+<text x="490" y="242" text-anchor="middle" class="mono" style="fill:var(--acc)">GLNO → PEN (NO)</text>
+</svg>
+<figcaption>Bump maintenance (Kim 2017, Turner-Evans 2020), bump rotation via shifted PEN projections (Green 2017, Turner-Evans 2017), the GLNO velocity source (Hulse 2023 preprint) and the certainty reading of amplitude (Kutschireiter 2023).</figcaption>
+</figure>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+<h2><span class="k">Panel 3</span>Anchoring the compass to the world: a learned inhibitory map with two modulators</h2>
+<p>The bump drifts in darkness, so it is tethered to cues. Visual and wind ring neurons (ER) inhibit EPGs; plasticity carves a trough in that inhibition at the heading each cue should map to. The learning rule needs to know which EPGs are active (postsynaptic) at each ER terminal (presynaptic). Octopamine carries the "which"; dopamine carries the "when".</p>
+<figure>
+<svg viewBox="0 0 980 360" role="img" aria-label="Ring neuron inputs inhibit EPGs; EL octopamine relays EPG activity back to ring terminals; ExR2 dopamine gates learning during turns">
+<!-- cue sources -->
+<rect x="20" y="40" width="130" height="46" rx="4" class="box"/>
+<text x="85" y="59" text-anchor="middle" class="h">Visual scene</text>
+<text x="85" y="76" text-anchor="middle" class="cap">stripe, sun, panorama</text>
+<rect x="20" y="110" width="130" height="46" rx="4" class="box"/>
+<text x="85" y="129" text-anchor="middle" class="h">Wind</text>
+<text x="85" y="146" text-anchor="middle" class="cap">antennae → WPN</text>
+<!-- ring neurons -->
+<rect x="220" y="40" width="150" height="46" rx="4" class="box"/>
+<text x="295" y="59" text-anchor="middle" class="mono">ER (R2/R4d…)</text>
+<text x="295" y="76" text-anchor="middle" class="cap">GABAergic, via TuBu/AOTU</text>
+<rect x="220" y="110" width="150" height="46" rx="4" class="box"/>
+<text x="295" y="129" text-anchor="middle" class="mono">ER R1</text>
+<text x="295" y="146" text-anchor="middle" class="cap">via WL-L</text>
+<line x1="150" y1="63" x2="218" y2="63" class="ln" marker-end="url(#ar)"/>
+<line x1="150" y1="133" x2="218" y2="133" class="ln" marker-end="url(#ar)"/>
+<!-- EPG -->
+<rect x="470" y="60" width="150" height="70" rx="4" class="box"/>
+<text x="545" y="88" text-anchor="middle" class="mono">EPG</text>
+<text x="545" y="108" text-anchor="middle" class="cap">heading bump</text>
+<!-- inhibitory synapses with plastic trough -->
+<path d="M370 63 H468" class="ln acc" marker-end="url(#ara)"/>
+<path d="M370 133 H468" class="ln acc" marker-end="url(#ara)"/>
+<text x="420" y="52" text-anchor="middle" class="mono" style="fill:var(--acc)">ER ⊣ EPG (plastic)</text>
+<text x="420" y="152" text-anchor="middle" class="cap">weakened at the "right" heading</text>
+<!-- EL loop -->
+<rect x="470" y="200" width="150" height="56" rx="4" class="box"/>
+<text x="545" y="222" text-anchor="middle" class="mono">EL (octopamine)</text>
+<text x="545" y="241" text-anchor="middle" class="cap">copies the EPG bump</text>
+<path d="M545 130 V198" class="ln" marker-end="url(#ar)"/>
+<text x="560" y="168" class="cap">EPG → EL</text>
+<path d="M470 228 H300 V158" class="ln" marker-end="url(#ar)"/>
+<text x="300" y="200" text-anchor="end" class="cap">octopamine onto ER terminals:</text>
+<text x="300" y="216" text-anchor="end" class="cap">"which synapses" (heading-specific)</text>
+<!-- ExR2 -->
+<rect x="700" y="60" width="180" height="70" rx="4" class="box"/>
+<text x="790" y="84" text-anchor="middle" class="mono">ExR2 (dopamine)</text>
+<text x="790" y="102" text-anchor="middle" class="cap">activity ∝ rotational speed</text>
+<text x="790" y="118" text-anchor="middle" class="cap">global, turn-locked</text>
+<path d="M700 95 H640 V40 H420 V52" class="ln dash" marker-end="url(#ar)"/>
+<text x="660" y="32" text-anchor="end" class="cap">"when to learn": learning rate η ∝ |ω|</text>
+<!-- consequences -->
+<g transform="translate(20,290)">
+  <text x="0" y="0" class="h">Consequences that behavior shows</text>
+  <text x="0" y="20" class="cap">• Each fly keeps its own stable cue–bump offset for hours (sun menotaxis), across scenes after remapping, and for days (long-term goal angle).</text>
+  <text x="0" y="38" class="cap">• Silence EL → no anchoring in a new scene. Silence ExR2 → cues lose influence. Pair EL activation with a cue → rapid remap even with EPG silenced.</text>
+  <text x="0" y="56" class="cap">• Compass disrupted (EPG, TuBu, Δ7 blocked) → every fly defaults to fixating the stripe frontally.</text>
+</g>
+</svg>
+<figcaption>Inhibitory visual inputs and remapping (Fisher 2019, Kim 2019), wind anchoring via R1 (Okubo 2020), octopamine feedback (Plitt 2025 preprint), dopamine gating (Fisher 2022), and the frontal-fixation default (Giraldo 2018, Turner-Evans 2020).</figcaption>
+</figure>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+<h2><span class="k">Panel 4</span>Bumps are vectors: the eight-axis coordinate system</h2>
+<p>Δ7 neurons impose a sinusoidal activity profile across the 8 + 8 glomeruli of the protocerebral bridge (PB). Any bump is then a 2-D vector: phase = angle, amplitude = length. Anatomy rotates vectors (fixed projection offsets), nodulus inputs scale them, convergence in a fan-shaped-body (FB) column adds them, and a membrane-potential switch can negate them.</p>
+<figure>
+<svg viewBox="0 0 980 330" role="img" aria-label="Sinusoid over eight glomeruli equals a phasor; four operations: rotate, scale, add, invert">
+<!-- sinusoid -->
+<g transform="translate(30,30)">
+  <text x="0" y="0" class="h">One population, eight glomeruli</text>
+  <line x1="0" y1="90" x2="240" y2="90" stroke="currentColor" stroke-width="1"/>
+  <g class="mono" style="font-size:10px">
+    <text x="15" y="106" text-anchor="middle">1</text><text x="45" y="106" text-anchor="middle">2</text><text x="75" y="106" text-anchor="middle">3</text><text x="105" y="106" text-anchor="middle">4</text><text x="135" y="106" text-anchor="middle">5</text><text x="165" y="106" text-anchor="middle">6</text><text x="195" y="106" text-anchor="middle">7</text><text x="225" y="106" text-anchor="middle">8</text>
+  </g>
+  <!-- bars following cosine with peak at glomerulus 3 -->
+  <g fill="var(--bump)" opacity=".85">
+    <rect x="7" y="70" width="16" height="20"/><rect x="37" y="45" width="16" height="45"/><rect x="67" y="30" width="16" height="60"/><rect x="97" y="45" width="16" height="45"/><rect x="127" y="70" width="16" height="20"/><rect x="157" y="84" width="16" height="6"/><rect x="187" y="84" width="16" height="6"/><rect x="217" y="70" width="16" height="20"/>
+  </g>
+  <path d="M15 72 Q45 20 75 30 T135 72 T195 88 T240 70" fill="none" stroke="var(--bump)" stroke-width="1.5" class="dash"/>
+  <text x="120" y="128" text-anchor="middle" class="cap">activity ≈ A·cos(θ − φ) across the axis</text>
+  <!-- equals phasor -->
+  <text x="270" y="70" class="h">=</text>
+  <g transform="translate(360,60)">
+    <circle cx="0" cy="0" r="46" fill="none" stroke="currentColor" stroke-width="1" opacity=".5"/>
+    <line x1="0" y1="0" x2="34" y2="-30" stroke="var(--bump)" stroke-width="2.5" marker-end="url(#arb)"/>
+    <text x="0" y="66" text-anchor="middle" class="cap">phase φ = angle · amplitude A = length</text>
+  </g>
+</g>
+<!-- four operations -->
+<g transform="translate(520,30)">
+  <text x="0" y="0" class="h">Four operations the anatomy provides</text>
+  <g transform="translate(0,20)">
+    <rect x="0" y="0" width="200" height="56" rx="4" class="soft"/>
+    <text x="10" y="20" class="mono">rotate</text>
+    <text x="10" y="38" class="cap">PB→FB projection offset: PFN ±45°, hΔ 180°</text>
+    <text x="10" y="52" class="cap">(PFNv-type ends up at ±135°)</text>
+  </g>
+  <g transform="translate(220,20)">
+    <rect x="0" y="0" width="200" height="56" rx="4" class="soft"/>
+    <text x="10" y="20" class="mono">scale</text>
+    <text x="10" y="38" class="cap">nodulus inputs set bump amplitude</text>
+    <text x="10" y="52" class="cap">(SpsP/LNO2 inhibition ∝ velocity)</text>
+  </g>
+  <g transform="translate(0,90)">
+    <rect x="0" y="0" width="200" height="56" rx="4" class="soft"/>
+    <text x="10" y="20" class="mono">add</text>
+    <text x="10" y="38" class="cap">populations converge on one FB column</text>
+    <text x="10" y="52" class="cap">(hΔB sums four PFN vectors)</text>
+  </g>
+  <g transform="translate(220,90)">
+    <rect x="0" y="0" width="200" height="56" rx="4" class="soft"/>
+    <text x="10" y="20" class="mono">invert (−v)</text>
+    <text x="10" y="38" class="cap">hyperpolarised PFNa fires Ca-α1T spikes</text>
+    <text x="10" y="52" class="cap">→ bump realigns ~180° (Ishida 2026)</text>
+  </g>
+  <text x="0" y="180" class="cap">Why sinusoids survive summation: symmetric inputs through an</text>
+  <text x="0" y="196" class="cap">≈quadratic nonlinearity cancel the unwanted cross terms</text>
+  <text x="0" y="212" class="cap">(Maimon &amp; Abbott 2026 appendix). Exact sinusoids are not required.</text>
+</g>
+<!-- basis diagram -->
+<g transform="translate(40,200)">
+  <text x="0" y="0" class="h">Basis vectors in the FB</text>
+  <g transform="translate(120,70)">
+    <line x1="-60" y1="0" x2="60" y2="0" stroke="currentColor" opacity=".4"/><line x1="0" y1="-60" x2="0" y2="60" stroke="currentColor" opacity=".4"/>
+    <line x1="0" y1="0" x2="38" y2="-38" class="vec" stroke-width="2.5" marker-end="url(#arv)"/>
+    <line x1="0" y1="0" x2="-38" y2="-38" class="vec" stroke-width="2.5" marker-end="url(#arv)"/>
+    <line x1="0" y1="0" x2="38" y2="38" class="vec dash" stroke-width="2" marker-end="url(#arv)"/>
+    <line x1="0" y1="0" x2="-38" y2="38" class="vec dash" stroke-width="2" marker-end="url(#arv)"/>
+    <text x="46" y="-40" class="mono" style="fill:var(--vec)">PFN R +45°</text>
+    <text x="-46" y="-40" text-anchor="end" class="mono" style="fill:var(--vec)">PFN L −45°</text>
+    <text x="46" y="52" class="mono" style="fill:var(--vec)">−135°</text>
+    <text x="-46" y="52" text-anchor="end" class="mono" style="fill:var(--vec)">+135°</text>
+    <text x="0" y="-68" text-anchor="middle" class="cap">heading (EPG phase)</text>
+  </g>
+  <text x="240" y="40" class="cap">Two populations at ±45° from heading span</text>
+  <text x="240" y="56" class="cap">the front half-plane; PFNv-type or inverted</text>
+  <text x="240" y="72" class="cap">vectors (dashed) cover the rear half.</text>
+  <text x="240" y="96" class="cap">Sum of the four = any direction, any length.</text>
+</g>
+</svg>
+<figcaption>The vector reading of bumps (Lyu 2022, Lu 2022, Maimon &amp; Abbott 2026); sign inversion by T-type calcium spikes in PFNa read out by FC3 (Ishida 2026).</figcaption>
+</figure>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+<h2><span class="k">Panel 5</span>Body-relative velocity → world-relative travel direction</h2>
+<p>The fly's walking (or airflow) velocity is measured in body coordinates. PFN populations carry heading-aligned bumps whose left/right amplitudes are set by the body-relative velocity components; summing them in hΔB gives the direction of travel in world coordinates, even when the fly sideslips or walks backward.</p>
+<figure>
+<svg viewBox="0 0 980 400" role="img" aria-label="Heading from EPG via Delta7 to PFNd and PFNv, scaled by nodulus velocity inputs, summed in hDeltaB to give world travel direction">
+<!-- inputs -->
+<rect x="20" y="40" width="140" height="56" rx="4" class="box"/>
+<text x="90" y="62" text-anchor="middle" class="h">Heading</text>
+<text x="90" y="82" text-anchor="middle" class="mono">EPG → Δ7 (PB)</text>
+<rect x="20" y="180" width="140" height="72" rx="4" class="box"/>
+<text x="90" y="202" text-anchor="middle" class="h">Body velocity</text>
+<text x="90" y="222" text-anchor="middle" class="cap">forward / backward / sideslip</text>
+<text x="90" y="240" text-anchor="middle" class="mono">SpsP · LNO2 · LNO1</text>
+<rect x="20" y="300" width="140" height="56" rx="4" class="box"/>
+<text x="90" y="322" text-anchor="middle" class="h">Airflow</text>
+<text x="90" y="342" text-anchor="middle" class="cap">direction · speed</text>
+<!-- PFN populations -->
+<g>
+  <rect x="260" y="30" width="170" height="50" rx="4" class="box"/>
+  <text x="345" y="50" text-anchor="middle" class="mono">PFNd L / R (±45°)</text>
+  <text x="345" y="68" text-anchor="middle" class="cap">amplitude ∝ forward velocity</text>
+  <rect x="260" y="100" width="170" height="50" rx="4" class="box"/>
+  <text x="345" y="120" text-anchor="middle" class="mono">PFNv L / R (±135°)</text>
+  <text x="345" y="138" text-anchor="middle" class="cap">amplitude ∝ backward velocity</text>
+  <rect x="260" y="200" width="170" height="50" rx="4" class="box"/>
+  <text x="345" y="220" text-anchor="middle" class="mono">PFNa L / R (±45°, invertible)</text>
+  <text x="345" y="238" text-anchor="middle" class="cap">airflow direction; Ca spikes → ±135°</text>
+  <rect x="260" y="270" width="170" height="50" rx="4" class="box"/>
+  <text x="345" y="290" text-anchor="middle" class="mono">PFNp_c · PFNd (flight)</text>
+  <text x="345" y="308" text-anchor="middle" class="cap">airspeed; airflow + optic flow</text>
+</g>
+<!-- arrows heading → PFNs -->
+<path d="M160 68 H258 M160 68 V125 H258" class="ln" marker-end="url(#ar)"/>
+<path d="M200 68 V225 H258" class="ln" marker-end="url(#ar)"/>
+<path d="M200 225 V295 H258" class="ln" marker-end="url(#ar)"/>
+<text x="205" y="60" class="cap">phase</text>
+<!-- velocity scaling -->
+<path d="M160 216 H230 V80 H258" class="ln vec" marker-end="url(#arv)"/>
+<path d="M230 150 H258" class="ln vec" marker-end="url(#arv)"/>
+<text x="238" y="170" class="cap" style="fill:var(--vec)">gain</text>
+<path d="M160 328 H240 V320 H258" class="ln vec" marker-end="url(#arv)"/>
+<path d="M240 320 V250 H258" class="ln vec" marker-end="url(#arv)"/>
+<!-- summation -->
+<rect x="540" y="70" width="170" height="70" rx="4" class="box acc" style="stroke:var(--acc)"/>
+<text x="625" y="96" text-anchor="middle" class="mono" style="fill:var(--acc)">hΔB (FB)</text>
+<text x="625" y="116" text-anchor="middle" class="cap">Σ four PFN vectors</text>
+<text x="625" y="132" text-anchor="middle" class="cap">→ world-centric travel direction</text>
+<path d="M430 55 H500 V105 H538" class="ln" marker-end="url(#ar)"/>
+<path d="M430 125 H500" class="ln"/>
+<rect x="540" y="230" width="170" height="70" rx="4" class="box"/>
+<text x="625" y="256" text-anchor="middle" class="mono">FC3 (FB)</text>
+<text x="625" y="276" text-anchor="middle" class="cap">Σ PFNa vectors</text>
+<text x="625" y="292" text-anchor="middle" class="cap">→ world-centric airflow direction</text>
+<path d="M430 225 H500 V265 H538" class="ln" marker-end="url(#ar)"/>
+<path d="M430 295 H500 V265" class="ln dash"/>
+<!-- outputs -->
+<rect x="790" y="70" width="170" height="70" rx="4" class="box dash"/>
+<text x="875" y="96" text-anchor="middle" class="h">Odometer / position?</text>
+<text x="875" y="116" text-anchor="middle" class="cap">PFNd·PFNv·hΔB needed for</text>
+<text x="875" y="132" text-anchor="middle" class="cap">distance memory; no integrator found</text>
+<path d="M710 105 H788" class="ln dash" marker-end="url(#ar)"/>
+<rect x="790" y="230" width="170" height="70" rx="4" class="box dash"/>
+<text x="875" y="256" text-anchor="middle" class="h">Upwind / downwind goal?</text>
+<text x="875" y="276" text-anchor="middle" class="cap">wind can also anchor the compass</text>
+<text x="875" y="292" text-anchor="middle" class="cap">(separate R1 route, Panel 3)</text>
+<path d="M710 265 H788" class="ln dash" marker-end="url(#ar)"/>
+<text x="20" y="385" class="cap">In flight, "wind direction" is itself inferred: PFN responses during saccades make it observable (May 2025). At rest, walking-direction neurons (PFR) drift ~180° away and the drift shifts with learning (Flores-Valle 2025).</text>
+</svg>
+<figcaption>PFNd/PFNv scaling and hΔB readout (Lu 2022, Lyu 2022), PFNa airflow vectors (Currier 2020, Ishida 2026), flight-specific PFN dynamics (May 2025 preprint), and the odometer requirement (D'Atri 2025, Chen 2024). Dashed outputs are where the evidence stops.</figcaption>
+</figure>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+<h2><span class="k">Panel 6</span>Goal → steering → legs</h2>
+<p>A goal heading is expressed as a bump in FC2. PFL3 neurons receive the goal (in the FB) and a copy of heading shifted by roughly ±90° per hemisphere (from the PB); their left-minus-right output approximates sin(goal − heading), a signed turn command. PFL2 rises near the anti-goal and raises the gain. Descending neurons then commit to a turn through a winner-take-all pair and drive all six legs.</p>
+<figure>
+<svg viewBox="0 0 980 400" role="img" aria-label="FC2 goal and heading copies converge on PFL3 and PFL2; outputs to DNa02, DNa03 and LAL013, then DNa11 to legs">
+<!-- goal -->
+<rect x="20" y="40" width="150" height="60" rx="4" class="box"/>
+<text x="95" y="63" text-anchor="middle" class="mono">FC2 (FB)</text>
+<text x="95" y="82" text-anchor="middle" class="cap">goal bump G</text>
+<rect x="20" y="150" width="150" height="60" rx="4" class="box"/>
+<text x="95" y="173" text-anchor="middle" class="mono">EPG → Δ7 (PB)</text>
+<text x="95" y="192" text-anchor="middle" class="cap">heading H, copies at ±~90°</text>
+<!-- PFL3 -->
+<rect x="270" y="30" width="190" height="80" rx="4" class="box acc" style="stroke:var(--acc)"/>
+<text x="365" y="54" text-anchor="middle" class="mono" style="fill:var(--acc)">PFL3 L and R</text>
+<text x="365" y="74" text-anchor="middle" class="cap">each ≈ G · H(±90°) summed</text>
+<text x="365" y="92" text-anchor="middle" class="cap">L − R ≈ K·sin(G − H)</text>
+<rect x="270" y="150" width="190" height="70" rx="4" class="box"/>
+<text x="365" y="174" text-anchor="middle" class="mono">PFL2</text>
+<text x="365" y="192" text-anchor="middle" class="cap">peaks near anti-goal; bilateral drive</text>
+<text x="365" y="208" text-anchor="middle" class="cap">→ more turning, less forward speed</text>
+<path d="M170 60 H268" class="ln" marker-end="url(#ar)"/>
+<path d="M170 180 H220 V80 H268" class="ln" marker-end="url(#ar)"/>
+<path d="M220 180 H268" class="ln" marker-end="url(#ar)"/>
+<path d="M170 70 H240 V165 H268" class="ln dash" marker-end="url(#ar)"/>
+<!-- LAL / DN layer -->
+<rect x="560" y="20" width="170" height="52" rx="4" class="box"/>
+<text x="645" y="41" text-anchor="middle" class="mono">DNa02</text>
+<text x="645" y="59" text-anchor="middle" class="cap">L/R asymmetry → turn</text>
+<rect x="560" y="95" width="170" height="70" rx="4" class="box"/>
+<text x="645" y="118" text-anchor="middle" class="mono">DNa03 ⇄ LAL013</text>
+<text x="645" y="136" text-anchor="middle" class="cap">reciprocal; winner-take-all</text>
+<text x="645" y="152" text-anchor="middle" class="cap">initiates and commits the turn</text>
+<rect x="560" y="190" width="170" height="52" rx="4" class="box"/>
+<text x="645" y="211" text-anchor="middle" class="mono">DNa11</text>
+<text x="645" y="229" text-anchor="middle" class="cap">saccades: all six legs re-step</text>
+<path d="M460 60 H558 V46" class="ln" marker-end="url(#ar)"/>
+<path d="M460 80 H520 V130 H558" class="ln" marker-end="url(#ar)"/>
+<path d="M460 185 H520 V130" class="ln dash"/>
+<text x="490" y="150" class="cap">gain</text>
+<path d="M645 165 V188" class="ln" marker-end="url(#ar)"/>
+<!-- legs / wings -->
+<rect x="800" y="95" width="160" height="70" rx="4" class="box"/>
+<text x="880" y="120" text-anchor="middle" class="h">VNC · legs</text>
+<text x="880" y="140" text-anchor="middle" class="cap">course correction → saccade</text>
+<text x="880" y="156" text-anchor="middle" class="cap">(flight DNs not covered)</text>
+<path d="M730 46 H770 V130 H798" class="ln" marker-end="url(#ar)"/>
+<path d="M730 130 H798" class="ln"/>
+<path d="M730 216 H770 V130" class="ln"/>
+<!-- behavior: policy -->
+<g transform="translate(20,270)">
+  <text x="0" y="0" class="h">What the animal does with the error</text>
+  <text x="0" y="20" class="cap">• Walking menotaxis: continuous corrections; forward speed drops with |error| (Green 2019, Westeinde 2024).</text>
+  <text x="0" y="38" class="cap">• Flight: a policy over fixations and saccades whose size depends on |goal − heading|; follows the compass bump, not the retina (Dan 2024).</text>
+  <text x="0" y="56" class="cap">• Goal learning is fast because the architecture is fixed and only compass-indexed goal weights change (model); where they live (FC2 inputs? hΔ? PFR?) is open.</text>
+  <text x="0" y="74" class="cap">• Displacing the compass in darkness elicits a turn that restores the prior phase: the fly steers to the internal estimate, not to the world.</text>
+</g>
+</svg>
+<figcaption>FC2/PFL3 goal comparison (Mussells Pires 2024), PFL2 gain and DNa03 route (Westeinde 2024), the descending steering hierarchy (Feng 2024 preprint, Rayshubskiy), and the flight policy (Dan 2024).</figcaption>
+</figure>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+<h2><span class="k">Panel 7</span>Behaviors mapped onto circuits</h2>
+<p>The same machinery is claimed for several behaviors, with very different strength of evidence. This table is the audit: for each behavior, which panel it draws on and what has actually been shown.</p>
+<table>
+<thead><tr><th>Behavior</th><th>Circuit (panels)</th><th>Evidence status</th><th>What is missing / the catch</th></tr></thead>
+<tbody>
+<tr><td>Hold an arbitrary heading for hours (menotaxis, sun, stripe)</td><td class="c">2 · 3 · 6</td><td><span class="pill ok">causal</span></td><td>How the preferred angle is chosen and stored for days; FC2 expresses it, storage substrate unknown.</td></tr>
+<tr><td>Return to a wind bearing after wind stops</td><td class="c">3 · 6</td><td><span class="pill ok">causal</span></td><td>Encoding→storage→retrieval into FC2 not separately localized.</td></tr>
+<tr><td>Update heading in the dark from self-motion</td><td class="c">2</td><td><span class="pill ok">causal</span></td><td>GLNO result is a preprint; motor-signal source unknown.</td></tr>
+<tr><td>Learn a new scene → compass mapping</td><td class="c">3</td><td><span class="pill ok">causal</span></td><td>Exact synaptic rule (potentiation vs depression) and receptor localization.</td></tr>
+<tr><td>Know direction of travel while sideslipping</td><td class="c">4 · 5</td><td><span class="pill ok">physiology + model</span></td><td>Readout of hΔB by downstream steering or memory not shown.</td></tr>
+<tr><td>Local search after food, in the dark</td><td class="c">5 → memory?</td><td><span class="pill mid">behavior; partial circuit</span></td><td>PFN→hΔB needed for distance memory; no integrator; enclosed arenas need chemical-mark controls (Chen 2024, Titova 2023).</td></tr>
+<tr><td>Search near a fictive site after passive displacement</td><td class="c">5 → memory?</td><td><span class="pill mid">behavior only</span></td><td>No neural data; predicted error of an internal estimate, not relocalization.</td></tr>
+<tr><td>Learn a rewarded place in a featureless chamber</td><td class="c">MB + 5</td><td><span class="pill mid">behavior + silencing</span></td><td>Uses self-deposited scent valued by MB plus PFNd; EPG/PFR dispensable. Not a home vector.</td></tr>
+<tr><td>Learn a safe heading in flight within minutes</td><td class="c">2 · 6 → goal weights</td><td><span class="pill mid">behavior + model</span></td><td>PFL/FC2 not recorded in that task; reinforcement signal into the FB unknown.</td></tr>
+<tr><td>Return to an odor plume boundary</td><td class="c">6 (FC2) + hΔK persistence</td><td><span class="pill ok">causal (FC2/EPG)</span></td><td>Odor → stored entry-bearing pathway is a proposal; a reflex-only model (surge/cast/object attraction) explains free-flight source finding without memory.</td></tr>
+<tr><td>Store a food location as a vector and navigate back</td><td class="c">memory box</td><td><span class="pill no">not demonstrated</span></td><td>The review's Figure 5 is hypotheses; ant/bee evidence does not transfer automatically.</td></tr>
+</tbody>
+</table>
+<figure>
+<svg viewBox="0 0 980 230" role="img" aria-label="Timescales of the navigation variables from milliseconds to weeks">
+<text x="20" y="24" class="h">Timescales, from what the papers measured</text>
+<line x1="60" y1="120" x2="940" y2="120" stroke="currentColor" stroke-width="1"/>
+<g class="mono" style="font-size:10.5px">
+  <g transform="translate(60,0)"><line x1="0" y1="114" x2="0" y2="126" stroke="currentColor"/><text x="0" y="142" text-anchor="middle">100 ms</text></g>
+  <g transform="translate(206,0)"><line x1="0" y1="114" x2="0" y2="126" stroke="currentColor"/><text x="0" y="142" text-anchor="middle">1 s</text></g>
+  <g transform="translate(353,0)"><line x1="0" y1="114" x2="0" y2="126" stroke="currentColor"/><text x="0" y="142" text-anchor="middle">10 s</text></g>
+  <g transform="translate(500,0)"><line x1="0" y1="114" x2="0" y2="126" stroke="currentColor"/><text x="0" y="142" text-anchor="middle">1 min</text></g>
+  <g transform="translate(646,0)"><line x1="0" y1="114" x2="0" y2="126" stroke="currentColor"/><text x="0" y="142" text-anchor="middle">1 h</text></g>
+  <g transform="translate(793,0)"><line x1="0" y1="114" x2="0" y2="126" stroke="currentColor"/><text x="0" y="142" text-anchor="middle">1 day</text></g>
+  <g transform="translate(940,0)"><line x1="0" y1="114" x2="0" y2="126" stroke="currentColor"/><text x="0" y="142" text-anchor="middle">weeks</text></g>
+</g>
+<!-- log scale: 100ms=60, each decade ≈146.7 px; 190ms→ 60+0.28*146.7=101; 450ms→156 -->
+<g class="cap">
+  <circle cx="101" cy="60" r="4" class="bumpf"/><text x="101" y="48" text-anchor="middle">surge 190 ms</text>
+  <circle cx="156" cy="88" r="4" class="bumpf"/><text x="156" y="104" text-anchor="middle">cast 450 ms</text>
+  <rect x="180" y="55" width="130" height="10" class="vecf" opacity=".7"/><text x="245" y="48" text-anchor="middle">bump persists in dark (s–10s s)</text>
+  <rect x="300" y="80" width="200" height="10" class="vecf" opacity=".5"/><text x="400" y="104" text-anchor="middle">hΔK persistence after odor loss</text>
+  <rect x="420" y="55" width="226" height="10" class="accf" opacity=".6"/><text x="533" y="48" text-anchor="middle">local search · place / distance memory</text>
+  <rect x="560" y="165" width="200" height="10" class="accf" opacity=".6"/><text x="660" y="188" text-anchor="middle">scene remapping · sun menotaxis</text>
+  <rect x="793" y="165" width="147" height="10" class="warnf" opacity=".7"/><text x="866" y="188" text-anchor="middle">preferred goal angle (days–weeks)</text>
+</g>
+</svg>
+<figcaption>Reflex latencies (van Breugel 2014), compass persistence (Seelig 2015), hΔK persistence (Kathman 2026), search and memory durations (Kim 2017, D'Atri 2025), remapping and menotaxis (Kim 2019, Giraldo 2018), long-term goal angle (Weisman 2025). Positions are approximate, log scale.</figcaption>
+</figure>
+</section>
+
+<section>
+<h2><span class="k">Where to start</span>Suggested order for going through these</h2>
+<p>Panels 2 and 4 are the load-bearing ideas: a ring attractor as the heading state, and sinusoidal bumps as vectors. Once those are clear, Panel 5 (vector transform) and Panel 6 (goal comparison) are the same trick applied twice. Panel 3 explains how the whole thing stays registered to the world, and Panel 7 is the honest scorecard of what behavior has actually been tied to which cells. The open problems are all in the dashed boxes: the accumulator, the goal store, and the reinforcement signal.</p>
+</section>
+</main>
