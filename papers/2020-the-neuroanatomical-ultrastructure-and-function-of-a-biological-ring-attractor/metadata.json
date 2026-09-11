@@ -3,12 +3,69 @@
   "doi": "10.1016/j.neuron.2020.08.006",
   "folder": "2020-the-neuroanatomical-ultrastructure-and-function-of-a-biological-ring-attractor",
   "discovery_note": "Combines ultrastructure and functional analysis of compass circuitry.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8356802/",
+      "bytes": 420065,
+      "sha256": "e39b0d0b28734d08e9a474aa3f7c09cc977c4a8464f4946a5e7af9e267dec831"
+    },
+    {
+      "filename": "figures/nihms-1728922-f0001.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d577/8356802/707d68938fa9/nihms-1728922-f0001.jpg",
+      "bytes": 1048488,
+      "sha256": "bd0aa04ac61ea9177659c4c9e44c94ee1c799bbf489a608e84a577d8e87e4899"
+    },
+    {
+      "filename": "figures/nihms-1728922-f0002.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d577/8356802/8e8013d3563b/nihms-1728922-f0002.jpg",
+      "bytes": 1789133,
+      "sha256": "ad331fdb68b51f6ad73ca75590c50aa831cf088b76e18a71ca8121c5430df900"
+    },
+    {
+      "filename": "figures/nihms-1728922-f0003.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d577/8356802/d177a26960d1/nihms-1728922-f0003.jpg",
+      "bytes": 759467,
+      "sha256": "a1a7fb7ff72ef2187c4c878f900fcc4a54ad10e802527cc91fa0e2199774ca6e"
+    },
+    {
+      "filename": "figures/nihms-1728922-f0004.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d577/8356802/1b6b214512b1/nihms-1728922-f0004.jpg",
+      "bytes": 1212077,
+      "sha256": "c8735b1bff7d9755ef35ea5578f6a5108cbd447fa2650c7e1829faf0c05a0bc4"
+    },
+    {
+      "filename": "figures/nihms-1728922-f0005.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d577/8356802/161d7d43247c/nihms-1728922-f0005.jpg",
+      "bytes": 827400,
+      "sha256": "3ef0c7402493707e5b61af606b916db5d94b51ae31a8063d43f95e2236ada776"
+    },
+    {
+      "filename": "figures/nihms-1728922-f0006.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d577/8356802/7bb7ddb51596/nihms-1728922-f0006.jpg",
+      "bytes": 1227009,
+      "sha256": "6d49d005f13a617f9ceba1e24662954ffbe7016a0267407ed9a34eea915be3b7"
+    },
+    {
+      "filename": "figures/nihms-1728922-f0007.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d577/8356802/2710f0bbd0b5/nihms-1728922-f0007.jpg",
+      "bytes": 1249649,
+      "sha256": "7d7b4cb4332cbcce40bc6ee456fd017f6933e9673a811c073fc13390b9877c6c"
+    },
+    {
+      "filename": "figures/nihms-1728922-f0008.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d577/8356802/fa2de9983d97/nihms-1728922-f0008.jpg",
+      "bytes": 901363,
+      "sha256": "ea5c6b0dd65bf5a57f19993ac5459e0c2bc21184a93b1c9e74a6194557342678"
+    }
+  ],
   "download_errors": [],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC8356802?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

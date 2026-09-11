@@ -5,11 +5,44 @@
   "metadata_source": "Reference lists of the manuscripts already read",
   "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
   "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9992764/",
+      "bytes": 281640,
+      "sha256": "98537b0a4f4c8558443fe3d501aef2bdfeb57b49da0a5e773990bcb32290c993"
+    },
+    {
+      "filename": "figures/pnas.2210622120fig01.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/72c6/9992764/d7f211285e12/pnas.2210622120fig01.jpg",
+      "bytes": 118955,
+      "sha256": "3b5be04b07548ced216aa5548979978acbf5ed528682892e115bb77e57cc8e0f"
+    },
+    {
+      "filename": "figures/pnas.2210622120fig02.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/72c6/9992764/b537017a3ddb/pnas.2210622120fig02.jpg",
+      "bytes": 195149,
+      "sha256": "6accde0dda309b636862237e6c65a98f46c5a3ed2ba880a76f2db90e0fe2dc02"
+    },
+    {
+      "filename": "figures/pnas.2210622120fig03.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/72c6/9992764/31d12d0a6744/pnas.2210622120fig03.jpg",
+      "bytes": 160127,
+      "sha256": "f10abad06d157eb8ae9be5e15f16717ec926ab5e6d2a33342b7c0d56d5f93e47"
+    },
+    {
+      "filename": "figures/pnas.2210622120fig04.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/72c6/9992764/44ff4e40fd0f/pnas.2210622120fig04.jpg",
+      "bytes": 175549,
+      "sha256": "73fe0e5ed5da9ccf049b9f63822cd3de7aa55ad3abdb9016e5d37612ee5c9541"
+    }
+  ],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC9992764?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

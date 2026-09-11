@@ -3,12 +3,39 @@
   "title": "Sun navigation requires compass neurons in Drosophila",
   "doi": "10.1016/j.cub.2018.07.002",
   "discovery_note": "Menotaxis and necessity of compass for a specific behavioral task.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7301569/",
+      "bytes": 218565,
+      "sha256": "f04224b41f275837ed7699a9c1e3c618a0eb58c93862ee7aab24a503a3573356"
+    },
+    {
+      "filename": "figures/nihms-1027095-f0001.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/0d30/7301569/f31efa3921bb/nihms-1027095-f0001.jpg",
+      "bytes": 286480,
+      "sha256": "b439b10a8e92810a4e95fb648bfb0085fba79820916de8c0949caa30c6c37770"
+    },
+    {
+      "filename": "figures/nihms-1027095-f0002.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/0d30/7301569/9c8d65f45a32/nihms-1027095-f0002.jpg",
+      "bytes": 330729,
+      "sha256": "ce1232ba72f98e741f1b878ef61d30ad364459a098e2597ed4a0e9c229bb339f"
+    },
+    {
+      "filename": "figures/nihms-1027095-f0003.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/0d30/7301569/afd93dab1cd0/nihms-1027095-f0003.jpg",
+      "bytes": 235214,
+      "sha256": "274820713bcab880d6adb00ad0eb09909d377e0599b629f45ec79953c6e471c6"
+    }
+  ],
   "download_errors": [],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC7301569?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

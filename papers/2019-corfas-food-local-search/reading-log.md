@@ -1,3 +1,6 @@
-# Reading log
+# Reading status — 2026-09-10
 
-Discovered through references in Currier (2020) and Titova (2023). Acquisition and full reading pending.
+- Full PMC author-manuscript text read: summary, results, discussion, STAR Methods.
+- All four main figures visually inspected as PMC jpgs (`figures/`).
+- Supplementary figures and videos **not obtained** (PMC supplement download blocked).
+- Publisher PDF not obtained; full HTML saved.

@@ -5,11 +5,21 @@
   "metadata_source": "Reference lists of the manuscripts already read",
   "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
   "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "biorxiv-fulltext-v1.md",
+      "url": null,
+      "note": "Browser text capture (get_page_text) of the full-text HTML; not the publisher file.",
+      "bytes": 16426,
+      "sha256": "e8bb2d27fd4fda328abd2fcdd310aa5e33db45f70ba99dc4f9726d1453cb232f"
+    }
+  ],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://www.biorxiv.org/content/10.1101/2025.03.23.644782.full.pdf",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

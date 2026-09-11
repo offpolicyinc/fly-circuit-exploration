@@ -3,7 +3,23 @@
   "title": "Plume-tracking behavior of flying Drosophila emerges from a set of distinct sensory-motor reflexes",
   "doi": "10.1016/j.cub.2013.12.023",
   "discovery_note": "Natural flight odor/wind/vision policy.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "cell-fulltext.md",
+      "url": "https://doi.org/10.1016/j.cub.2013.12.023 (cell.com full-text page)",
+      "note": "Browser text capture (get_page_text) of the full-text HTML; not the publisher file.",
+      "bytes": 42176,
+      "sha256": "32f3e05820ab15984ee6a74bc3cd886a17b2f3c356476fafaba9d5166f0069f8"
+    },
+    {
+      "filename": "mmc1-supplement.pdf",
+      "url": "Caltech Authors repository copy of Current Biology Document S1 (mmc1.pdf) for 10.1016/j.cub.2013.12.023",
+      "bytes": 4930396,
+      "sha256": "3d5a99d81dcb33b0156c58c7ce33648359d0eb0567076f16d4e23f25c9b3dda0"
+    }
+  ],
   "download_errors": [],
-  "main_pdf_fallback_attempts": []
+  "main_pdf_fallback_attempts": [],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

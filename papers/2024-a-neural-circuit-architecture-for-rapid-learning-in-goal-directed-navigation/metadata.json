@@ -3,7 +3,17 @@
   "doi": "10.1016/j.neuron.2024.04.036",
   "folder": "2024-a-neural-circuit-architecture-for-rapid-learning-in-goal-directed-navigation",
   "discovery_note": "Connectome-informed modular architecture for learning navigational goals.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "biorxiv-fulltext-v1.md",
+      "url": "https://www.biorxiv.org/content/10.1101/2021.08.18.456004v1.full",
+      "note": "Browser text capture (get_page_text) of the full-text HTML; not the publisher file.",
+      "bytes": 210294,
+      "sha256": "6edd7a6828d0c6099a0cb1df434cf98ee91a9e3c4a0504963d41c05a09afd55d"
+    }
+  ],
   "download_errors": [],
-  "main_pdf_fallback_attempts": []
+  "main_pdf_fallback_attempts": [],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

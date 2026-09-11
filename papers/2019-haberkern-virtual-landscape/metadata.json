@@ -3,7 +3,17 @@
   "title": "Visually guided behavior and optogenetically induced learning in head-fixed flies exploring a virtual landscape",
   "doi": "10.1016/j.cub.2019.04.033",
   "discovery_note": "Bridge between spatial behavior and imaging-compatible preparations.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "cell-fulltext.md",
+      "url": "https://www.cell.com/current-biology/fulltext/S0960-9822(19)30431-2",
+      "note": "Browser text capture (get_page_text) of the full-text HTML; not the publisher file.",
+      "bytes": 99213,
+      "sha256": "48bd300d821b59fe829f74daf8e1d18d4c49bb747f9dc143b1e3edba65275e8f"
+    }
+  ],
   "download_errors": [],
-  "main_pdf_fallback_attempts": []
+  "main_pdf_fallback_attempts": [],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

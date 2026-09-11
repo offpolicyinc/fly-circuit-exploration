@@ -3,12 +3,45 @@
   "title": "Diverse food-sensing neurons trigger idiothetic local search in Drosophila",
   "doi": "10.1016/j.cub.2019.03.004",
   "discovery_note": "Food-reward initiation of local search; read against displacement controls.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6532790/",
+      "bytes": 238339,
+      "sha256": "f07697ed6164b3142c729d3f4bc2f887630b5905d4634d0cfc79dbbf3ab1373a"
+    },
+    {
+      "filename": "figures/nihms-1528027-f0001.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ea88/6532790/f897afcb814d/nihms-1528027-f0001.jpg",
+      "bytes": 399178,
+      "sha256": "8f23b6f54fad5f933a5a82eb624cc18d81a674e056360646dc751c1e26580ef0"
+    },
+    {
+      "filename": "figures/nihms-1528027-f0002.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ea88/6532790/fbd94d0b1675/nihms-1528027-f0002.jpg",
+      "bytes": 230840,
+      "sha256": "8a31f9cdd2ee37ed7691e0bb95842d8fb48d8376db7c7bcf5a6a50f383ae8dc9"
+    },
+    {
+      "filename": "figures/nihms-1528027-f0003.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ea88/6532790/526d00bb7e0c/nihms-1528027-f0003.jpg",
+      "bytes": 266563,
+      "sha256": "2580083eede2f760ed15acb43be326381d2ee6d71d15cfcbef60754090edeb81"
+    },
+    {
+      "filename": "figures/nihms-1528027-f0004.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ea88/6532790/428f2b6715a7/nihms-1528027-f0004.jpg",
+      "bytes": 148928,
+      "sha256": "9bb786d0727d585fc3a63284673595e416f8aa40891c4729da957f933f2826dd"
+    }
+  ],
   "download_errors": [],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC6532790?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

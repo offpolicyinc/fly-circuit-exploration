@@ -3,12 +3,69 @@
   "doi": "10.1016/j.cell.2025.11.040",
   "folder": "2026-neuronal-calcium-spikes-enable-vector-inversion-in-the-drosophila-brain",
   "discovery_note": "Hyperpolarization-elicited T-type calcium spikes enable PFNa population-vector inversion.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12758628/",
+      "bytes": 425374,
+      "sha256": "2fc33c737126f6d90fc59ce5e047cad4398b08ca16625da0a60ad07b97576324"
+    },
+    {
+      "filename": "figures/nihms-2127566-f0001.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e2f6/12758628/ccaa4aaa83fb/nihms-2127566-f0001.jpg",
+      "bytes": 206380,
+      "sha256": "d5091ccd9ef463211d3a9a5cc1682e979343e35d3671787a499ca89ab299dafd"
+    },
+    {
+      "filename": "figures/nihms-2127566-f0002.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e2f6/12758628/231ce2c424b7/nihms-2127566-f0002.jpg",
+      "bytes": 868508,
+      "sha256": "345b100ace0e956358a0e18ecc644031a0adf5397e695afb839aa939cd0cbc89"
+    },
+    {
+      "filename": "figures/nihms-2127566-f0003.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e2f6/12758628/80c174ec709f/nihms-2127566-f0003.jpg",
+      "bytes": 1139852,
+      "sha256": "069dd9b9b07052de20eab7e45d164e1d094c5462fa8d424ffbc32a1cfb3c7db5"
+    },
+    {
+      "filename": "figures/nihms-2127566-f0004.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e2f6/12758628/eec2d93faf36/nihms-2127566-f0004.jpg",
+      "bytes": 940052,
+      "sha256": "9da631f46ea7fd415cf51d25ab4824aa3bd222a28a9b83cf6792abe10a6527db"
+    },
+    {
+      "filename": "figures/nihms-2127566-f0005.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e2f6/12758628/1183410927c3/nihms-2127566-f0005.jpg",
+      "bytes": 915273,
+      "sha256": "b9fe30345c3dc4221579aadd607a06e4f520b7d869205e400a5bf7f30caf8b69"
+    },
+    {
+      "filename": "figures/nihms-2127566-f0006.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e2f6/12758628/474428d3823e/nihms-2127566-f0006.jpg",
+      "bytes": 232051,
+      "sha256": "ffcbee36080f6a4069579d1a3f127dbe467b83d05bc9bc1153d1490f65a9063f"
+    },
+    {
+      "filename": "figures/nihms-2127566-f0007.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e2f6/12758628/d5c0c7d7cca1/nihms-2127566-f0007.jpg",
+      "bytes": 1239113,
+      "sha256": "f89e0d2a0d424e0d7c3dee928c8fbb7a22e15adbf93a8104db530dea2fe26fc3"
+    },
+    {
+      "filename": "figures/nihms-2127566-f0008.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e2f6/12758628/9a72bd9d4304/nihms-2127566-f0008.jpg",
+      "bytes": 721825,
+      "sha256": "92d29ebc20145e3600790fcdff27c42c1c0d445b7891efb94deab86d5479ff01"
+    }
+  ],
   "download_errors": [],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC12758628?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

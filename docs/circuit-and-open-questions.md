@@ -13,6 +13,8 @@ The appropriate unit of understanding is a computation in specified conditions, 
 | Transform body-relative movement into world-relative travel | Strong cell-level vector-computation account | Separate instantaneous velocity, displacement integration, and memory storage |
 | Compare desired direction with heading and steer | Strong FC2/PFL framework in studied tasks | Explain goal acquisition, selection, switching, and routing to all relevant motor actions |
 | Navigate natural odor landscapes | Rapid progress including 2026 directional-memory results | Integrate navigation strategies, variable wind, sensory loss, and free movement |
+| Integrate travel vectors into position and store it | Behavioral odometry and re-zeroing exist; PFN→hΔB needed for distance memory; no identified integrator | Locate the accumulator (hΔB? PFR? FC?), its reset, and controls for self-deposited chemical marks |
+| Provide rotational velocity to the compass | GLNO pair identified as the lateralised PEN input (preprint) | Confirm in print; find motor-signal sources |
 | Explain the entire central complex | Incomplete | Internal state, sleep, action selection, and many cell types remain outside the compact navigation story |
 
 Evidence and qualifications for each row are linked in the [reading map](literature.md). The table is our synthesis, not a consensus scorecard.
@@ -34,8 +36,11 @@ flowchart LR
   E --> O
   O --> N[Descending pathways]
   N --> B[VNC and behavior]
-  E -. recent plasticity model .-> EL[EL octopamine pathway]
+  E -. EPG activity relayed .-> EL[EL octopamine pathway]
   EL -.-> R
+  X[ExR2 dopamine, rotational speed] -.-> R
+  W[GLNO rotational velocity] --> P
+  A[Airflow via PFNa, Ca-alpha1T inversion] --> H
 ```
 
 Read EPG→PFL as a functional heading-information route, not necessarily a direct connection. Recurrent and intermediary paths matter. In particular, preserve Delta7 and FB pathways when constructing the actual graph.

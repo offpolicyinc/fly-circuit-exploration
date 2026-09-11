@@ -3,7 +3,17 @@
   "title": "Learning a spatial task by trial and error in Drosophila",
   "doi": "10.1016/j.cub.2019.06.045",
   "discovery_note": "Reward-dependent spatial learning and PAM reinforcement.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "cell-fulltext.md",
+      "url": "https://www.cell.com/current-biology/fulltext/S0960-9822(19)30772-9",
+      "note": "Browser text capture (get_page_text) of the full-text HTML; not the publisher file.",
+      "bytes": 17607,
+      "sha256": "7efb7c05ec5e334817d48a0fd94866b51b29251e7ac77d79fc09d6f7d6d746cd"
+    }
+  ],
   "download_errors": [],
-  "main_pdf_fallback_attempts": []
+  "main_pdf_fallback_attempts": [],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

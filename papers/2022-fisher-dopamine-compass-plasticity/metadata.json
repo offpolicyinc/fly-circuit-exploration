@@ -4,11 +4,98 @@
   "title": "Dopamine promotes head direction plasticity during orienting movements",
   "discovery_note": "State-dependent compass learning and orienting movements.",
   "metadata_source": "https://api.crossref.org/works/10.1038/s41586-022-05485-4",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9729112/",
+      "bytes": 311220,
+      "sha256": "a27f703da2c59e6cb1f140c935393aca1688f530c528268b0928cb2de7149cd3"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig10_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/171a9365ffe1/41586_2022_5485_Fig10_ESM.jpg",
+      "bytes": 138785,
+      "sha256": "39c56ba5395185514a74fa405493d2616f21e7f93cc61ccbbdeed3713dc5f022"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig11_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/e8fb8dc46390/41586_2022_5485_Fig11_ESM.jpg",
+      "bytes": 161773,
+      "sha256": "36ddb9bbe6728a2959d25766a273bfc832a5c1ff550f936b4b7ac0112f97ed67"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig12_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/6c9d63da68c0/41586_2022_5485_Fig12_ESM.jpg",
+      "bytes": 105545,
+      "sha256": "890562c61bf982eb1d6835aa01c362ed011f7131cca718b125bdb8fbd135381a"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig13_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/2a2ad5e1c6b4/41586_2022_5485_Fig13_ESM.jpg",
+      "bytes": 121640,
+      "sha256": "c5bdba6e615243393eb848bef23d288bcd7e005b3d0f3f8385676c9f26617230"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig1_HTML.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/8ea5271f524b/41586_2022_5485_Fig1_HTML.jpg",
+      "bytes": 99916,
+      "sha256": "5677ab2833a79e91af8664b0c76219f376353d0e84fa40b7a7b84cde6676d323"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig2_HTML.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/0681685f9ca6/41586_2022_5485_Fig2_HTML.jpg",
+      "bytes": 197600,
+      "sha256": "bdc961f30741a3b6829b7a9888d84fb1334c3505ba86873867b9accb0a1acb58"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig3_HTML.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/4543b969258f/41586_2022_5485_Fig3_HTML.jpg",
+      "bytes": 134181,
+      "sha256": "772cffb78b0488699661f4ad51cc0426c796fbc5516cb6c7dce95d13f0eafd52"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig4_HTML.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/87d2d496281c/41586_2022_5485_Fig4_HTML.jpg",
+      "bytes": 147552,
+      "sha256": "641a1eca0f3da534b0e0a2990e571b17f14f34d1272a8e562ab301465277f874"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig5_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/ad684717352e/41586_2022_5485_Fig5_ESM.jpg",
+      "bytes": 105249,
+      "sha256": "701b21fee67b74595bcbcd92a5e052a8ddd9df719c933b091461a98b93907e72"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig6_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/faa4e715f066/41586_2022_5485_Fig6_ESM.jpg",
+      "bytes": 67926,
+      "sha256": "8c24d33b21fa66f0f1c163c6731dd314099834b083fefc1d73ef5901830e44d9"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig7_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/eb541bd99965/41586_2022_5485_Fig7_ESM.jpg",
+      "bytes": 161239,
+      "sha256": "ba947127d8fc24d2a7eb5af6c4d848e225c7f8e0a184898283a1a983fc9c6f47"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig8_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/a7975e9289e7/41586_2022_5485_Fig8_ESM.jpg",
+      "bytes": 83880,
+      "sha256": "61be75537d4ab692e4f1011d5d8132186a72e68a3529deddfc1c51971cb0fb56"
+    },
+    {
+      "filename": "figures/41586_2022_5485_Fig9_ESM.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/af53/9729112/d35d15595ea5/41586_2022_5485_Fig9_ESM.jpg",
+      "bytes": 39234,
+      "sha256": "76c3f4f5ff0af56a148ffe03ef948cdd4f98156b40e429c67e8013482fa68784"
+    }
+  ],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC9729112?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

@@ -1,6 +1,6 @@
 # Fly navigation: a first reading map
 
-Checked 10 September 2026. This is a curated starting map, not a systematic review. Notes are short original summaries of primary-paper abstracts, accessible text, and author records; they are not full methods-level paper reviews. Dates below generally use journal issue year, with online dates called out where they differ. Preprints are explicitly separated.
+Checked 10 September 2026. This is a curated starting map, not a systematic review. Notes here are short orientation summaries; the methods-level reading of each paper lives in its `papers/<folder>/notes.md` and `reading-log.md`. The status table in [papers/README.md](../papers/README.md) is authoritative for which papers have been read in full; the 2026-09-10 batch listed below added twenty-six full-text readings. Dates below generally use journal issue year, with online dates called out where they differ. Preprints are explicitly separated.
 
 ## Read first
 
@@ -44,6 +44,38 @@ Then read Seelig & Jayaraman 2015 → the two 2017 angular-integration papers �
 - **Plitt, Turner-Evans et al., Jayaraman & Fisher**, [Octopamine instructs head direction plasticity](https://doi.org/10.64898/2025.12.11.693783), posted December 2025; still listed as bioRxiv by the [Fisher lab](https://www.fisherlab.science/publications) at this check. Proposes and tests an EPG→EL→ER feedback pathway that supplies coincidence information for inhibitory sensory plasticity. Add EL to the extraction even though it is absent from a minimal EPG/PEN compass cartoon. [Accessible manuscript](https://pmc.ncbi.nlm.nih.gov/articles/PMC12724720/).
 - **Weisman et al., Maimon lab**, [Drosophila maintain a consistent navigational goal angle for days to weeks](https://doi.org/10.64898/2025.12.09.693277), December 2025 preprint. Long-duration head-fixed VR behavior motivates questions about durable goal storage. This is not evidence that a particular synaptic memory substrate has been identified. [Record and abstract](https://pubmed.ncbi.nlm.nih.gov/41427349/).
 - [Deep conservation of head direction circuits in bees, ants and flies](https://www.biorxiv.org/content/10.64898/2026.07.26.740564v1.full), July 2026 preprint. Useful comparative extension; do not assume every insect implements identical circuitry.
+
+
+## Papers read in full on 2026-09-10 (added to the map)
+
+| Paper | Role in the synthesis | Notes |
+|---|---|---|
+| van Breugel & Dickinson (2014), Curr Biol | Three flight reflexes (surge 190 ms, cast 450 ms, odor-gated object attraction); stigmergic null model | [notes](../papers/2014-van-breugel-plume-tracking/notes.md) |
+| Hige et al. (2015), Neuron | Dopamine-gated KC→MBON depression; MB plasticity comparison case | [notes](../papers/2015-hige-heterosynaptic-memory-plasticity/notes.md) |
+| Kim & Dickinson (2017), Curr Biol | Idiothetic local search after food in the dark | [notes](../papers/2017-kim-dickinson-idiothetic-path-integration/notes.md) |
+| Currier & Nagel (2018), Curr Biol | Stripe dominates wind in tethered flight; filter-sum model | [notes](../papers/2018-currier-multisensory-flight/notes.md) |
+| Giraldo et al. (2018), Curr Biol | Sun menotaxis over hours needs E-PGs | [notes](../papers/2018-giraldo-sun-navigation/notes.md) |
+| Suver et al. (2019), Neuron | APN/WPN antennal wind-direction code | [notes](../papers/2019-suver-wind-direction/notes.md) |
+| Corfas et al. (2019), eLife | State-dependent sensory triggers of local search | [notes](../papers/2019-corfas-food-local-search/notes.md) |
+| Haberkern et al. (2019), Curr Biol | 2D VR: sugar search independent of landmarks; virtual-heat conditioning | [notes](../papers/2019-haberkern-virtual-landscape/notes.md) |
+| Stern et al. (2019), Curr Biol | Trial-and-error learning of an unmarked rewarded place; MB vs ring-neuron contributions | [notes](../papers/2019-stern-spatial-trial-error/notes.md) |
+| Okubo et al. (2020), Neuron | Wind anchors the EPG compass via WL-L→R1 | [notes](../papers/2020-okubo-wind-compass/notes.md) |
+| Turner-Evans et al. (2020), Neuron | EM/RNA-seq/perturbation audit of the ring attractor | [notes](../papers/2020-the-neuroanatomical-ultrastructure-and-function-of-a-biological-ring-attractor/notes.md) |
+| Behbahani et al. (2021), Curr Biol | Path integrator re-zeros at the centre of a fictive patch | [notes](../papers/2021-behbahani-rezero-path-integrator/notes.md) |
+| Fisher et al. (2022), Nature | ExR2 dopamine gates compass plasticity during turns | [notes](../papers/2022-fisher-dopamine-compass-plasticity/notes.md) |
+| Lu et al. (2022; bioRxiv v1 read), Nature | PFNd/PFNv velocity vectors, SpsP/LNO2 inputs, hΔB travel direction | [notes](../papers/2022-transforming-representations-of-movement-from-body-to-world-centric-space/notes.md) |
+| Hulse et al. (2023 preprint) | GLNO rotational-velocity input to PEN; motor over visual | [notes](../papers/2023-hulse-visuomotor-angular-velocity/notes.md) |
+| Kutschireiter et al. (2023), PNAS | Bayesian ring attractor; amplitude as certainty | [notes](../papers/2023-kutschireiter-bayesian-ring-attractor/notes.md) |
+| Mitchell et al. (2023), Proc R Soc B | Cue integration as vector summation; contrast weighting in beetles | [notes](../papers/2023-mitchell-cue-integration/notes.md) |
+| Dan et al. (2021 preprint of Neuron 2024) | Fixation/saccade policy learning; compass-indexed goal weights | [notes](../papers/2024-a-neural-circuit-architecture-for-rapid-learning-in-goal-directed-navigation/notes.md) |
+| Chen et al. (2024 preprint) | Self-deposited scent marks plus PFNd self-motion in featureless arenas | [notes](../papers/2024-chen-spatial-learning/notes.md) |
+| Feng et al. (2024 preprint) | DNa03/LAL013/DNa11 hierarchical steering circuit | [notes](../papers/2024-feng-central-steering/notes.md) |
+| D'Atri & DasGupta (2025 preprint) | Distance vs place memory; PFN→hΔB odometer | [notes](../papers/2025-datri-odometry/notes.md) |
+| Flores-Valle et al. (2025 preprint) | PFR rest drift ~180° from walking; learning shifts drift | [notes](../papers/2025-flores-valle-goal-learning-memory-drift/notes.md) |
+| May et al. (2025 preprint) | PFNd airflow+optic flow, PFNp_c airspeed; wind observable during maneuvers | [notes](../papers/2025-may-multisensory-wind/notes.md) |
+| Plitt et al. (2025 preprint) | EL octopamine relays EPG activity to ER terminals | [notes](../papers/2025-plitt-octopamine-compass-plasticity/notes.md) |
+| Maimon & Abbott (2026), Annu Rev Neurosci | Organising review; vector arithmetic on sinusoidal codes | [notes](../papers/2026-maimon-abbott-navigation-review/notes.md) |
+| Ishida et al. (2026), Cell | Ca-α1T calcium spikes invert PFNa vectors; FC3 readout | [notes](../papers/2026-neuronal-calcium-spikes-enable-vector-inversion-in-the-drosophila-brain/notes.md) |
 
 ## Who to follow, beyond the four requested names
 

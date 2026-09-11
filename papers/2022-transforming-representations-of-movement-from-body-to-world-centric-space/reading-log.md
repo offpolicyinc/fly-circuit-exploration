@@ -1,8 +1,7 @@
-# Reading status
+# Reading status — 2026-09-10
 
-- Main PDF: not downloaded; access search pending.
-- Main text, figures and Methods: pending full reading and visual inspection.
-- Downloaded PDF files: 1. Their presence does not establish complete supplement coverage.
-- Supplementary inventory and full inspection: pending.
-
-Do not treat the discovery note as a completed review.
+- bioRxiv v1 PDF (10.1101/2020.12.22.424001, 3.1 MB) fully read: abstract, main text, all main and extended-data figure captions, methods.
+- Nature supplementary information PDF (`41586_2021_4191_MOESM1_ESM.pdf`; supplementary discussion and notes) read.
+- Main figures inspected in the bioRxiv PDF; Nature extended-data figure images not obtained.
+- Nature main PDF **not obtained** (publisher and Europe PMC fallbacks failed).
+- Code/data (github/zenodo) not inspected.

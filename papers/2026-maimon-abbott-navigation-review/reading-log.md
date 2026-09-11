@@ -1,3 +1,5 @@
-# Reading log
+# Reading status — 2026-09-10
 
-2026-09-10: Read text of the 24-page author PDF, including appendix, captions and references, via web extraction. Direct author PDF timed out repeatedly; publisher returned challenge HTML. Web screenshots yielded references but no model-visible image content. No claim of visual reading. Main PDF remains an acquisition gap. The short provisional notes are a coverage guide; primary-paper notes remain the evidence base. Supplement inventory still requires publisher verification.
+- Full open-access text captured from annualreviews.org via the in-app browser and read in full: abstract, all sections, appendix (mathematics of sinusoidal vector codes), figure captions, literature cited. Earlier in the day the author PDF text was also read through web extraction.
+- Figure images (1–5) **not inspected**; the author PDF and publisher PDF could not be downloaded (timeouts / challenge page).
+- No supplementary material exists for this review.

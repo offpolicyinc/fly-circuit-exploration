@@ -3,12 +3,57 @@
   "title": "Drosophila re-zero their path integrator at the center of a fictive food patch",
   "doi": "10.1016/j.cub.2021.08.006",
   "discovery_note": "Reference-point updating and multiple rewards; reconcile pheromone alternative.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8551043/",
+      "bytes": 256966,
+      "sha256": "c51f45d34cfd33b4132011dd4d36d8be5517891bb8200a2cef405c41db107a61"
+    },
+    {
+      "filename": "figures/nihms-1736810-f0001.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/be76/8551043/46ce99c41b6d/nihms-1736810-f0001.jpg",
+      "bytes": 1065468,
+      "sha256": "357cf08473faca59c8a8bed665888e28676f3dc2b6e347bee5aa156a855b77b0"
+    },
+    {
+      "filename": "figures/nihms-1736810-f0002.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/be76/8551043/1d30a8888f1d/nihms-1736810-f0002.jpg",
+      "bytes": 723943,
+      "sha256": "00e439bca9b7d31bf4a4a3cba743bc5d2b80a9fb3ba3ba8f3f52334ae17c81e7"
+    },
+    {
+      "filename": "figures/nihms-1736810-f0003.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/be76/8551043/8011d5bbf952/nihms-1736810-f0003.jpg",
+      "bytes": 741163,
+      "sha256": "c081c65c7d72cd5cf44155226a1ee392dbe57e955c19f476cb588b747dc03c90"
+    },
+    {
+      "filename": "figures/nihms-1736810-f0004.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/be76/8551043/0412f8e864aa/nihms-1736810-f0004.jpg",
+      "bytes": 602819,
+      "sha256": "ea2139b9615aa005aa15d8c21d837c7fcae29d7ac9370e5cb5a00c68812be9b2"
+    },
+    {
+      "filename": "figures/nihms-1736810-f0005.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/be76/8551043/336f918a87c2/nihms-1736810-f0005.jpg",
+      "bytes": 802894,
+      "sha256": "b0f9cc92764d2cd075f9fa76b0b657889a40b8ee750f6c23f942ccfe2b306d04"
+    },
+    {
+      "filename": "figures/nihms-1736810-f0006.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/be76/8551043/d50401bd42b9/nihms-1736810-f0006.jpg",
+      "bytes": 893307,
+      "sha256": "95622921df64ff419e52a54a1393f3d9a17aa287b3603fe9a8a0cab22ca30f91"
+    }
+  ],
   "download_errors": [],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC8551043?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

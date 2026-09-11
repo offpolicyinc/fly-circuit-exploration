@@ -1,8 +1,6 @@
-# Reading status
+# Reading status — 2026-09-10
 
-- Main PDF: not downloaded; access search pending.
-- Main text, figures and Methods: pending full reading and visual inspection.
-- Downloaded PDF files: 0. Their presence does not establish complete supplement coverage.
-- Supplementary inventory and full inspection: pending.
-
-Do not treat the discovery note as a completed review.
+- bioRxiv v1 (10.1101/2021.08.18.456004) full-text HTML captured via the in-app browser and read in full: abstract, introduction, results, discussion, methods, figure captions.
+- Figures inspected in the browser during capture; images not saved locally.
+- Supplementary figures **not obtained**.
+- Neuron 2024 published version and its PDF **not obtained**; differences from the preprint are not reflected in the notes.

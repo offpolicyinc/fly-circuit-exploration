@@ -3,12 +3,75 @@
   "title": "Encoding of wind direction by central neurons in Drosophila",
   "doi": "10.1016/j.neuron.2019.03.012",
   "discovery_note": "Upstream mechanosensory computation supplying wind navigation.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6533146/",
+      "bytes": 279740,
+      "sha256": "6b485d5018399b3552eba15e3142d12c14f0b1422a2a2add0f74b21406d2d7a1"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0001.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/02305a08523b/nihms-1524477-f0001.jpg",
+      "bytes": 147799,
+      "sha256": "b7df4b998db713b35320e2eb6b9965a63730168fa3fdb65397e88ff8bfdeb984"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0002.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/89f99a2d0021/nihms-1524477-f0002.jpg",
+      "bytes": 257044,
+      "sha256": "b6f3067c1fa2a7d96dd0a8ce4993cca0487125ff8955e772f19a774f9bdb3c08"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0003.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/935a199a5650/nihms-1524477-f0003.jpg",
+      "bytes": 193904,
+      "sha256": "0076ef23d33339ccf9d585ca5facf9d4c8f80a65c60353998102a385a872d880"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0004.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/925834c6d2ef/nihms-1524477-f0004.jpg",
+      "bytes": 287668,
+      "sha256": "0e922e077789527029ab5fa1e84f7892451c64c5a4e8a14f3d299189c875e4b9"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0005.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/79a9e63db7e3/nihms-1524477-f0005.jpg",
+      "bytes": 474606,
+      "sha256": "345744cb200bba9fa7fb2eaedd7470cae90cdf04849da4d194364da8b552940a"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0006.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/5d42934a8d08/nihms-1524477-f0006.jpg",
+      "bytes": 258495,
+      "sha256": "84e303e89a968ef3a9a8b603b9d100b2e09b0408a370a3ce00e0ed11f4d62a0e"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0007.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/4b29ebb48636/nihms-1524477-f0007.jpg",
+      "bytes": 99693,
+      "sha256": "413cdc5d5c635d858cd6478e1e15c46ef9e02dc9c6664f20b35ec6bd560091e8"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0008.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/eb475a054802/nihms-1524477-f0008.jpg",
+      "bytes": 513369,
+      "sha256": "9194243aa53ef0cc39fe14c024fd418270a10c89936f85663e9c6c031ae3b1ba"
+    },
+    {
+      "filename": "figures/nihms-1524477-f0009.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6e42/6533146/3f753a924923/nihms-1524477-f0009.jpg",
+      "bytes": 113216,
+      "sha256": "134ef2e9e8da73bd06eea65818f91ab672ec9f733479f77e69e27ad37513ac35"
+    }
+  ],
   "download_errors": [],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC6533146?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

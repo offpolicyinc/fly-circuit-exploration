@@ -2,13 +2,19 @@
   "title": "Transforming representations of movement from body- to world-centric space",
   "doi": "10.1038/s41586-021-04191-x",
   "folder": "2022-transforming-representations-of-movement-from-body-to-world-centric-space",
-  "discovery_note": "PFN populations combine heading and translation; h\u0394B represents world-relative velocity.",
+  "discovery_note": "PFN populations combine heading and translation; hΔB represents world-relative velocity.",
   "assets": [
     {
       "filename": "41586_2021_4191_MOESM1_ESM.pdf",
       "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-021-04191-x/MediaObjects/41586_2021_4191_MOESM1_ESM.pdf",
       "bytes": 84150,
       "sha256": "55aa6b3910c3505b29eef5660dc718e7f259639336346d6fad9601df4ef2c85c"
+    },
+    {
+      "filename": "biorxiv-2020.12.22.424001v1.pdf",
+      "url": "https://www.biorxiv.org/content/10.1101/2020.12.22.424001v1.full.pdf",
+      "bytes": 3094162,
+      "sha256": "7402b2e2b37f3e1686f1a9fc298276ad1cc980aafd067d256f045842c723dda2"
     }
   ],
   "download_errors": [
@@ -22,5 +28,7 @@
       "url": "https://europepmc.org/articles/PMC10759448?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

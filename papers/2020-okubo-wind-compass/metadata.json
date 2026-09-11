@@ -3,12 +3,75 @@
   "title": "A neural network for wind-guided compass navigation",
   "doi": "10.1016/j.neuron.2020.06.022",
   "discovery_note": "Airflow anchoring of the heading compass; distinguish from PFN basis input.",
-  "assets": [],
+  "assets": [
+    {
+      "filename": "pmc-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7507644/",
+      "bytes": 404233,
+      "sha256": "865550dd1fcd19d0afcda1e79535a89288c2bfdd65b3eecd84d43affc1e8a95e"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0001.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/22964e35913c/nihms-1613644-f0001.jpg",
+      "bytes": 128969,
+      "sha256": "02034d16afb37c219e6b56612d01660e87bb8f706152e6c94bda175742b954f9"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0002.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/3500eb112ecb/nihms-1613644-f0002.jpg",
+      "bytes": 271550,
+      "sha256": "cae63a5ad6e29c31ab1102b2b30adbbb206efc01f91cc0a929256963901bb515"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0003.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/06fe964010f6/nihms-1613644-f0003.jpg",
+      "bytes": 544770,
+      "sha256": "5efdc6c835267685b126538c977f47046f7fd2a24e080d84fca336a794473c0c"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0004.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/f9605258508b/nihms-1613644-f0004.jpg",
+      "bytes": 505616,
+      "sha256": "fbf2d0030634e755d3f47777bc54ecba46cc0980fcca57f8ec1f65622e7279a9"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0005.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/5bc2a0b58098/nihms-1613644-f0005.jpg",
+      "bytes": 358387,
+      "sha256": "1e6a095873f2f3341587c0ca8907740a3e4167f28e76f77bc29ffec4bcd34e43"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0006.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/dbe831c3a15a/nihms-1613644-f0006.jpg",
+      "bytes": 344568,
+      "sha256": "8a2343de486fdc24e90a99430272380026910b2d30deee9620401e78188a33cc"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0007.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/25fdb948fe25/nihms-1613644-f0007.jpg",
+      "bytes": 488708,
+      "sha256": "c62f9c6c4d291cc82953da999c41113cfca9dad23b3efcd8494885ba9bb3b99a"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0008.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/7e4f6f566051/nihms-1613644-f0008.jpg",
+      "bytes": 272595,
+      "sha256": "0a9bcf9b9af42e240c9c10b69db76403f3a859ed79620c580965326569030fed"
+    },
+    {
+      "filename": "figures/nihms-1613644-f0009.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/beba/7507644/153a12ab730f/nihms-1613644-f0009.jpg",
+      "bytes": 323141,
+      "sha256": "3ca4cee97221a770deed6a7d491521cf15e7d7d431e720f8e1f6b9b15ddd7f24"
+    }
+  ],
   "download_errors": [],
   "main_pdf_fallback_attempts": [
     {
       "url": "https://europepmc.org/articles/PMC7507644?pdf=render",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }

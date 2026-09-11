@@ -8,5 +8,16 @@
       "url": "https://www.biorxiv.org/content/10.1101/2024.09.28.615625.full.pdf",
       "error": "No valid PDF received"
     }
-  ]
+  ],
+  "assets": [
+    {
+      "filename": "biorxiv-fulltext-v1.md",
+      "url": "https://www.biorxiv.org/content/10.1101/2024.09.28.615625v1.full",
+      "note": "Browser text capture (get_page_text) of the full-text HTML; not the publisher file.",
+      "bytes": 90580,
+      "sha256": "a26fa11169f8fa6db3e1fae6c718e74933f0a13cf9c0e103ef3cffe4222e6bf9"
+    }
+  ],
+  "reading_status": "Full text read 2026-09-10; see reading-log.md for exact coverage and gaps.",
+  "reading_log_updated": "2026-09-10"
 }
