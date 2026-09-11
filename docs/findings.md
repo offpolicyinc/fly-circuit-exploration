@@ -1,6 +1,6 @@
 # Connectome findings in context
 
-Each entry answers four questions: what the literature already knows, what this analysis found, why that matters, and what the evidence is. "Proof" here always means synapse counts in a reconstructed electron-microscopy brain: it shows wiring, never activity, sign or behaviour. Analysis dates 2026-09-10. Details and tables: [compass-recurrence.md](compass-recurrence.md), [goal-and-plasticity-motifs.md](goal-and-plasticity-motifs.md), [descending-trace.md](descending-trace.md).
+Each entry answers four questions: what the literature already knows, what this analysis found, why that matters, and what the evidence is. "Proof" here always means synapse counts in a reconstructed electron-microscopy brain: it shows wiring, never activity, sign or behaviour. Analysis dates 2026-09-10. Details and tables: [compass-recurrence.md](compass-recurrence.md), [goal-and-plasticity-motifs.md](goal-and-plasticity-motifs.md), [descending-trace.md](descending-trace.md). Function hypotheses for uncharacterised cells: [uncharacterised-neurons.md](uncharacterised-neurons.md); task decomposition: [behavioral-task-map.md](behavioral-task-map.md).
 
 Background for all entries: the fly's compass is a ring of about 50 EPG neurons whose activity "bump" points in the fly's heading. To rotate the bump when the fly turns, PEN neurons read the bump and write it back one step to the left or right (Green 2017; Turner-Evans 2017). Delta7 neurons spread inhibition so only one bump exists. Ring (ER) neurons carry visual and wind cues into the compass and learn which cue direction goes with which heading (Kim 2019; Fisher 2019). Downstream, FC2 neurons hold a goal direction and PFL3 neurons compare it with the heading to produce a turn command (Mussells Pires 2024; Westeinde 2024). MaleCNS is a 2026 whole-brain wiring diagram of a male fly; the hemibrain (2020) is a partial wiring diagram of a female.
 
@@ -66,6 +66,25 @@ Background for all entries: the fly's compass is a ring of about 50 EPG neurons 
 - **Found:** In the whole-brain graph, every major PFL3 target is on the opposite side (left PFL3 → right DNa02: 380 synapses vs 0 ipsilateral). But PFL3 → DNa02 is only 1.5 % of DNa02's input; PFL3's largest typed targets are LAL interneurons, several predicted inhibitory (LAL121 gets 37 % of its input from PFL3), which in turn hit DNa02, DNa03, DNa15 and DNg04. PFL2 → DNa03 is direct and bilateral (4.5 % of DNa03 input). Feng 2024's LAL013 and DNa11 receive essentially nothing from any PFL.
 - **Why it matters:** The steering signal is reshaped in the lateral accessory lobe before it becomes a descending command, so "PFL3 → DNa02 → turn" is a summary, not the circuit. It also locates the gap between the compass-steering papers and Feng's steering hierarchy: PFL3 must reach LAL013/DNa11 through intermediates such as LAL121, LAL014 or LAL122.
 - **Proof:** Full MaleCNS graph, `pfl_outputs_hop1.csv` and `pfl_outputs_hop2_to_dn.csv`. Caveat: about two thirds of PFL output synapses land on untyped fragments in this export and are excluded.
+
+
+## What it means, ranked by how much it should change current thinking
+
+**Genuinely surprising (a model built today would be wrong without it)**
+
+1. *Finding 2, the ring-side EPG→PEN loop.* Every published ring-attractor model routes EPG→PEN through the bridge only. The ellipsoid-body contacts are three times larger and sit on the tile each PEN writes to, so each PEN excites and is excited by the same EPGs: a local positive-feedback cell. A minimal simulation ([simulations/eb_epg_pen_loop.py](../simulations/eb_epg_pen_loop.py)) shows this loop acts as a brake: at a quarter of the measured strength it cuts rotation gain by a third, and at the measured strength it stops the bump moving at all. Real flies rotate their bump fine, so one of three things is true: those synapses are functionally weak, they are axo-axonic (modulating PEN output rather than driving it), or they are balanced by inhibition not in the model. Any of these is a physiology experiment nobody has done, and the answer determines whether the compass has a built-in hysteresis that stabilises heading in darkness at the cost of speed. If the loop is real and dendritic, current models over-estimate how easily the bump moves.
+
+2. *Finding 9, the steering signal is reshaped in the lateral accessory lobe.* The steering papers treat PFL3→DNa02 as the output. In the whole-brain graph that edge is 1.5 % of DNa02's input, and PFL3's largest targets are LAL interneurons, several inhibitory, that converge on DNa02, DNa03, DNa15 and DNg04. Feng 2024's steering hierarchy (LAL013/DNa03/DNa11) receives nothing direct from PFL. There is an uncharacterised processing stage between the compass and the legs; sign inversions in it could flip the meaning of "left PFL3 drives right turns". No one has recorded from LAL121, LAL126 or LAL083 with the compass in mind.
+
+**Interesting (turns a published claim into a specific prediction)**
+
+3. *Finding 7, EL feedback is ring-class specific.* Predicts octopamine-dependent learning for ER4d/ER2_c-type cues and a different mechanism (direct EPG feedback) for ER4m/ER6. Also, ER5, the sleep ring class, is EL's biggest input, so compass learning may be state-gated.
+
+4. *Finding 5, FC2 subtypes.* Identical outputs, different inputs: if goals of different kinds exist, they are separated upstream, not at the readout. hDeltaB→FC2 is absent, so the obvious "integrate travel into a goal" path does not exist as a direct edge.
+
+**Confirmation (foundation, not news)**
+
+5. Findings 1, 3, 4, 6, 8: the shifted PEN wiring, the PEG loop, Delta7 confinement, the PFL3 offset rule and ring-class self-inhibition all match the literature. Their value is that they now hold for every cell in two brains, which is what lets the unknown cells in [uncharacterised-neurons.md](uncharacterised-neurons.md) be interpreted relative to them.
 
 ## What none of this shows
 

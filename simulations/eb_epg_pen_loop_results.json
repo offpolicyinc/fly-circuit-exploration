@@ -1,0 +1,50 @@
+{
+ "EB loop off | ExR feedback 0.0": {
+  "dark_bump_len": 0.922,
+  "dark_drift_deg_s": -0.0,
+  "dark_peak": 5.0,
+  "rotation_gain_deg_s": -138.6,
+  "rot_bump_len": 0.893,
+  "rot_peak": 5.0
+ },
+ "EB loop off | ExR feedback 0.3": {
+  "dark_bump_len": 0.856,
+  "dark_drift_deg_s": -0.8,
+  "dark_peak": 0.04,
+  "rotation_gain_deg_s": -74.9,
+  "rot_bump_len": 0.176,
+  "rot_peak": 0.01
+ },
+ "EB loop = measured (2.7x PB) | ExR feedback 0.0": {
+  "dark_bump_len": 0.789,
+  "dark_drift_deg_s": 0.0,
+  "dark_peak": 5.0,
+  "rotation_gain_deg_s": 0.0,
+  "rot_bump_len": 0.789,
+  "rot_peak": 5.0
+ },
+ "EB loop = measured (2.7x PB) | ExR feedback 0.3": {
+  "dark_bump_len": 0.906,
+  "dark_drift_deg_s": 0.0,
+  "dark_peak": 5.0,
+  "rotation_gain_deg_s": 0.0,
+  "rot_bump_len": 0.789,
+  "rot_peak": 5.0
+ },
+ "EB loop doubled (5.4x PB) | ExR feedback 0.0": {
+  "dark_bump_len": 0.789,
+  "dark_drift_deg_s": 0.0,
+  "dark_peak": 5.0,
+  "rotation_gain_deg_s": 0.0,
+  "rot_bump_len": 0.789,
+  "rot_peak": 5.0
+ },
+ "EB loop doubled (5.4x PB) | ExR feedback 0.3": {
+  "dark_bump_len": 0.789,
+  "dark_drift_deg_s": 0.0,
+  "dark_peak": 5.0,
+  "rotation_gain_deg_s": 0.0,
+  "rot_bump_len": 0.789,
+  "rot_peak": 5.0
+ }
+}

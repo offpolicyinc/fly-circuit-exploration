@@ -1,0 +1,32 @@
+{
+ "0": {
+  "rot_gain": -138.6,
+  "bump_len": 0.893,
+  "dark_drift": -0.0
+ },
+ "0.25": {
+  "rot_gain": -102.0,
+  "bump_len": 0.884,
+  "dark_drift": -0.0
+ },
+ "0.5": {
+  "rot_gain": -72.1,
+  "bump_len": 0.82,
+  "dark_drift": 0.0
+ },
+ "1.0": {
+  "rot_gain": 0.0,
+  "bump_len": 0.789,
+  "dark_drift": 0.0
+ },
+ "1.5": {
+  "rot_gain": 0.0,
+  "bump_len": 0.789,
+  "dark_drift": 0.0
+ },
+ "2.7": {
+  "rot_gain": 0.0,
+  "bump_len": 0.789,
+  "dark_drift": 0.0
+ }
+}

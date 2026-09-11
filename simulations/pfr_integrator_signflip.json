@@ -1,0 +1,100 @@
+[
+ {
+  "g_rec": 1,
+  "uniform_mode_gain": 0.049799017418490396,
+  "cosine_mode_gain": 0.11699423677615661,
+  "max_eig": 0.10011888559862753,
+  "leg2": {
+   "t": 20.0,
+   "travel_dir": 90.0,
+   "displacement_dir": 45.0,
+   "pfr_dir": -155.2978886867377,
+   "pfr_vec_len": 0.5215346237800974,
+   "pfr_mean_rate": 0.5962784845233494
+  }
+ },
+ {
+  "g_rec": 2,
+  "uniform_mode_gain": 0.09959803483698079,
+  "cosine_mode_gain": 0.23398847355231323,
+  "max_eig": 0.20023777119725505,
+  "leg2": {
+   "t": 20.0,
+   "travel_dir": 90.0,
+   "displacement_dir": 45.0,
+   "pfr_dir": -155.38531349346152,
+   "pfr_vec_len": 0.53053487672238,
+   "pfr_mean_rate": 0.635700791207097
+  }
+ },
+ {
+  "g_rec": 4,
+  "uniform_mode_gain": 0.19919606967396158,
+  "cosine_mode_gain": 0.46797694710462645,
+  "max_eig": 0.4004755423945101,
+  "leg2": {
+   "t": 20.0,
+   "travel_dir": 90.0,
+   "displacement_dir": 45.0,
+   "pfr_dir": -155.55356173815426,
+   "pfr_vec_len": 0.5704100921598073,
+   "pfr_mean_rate": 0.7213310894229128
+  }
+ },
+ {
+  "g_rec": 6,
+  "uniform_mode_gain": 0.29879410451094235,
+  "cosine_mode_gain": 0.7019654206569397,
+  "max_eig": 0.6007133135917642,
+  "leg2": {
+   "t": 20.0,
+   "travel_dir": 90.0,
+   "displacement_dir": 45.0,
+   "pfr_dir": -156.88752859678416,
+   "pfr_vec_len": 0.6048425771404304,
+   "pfr_mean_rate": 0.8483665109347247
+  }
+ },
+ {
+  "g_rec": 8,
+  "uniform_mode_gain": 0.39839213934792317,
+  "cosine_mode_gain": 0.9359538942092529,
+  "max_eig": 0.8009510847890202,
+  "leg2": {
+   "t": 20.0,
+   "travel_dir": 90.0,
+   "displacement_dir": 45.0,
+   "pfr_dir": -157.73287844218703,
+   "pfr_vec_len": 0.6360557024217561,
+   "pfr_mean_rate": 1.0456428783406344
+  }
+ },
+ {
+  "g_rec": 10,
+  "uniform_mode_gain": 0.4979901741849039,
+  "cosine_mode_gain": 1.169942367761566,
+  "max_eig": 1.0011888559862743,
+  "leg2": {
+   "t": 20.0,
+   "travel_dir": 90.0,
+   "displacement_dir": 45.0,
+   "pfr_dir": -163.18678787726284,
+   "pfr_vec_len": 0.7029781185044203,
+   "pfr_mean_rate": 1.3823405315299926
+  }
+ },
+ {
+  "g_rec": 12,
+  "uniform_mode_gain": 0.5975882090218847,
+  "cosine_mode_gain": 1.4039308413138794,
+  "max_eig": 1.2014266271835283,
+  "leg2": {
+   "t": 20.0,
+   "travel_dir": 90.0,
+   "displacement_dir": 45.0,
+   "pfr_dir": 167.375732751679,
+   "pfr_vec_len": 0.7416235432393485,
+   "pfr_mean_rate": 2.2461508840900377
+  }
+ }
+]
