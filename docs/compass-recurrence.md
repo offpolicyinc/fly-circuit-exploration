@@ -50,3 +50,30 @@ Right-side rows mirror the left with opposite signs; the full table is in the CS
 - Establishes: lateralised, one-glomerulus PEN→EPG shifts for both PEN subtypes; a same-glomerulus EPG→PEG and tile-matched PEG→PEN_b loop; Delta7 output confinement and distal input. These are structural predictions of the ring-attractor models, verified at synapse-count level in a second specimen (male).
 - Does not establish: synaptic sign or efficacy (Delta7 glutamatergic inhibition and PEN cholinergic excitation are from Turner-Evans 2020 transmitter data, not from this graph), the PB/EB location of mixed edges, the functional difference between PEN_a and PEN_b (bridge phases and timing come from Green 2017), or whether the EB EPG→PEN contacts matter for dynamics.
 - Next: split the same edges by ROI once synapse-level coordinates are available; compare the offset profiles with hemibrain/FlyWire to test whether the tile rule and the EB hyper-local share are conserved; use the measured per-offset weights as the connectivity of a rate model to see whether PEN_b's tighter profile changes integration gain.
+
+## Cross-specimen check: hemibrain v1.2 (female) with ROI-resolved synapses
+
+Script: [scripts/hemibrain_compass_comparison.py](../scripts/hemibrain_compass_comparison.py); data from the public hemibrain v1.2 traced-adjacency export (`data/raw/hemibrain/`, 80 MB, not tracked). Tables: `data/derived/hemibrain_compass_offsets.csv`, `hemibrain_epg_pen_by_roi.csv`.
+
+Same cell counts as MaleCNS (46 EPG, 4 EPGt, 20 PEN_a, 22 PEN_b, 18 PEG, 42 Delta7) and nearly identical offset profiles:
+
+| Edge (pre side) | MaleCNS dominant offsets | Hemibrain dominant offsets |
+|---|---|---|
+| PEN_a L → EPG | −3 (0.27), −2 (0.27) | −3 (0.28), −2 (0.28) |
+| PEN_b L → EPG | −2 (0.38), −3 (0.34) | −2 (0.40), −3 (0.35) |
+| EPG L → PEG | 0 (0.71) | 0 (0.72) |
+| PEG L → PEN_b | +2 (0.48), −3 (0.44) | −3 (0.47), +2 (0.45) |
+| Delta7 → EPG | 0 (0.82) | 0 (0.70) |
+| EPG L → Delta7 | −7, +6, −5 | −7, +6, −5 |
+
+The hemibrain ROI column settles the location question for the mixed EPG→PEN edges:
+
+| Edge | PB synapses (share at offset 0) | EB synapses (share at tile offsets ±2/±3) |
+|---|---:|---:|
+| EPG → PEN_a | 1,281 (0.96) | 3,844 (0.66) |
+| EPG → PEN_b | 1,512 (0.97) | 3,645 (0.88) |
+| PEG → PEN_b | 7 | 1,300 (0.92) |
+| PEN_a → EPG | 4 | 13,473 (0.56) |
+| PEN_b → EPG | 4 | 8,403 (0.74) |
+
+So in the female brain too, EPG→PEN contacts inside the EB outnumber the canonical same-glomerulus PB contacts by 2.5–3 to 1, and they sit exactly at the tile the PEN projects back to. The PEN→EPG return path is entirely EB. The shifted recurrence and the EB-side EPG→PEN loop are conserved across two specimens of different sex.

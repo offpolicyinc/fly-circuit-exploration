@@ -1,0 +1,44 @@
+{
+ "pfl_cells": {
+  "PFL1": 14,
+  "PFL2": 12,
+  "PFL3": 24
+ },
+ "hop1_edges": 96301,
+ "hop1_targets": 66485,
+ "hop1_weight_by_pfl_type": {
+  "PFL1": 47973,
+  "PFL2": 44557,
+  "PFL3": 99113
+ },
+ "hop1_weight_by_target_superclass": {
+  "PFL1": {
+   "(none)": 31593,
+   "cb_intrinsic": 16331,
+   "descending_neuron": 19,
+   "visual_projection": 17,
+   "visual_centrifugal": 12,
+   "ascending_neuron": 1,
+   "cb_endocrine": 0
+  },
+  "PFL3": {
+   "(none)": 64288,
+   "cb_intrinsic": 30239,
+   "descending_neuron": 3491,
+   "visual_projection": 702,
+   "visual_centrifugal": 393,
+   "ascending_neuron": 0,
+   "cb_endocrine": 0
+  },
+  "PFL2": {
+   "(none)": 30217,
+   "cb_intrinsic": 11300,
+   "descending_neuron": 2047,
+   "visual_centrifugal": 953,
+   "visual_projection": 39,
+   "cb_endocrine": 1,
+   "ascending_neuron": 0
+  }
+ },
+ "hop2_dn_edges": 19692
+}
