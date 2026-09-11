@@ -47,7 +47,7 @@ Read EPG→PFL as a functional heading-information route, not necessarily a dire
 
 ## Concrete next analyses
 
-1. **Reconstruct compass recurrence at cell resolution.** Start with EPG, PEN_a(PEN1), PEN_b(PEN2), PEG, and Delta7. Recover angular organization from spatial/arbor and bridge-column annotations, then test shifted recurrent connectivity. A type-level matrix cannot demonstrate the angular shift.
+1. **Reconstruct compass recurrence at cell resolution.** Done for MaleCNS on 2026-09-10; see [compass-recurrence.md](compass-recurrence.md). Start with EPG, PEN_a(PEN1), PEN_b(PEN2), PEG, and Delta7. Recover angular organization from spatial/arbor and bridge-column annotations, then test shifted recurrent connectivity. A type-level matrix cannot demonstrate the angular shift.
 2. **Resolve goal-cell correspondence.** The release splits FC2 into FC2A/B/C. Cross-check the paper's driver expression and morphology before assigning all subtypes the same goal function. Keep hemibrain and FlyWire type annotations alongside MaleCNS IDs.
 3. **Trace PFL outputs to identified descending cells and onward through VNC.** Use our ranked one-hop table to choose targets, then add intermediates and normalize by each target's total input. Large raw counts are not automatically selective or functionally powerful.
 4. **Test the sensory-plasticity motif structurally.** Query EPG→EL, EL→ER, and ER→EPG at subtype and location resolution. Anatomy alone cannot establish octopamine release, receptor localization, or the learning rule.
