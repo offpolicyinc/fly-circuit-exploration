@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Return to food: the whole circuit</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; --miss:#b4432c; --new:#b07a12; --purple:#6a4c93; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:1440px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:28px; line-height:1.2; margin:0 0 8px; }
+  .lede { font-size:18px; margin:0 0 18px; max-width:820px; }
+  h2 { font-size:18px; margin:30px 0 8px; }
+  h3 { font-size:15px; margin:18px 0 4px; }
+  .legend { display:flex; flex-wrap:wrap; gap:14px 22px; font-size:13px; color:var(--muted); margin:8px 0 16px; }
+  .legend span { display:inline-flex; align-items:center; gap:6px; }
+  .sw { width:22px; height:14px; border-radius:4px; display:inline-block; }
+  .diagram { background:#fff; border:1px solid var(--line); border-radius:12px; padding:10px; overflow-x:auto; }
+  svg text { font:12px -apple-system,Helvetica,Arial,sans-serif; }
+  .stage { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
+  .row { display:grid; grid-template-columns: 110px 1fr; gap:6px 14px; font-size:15px; }
+  .k { font-weight:700; } .k.p{color:var(--good)} .k.n{color:var(--new)} .k.c{color:var(--purple)} .k.m{color:var(--miss)}
+  .pin { display:inline-block; background:var(--ink); color:#fff; border-radius:999px; font-size:11px; font-weight:700; padding:0 7px; margin-left:4px; text-decoration:none; }
+  a { color:var(--accent2); }
+  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Leaving food and coming back: the whole circuit, with what is proven and what is not</h1>
+  <p class="lede">One behaviour, start to finish: a walking fly finds sugar, wanders off in the dark, and returns. Below is the wiring that would have to carry it, drawn in the order information has to flow, with every box coloured by the kind of evidence behind it. The eight findings sit where they belong in that flow. Boxes with a red dashed outline are computations the behaviour proves exist and for which no neuron has been shown to do the job.</p>
+
+  <div class="legend">
+    <span><i class="sw" style="background:#2f7d4a"></i>Proven: causal + physiology, several labs</span>
+    <span><i class="sw" style="background:#5a86a8"></i>Physiology recorded, causal role partial</span>
+    <span><i class="sw" style="background:#b07a12"></i>Structural only: this work, connectome</span>
+    <span><i class="sw" style="border:2px dashed #b4432c;background:#fff"></i>Missing: behaviour demands it, no neuron</span>
+    <span><i class="sw" style="border:3px solid #6a4c93;background:#fff"></i>Controversial: wiring contradicts the model</span>
+    <span><i class="sw" style="background:#1b1b1f;border-radius:999px;width:18px"></i>Finding number (click)</span>
+  </div>
+
+  <div class="diagram">
+  <svg viewBox="0 0 1400 650" width="100%" role="img" aria-label="End-to-end navigation circuit for return to food">
+    <defs>
+      <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
+      <marker id="g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#8a8f99"/></marker>
+      <marker id="r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b4432c"/></marker>
+      <marker id="o" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b07a12"/></marker>
+      <marker id="p" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#6a4c93"/></marker>
+    </defs>
+    <!-- headers -->
+    <g font-weight="700" fill="#5a5f6a">
+      <text x="20" y="18">1 · Sense</text><text x="240" y="18">2 · Heading</text><text x="480" y="18">3 · Velocity → travel direction</text>
+      <text x="710" y="18">4 · Integrate, store, choose a goal</text><text x="1000" y="18">5 · Steer</text><text x="1200" y="18">6 · Move</text>
+      <text x="480" y="548">Side branches</text>
+    </g>
+    <line x1="215" y1="8" x2="215" y2="640" stroke="#eeede8"/><line x1="455" y1="8" x2="455" y2="640" stroke="#eeede8"/><line x1="685" y1="8" x2="685" y2="640" stroke="#eeede8"/><line x1="980" y1="8" x2="980" y2="640" stroke="#eeede8"/><line x1="1190" y1="8" x2="1190" y2="640" stroke="#eeede8"/>
+
+    <!-- ===== 1 Sense ===== -->
+    <rect x="20" y="50" width="170" height="46" rx="8" fill="#2f7d4a"/><text x="105" y="69" text-anchor="middle" fill="#fff" font-weight="700">Visual cues → ER rings</text><text x="105" y="85" text-anchor="middle" fill="#fff">ER4d, ER4m, ER2 …</text>
+    <rect x="20" y="104" width="170" height="46" rx="8" fill="#2f7d4a"/><text x="105" y="123" text-anchor="middle" fill="#fff" font-weight="700">Wind → ER rings</text><text x="105" y="139" text-anchor="middle" fill="#fff">ER1, ER3w</text>
+    <rect x="20" y="158" width="170" height="46" rx="8" fill="#5a86a8"/><text x="105" y="177" text-anchor="middle" fill="#fff" font-weight="700">Internal state → ER5</text><text x="105" y="193" text-anchor="middle" fill="#fff">sleep drive</text>
+    <rect x="20" y="240" width="170" height="46" rx="8" fill="#b07a12"/><text x="105" y="259" text-anchor="middle" fill="#fff" font-weight="700">Motor copy: PS196_b</text><text x="105" y="275" text-anchor="middle" fill="#fff">unnamed source</text>
+    <rect x="20" y="294" width="170" height="46" rx="8" fill="#b07a12"/><text x="105" y="313" text-anchor="middle" fill="#fff" font-weight="700">Legs → ascending → FB3A</text><text x="105" y="329" text-anchor="middle" fill="#fff">12 % of PFNd input</text>
+    <rect x="20" y="400" width="170" height="46" rx="8" fill="#2f7d4a"/><text x="105" y="419" text-anchor="middle" fill="#fff" font-weight="700">Sugar → search state</text><text x="105" y="435" text-anchor="middle" fill="#fff">Corfas 2019</text>
+    <rect x="20" y="454" width="170" height="46" rx="8" fill="#2f7d4a"/><text x="105" y="473" text-anchor="middle" fill="#fff" font-weight="700">Self-deposited scent</text><text x="105" y="489" text-anchor="middle" fill="#fff">Chen 2024, Titova 2023</text>
+
+    <!-- ===== 2 Heading ===== -->
+    <rect x="240" y="50" width="190" height="70" rx="10" fill="#2f7d4a" stroke="#6a4c93" stroke-width="3"/><text x="335" y="74" text-anchor="middle" fill="#fff" font-weight="700">EPG compass ring</text><text x="335" y="90" text-anchor="middle" fill="#fff">heading bump</text><text x="335" y="106" text-anchor="middle" fill="#fff">+ Δ7 inhibition</text>
+    <rect x="330" y="140" width="100" height="46" rx="8" fill="#2f7d4a" stroke="#6a4c93" stroke-width="3"/><text x="380" y="159" text-anchor="middle" fill="#fff" font-weight="700">PEN shifters</text><text x="380" y="175" text-anchor="middle" fill="#fff">L / R rotation</text>
+    <rect x="330" y="200" width="100" height="46" rx="8" fill="#5a86a8"/><text x="380" y="219" text-anchor="middle" fill="#fff" font-weight="700">GLNO</text><text x="380" y="235" text-anchor="middle" fill="#fff">rotational velocity</text>
+    <rect x="240" y="380" width="190" height="60" rx="8" fill="#2f7d4a"/><text x="335" y="399" text-anchor="middle" fill="#fff" font-weight="700">Cue-learning gates</text><text x="335" y="415" text-anchor="middle" fill="#fff">EL octopamine: which synapses</text><text x="335" y="431" text-anchor="middle" fill="#fff">ExR2 dopamine: when</text>
+    <path d="M190 73 L 238 70" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+    <path d="M190 127 L 238 95" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <path d="M190 181 L 238 395" stroke="#8a8f99" stroke-width="1.5" fill="none" marker-end="url(#g)"/>
+    <path d="M360 120 L 360 138" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="345" y="133" text-anchor="end">read</text>
+    <path d="M400 140 L 400 122" stroke="#1b1b1f" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="410" y="133">write ±1</text>
+    <path d="M380 200 L 380 188" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+    <path d="M190 263 L 328 225" stroke="#b07a12" stroke-width="2" fill="none" marker-end="url(#o)"/>
+    <path d="M300 380 L 300 122" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="292" y="310" text-anchor="end">learn</text>
+    <a href="findings/01-compass-brake.html"><circle cx="432" cy="188" r="11" fill="#1b1b1f"/><text x="432" y="192" text-anchor="middle" fill="#fff" font-weight="700">1</text></a>
+    <a href="findings/08-cue-specific-octopamine.html"><circle cx="432" cy="442" r="11" fill="#1b1b1f"/><text x="432" y="446" text-anchor="middle" fill="#fff" font-weight="700">8</text></a>
+    <a href="findings/07-velocity-sources.html"><circle cx="192" cy="342" r="11" fill="#1b1b1f"/><text x="192" y="346" text-anchor="middle" fill="#fff" font-weight="700">7</text></a>
+
+    <!-- ===== 3 Velocity ===== -->
+    <rect x="480" y="50" width="180" height="60" rx="10" fill="#2f7d4a"/><text x="570" y="74" text-anchor="middle" fill="#fff" font-weight="700">hΔB</text><text x="570" y="90" text-anchor="middle" fill="#fff">world travel direction</text>
+    <rect x="480" y="140" width="160" height="46" rx="8" fill="#2f7d4a"/><text x="560" y="159" text-anchor="middle" fill="#fff" font-weight="700">PFNd / PFNv</text><text x="560" y="175" text-anchor="middle" fill="#fff">velocity × heading</text>
+    <rect x="480" y="200" width="160" height="46" rx="8" fill="#5a86a8"/><text x="560" y="219" text-anchor="middle" fill="#fff" font-weight="700">LNO2, SpsP</text><text x="560" y="235" text-anchor="middle" fill="#fff">velocity scaling</text>
+    <path d="M430 100 L 478 150" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="482" y="130">heading</text>
+    <path d="M560 140 L 560 112" stroke="#1b1b1f" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="566" y="130">20,165</text>
+    <path d="M560 200 L 560 188" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <path d="M190 317 L 215 317 L 215 460 L 465 460 L 465 175 L 478 175" stroke="#b07a12" stroke-width="2" fill="none" marker-end="url(#o)"/>
+
+    <!-- ===== 4 Integrate / store / goal ===== -->
+    <!-- candidates (left) -->
+    <rect x="710" y="50" width="120" height="56" rx="8" fill="#5a86a8"/><text x="770" y="70" text-anchor="middle" fill="#fff" font-weight="700">PFR_a / PFR_b</text><text x="770" y="86" text-anchor="middle" fill="#fff">relay or</text><text x="770" y="100" text-anchor="middle" fill="#fff">integrator?</text>
+    <rect x="710" y="120" width="120" height="56" rx="8" fill="#b07a12"/><text x="770" y="140" text-anchor="middle" fill="#fff" font-weight="700">FB4M / FB4L</text><text x="770" y="156" text-anchor="middle" fill="#fff">dopamine; sugar?</text><text x="770" y="170" text-anchor="middle" fill="#fff">(hypothesis)</text>
+    <rect x="710" y="190" width="120" height="56" rx="8" fill="#b07a12"/><text x="770" y="210" text-anchor="middle" fill="#fff" font-weight="700">hΔ inverters</text><text x="770" y="226" text-anchor="middle" fill="#fff">180° by anatomy</text><text x="770" y="240" text-anchor="middle" fill="#fff">which one?</text>
+    <!-- missing (right) -->
+    <rect x="845" y="50" width="115" height="56" rx="8" fill="#fff" stroke="#b4432c" stroke-width="2.5" stroke-dasharray="7 4"/><text x="902" y="70" text-anchor="middle" font-weight="700" fill="#b4432c">Integrate</text><text x="902" y="86" text-anchor="middle" fill="#b4432c">position /</text><text x="902" y="100" text-anchor="middle" fill="#b4432c">home vector</text>
+    <rect x="845" y="120" width="115" height="56" rx="8" fill="#fff" stroke="#b4432c" stroke-width="2.5" stroke-dasharray="7 4"/><text x="902" y="140" text-anchor="middle" font-weight="700" fill="#b4432c">Store zero</text><text x="902" y="156" text-anchor="middle" fill="#b4432c">re-zero at food</text><text x="902" y="170" text-anchor="middle" fill="#b4432c">(Behbahani)</text>
+    <rect x="845" y="190" width="115" height="56" rx="8" fill="#fff" stroke="#b4432c" stroke-width="2.5" stroke-dasharray="7 4"/><text x="902" y="210" text-anchor="middle" font-weight="700" fill="#b4432c">Invert</text><text x="902" y="226" text-anchor="middle" fill="#b4432c">home vector →</text><text x="902" y="240" text-anchor="middle" fill="#b4432c">return goal</text>
+    <!-- goal -->
+    <rect x="710" y="270" width="250" height="74" rx="10" fill="#2f7d4a"/><text x="835" y="290" text-anchor="middle" fill="#fff" font-weight="700">FC2 goal (A / B / C subtypes)</text><text x="835" y="306" text-anchor="middle" fill="#fff">A: self-motion · B: MB relay, memory</text><text x="835" y="320" text-anchor="middle" fill="#fff">C: arousal layers · FB5A inhibitor</text><text x="835" y="334" text-anchor="middle" fill="#fff">no direct hΔB input (&lt;150 synapses)</text>
+    <rect x="710" y="420" width="120" height="46" rx="8" fill="#5a86a8"/><text x="770" y="439" text-anchor="middle" fill="#fff" font-weight="700">hΔK / PFGs loop</text><text x="770" y="455" text-anchor="middle" fill="#fff">working memory</text>
+    <rect x="845" y="420" width="115" height="46" rx="8" fill="#b07a12"/><text x="902" y="439" text-anchor="middle" fill="#fff" font-weight="700">FB6A / FB6M</text><text x="902" y="455" text-anchor="middle" fill="#fff">inhibitory gates</text>
+    <rect x="710" y="480" width="120" height="46" rx="8" fill="#b07a12"/><text x="770" y="499" text-anchor="middle" fill="#fff" font-weight="700">FR1 self-loop</text><text x="770" y="515" text-anchor="middle" fill="#fff">→ MB dopamine</text>
+    <!-- edges col4 -->
+    <path d="M660 78 L 708 78" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+    <path d="M650 110 L 690 110 L 690 503 L 708 503" stroke="#b07a12" stroke-width="2" fill="none" marker-end="url(#o)"/>
+    <path d="M830 78 L 843 78" stroke="#b4432c" stroke-width="2" fill="none" stroke-dasharray="3 3" marker-end="url(#r)"/>
+    <path d="M830 148 L 843 148" stroke="#b4432c" stroke-width="2" fill="none" stroke-dasharray="3 3" marker-end="url(#r)"/>
+    <path d="M830 218 L 843 218" stroke="#b4432c" stroke-width="2" fill="none" stroke-dasharray="3 3" marker-end="url(#r)"/>
+    <path d="M902 106 L 902 118" stroke="#b4432c" stroke-width="2" fill="none" stroke-dasharray="4 3" marker-end="url(#r)"/>
+    <path d="M902 176 L 902 188" stroke="#b4432c" stroke-width="2" fill="none" stroke-dasharray="4 3" marker-end="url(#r)"/>
+    <path d="M902 246 L 902 268" stroke="#b4432c" stroke-width="2" fill="none" stroke-dasharray="4 3" marker-end="url(#r)"/>
+    <path d="M770 420 L 770 346" stroke="#8a8f99" stroke-width="2" fill="none" marker-end="url(#g)"/><text x="762" y="385" text-anchor="end">via hΔC / hΔF</text>
+    <path d="M845 443 L 832 443" stroke="#b07a12" stroke-width="2" fill="none" marker-end="url(#o)"/>
+        <a href="findings/03-pfr-integrator.html"><circle cx="832" cy="108" r="11" fill="#1b1b1f"/><text x="832" y="112" text-anchor="middle" fill="#fff" font-weight="700">3</text></a>
+
+    <!-- ===== 5 Steer ===== -->
+    <rect x="1000" y="50" width="180" height="70" rx="10" fill="#2f7d4a"/><text x="1090" y="74" text-anchor="middle" fill="#fff" font-weight="700">PFL3 / PFL2</text><text x="1090" y="90" text-anchor="middle" fill="#fff">heading vs goal</text><text x="1090" y="106" text-anchor="middle" fill="#fff">→ L / R error</text>
+    <rect x="1000" y="150" width="85" height="60" rx="8" fill="#b07a12"/><text x="1042" y="170" text-anchor="middle" fill="#fff" font-weight="700">hΔM</text><text x="1042" y="186" text-anchor="middle" fill="#fff">goal + 180°</text><text x="1042" y="200" text-anchor="middle" fill="#fff">← FC2</text>
+    <rect x="1095" y="150" width="85" height="60" rx="8" fill="#b07a12"/><text x="1137" y="170" text-anchor="middle" fill="#fff" font-weight="700">hΔA / hΔI</text><text x="1137" y="186" text-anchor="middle" fill="#fff">travel-derived</text><text x="1137" y="200" text-anchor="middle" fill="#fff">← hΔB, MB</text>
+    <path d="M400 50 L 400 36 L 990 36 L 990 60 L 998 60" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="700" y="31" text-anchor="middle">heading (via Δ7)</text>
+    <path d="M960 300 L 985 300 L 985 100 L 998 100" stroke="#1b1b1f" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="975" y="205" text-anchor="middle" transform="rotate(-90 975 205)">goal 7,690</text>
+    <path d="M1042 150 L 1042 122" stroke="#b07a12" stroke-width="2.5" fill="none" marker-end="url(#o)"/><text x="1050" y="140">3,983</text>
+    <path d="M1137 150 L 1137 122" stroke="#b07a12" stroke-width="2.5" fill="none" marker-end="url(#o)"/><text x="1145" y="140">7,349</text>
+    <a href="findings/06-anti-goal.html"><circle cx="1085" cy="212" r="11" fill="#1b1b1f"/><text x="1085" y="216" text-anchor="middle" fill="#fff" font-weight="700">6</text></a>
+
+    <!-- ===== 6 Move ===== -->
+    <rect x="1200" y="50" width="180" height="70" rx="10" fill="#b07a12" stroke="#6a4c93" stroke-width="3"/><text x="1290" y="72" text-anchor="middle" fill="#fff" font-weight="700">LAL interneurons</text><text x="1290" y="88" text-anchor="middle" fill="#fff">get most of PFL3 output</text><text x="1290" y="104" text-anchor="middle" fill="#fff">contralateral, inhibitory</text>
+    <rect x="1200" y="140" width="180" height="60" rx="10" fill="#2f7d4a"/><text x="1290" y="162" text-anchor="middle" fill="#fff" font-weight="700">Descending neurons</text><text x="1290" y="178" text-anchor="middle" fill="#fff">DNa02, DNa03, DNa15, DNg04</text><text x="1290" y="192" text-anchor="middle" fill="#fff">PFL3 → DNa02 direct: 1.5 %</text>
+    <rect x="1200" y="220" width="100" height="46" rx="8" fill="#2f7d4a"/><text x="1250" y="239" text-anchor="middle" fill="#fff" font-weight="700">Legs turn</text><text x="1250" y="255" text-anchor="middle" fill="#fff">VNC not in graph</text>
+    <rect x="1200" y="300" width="180" height="46" rx="8" fill="#5a86a8"/><text x="1290" y="319" text-anchor="middle" fill="#fff" font-weight="700">LAL013 / DNa11 (Feng)</text><text x="1290" y="335" text-anchor="middle" fill="#fff">PFL input: ~0</text>
+    <path d="M1180 85 L 1198 85" stroke="#1b1b1f" stroke-width="3.5" fill="none" marker-end="url(#a)"/>
+    <path d="M1180 110 L 1198 150" stroke="#8a8f99" stroke-width="1.5" fill="none" stroke-dasharray="5 4" marker-end="url(#g)"/>
+    <path d="M1290 120 L 1290 138" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+    <path d="M1250 200 L 1250 218" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+    <path d="M1340 300 L 1340 202" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <path d="M1250 300 L 1250 268" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <a href="findings/02-steering-stage.html"><circle cx="1382" cy="122" r="11" fill="#1b1b1f"/><text x="1382" y="126" text-anchor="middle" fill="#fff" font-weight="700">2</text></a>
+
+    <!-- ===== Side branches ===== -->
+    <rect x="480" y="560" width="190" height="70" rx="10" fill="#b07a12"/><text x="575" y="580" text-anchor="middle" fill="#fff" font-weight="700">Mushroom body (value)</text><text x="575" y="596" text-anchor="middle" fill="#fff">MBON21/09 → FB4R → hΔB</text><text x="575" y="612" text-anchor="middle" fill="#fff">MBON25/34 → FB4G/H → PFL3</text>
+    <rect x="1000" y="560" width="150" height="60" rx="10" fill="#5a86a8"/><text x="1075" y="582" text-anchor="middle" fill="#fff" font-weight="700">FS outputs</text><text x="1075" y="598" text-anchor="middle" fill="#fff">FB state → SMP, oviIN</text>
+    <rect x="1200" y="560" width="180" height="60" rx="10" fill="#b07a12"/><text x="1290" y="582" text-anchor="middle" fill="#fff" font-weight="700">oviIN egg-laying gate</text><text x="1290" y="598" text-anchor="middle" fill="#fff">↔ FC2, FS1A (~3,500)</text>
+    <path d="M652 560 L 652 112" stroke="#b07a12" stroke-width="2.5" fill="none" marker-end="url(#o)"/><text x="646" y="400" text-anchor="end">FB4R → hΔB</text>
+    <path d="M708 503 L 672 580" stroke="#b07a12" stroke-width="2" fill="none" marker-end="url(#o)"/>
+    <path d="M190 490 L 478 590" stroke="#8a8f99" stroke-width="1.5" fill="none" stroke-dasharray="5 4" marker-end="url(#g)"/>
+    <path d="M838 344 L 838 540 L 1290 540 L 1290 558" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <path d="M1075 540 L 1075 558" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <path d="M1150 590 L 1198 590" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <path d="M1200 575 C 1100 575, 980 430, 912 348" stroke="#6a4c93" stroke-width="1.5" fill="none" marker-end="url(#p)"/><text x="1010" y="470" fill="#6a4c93">feedback to goal</text>
+    <a href="findings/04-mb-bridges.html"><circle cx="672" cy="632" r="11" fill="#1b1b1f"/><text x="672" y="636" text-anchor="middle" fill="#fff" font-weight="700">4</text></a>
+    <a href="findings/05-goal-to-egglaying.html"><circle cx="1382" cy="622" r="11" fill="#1b1b1f"/><text x="1382" y="626" text-anchor="middle" fill="#fff" font-weight="700">5</text></a>
+  </svg>
+  </div>
+
+  <h2>Stage by stage</h2>
+
+  <div class="stage"><h3>1 · Sense</h3><div class="row">
+    <span class="k p">Proven</span><span>Visual and wind cues reach the compass through ring-neuron classes whose synapses onto EPG are learned (Kim 2019; Fisher 2019; Okubo 2020). Sugar contact switches the fly into local search through several sensory routes (Corfas 2019). Flies also mark rewarded spots with their own scent and use it (Chen 2024; Titova 2023).</span>
+    <span class="k n">New</span><span>The self-motion sources are named for the first time: PS196_b feeds the rotational velocity neuron GLNO and the dopamine/feedback cells; FB3A carries an ascending (leg-derived) signal into PFNd and supplies 12 % of its input. <a class="pin" href="findings/07-velocity-sources.html">7</a></span>
+    <span class="k m">Missing</span><span>Which signal tells the navigation system "food is here". Candidates only: the dopamine tangentials FB4M/FB4L (target hΔB, PFNd, PFR) and FB1H (targets the goal input hΔJ).</span>
+  </div></div>
+
+  <div class="stage"><h3>2 · Heading</h3><div class="row">
+    <span class="k p">Proven</span><span>EPG ring attractor, PEN shifters, Δ7 inhibition, GLNO velocity input, EL octopamine and ExR2 dopamine for cue learning (Seelig 2015; Kim 2017; Green 2017; Turner-Evans 2017/2020; Hulse 2023; Plitt 2025; Fisher 2022). The shifted PEN wiring is confirmed cell by cell in both connectomes.</span>
+    <span class="k c">Controversial</span><span>The shifters receive three times more compass input at the position they write to than at the position they read from. Every published model omits this; in simulation it brakes rotation. Either the synapses are weak, axo-axonic, or cancelled by inhibition, and each answer is a different compass. <a class="pin" href="findings/01-compass-brake.html">1</a></span>
+    <span class="k n">New</span><span>EL feedback is ring-class specific, so cue learning should depend on octopamine for some cue types and not others. ExR4/ExR6 provide a global glutamatergic feedback that could set bump amplitude. <a class="pin" href="findings/08-cue-specific-octopamine.html">8</a></span>
+  </div></div>
+
+  <div class="stage"><h3>3 · Velocity → travel direction</h3><div class="row">
+    <span class="k p">Proven</span><span>PFNd/PFNv combine heading with body velocity; hΔB sums them into world-centred travel direction (Lu 2022; Lyu 2022). Airflow vectors in PFNa, including sign inversion by calcium spikes (Currier 2020; Ishida 2026).</span>
+    <span class="k n">New</span><span>FB3A and PS196_b as inputs (stage 1). The mushroom-body output FB4R modulates hΔB directly (8 % of its input). <a class="pin" href="findings/04-mb-bridges.html">4</a></span>
+    <span class="k m">Missing</span><span>Nothing here is missing for the instantaneous computation; what is missing is what happens to it over time (stage 4).</span>
+  </div></div>
+
+  <div class="stage"><h3>4 · Integrate, store, choose a goal</h3><div class="row">
+    <span class="k p">Proven</span><span>Behaviourally only: flies integrate distance and re-zero at food (Kim 2017; Behbahani 2021; Titova 2023; D'Atri 2025), and the PFNd/PFNv/hΔB/PFR pathway is required. FC2 holds the goal and drives steering (Mussells Pires 2024). The hΔK/PFGs loop holds an odor working memory (Kathman 2026; Lanz 2025).</span>
+    <span class="k m">Missing</span><span>The three red boxes. No neuron has been shown to integrate travel direction into position, to store the zero point, or to invert the home vector into a return goal. hΔB has no direct route to FC2 (fewer than 150 synapses), so the goal must be built through the hΔ inputs to FC2, none of which has been recorded during a return.</span>
+    <span class="k n">New</span><span>PFR has the inputs and recurrence of an integrator but, with excitatory signs, only relays travel direction; one transmitter measurement decides. FR1 is the strongest self-loop in the fan-shaped body and links travel direction to MB dopamine. FB6A/FB6M are the inhibitory gates the working-memory model needs. FC2 subtypes differ only by input: A from self-motion/airflow, B from the MB relay and working-memory loop, C from arousal-related dorsal layers. <a class="pin" href="findings/03-pfr-integrator.html">3</a> <a class="pin" href="findings/04-mb-bridges.html">4</a></span>
+  </div></div>
+
+  <div class="stage"><h3>5 · Steer</h3><div class="row">
+    <span class="k p">Proven</span><span>PFL3 compares heading with the FC2 goal and outputs a lateralised error; PFL2 scales the response with error size (Mussells Pires 2024; Westeinde 2024). The ±67° PFL3 phase offset is visible in every cell's anatomy.</span>
+    <span class="k n">New</span><span>PFL3 also receives the goal inverted by 180° through hΔM (about half the direct route) and a travel-direction-derived input through hΔA/hΔI that outweighs any single FC2 subtype. The published steering model has neither. <a class="pin" href="findings/06-anti-goal.html">6</a></span>
+    <span class="k m">Missing</span><span>What PFL3 does with three goal-like inputs at once, and how arrival (home vector near zero) stops the steering.</span>
+  </div></div>
+
+  <div class="stage"><h3>6 · Move</h3><div class="row">
+    <span class="k p">Proven</span><span>DNa02 activation turns the fly and receives PFL3 input (Rayshubskiy 2020; Westeinde 2024). A separate LAL steering hierarchy (LAL013, DNa03, DNa11) generates turns of all sizes (Feng 2024).</span>
+    <span class="k c">Controversial</span><span>The direct PFL3 → DNa02 link is 1.5 % of DNa02's input. Most of the steering signal goes through contralateral, largely inhibitory LAL interneurons that fan out to five descending neurons, and Feng's hierarchy receives no PFL input at all. Hulse 2021 flagged the LAL interneurons; the steering papers did not follow it up. <a class="pin" href="findings/02-steering-stage.html">2</a></span>
+    <span class="k m">Missing</span><span>The ventral nerve cord is not in this connectome, so the leg-level command is out of reach here.</span>
+  </div></div>
+
+  <div class="stage"><h3>Side branches</h3><div class="row">
+    <span class="k n">New</span><span>Three routes tie the mushroom body to the navigation system (value into hΔB, value into PFL3, travel direction back to MB dopamine). The goal population and its FS1A readouts send ~3,500 synapses to oviIN, the egg-laying gate, which projects back. <a class="pin" href="findings/04-mb-bridges.html">4</a> <a class="pin" href="findings/05-goal-to-egglaying.html">5</a></span>
+    <span class="k m">Missing</span><span>Any physiology on the FS output neurons, which broadcast fan-shaped-body state to the rest of the brain.</span>
+  </div></div>
+
+  <h2>What the picture says</h2>
+  <p>Every box on the left and right is green or blue: sensing, heading, velocity, steering and descending control each have named neurons with recordings and, mostly, causal tests. The middle of the flow, where the behaviour requires memory, is red. The fly demonstrably integrates, stores, inverts and stops; no neuron has been shown doing any of it. The structural candidates for those steps (PFR, FR1, the hΔK loop and its gates, the hΔ inverters, the dopamine tangentials) are the orange boxes, and the experiments that would promote them to blue are listed on each finding page. The two purple outlines mark where the wiring disagrees with the models of stages everyone considers solved.</p>
+
+  <p class="foot">Sources: <a href="findings/index.html">findings</a>; repository docs <code>behavioral-task-map.md</code>, <code>uncharacterised-neurons.md</code>, <code>findings.md</code>. Data: MaleCNS v1.0 (2026) and hemibrain v1.2 (2020). Colours reflect the state of evidence as read for this project, not a consensus.</p>
+</main>
+</body>
+</html>
