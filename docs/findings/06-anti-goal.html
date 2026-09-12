@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Finding 6: an anti-goal channel into the steering neurons</title>
+<title>Finding 6: a second goal input the steering model omits</title>
 <style>
   :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
   body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
@@ -26,12 +26,12 @@
 </head>
 <body>
 <main>
-  <div class="kicker">Finding 6 of 8 · a hidden sign flip</div>
-  <h1>The steering neurons receive the goal twice: once as is, once flipped by 180°</h1>
-  <p class="lede">Steering works by comparing heading with a goal direction held by the FC2 population. FC2 delivers that goal straight to the steering neurons. The wiring shows a second, parallel route: FC2 also drives a set of eight neurons, hΔM, whose anatomy inverts any signal by half a turn, and hΔM delivers that inverted goal to the same steering neurons with almost as many synapses. The fly's steering system is wired to receive "toward the goal" and "away from the goal" at the same time, with an inhibitory gate deciding the mix.</p>
+  <div class="kicker">Finding 6 of 8 · a known operation, an omitted input</div>
+  <h1>The steering neurons receive the goal twice: once as is, once flipped by 180°. The steering model uses only the first.</h1>
+  <p class="lede">Steering works by comparing heading with a goal direction held by the FC2 population, which delivers the goal straight to the steering neurons. That is the published model. The wiring shows a parallel route of about half the size: FC2 also drives hΔM, a type whose anatomy inverts any signal by half a turn, and hΔM delivers the inverted goal to the same steering neurons. None of the wiring is new; it is in the 2021 hemibrain tables. What is new is stating its size relative to the direct route and asking what a steering neuron does with a goal and its opposite at the same time.</p>
 
   <figure>
-    <svg viewBox="0 0 900 300" width="100%" role="img" aria-label="Goal and inverted goal converge on PFL3 and PFL2">
+    <svg viewBox="0 0 900 260" width="100%" role="img" aria-label="Goal and inverted goal converge on PFL3 and PFL2">
       <defs>
         <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
         <marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker>
@@ -47,14 +47,11 @@
       <path d="M170 140 L 358 195" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/><text x="235" y="185" font-size="12">1,073</text>
       <path d="M530 196 C 600 196, 640 160, 698 130" stroke="#b4432c" stroke-width="3.5" fill="none" marker-end="url(#b)"/>
       <text x="600" y="228" text-anchor="middle" font-size="12" fill="#b4432c" font-weight="700">inverted goal (3,983)</text>
-      <!-- gate -->
-      <rect x="360" y="250" width="170" height="36" rx="8" fill="#e8f0f6" stroke="#2a6f97"/><text x="445" y="273" text-anchor="middle" font-size="12" font-weight="600">FB5A gate (GABA, 4 cells)</text>
-      <path d="M445 250 L 445 232" stroke="#2a6f97" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
       <!-- target -->
       <rect x="700" y="90" width="180" height="60" rx="8" fill="#1b1b1f"/><text x="790" y="114" text-anchor="middle" fill="#fff" font-weight="700">PFL3 and PFL2</text><text x="790" y="132" text-anchor="middle" fill="#fff" font-size="12">steering neurons</text>
       <text x="790" y="180" text-anchor="middle" font-size="12" fill="#5a5f6a">compare heading with</text><text x="790" y="196" text-anchor="middle" font-size="12" fill="#5a5f6a">whatever goal they receive</text>
     </svg>
-    <figcaption>Synapse counts (MaleCNS). hΔM's output lands 180° from its input in 97 % of its synapses onto PFL3. FB5A reads FC2 and PFL3 and inhibits FC2, PFL3 and hΔM.</figcaption>
+    <figcaption>Synapse counts (MaleCNS). hΔM's output lands 180° from its input in 97 % of its synapses onto PFL3.</figcaption>
   </figure>
 
   <h2>Background</h2>
@@ -62,6 +59,7 @@
     <dl>
       <dt>Goal and steering</dt><dd><b>FC2</b> neurons hold the goal as a bump in one of eight fan-shaped-body columns (each column is 45° of heading). <b>PFL3</b> neurons receive the goal and the compass heading and fire when the two disagree, driving a corrective turn; <b>PFL2</b> fire most when the fly faces directly away from the goal and add turning strength (Mussells Pires 2024; Westeinde 2024).</dd>
       <dt>hΔ neurons</dt><dd>A family of fan-shaped-body cells with input in one column and output in the column half a turn away. Anatomically, every hΔ type inverts whatever vector it carries (Hulse 2021). Which signal each one inverts, and where it delivers it, is what the wiring can tell us.</dd>
+      <dt>What Hulse et al. 2021 already said</dt><dd>That hΔ types invert by ~180° by construction, and, in one sentence, that PFL2/3 "receive shared input from a handful of hΔ types, several FC2 types, one or two vΔ types, and many FB tangential neuron types." No hΔ type was singled out and no strength was given.</dd>
       <dt>Why an inverted goal is useful</dt><dd>Sometimes the task is to move away: flies learn to avoid a heading that brought heat (Dan 2024). The same goal memory could serve both approach and avoidance if something can flip its sign on demand.</dd>
     </dl>
   </div>
@@ -75,17 +73,16 @@
       <tr><td>hΔM → PFL3</td><td class="n">2,428</td><td>180° (97 % at half a turn)</td></tr>
       <tr><td>hΔM → PFL2</td><td class="n">1,555</td><td>180° (98 %)</td></tr>
       <tr><td>hΔM → FC2B (back into the goal)</td><td class="n">958</td><td>180°</td></tr>
-      <tr><td>FB5A (GABA) → FC2A/B/C, PFL3, hΔM</td><td class="n">9,031 / 1,763 / 1,611</td><td>all columns</td></tr>
     </table>
-    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">For comparison the direct FC2 → PFL3 route carries 7,690 synapses across the three subtypes. hΔH does the same inversion for a different input (PFR_b) into FC2B and PFL3.</p>
+    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">For comparison the direct FC2 → PFL3 route carries 7,690 synapses across the three subtypes. hΔH does the same inversion for a different input (PFR_b). FB5A, four GABAergic cells, inhibits FC2, PFL3 and hΔM together; it is a candidate global inhibitor of this stage, not a selector between the two routes.</p>
   </div>
 
   <h2>Why it matters</h2>
   <div class="card">
     <ul>
-      <li><b>PFL2's anti-goal tuning may come from here.</b> Westeinde 2024 explained PFL2's preference for facing away from the goal by PFL2's own anatomy. hΔM supplies exactly that signal, pre-inverted, with 1,555 synapses. The two explanations make different predictions when hΔM is silenced.</li>
-      <li><b>A valence switch without a second memory.</b> Approach uses the goal; avoidance uses the goal plus 180°. If FB5A's inhibition sets the balance between the direct and the hΔM route, one stored direction serves both, which is what Dan 2024's fast avoidance learning needs.</li>
-      <li><b>It is a family trait.</b> hΔD, hΔE, hΔG and hΔH show the same 180° delivery into FC2 and PFL3 for other inputs, so "invert then deliver to the goal or steering layer" is a general fan-shaped-body operation, not a one-off.</li>
+      <li><b>The steering model is incomplete by a known amount.</b> "PFL3 = heading versus goal" omits a second goal-derived input worth about half the first, of opposite sign in angle. A model that fits PFL3 tuning without it is fitting with the wrong inputs.</li>
+      <li><b>PFL2's anti-goal tuning has a candidate source.</b> Westeinde 2024 explained PFL2's preference for facing away from the goal by PFL2's own anatomy. hΔM supplies that signal, pre-inverted, with 1,555 synapses. The two explanations diverge if hΔM is silenced.</li>
+      <li><b>A sign flip is what avoidance needs.</b> If the same stored direction must serve approach and avoidance (Dan 2024), an inverted copy is the minimal machinery. Whether the fly uses hΔM that way is untested; the wiring only shows the copy exists.</li>
     </ul>
   </div>
 
@@ -94,11 +91,11 @@
     <ul>
       <li>Image hΔM alongside FC2: the wiring predicts an hΔM bump antiphase to the FC2 bump.</li>
       <li>Silence hΔM during approach menotaxis versus heat-avoidance: predict avoidance impaired, approach intact, and a reduced PFL2 anti-goal signal.</li>
-      <li>Activate FB5A and measure the FC2 bump: predict narrowing or suppression and a change in the PFL2/PFL3 balance.</li>
+      <li>Activate FB5A and measure the FC2 bump: predict global suppression of the goal layer (this tests the inhibitor reading, not route selection).</li>
     </ul>
   </div>
 
-  <p><span class="tag strong">Wiring and phase: high confidence</span><span class="tag open">Function: predicted only</span></p>
+  <p><span class="tag strong">Wiring and phase: high confidence, not new</span><span class="tag open">Function: predicted only</span></p>
   <p class="foot">Sources: <code>docs/uncharacterised-neurons.md</code> §A4, §A6; tables <code>fb_column_offsets.csv</code>, <code>cx_sharp_offsets.csv</code>. Hulse 2021; Mussells Pires 2024; Westeinde 2024; Dan 2024.</p>
 </main>
 </body>
