@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How a synaptic home vector works</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; --purple:#6a4c93; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:980px; margin:0 auto; padding:30px 22px 60px; }
+  h1 { font-size:26px; line-height:1.2; margin:0 0 8px; }
+  .lede { font-size:17px; margin:0 0 16px; max-width:860px; }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 14px; } .nav a { color:var(--muted); text-decoration:none; }
+  .stage { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .ctrl { display:flex; align-items:center; gap:10px; margin:10px 0; }
+  button { font:600 14px -apple-system,Helvetica,Arial,sans-serif; padding:8px 14px; border-radius:8px; border:1px solid var(--line); background:#fff; cursor:pointer; }
+  button:hover { border-color:var(--accent2); }
+  .step { font-weight:700; }
+  .caption { min-height:78px; font-size:16px; padding:8px 10px; background:#f5f4ef; border-radius:8px; }
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; }
+  .k { color:var(--muted); font-size:13px; }
+  .foot { color:var(--muted); font-size:13px; margin-top:22px; border-top:1px solid var(--line); padding-top:10px; }
+</style>
+</head>
+<body>
+<main>
+  <nav class="nav"><a href="02-synaptic-store.html">← back to finding 2</a><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a></nav>
+  <h1>How a home vector can live in synapse strengths</h1>
+  <p class="lede">A worked example with four direction columns. The fly walks 6 north, then 4 south, ends up 2 north of the food, and comes back. Step through it. Left: the world. Middle: the strength of the synapse from the travel-direction bump onto each direction column. Right: what the steering neurons receive.</p>
+
+  <div class="stage">
+    <div class="ctrl"><button id="prev">◀ Prev</button><button id="next">Next ▶</button><span class="step" id="steplabel"></span><span class="k" id="stepcount"></span></div>
+    <div class="caption" id="caption"></div>
+    <svg id="scene" viewBox="0 0 980 420" width="100%" role="img" aria-label="Worked example of synaptic path integration">
+      <defs>
+        <marker id="ma" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
+        <marker id="mr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b4432c"/></marker>
+        <marker id="mb" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#2a6f97"/></marker>
+      </defs>
+      <!-- WORLD -->
+      <g id="world">
+        <text x="20" y="24" font-weight="700">World</text>
+        <rect x="20" y="36" width="280" height="360" rx="10" fill="#f5f4ef" stroke="#e3e2dc"/>
+        <text x="160" y="56" text-anchor="middle" class="k">north ↑</text>
+        <circle id="food" cx="160" cy="330" r="9" fill="#b4432c"/><text x="160" y="352" text-anchor="middle" font-size="12">food (start)</text>
+        <polyline id="path" points="" fill="none" stroke="#2a6f97" stroke-width="3"/>
+        <circle id="fly" cx="160" cy="330" r="7" fill="#1b1b1f"/>
+        <text id="flylabel" x="0" y="0" font-size="12" fill="#1b1b1f"></text>
+      </g>
+      <!-- SYNAPSES -->
+      <g id="syn">
+        <text x="340" y="24" font-weight="700">Synapse strengths (hΔB → store, per direction column)</text>
+        <rect x="340" y="36" width="330" height="360" rx="10" fill="#fff" stroke="#e3e2dc"/>
+        <g id="bars"></g>
+        <text x="505" y="384" text-anchor="middle" class="k" id="synnote">grow while walking (dopamine-gated)</text>
+      </g>
+      <!-- READOUT -->
+      <g id="read">
+        <text x="700" y="24" font-weight="700">What steering receives</text>
+        <rect x="700" y="36" width="260" height="360" rx="10" fill="#fff" stroke="#e3e2dc"/>
+        <circle cx="830" cy="190" r="70" fill="none" stroke="#e3e2dc"/>
+        <text x="830" y="104" text-anchor="middle" class="k">N</text><text x="918" y="194" class="k">E</text><text x="830" y="284" text-anchor="middle" class="k">S</text><text x="734" y="194" class="k">W</text>
+        <g id="pushes"></g>
+        <line id="net" x1="830" y1="190" x2="830" y2="190" stroke="#1b1b1f" stroke-width="4" marker-end="url(#ma)" visibility="hidden"/>
+        <line id="inv" x1="830" y1="190" x2="830" y2="190" stroke="#b4432c" stroke-width="4" marker-end="url(#mr)" visibility="hidden" stroke-dasharray="6 4"/>
+        <text id="netlabel" x="830" y="300" text-anchor="middle" font-size="12"></text>
+        <text id="invlabel" x="830" y="318" text-anchor="middle" font-size="12" fill="#b4432c"></text>
+        <text x="830" y="378" text-anchor="middle" class="k">each column pushes toward its direction;</text><text x="830" y="392" text-anchor="middle" class="k">pushes add as vectors</text>
+      </g>
+    </svg>
+  </div>
+
+  <h2 style="font-size:18px;margin:26px 0 8px">The three rules, and what is measured versus assumed</h2>
+  <div class="stage" style="padding:14px 18px">
+    <ol>
+      <li><b>Write.</b> While the fly walks, the active hΔB column (its current travel direction) strengthens its synapse onto the matching store column, by an amount proportional to distance. Measured: hΔB synapses column-matched onto hΔH/hΔA/hΔI/hΔG; dopamine cells FB4M/FB1H, driven by the velocity system, contact every store cell. Assumed: that the synapses actually potentiate under that dopamine.</li>
+      <li><b>Read.</b> Whenever hΔB is active, each store cell fires in proportion to its synapse strength, and the steering neurons sum the columns as vectors, with opposite columns pulling opposite ways. 6 north and 4 south are both present; the sum is 2 north. Measured: this vector summation is the operation the fan-shaped body already uses to combine PFN inputs (Lyu 2022; Maimon &amp; Abbott 2026). The sum points <i>away</i> from food; hΔM inverts it (finding 3).</li>
+      <li><b>Cancel and reset.</b> Walking back fills the opposite column until the pushes cancel and the fly stops; that is arrival. But the strengths are then 6/6, not 0/0, and would saturate over trips. Something must scale them all down at food. Measured: the reward octopamine neuron OA-VPM3 contacts the store cells. Assumed: that it depresses or renormalises the synapses. This is the least supported step and the first thing to test.</li>
+    </ol>
+    <p class="k">Path independence: any path with the same endpoint produces the same net vector, because only totals per direction are kept and opposite directions cancel at readout. The path itself is never stored.</p>
+  </div>
+  <p class="foot">Companion to <a href="02-synaptic-store.html">finding 2</a> and <a href="03-return-inverter.html">finding 3</a>. Numbers in the example are arbitrary; the circuit pages give the measured synapse counts.</p>
+
+<script>
+(function(){
+  const dirs = ['N','E','S','W'];
+  const S = [
+    {label:'0 · at food', w:{N:0,E:0,S:0,W:0}, pos:[0,0], path:[[0,0]], cap:'The fly is at the food. All four synapses are at zero. Octopamine (OA-VPM3) has just reset them.', show:'none'},
+    {label:'1 · walk 3 north', w:{N:3,E:0,S:0,W:0}, pos:[0,3], path:[[0,0],[0,3]], cap:'Walking north, the hΔB bump sits on the "north" column. Dopamine is on because the fly is moving, so the north synapse grows by 3 (distance walked).', show:'none'},
+    {label:'2 · walk 3 more north', w:{N:6,E:0,S:0,W:0}, pos:[0,6], path:[[0,0],[0,6]], cap:'Still north. The north synapse is now 6. Nothing else has changed.', show:'none'},
+    {label:'3 · turn and walk 4 south', w:{N:6,E:0,S:4,W:0}, pos:[0,2], path:[[0,0],[0,6],[0,2]], cap:'The bump moves to the "south" column; the south synapse grows by 4. The north synapse is NOT reduced. Both are stored: 6 north, 4 south. The fly is 2 north of the food.', show:'none'},
+    {label:'4 · read out', w:{N:6,E:0,S:4,W:0}, pos:[0,2], path:[[0,0],[0,6],[0,2]], cap:'Readout needs no recall step: hΔB is active while the fly moves, and each store cell fires in proportion to its synapse. Steering sums the columns as vectors: a push of 6 toward north and 4 toward south add to a net push of 2 toward north. The 6 and the 4 are both still there; the subtraction is geometry.', show:'net'},
+    {label:'5 · invert', w:{N:6,E:0,S:4,W:0}, pos:[0,2], path:[[0,0],[0,6],[0,2]], cap:'The net vector points along the displacement, i.e. away from food. hΔM delivers the FC2 goal to the steering neurons rotated by 178°, so the fly steers 2 toward south: back toward food.', show:'inv'},
+    {label:'6 · walk 2 south', w:{N:6,E:0,S:6,W:0}, pos:[0,0], path:[[0,0],[0,6],[0,2],[0,0]], cap:'Walking south fills the south synapse by 2: now 6 north, 6 south. The pushes cancel, the net vector is zero, steering stops. The fly is back at the food. The memory cleared itself by being used.', show:'net'},
+    {label:'7 · reset', w:{N:0,E:0,S:0,W:0}, pos:[0,0], path:[[0,0],[0,6],[0,2],[0,0]], cap:'The synapses sit at 6/6, not 0/0; another trip would pile on top and eventually saturate. At the food, the reward octopamine neuron OA-VPM3 contacts the same cells. If it scales all synapses down together, the next trip starts clean. This step is the least supported by evidence.', show:'none'}
+  ];
+  let i = Math.min(S.length-1, Math.max(0, parseInt((location.hash||'#0').slice(1))||0));
+  const $ = id => document.getElementById(id);
+  const cx = 160, cy = 330, sc = 38;   // world scale: 1 unit = 38 px
+  function render(){
+    const s = S[i];
+    $('steplabel').textContent = s.label; $('stepcount').textContent = `(${i+1} of ${S.length})`; $('caption').textContent = s.cap;
+    $('path').setAttribute('points', s.path.map(p => `${cx+p[0]*sc},${cy-p[1]*sc}`).join(' '));
+    const fx = cx+s.pos[0]*sc, fy = cy-s.pos[1]*sc; $('fly').setAttribute('cx', fx); $('fly').setAttribute('cy', fy);
+    $('flylabel').setAttribute('x', fx+12); $('flylabel').setAttribute('y', fy-8); $('flylabel').textContent = s.pos[1] ? `fly: ${s.pos[1]} north of food` : 'fly: at food';
+    // bars
+    const bars = $('bars'); while (bars.firstChild) bars.removeChild(bars.firstChild);
+    const x0 = 380, w = 60, gap = 14, base = 340, unit = 40;
+    dirs.forEach((d, k) => {
+      const v = s.w[d], x = x0 + k*(w+gap), h = v*unit;
+      const r = document.createElementNS('http://www.w3.org/2000/svg','rect'); r.setAttribute('x', x); r.setAttribute('y', base-h); r.setAttribute('width', w); r.setAttribute('height', h); r.setAttribute('rx', 4); r.setAttribute('fill', d==='N'||d==='S' ? '#2a6f97' : '#c9d1dc'); bars.appendChild(r);
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x', x+w/2); t.setAttribute('y', base+18); t.setAttribute('text-anchor','middle'); t.setAttribute('font-weight','700'); t.textContent = d; bars.appendChild(t);
+      const n = document.createElementNS('http://www.w3.org/2000/svg','text'); n.setAttribute('x', x+w/2); n.setAttribute('y', base-h-6); n.setAttribute('text-anchor','middle'); n.textContent = v ? v : ''; bars.appendChild(n);
+      const l = document.createElementNS('http://www.w3.org/2000/svg','line'); l.setAttribute('x1', x0-10); l.setAttribute('x2', x0+4*w+3*gap+10); l.setAttribute('y1', base); l.setAttribute('y2', base); l.setAttribute('stroke','#1b1b1f'); bars.appendChild(l);
+    });
+    // pushes
+    const P = $('pushes'); while (P.firstChild) P.removeChild(P.firstChild);
+    const c = [830,190], u = 8; const vec = {N:[0,-1],E:[1,0],S:[0,1],W:[-1,0]};
+    dirs.forEach(d => { const v = s.w[d]; if (!v) return; const l = document.createElementNS('http://www.w3.org/2000/svg','line'); l.setAttribute('x1', c[0]); l.setAttribute('y1', c[1]); l.setAttribute('x2', c[0]+vec[d][0]*v*u); l.setAttribute('y2', c[1]+vec[d][1]*v*u); l.setAttribute('stroke','#2a6f97'); l.setAttribute('stroke-width','3'); l.setAttribute('marker-end','url(#mb)'); l.setAttribute('opacity','0.55'); P.appendChild(l);
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x', c[0]+vec[d][0]*(v*u+16)+(d==='E'?6:d==='W'?-6:0)); t.setAttribute('y', c[1]+vec[d][1]*(v*u+16)+4); t.setAttribute('text-anchor','middle'); t.setAttribute('fill','#2a6f97'); t.textContent = `${v} ${d}`; P.appendChild(t); });
+    const net = [ (s.w.E - s.w.W), (s.w.N - s.w.S) ];
+    const showNet = s.show === 'net' || s.show === 'inv';
+    $('net').setAttribute('visibility', (showNet && (net[0]||net[1])) ? 'visible' : 'hidden'); $('inv').setAttribute('visibility', s.show === 'inv' ? 'visible' : 'hidden');
+    $('net').setAttribute('x2', c[0]+net[0]*u); $('net').setAttribute('y2', c[1]-net[1]*u);
+    $('inv').setAttribute('x2', c[0]-net[0]*u); $('inv').setAttribute('y2', c[1]+net[1]*u);
+    $('netlabel').textContent = showNet ? (net[0]||net[1] ? `net push: ${Math.abs(net[1])} ${net[1]>0?'north':'south'} (= displacement)` : 'net push: zero → stop') : '';
+    $('invlabel').textContent = s.show === 'inv' ? `after hΔM: steer ${Math.abs(net[1])} ${net[1]>0?'south':'north'} (= home)` : '';
+    $('synnote').textContent = i === 7 ? 'reset at food by OA-VPM3 (assumed)' : 'grow while walking (dopamine-gated)';
+  }
+  $('prev').onclick = () => { i = Math.max(0, i-1); location.hash = i; render(); };
+  $('next').onclick = () => { i = Math.min(S.length-1, i+1); location.hash = i; render(); };
+  document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') $('next').click(); if (e.key === 'ArrowLeft') $('prev').click(); });
+  render();
+})();
+</script>
+</main>
+</body>
+</html>

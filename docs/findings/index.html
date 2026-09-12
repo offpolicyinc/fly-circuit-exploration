@@ -16,34 +16,30 @@
   .t { font-weight:700; } .s { color:var(--muted); font-size:14px; margin-top:2px; }
   .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:11px; font-weight:600; margin-left:6px; vertical-align:middle; }
   .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); }
   .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
-  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
 </style>
 </head>
 <body>
 <main>
-  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html" class="on">List view</a><a href="../index.html">Home</a></nav>
+  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html" class="on">List view</a><a href="../index.html">Home</a></nav>
   <h1>What the wiring diagrams say about fly navigation</h1>
-  <p class="lede">Nine findings from analysing (novelty-audited 2026-09-12; kickers on each page state what was already in print) the MaleCNS (2026) and hemibrain (2020) synapse-level connectomes against the published circuit models, ranked by how much they should change current thinking. Each page is self-contained: background, figure, evidence, why it matters, what would settle it. Everything beyond the synapse counts is a hypothesis.</p>
+  <p class="lede">Four findings that survived an exhaustive pass over every fan-shaped-body population and a literature sweep for prior claims (2026-09-12), from the MaleCNS (2026) and hemibrain (2020) connectomes. Each page is self-contained and states what was already in print. A fifth page collects results that turned out to be published.</p>
 
-  <h2>Against the literature</h2>
-  <a class="card" href="01-compass-brake.html"><div class="t">1. The compass has a built-in brake that no published model includes<span class="tag strong">two brains</span><span class="tag model">simulated</span></div><div class="s">The shifter neurons that rotate the compass get three times more input from the position they write to than from the position they read from. Both sides do it, so it anchors the bump; in simulation rotation collapses.</div></a>
-  <a class="card" href="02-steering-stage.html"><div class="t">2. The turn command is reprocessed before it reaches the legs<span class="tag strong">whole graph</span><span class="tag open">mostly in Rayshubskiy 2025 / Liao 2025</span></div><div class="s">The published PFL3 → DNa02 link is 1.5 % of DNa02's input. Most of the steering signal goes to inhibitory LAL interneurons that fan out to five descending neurons; Feng's steering hierarchy gets nothing from PFL.</div></a>
+  <h2>Against the models</h2>
+  <a class="card" href="01-compass-brake.html"><div class="t">1. The compass has a built-in brake that no published model includes<span class="tag strong">two brains</span><span class="tag model">simulated</span></div><div class="s">The shifter neurons get three times more compass input from the position they write to than from the position they read from, on both sides, so they anchor the bump. In simulation rotation collapses. Hulse 2021 saw the dense EB interconnection; the ratio, placement and consequence are new.</div></a>
 
-  <h2>Missing computation</h2>
-  <a class="card" href="09-synaptic-integrator.html"><div class="t">9. The home vector is probably stored in synapses at hΔB → hΔ(H, A, I, G); the return needs hΔM<span class="tag model">simulated</span><span class="tag open">hypothesis, corrected</span></div><div class="s">No population has recurrence for an activity integrator. Several hΔ sites carry hΔB input, walking-driven dopamine and the reward octopamine neuron OA-VPM3, but every one delivers the stored displacement sign-preserved; only hΔM (and hΔK/PFGs) invert. Return requires that inversion in the closed-loop model.</div></a>
-  <a class="card" href="03-pfr-integrator.html"><div class="t">3. PFR is not the integrator; it reads as a heading-versus-travel mismatch<span class="tag model">simulated</span></div><div class="s">With excitatory signs PFR only relays travel direction, and its two velocity inputs arrive in opposite phase (PFNd ~21°, hΔB ~195°), cancelling during straight walking.</div></a>
+  <h2>The missing middle</h2>
+  <a class="card" href="02-synaptic-store.html"><div class="t">2. The home vector is stored in synapses, not activity, at hΔB's synapses onto a family of hΔ types<span class="tag strong">two brains</span><span class="tag model">simulated</span><span class="tag open">hypothesis</span></div><div class="s">No population has recurrence for an activity integrator. hΔH, hΔA, hΔI, hΔG carry column-matched hΔB input, walking-driven dopamine (FB4M, FB1H) and the reward octopamine neuron OA-VPM3. Only a vector integrator reproduces the behaviour.</div></a>
+  <a class="card" href="03-return-inverter.html"><div class="t">3. Every store delivers the displacement sign-preserved; hΔM is the only inverter, so it is the return path<span class="tag strong">phases measured</span><span class="tag model">simulated</span></div><div class="s">Anchored to Hulse 2021 and Lyu 2022 conventions, hΔB lands on the axonal arbor of each store, so FC2 receives "where I have gone". FC2 → hΔM → PFL3 at 178° turns it into "go back". One memory: dispersal read directly, return read through hΔM.</div></a>
 
-  <h2>Unknown unknowns and omitted inputs</h2>
-  <a class="card" href="04-mb-bridges.html"><div class="t">4. The learning centre and the navigation system are wired together, three ways<span class="tag strong">screen</span><span class="tag open">routes 1, 3 in Hulse/Li</span></div><div class="s">MBON21/09 → FB4R → hΔB; MBON25/34 → FB4G/H → hΔA → PFL3; and hΔB → FR1 → MBON30/PPL1 dopamine. The bridges Chen 2024's result requires, all uncharacterised.</div></a>
-  <a class="card" href="05-goal-to-egglaying.html"><div class="t">5. The navigation goal has a two-way line to the egg-laying circuit<span class="tag strong">screen</span><span class="tag open">forward edge published 2025</span></div><div class="s">FC2 and its FS1A readouts send ~3,500 synapses to oviIN, the egg-laying gate, which projects back into the goal layer.</div></a>
-  <a class="card" href="06-anti-goal.html"><div class="t">6. hΔM inverts the goal into PFL3: the candidate return path<span class="tag strong">phase measured</span><span class="tag open">re-ranked up</span></div><div class="s">FC2 → hΔM → PFL3 at 178° is the only inverter downstream of the goal. Since every stored-displacement route reaches FC2 sign-preserved, this is what would turn "where I have gone" into "go back".</div></a>
-  <a class="card" href="07-velocity-sources.html"><div class="t">7. The velocity signals come from cells nobody has named<span class="tag strong">screen</span></div><div class="s">PS196_b feeds the rotational (GLNO) and translational (FB3A) velocity inputs plus ExR2/ExR4; FB3A carries an ascending signal into PFNd and supplies 12 % of its input.</div></a>
+  <h2>Unnamed inputs</h2>
+  <a class="card" href="04-velocity-sources.html"><div class="t">4. The velocity signals come from cells nobody has named<span class="tag strong">two brains</span></div><div class="s">PS196_b feeds the rotational (GLNO) and translational (FB3A) velocity inputs plus ExR2/ExR4; FB3A carries an ascending signal into PFNd and supplies 12 % of its input.</div></a>
 
-  <h2>Prediction from a published mechanism</h2>
-  <a class="card" href="08-cue-specific-octopamine.html"><div class="t">8. Compass learning should be cue-specific<span class="tag strong">measured</span><span class="tag open">data in Plitt 2025; prediction new</span></div><div class="s">EL octopamine feedback concentrates on ER4d/ER3p/ER3d/ER2_c and barely reaches ER4m or ER6, which get direct EPG feedback instead. ER5 (sleep) is EL's largest input.</div></a>
+  <h2>Already in print</h2>
+  <a class="card" href="05-confirmations.html"><div class="t">Confirmations and minor additions<span class="tag open">audit</span></div><div class="s">The LAL steering stage (Rayshubskiy 2025, Liao 2025), PFR (Lyu 2022), mushroom-body bridges (Hulse 2021, Li 2020), the goal-to-oviIN link (Weber-Langstaff 2025) and ring-class-specific EL feedback (Plitt 2025), each with what this analysis adds.</div></a>
 
-  <p class="foot">Repository docs: <code>findings.md</code>, <code>uncharacterised-neurons.md</code>, <code>behavioral-task-map.md</code>, <code>compass-recurrence.md</code>, <code>goal-and-plasticity-motifs.md</code>, <code>descending-trace.md</code>. Data: MaleCNS v1.0 flat connectome; hemibrain v1.2 traced adjacencies. Analyses 2026-09-10/11.</p>
+  <p class="foot">Method and audit: <code>exhaustive-search.md</code>. Repository docs: <code>findings.md</code>, <code>uncharacterised-neurons.md</code>, <code>behavioral-task-map.md</code>. Data: MaleCNS v1.0 flat connectome; hemibrain v1.2 traced adjacencies.</p>
 </main>
 </body>
 </html>

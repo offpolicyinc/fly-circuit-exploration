@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmations and minor additions</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
+  .lede { font-size:18px; margin:0 0 22px; }
+  h2 { font-size:17px; margin:26px 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
+  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
+  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
+  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
+  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
+  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+  a { color:var(--accent2); }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
+</style>
+</head>
+<body>
+<main>
+  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
+  <div class="kicker">Confirmations · things the audit found already in print</div>
+  <h1>Five results that turned out to be published, with what this analysis adds to each</h1>
+  <p class="lede">These were headline findings in an earlier draft. A literature sweep on 2026-09-12 found the core of each already in print. They are kept here because the confirmations are useful (two specimens, whole-brain shares) and because each carries a small addition, but none of them changes how the circuit is thought to work.</p>
+
+  <div class="card"><h3 style="margin-top:0">The turn command is reshaped in the lateral accessory lobe before the legs</h3>
+    <p><b>In print:</b> Rayshubskiy et al. 2025 (eLife): PFL3 → DNa03 and LAL010 → DNa02 ipsilaterally, plus PFL3 → LAL121, AOTU019 and others that inhibit the contralateral DNa02/DNa03/LAL010, a "see-saw". Liao, Chang, Liu &amp; Lo 2025 (bioRxiv): the full pro-goal push-pull LAL circuit and a ventral anti-goal circuit. Hulse 2021 had flagged the LAL interneurons.</p>
+    <p><b>Added here:</b> whole-brain input shares (direct PFL3 → DNa02 is 1.5 % of DNa02's input; LAL121 takes 37 % of its input from PFL3), strict contralaterality of every PFL3 target, and the absence of any PFL input to Feng 2024's LAL013/DNa11 layer (≤ 5 synapses), so the two steering literatures connect only through LAL121/LAL014/LAL122 → DNa03.</p></div>
+
+  <div class="card"><h3 style="margin-top:0">PFR is not the integrator</h3>
+    <p><b>In print:</b> Lyu 2022: PFR receives hΔB and PFNd and its bump tracks travel direction with a bias toward heading. Flores-Valle 2025: PFR drifts at rest. D'Atri 2025: PFR needed for distance memory.</p>
+    <p><b>Added here:</b> with the measured kernels and excitatory signs PFR relays and cannot integrate (vector-mode recurrent gain 0.00–0.07); integration would need its broad recurrence to be inhibitory, and PFR_a's transmitter is unresolved. An earlier "heading-versus-travel mismatch" reading was wrong and is withdrawn: anchored to Lyu's conventions PFR sums travel direction and heading, as observed.</p></div>
+
+  <div class="card"><h3 style="margin-top:0">Mushroom body ↔ navigation system wiring</h3>
+    <p><b>In print:</b> Hulse 2021 and Li 2020: MBON09, MBON21 and MBON05 converge on FB4R as "a significant fraction" of its input; MBON30 → LCNOp; FR1 makes ~500 synapses onto MBON30.</p>
+    <p><b>Added here:</b> the next step of each route: FB4R is 8 % of hΔB's input (value into travel direction); MBON25/34 → FB4G/FB4H → vΔK/vΔM → hΔA → PFL3 (value into steering, bypassing the goal); FR1 reads hΔB (11 %) and is the strongest self-loop in the FB (uniform mode only), a scalar accumulator feeding MBON30 and PPL1 dopamine. These are the bridges Chen 2024's MB-plus-PFNd result needs. All replicate in the hemibrain.</p></div>
+
+  <div class="card"><h3 style="margin-top:0">The goal population talks to the egg-laying gate</h3>
+    <p><b>In print:</b> Weber-Langstaff, Srivastava, Kunin &amp; Gutierrez 2025 (eNeuro): FS1A is the strongest input to oviIN, with FC2B/FC2C in the same recurrent module.</p>
+    <p><b>Added here:</b> MaleCNS replication (FS1A_a/b/c → oviIN 780/633/598; FC2B/C → oviIN 631/682) and the return direction: oviIN → FC2C (418) and → FB5 tangentials that feed the goal layer (~1,300). The coupling is two-way. The male brain's oviIN is a homolog; the behavioural reading is from the female literature.</p></div>
+
+  <div class="card"><h3 style="margin-top:0">EL octopamine feedback is ring-class specific</h3>
+    <p><b>In print:</b> Plitt et al. 2025, Extended Data: "EL provides the strongest feedback onto ER4d and ER3p neurons", with cue assignments per ring class.</p>
+    <p><b>Added here:</b> the contrast with direct EPG → ER4m (4,487) and EPG → ER6 (4,580) feedback, which EL barely reaches (479 / 54), and the resulting prediction that EL silencing should abolish learning for ER4d/ER2-carried cues and spare ER4m/ER6-carried ones. ER5 (sleep) is EL's largest input (10,073), so learning may be state-gated.</p></div>
+
+  <p class="foot">Sources: <code>docs/exhaustive-search.md</code> §7; <code>hemibrain_key_edges.csv</code>; <code>pfl_outputs_hop1.csv</code>; <code>er_subtype_motif.csv</code>; <code>fc2_subtype_partners.csv</code>.</p>
+</main>
+</body>
+</html>

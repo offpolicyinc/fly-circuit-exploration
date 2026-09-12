@@ -15,7 +15,7 @@
   .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
   dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
   table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
-  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+  .grid { display:block; }
   .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
   .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
   svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
@@ -27,7 +27,7 @@
 <body>
 <main>
   <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html">List view</a><a href="../index.html">Home</a></nav>
-  <div class="kicker">Finding 1 of 8 · most against the literature</div>
+  <div class="kicker">Finding 1 of 4 · most against the models</div>
   <h1>The fly's compass has a built-in brake that no published model includes</h1>
   <p class="lede">The compass is a ring attractor moved by "shifter" neurons that read the activity bump at one position and write it one step over. They are supposed to be one-way conveyors. The wiring shows each shifter gets three times more input from the position it writes <i>to</i> than from the position it reads <i>from</i>. Both left and right shifters do this, so the effect has no direction: it makes the shifters anchor the bump where it is. In simulation the anchor beats the turn signal and rotation collapses. Real flies turn fine, so these synapses cannot be acting the way a naive reading of the wiring says.</p>
   <figure>
