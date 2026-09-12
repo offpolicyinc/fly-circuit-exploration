@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding 5: the navigation goal talks directly to the egg-laying circuit</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
+  .lede { font-size:18px; margin:0 0 22px; }
+  h2 { font-size:17px; margin:26px 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
+  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
+  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
+  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
+  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
+  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">Finding 5 of 8 · biggest unknown unknown</div>
+  <h1>The navigation goal has a direct, two-way line to the egg-laying circuit</h1>
+  <p class="lede">Nobody was looking for this. An unbiased scan of where central-complex neurons send their output outside the navigation system found that the goal population itself, and three fan-shaped-body output types that read it, converge on oviIN, the inhibitory neuron that gates egg laying. Roughly 3,500 synapses in total. And oviIN sends back into the goal population and its tangential inputs. The fly's "where am I trying to go" signal and its "should I lay an egg here" signal are wired to each other, and no navigation study mentions it.</p>
+
+  <figure>
+    <svg viewBox="0 0 900 300" width="100%" role="img" aria-label="Goal population and FS1A outputs converge on oviIN, which feeds back">
+      <defs>
+        <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
+        <marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker>
+        <marker id="p" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#6a4c93"/></marker>
+        <marker id="g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#8a8f99"/></marker>
+      </defs>
+      <text x="130" y="24" text-anchor="middle" font-weight="700" font-size="14">Navigation goal layer</text>
+      <text x="520" y="24" text-anchor="middle" font-weight="700" font-size="14">Egg-laying circuit</text>
+      <!-- goal boxes -->
+      <rect x="30" y="50" width="200" height="40" rx="8" fill="#2a6f97"/><text x="130" y="75" text-anchor="middle" fill="#fff" font-weight="700">FC2B, FC2C (goal direction)</text>
+      <rect x="30" y="120" width="200" height="40" rx="8" fill="#5a86a8"/><text x="130" y="145" text-anchor="middle" fill="#fff" font-weight="700">FS1A_a/b/c (47 cells)</text>
+      <text x="130" y="178" text-anchor="middle" fill="#5a5f6a" font-size="12">read FC2, hΔM, hΔJ, hΔL; uncharacterised</text>
+      <rect x="30" y="200" width="200" height="40" rx="8" fill="#e3e2dc"/><text x="130" y="225" text-anchor="middle" font-weight="600">FB5 tangentials (FB5P/Q/X/Z…)</text>
+      <!-- oviIN -->
+      <rect x="450" y="85" width="140" height="70" rx="10" fill="#6a4c93"/><text x="520" y="115" text-anchor="middle" fill="#fff" font-weight="700">oviIN (pair)</text><text x="520" y="135" text-anchor="middle" fill="#fff" font-size="12">inhibitory gate</text>
+      <!-- forward arrows -->
+      <path d="M230 70 C 330 70, 380 100, 448 108" stroke="#b4432c" stroke-width="3" fill="none" marker-end="url(#b)"/><text x="300" y="88" text-anchor="middle" font-size="11" fill="#b4432c">1,377</text>
+      <path d="M230 140 L 448 124" stroke="#b4432c" stroke-width="4" fill="none" marker-end="url(#b)"/><text x="330" y="156" text-anchor="middle" font-size="11" fill="#b4432c">2,011</text>
+      <!-- feedback arrows -->
+      <path d="M450 100 C 380 40, 300 40, 232 58" stroke="#6a4c93" stroke-width="2.5" fill="none" marker-end="url(#p)"/><text x="330" y="38" text-anchor="middle" font-size="11" fill="#6a4c93">601 back to FC2</text>
+      <path d="M450 145 C 380 200, 320 215, 232 220" stroke="#6a4c93" stroke-width="2.5" fill="none" marker-end="url(#p)"/><text x="440" y="236" text-anchor="middle" font-size="11" fill="#6a4c93">~1,300 back to FB5 tangentials</text>
+      <!-- downstream -->
+      <rect x="680" y="85" width="200" height="70" rx="10" fill="#fff" stroke="#8a8f99" stroke-dasharray="4 3"/><text x="780" y="112" text-anchor="middle" fill="#5a5f6a" font-size="12">oviDN egg-laying</text><text x="780" y="128" text-anchor="middle" fill="#5a5f6a" font-size="12">descending neurons</text><text x="780" y="144" text-anchor="middle" fill="#8a8f99" font-size="11">(from literature)</text>
+      <path d="M590 120 L 678 120" stroke="#8a8f99" stroke-width="2" fill="none" marker-end="url(#g)" stroke-dasharray="5 4"/><text x="634" y="110" text-anchor="middle" font-size="11" fill="#8a8f99">suppresses</text>
+      <text x="30" y="280" fill="#5a5f6a" font-size="12">MaleCNS synapse counts summed over the listed types. Male brain: oviIN is the homolog of a female cell (see caveat).</text>
+    </svg>
+    <figcaption>Forward: the goal population and its FS1A readouts drive oviIN. Backward: oviIN projects into FC2C and the fan-shaped-body tangentials that shape the goal. The oviIN → oviDN link is from the egg-laying literature, not from this analysis.</figcaption>
+  </figure>
+
+  <h2>Background</h2>
+  <div class="card">
+    <dl>
+      <dt>Goal population</dt><dd><b>FC2</b> neurons (three subtypes) hold the direction the fly is trying to go; steering neurons compare it with heading (Mussells Pires 2024).</dd>
+      <dt>FS neurons</dt><dd>Fan-shaped-body output cells that read columnar activity and project out of the central complex to higher brain areas. <b>FS1A</b> (three subtypes, 47 cells) reads the goal layer. No function published.</dd>
+      <dt>oviIN</dt><dd>A single pair of inhibitory neurons in the female egg-laying circuit. It suppresses the descending neurons (oviDNs) that trigger egg deposition; its activity is one of the switches that decides whether a female lays here or moves on (Wang et al. 2020).</dd>
+      <dt>Caveat</dt><dd>MaleCNS is a male brain. The cell annotated oviIN is the male homolog; the connections are real, their behavioural meaning is inferred from the female literature and must be checked in a female connectome (FlyWire) and in behaviour.</dd>
+    </dl>
+  </div>
+
+  <h2>What we found</h2>
+  <div class="card">
+    <span class="tag strong">Measured, unbiased screen</span>
+    <table>
+      <tr><th>Connection</th><th class="n">synapses</th></tr>
+      <tr><td>FS1A_a / FS1A_b / FS1A_c → oviIN (each type's largest typed output)</td><td class="n">780 / 633 / 598</td></tr>
+      <tr><td>FC2C / FC2B / FC2A → oviIN (direct, from the goal population)</td><td class="n">682 / 631 / 64</td></tr>
+      <tr><td>oviIN → FC2C / FC2B</td><td class="n">418 / 183</td></tr>
+      <tr><td>oviIN → FB5Z, FB5Q, FB5P, FB7E, FB5X, FB5F (tangentials that feed the goal layer and hΔA→PFL3)</td><td class="n">263 / 261 / 207 / 205 / 191 / 133</td></tr>
+    </table>
+    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">FS1A inputs, for reference: FC2B/C/A, hΔM, hΔJ, hΔL, FB5Q, FB3C. FS1A also projects to LAL022, CRE040 and SMP081.</p>
+  </div>
+
+  <h2>Why it matters</h2>
+  <div class="card">
+    <ul>
+      <li><b>A navigation state gates a reproductive decision.</b> Egg-site selection is a spatial choice: females walk, sample, leave and return. A direct line from the goal representation to the egg-laying gate is the obvious way to couple "I have a destination" to "do not lay yet", or the reverse.</li>
+      <li><b>It runs both ways.</b> oviIN's projections back into FC2C and the FB5 tangentials mean the egg-laying state can also alter the goal. Reproductive state modulating navigation is expected in principle; here is the wire.</li>
+      <li><b>It reframes the FS neurons.</b> FS types are ~200 cells with no assigned function. FS1A's largest output being a single identified behavioural switch suggests each FS type may broadcast a specific navigation variable to a specific decision circuit.</li>
+    </ul>
+  </div>
+
+  <h2>What would settle it</h2>
+  <div class="card">
+    <ul>
+      <li>Confirm the same connections in the female FlyWire connectome.</li>
+      <li>Silence FS1A in mated females and score egg-laying site choice and the walk-sample-return pattern.</li>
+      <li>Image FS1A during goal-directed walking (menotaxis) versus egg-laying bouts; predict activity tied to goal expression and suppressed during deposition.</li>
+    </ul>
+  </div>
+
+  <p><span class="tag strong">Wiring: high confidence (male)</span><span class="tag open">Function: inferred from female literature</span></p>
+  <p class="foot">Sources: <code>docs/uncharacterised-neurons.md</code> §B1; tables <code>cx_type_edges.csv</code>, <code>cx_screen.csv</code>. Mussells Pires 2024; Wang et al. 2020 (oviposition circuit).</p>
+</main>
+</body>
+</html>
