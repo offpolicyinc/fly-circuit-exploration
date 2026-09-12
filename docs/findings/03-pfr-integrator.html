@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding 3: the path integrator is not there as excitatory wiring</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
+  .lede { font-size:18px; margin:0 0 22px; }
+  h2 { font-size:17px; margin:26px 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
+  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
+  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
+  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
+  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
+  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">Finding 3 of 8 · the most important negative</div>
+  <h1>The fly's path integrator is not in the wiring as excitatory circuitry. One measurement decides whether it is there at all.</h1>
+  <p class="lede">Flies provably add up their movements: they walk a loop in the dark and return to where food was, and silencing a population called PFR abolishes their memory of distance. So PFR is the prime suspect for the integrator. Its wiring has the right ingredients, a travel-direction input and mutual excitation between its two subtypes, but a simulation with the measured wiring shows PFR only relays travel direction; it never accumulates. Integration becomes possible only if PFR's broad self-connections are inhibitory. PFR_a's transmitter is unresolved, so one immunostain settles whether the fly's path integrator has been found.</p>
+
+  <figure>
+    <svg viewBox="0 0 900 330" width="100%" role="img" aria-label="The computation needed versus the PFR wiring">
+      <defs>
+        <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
+        <marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker>
+        <marker id="c" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#2a6f97"/></marker>
+      </defs>
+      <!-- LEFT: computation -->
+      <g>
+        <text x="20" y="24" font-weight="700" font-size="15">The computation the behaviour requires</text>
+        <text x="20" y="46" fill="#5a5f6a" font-size="12">add each step's direction and length; keep the running total</text>
+        <!-- path -->
+        <circle cx="60" cy="230" r="9" fill="#b4432c"/><text x="60" y="256" text-anchor="middle" font-size="12">food</text>
+        <path d="M60 230 L 150 230" stroke="#2a6f97" stroke-width="3" fill="none" marker-end="url(#c)"/>
+        <path d="M150 230 L 150 130" stroke="#2a6f97" stroke-width="3" fill="none" marker-end="url(#c)"/>
+        <path d="M150 130 L 230 100" stroke="#2a6f97" stroke-width="3" fill="none" marker-end="url(#c)"/>
+        <circle cx="230" cy="100" r="9" fill="#1b1b1f"/><text x="250" y="105" font-size="12">fly now</text>
+        <path d="M222 108 L 68 224" stroke="#1b1b1f" stroke-width="2.5" stroke-dasharray="6 4" fill="none" marker-end="url(#a)"/>
+        <text x="172" y="188" font-size="12" font-weight="600">home vector</text><text x="172" y="203" font-size="12" font-weight="600">= sum of steps</text>
+        <text x="20" y="300" fill="#5a5f6a" font-size="12">Needs activity that grows with distance and points along the sum.</text>
+      </g>
+      <!-- RIGHT: PFR wiring -->
+      <g transform="translate(400,0)">
+        <text x="20" y="24" font-weight="700" font-size="15">What PFR's wiring provides</text>
+        <rect x="20" y="60" width="130" height="40" rx="8" fill="#2a6f97"/><text x="85" y="85" text-anchor="middle" fill="#fff" font-weight="700">hΔB travel direction</text>
+        <rect x="20" y="120" width="130" height="40" rx="8" fill="#5a86a8"/><text x="85" y="145" text-anchor="middle" fill="#fff" font-weight="700">PFNd velocity</text>
+        <rect x="250" y="60" width="90" height="40" rx="8" fill="#b4432c"/><text x="295" y="85" text-anchor="middle" fill="#fff" font-weight="700">PFR_a</text>
+        <rect x="250" y="180" width="90" height="40" rx="8" fill="#b4432c"/><text x="295" y="205" text-anchor="middle" fill="#fff" font-weight="700">PFR_b</text>
+        <path d="M150 80 L 248 80" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+        <path d="M150 90 L 248 190" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+        <path d="M150 140 L 248 96" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+        <!-- mutual same-column -->
+        <path d="M285 100 L 285 178" stroke="#b4432c" stroke-width="3" fill="none" marker-end="url(#b)"/>
+        <path d="M305 178 L 305 100" stroke="#b4432c" stroke-width="3" fill="none" marker-end="url(#b)"/>
+        <text x="318" y="145" fill="#b4432c" font-size="12">same column,</text>
+        <text x="318" y="160" fill="#b4432c" font-size="12">mutual excitation</text>
+        <!-- broad self loop on PFR_b -->
+        <path d="M340 208 C 385 218, 385 182, 342 190" stroke="#b07a12" stroke-width="3" fill="none" marker-end="url(#b)"/>
+        <text x="345" y="240" fill="#b07a12" font-size="12" font-weight="700">broad self-loop,</text>
+        <text x="345" y="255" fill="#b07a12" font-size="12" font-weight="700">sign unknown</text>
+        <!-- outputs -->
+        <path d="M295 220 L 295 268" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/>
+        <text x="295" y="290" text-anchor="middle" font-size="12">→ LAL, PFL3 (steering)</text>
+        
+      </g>
+    </svg>
+    <figcaption>Left: what path integration means. Right: PFR's measured inputs and recurrence. Whether the yellow loop is excitatory or inhibitory decides which computation the wiring can do.</figcaption>
+  </figure>
+
+  <h2>Background</h2>
+  <div class="card">
+    <dl>
+      <dt>Path integration</dt><dd>Keeping a running sum of every step's direction and length, so the animal always knows the straight-line vector back to the start. Ants and bees do it over hundreds of metres; flies do it over centimetres in the dark (Kim &amp; Dickinson 2017; Behbahani 2021; Titova 2023).</dd>
+      <dt>What is already known in the fly</dt><dd>The instantaneous inputs are solved: <b>PFNd</b> and <b>PFNv</b> encode the fly's velocity, and <b>hΔB</b> combines them with heading to give travel direction in world coordinates (Lu 2022; Lyu 2022). What no one has found is the neuron that adds those up over time.</dd>
+      <dt>PFR</dt><dd>44 cells in two subtypes (<b>PFR_a</b>, <b>PFR_b</b>) linking the compass bridge, the fan-shaped body and a small output region. Recent preprints show PFR activity tracks walking direction and drifts when the fly stops (Flores-Valle 2025), and that silencing PFR removes a learned distance memory (D'Atri 2025). Neither paper claims PFR integrates.</dd>
+      <dt>How an integrator has to be wired</dt><dd>A population integrates a vector input only if its recurrent connections give the "which direction" pattern of activity a gain of about 1 (so it persists and accumulates) while keeping the "everything on" pattern below 1 (so it does not saturate). Broad excitation does the opposite: it amplifies "everything on".</dd>
+    </dl>
+  </div>
+
+  <h2>What we found</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag strong">Measured</span>
+      <p>PFR has the inputs an integrator needs and a specific recurrent structure.</p>
+      <table>
+        <tr><th>Connection</th><th class="n">synapses</th><th>column relation</th></tr>
+        <tr><td>hΔB → PFR_a / PFR_b</td><td class="n">6,717 / 5,787</td><td>fixed offset</td></tr>
+        <tr><td>PFNd → PFR_a</td><td class="n">3,430</td><td>same column (99 %)</td></tr>
+        <tr><td>PFR_b ↔ PFR_a</td><td class="n">2,199 / 579</td><td>same column (44 %)</td></tr>
+        <tr><td>PFR_b → PFR_b</td><td class="n">1,722</td><td>every column except its own</td></tr>
+        <tr><td>PFR_b → LAL002; PFR_a → hΔA → PFL3</td><td class="n">2,699 / 2,666</td><td>outputs</td></tr>
+      </table>
+      <p style="color:var(--muted);font-size:13px;margin:6px 0 0">Transmitter predictions: PFR_b acetylcholine (excitatory); PFR_a unresolved.</p>
+    </div>
+    <div class="card">
+      <span class="tag model">Simulated</span>
+      <p>Rate model on 8 columns with the measured connection kernels. The model fly walks east then north; an integrator should end pointing north-east with growing amplitude, a relay should point wherever the fly is currently going.</p>
+      <table>
+        <tr><th>Wiring</th><th class="n">direction-pattern gain</th><th>result</th></tr>
+        <tr><td>all excitatory, any gain 0–3</td><td class="n">≤ 0.24</td><td>relays current travel direction (fixed offset); saturates at high gain</td></tr>
+        <tr><td>broad self-loop inhibitory, gain 8–12</td><td class="n">0.9–1.4</td><td>output starts to lag toward the summed displacement</td></tr>
+      </table>
+      <p style="color:var(--muted);font-size:13px;margin:6px 0 0">Minimal model; it tests what the wiring can and cannot do, not what PFR does.</p>
+    </div>
+  </div>
+
+  <h2>Why it matters</h2>
+  <div class="card">
+    <ul>
+      <li><b>The obvious candidate fails as drawn.</b> With every connection excitatory, PFR is a relay: it hands travel direction (rotated by a fixed angle) to the steering neurons and the lateral accessory lobe. That is a real function, but it is not memory.</li>
+      <li><b>The gap is one bit of information.</b> If the broad PFR recurrence is inhibitory, either because PFR_a is glutamatergic or because an inhibitory tangential input (FB3C, GABA, targets PFR_b) supplies it, the same wiring becomes an integrator. Nothing else in the fan-shaped body has both a travel-direction input and column-matched recurrence.</li>
+      <li><b>It explains the drift.</b> A relay with a fixed offset predicts exactly what Flores-Valle saw: PFR follows walking direction, and when velocity input stops the population settles wherever its recurrence pushes it. An integrator would predict the opposite: PFR should hold its value when the fly stops.</li>
+    </ul>
+  </div>
+
+  <h2>What would settle it</h2>
+  <div class="card">
+    <ul>
+      <li>Immunostain PFR_a for glutamate vs acetylcholine (VGlut / ChAT). This is the decisive measurement.</li>
+      <li>Two-colour imaging of hΔB and PFR: a relay predicts a fixed ~90–135° phase offset between the two bumps; an integrator predicts PFR lagging hΔB after every turn and holding when the fly stops.</li>
+      <li>Image PFR during Behbahani's re-zeroing task: an integrator's amplitude should fall to zero at the fictive food centre.</li>
+    </ul>
+  </div>
+
+  <p><span class="tag strong">Wiring: high confidence</span><span class="tag model">Relay-vs-integrator: model-dependent</span><span class="tag open">Function: unknown</span></p>
+  <p class="foot">Sources: <code>docs/uncharacterised-neurons.md</code> §A1; <code>simulations/pfr_integrator.py</code>; tables <code>fb_column_offsets.csv</code>, <code>cx_type_profiles.json</code>. Lu 2022; Lyu 2022; Flores-Valle 2025; D'Atri 2025; Stone 2017 (bee integrator model).</p>
+</main>
+</body>
+</html>
