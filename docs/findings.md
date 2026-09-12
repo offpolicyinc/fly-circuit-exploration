@@ -90,7 +90,8 @@ Background for all entries: the fly's compass is a ring of about 50 EPG neurons 
 
 - **Known:** flies integrate, re-zero at food, and need PFNd/PFNv/hΔB/PFR for distance memory; no neuron integrates. Maimon & Abbott 2026 and Hulse 2021 suggested memory could be synaptic.
 - **Found:** no columnar type has recurrence strong enough for an activity-based integrator (vector-mode gains ≤ 0.14). But at one site every element of a synaptic integrator converges: hΔB (travel direction) → hΔJ (column-matched, every cell), walking-driven dopamine FB4M/FB1H on every hΔJ cell, the reward octopamine neuron OA-VPM3 on hΔJ/hΔB/PFR, and hΔJ's 194° anatomical output into the FC2 goal, which inverts the stored displacement into a return direction. A closed-loop model with the measured kernels returns home; without the inversion it walks away.
-- **Why it matters:** it is a complete, wiring-consistent account of the missing middle of the return-to-food circuit, with five specific experiments. See [vector-memory-search.md](vector-memory-search.md).
+- **Correction (2026-09-12):** anchored to the published column conventions, hΔJ and its siblings deliver the stored displacement sign-preserved; the inversion needed for return is provided only by hΔM (or hΔK/PFGs). The store is more likely hΔH/hΔA; see [exhaustive-search.md](exhaustive-search.md).
+- **Why it matters:** it is a wiring-consistent account of the missing middle of the return-to-food circuit, with experiments. See [vector-memory-search.md](vector-memory-search.md) and the corrections in [exhaustive-search.md](exhaustive-search.md).
 - **Proof:** synapse counts and angle-corrected phase statistics (`fb_offset_stats.csv`), full-graph trace of OA-VPM3 and FB4M inputs, two simulations. Everything about plasticity and reward is inferred.
 
 ## What none of this shows

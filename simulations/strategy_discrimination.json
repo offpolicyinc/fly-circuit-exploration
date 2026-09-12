@@ -1,0 +1,22 @@
+{
+ "kim|A integrator": 0.8014179733724471,
+ "kim|B reward-direction": 26.77791612131073,
+ "kim|C odometer+heading": 26.822691812885857,
+ "kim|D random": 12.710498768642205,
+ "titova|A integrator": {
+  "fictive": 0.8014179733724447,
+  "real": 4.184170721341865
+ },
+ "titova|B reward-direction": {
+  "fictive": 26.777916121310717,
+  "real": 22.890736227488045
+ },
+ "titova|C odometer+heading": {
+  "fictive": 26.822691812885864,
+  "real": 27.501955451030994
+ },
+ "titova|D random": {
+  "fictive": 12.71049876864221,
+  "real": 12.947288197374698
+ }
+}

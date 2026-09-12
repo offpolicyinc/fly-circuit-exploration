@@ -28,7 +28,7 @@
 <body>
 <main>
   <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html">List view</a><a href="../index.html">Home</a></nav>
-  <div class="kicker">Finding 6 of 8 · a known operation, an omitted input</div>
+  <div class="kicker">Finding 6 of 9 · re-ranked upward: the candidate return path</div>
   <h1>The steering neurons receive the goal twice: once as is, once flipped by 180°. The steering model uses only the first.</h1>
   <p class="lede">Steering works by comparing heading with a goal direction held by the FC2 population, which delivers the goal straight to the steering neurons. That is the published model. The wiring shows a parallel route of about half the size: FC2 also drives hΔM, a type whose anatomy inverts any signal by half a turn, and hΔM delivers the inverted goal to the same steering neurons. None of the wiring is new; it is in the 2021 hemibrain tables. What is new is stating its size relative to the direct route and asking what a steering neuron does with a goal and its opposite at the same time.</p>
 
@@ -77,6 +77,11 @@
       <tr><td>hΔM → FC2B (back into the goal)</td><td class="n">958</td><td>180°</td></tr>
     </table>
     <p style="color:var(--muted);font-size:13px;margin:6px 0 0">For comparison the direct FC2 → PFL3 route carries 7,690 synapses across the three subtypes. hΔH does the same inversion for a different input (PFR_b). FB5A, four GABAergic cells, inhibits FC2, PFL3 and hΔM together; it is a candidate global inhibitor of this stage, not a selector between the two routes.</p>
+  </div>
+
+  <h2>Update, 2026-09-12: why this route may be the return path</h2>
+  <div class="card">
+    <p>Anchoring every fan-shaped-body phase to two published conventions (hΔ labels are dendritic columns, Hulse 2021; the hΔB travel bump sits on its axon, Lyu 2022) shows that all the hΔ routes that could store a displacement (hΔA, hΔH, hΔG, hΔI) deliver it to FC2 or PFL3 with its sign preserved, i.e. as the outbound direction. The only inverters downstream of the goal are hΔM (FC2 → hΔM → PFL3 at 178°) and the hΔK/PFGs loop. A closed-loop model shows return is impossible without a net inversion. So a stored displacement read directly makes the fly continue, and read through hΔM makes it return. Details: <a href="../exhaustive-search.md">exhaustive-search.md</a> §4. Prior work found in the sweep: Liao et al. 2025 describe a separate anti-goal circuit in the lateral accessory lobe; Nanni &amp; Lee 2026 propose FB5A as the FC2 normaliser. The hΔM route itself is not in print.</p>
   </div>
 
   <h2>Why it matters</h2>

@@ -1,5 +1,7 @@
 # Where is the fly's path integrator? A systematic search of the connectome
 
+> **Superseded in part (2026-09-12).** The sign analysis in [exhaustive-search.md](exhaustive-search.md) §4 shows the "hΔJ anatomy inverts the stored vector" claim below is wrong once phases are anchored to the published conventions; hΔJ's input is bimodal and its stored vector cancels. The negative result on activity-based storage, the OA-VPM3 and FB4M/FB1H convergence, and the need for an inversion stand. Read this document for the search method and the corrected one for conclusions.
+
 Date 2026-09-12. Scripts: [vector_memory_screen.py](../scripts/vector_memory_screen.py), [recurrence_modes.py](../scripts/recurrence_modes.py), [reward_inputs_trace.py](../scripts/reward_inputs_trace.py), [fb_column_offsets.py](../scripts/fb_column_offsets.py) (angle-aware version). Simulations: [synaptic_path_integrator.py](../simulations/synaptic_path_integrator.py), [closed_loop_return.py](../simulations/closed_loop_return.py). Tables: `vector_memory_screen.csv`, `recurrence_modes.csv`, `recurrence_loops.csv`, `fb_offset_stats.csv`, `reward_inputs_trace.json`.
 
 ## The question

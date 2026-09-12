@@ -1,0 +1,44 @@
+{
+ "hDeltaJ -> FC2A": {
+  "returned_frac": 0.175,
+  "median_closest": 1.779501237189235,
+  "in_offset": 6.3,
+  "in_conc": 0.153
+ },
+ "hDeltaH -> FC2B": {
+  "returned_frac": 0.075,
+  "median_closest": 4.076063854633699,
+  "in_offset": 353.5,
+  "in_conc": 0.866
+ },
+ "hDeltaG -> FC2B": {
+  "returned_frac": 0.225,
+  "median_closest": 1.3447433629477892,
+  "in_offset": 353.3,
+  "in_conc": 0.453
+ },
+ "hDeltaA -> PFL3": {
+  "returned_frac": 0.1,
+  "median_closest": 3.0278699443257695,
+  "in_offset": 1.3,
+  "in_conc": 0.794
+ },
+ "hDeltaI -> PFL3": {
+  "returned_frac": 0.15,
+  "median_closest": 2.2195223340277153,
+  "in_offset": 4.0,
+  "in_conc": 0.596
+ },
+ "PFR_a -> hDeltaA": {
+  "returned_frac": 0.05,
+  "median_closest": 4.345671434424371,
+  "in_offset": 194.6,
+  "in_conc": 0.931
+ },
+ "hDeltaB(PFN site) -> hDeltaJ -> FC2A": {
+  "returned_frac": 0.275,
+  "median_closest": 1.525495623529865,
+  "in_offset": 0.0,
+  "in_conc": 1.0
+ }
+}

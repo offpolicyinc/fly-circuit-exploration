@@ -28,8 +28,8 @@
 <body>
 <main>
   <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
-  <div class="kicker">Finding 9 of 9 · the missing middle, filled by a hypothesis</div>
-  <h1>The home vector is probably stored in synapses, not in activity, and one site has every ingredient</h1>
+  <div class="kicker">Finding 9 of 9 · corrected 2026-09-12 after the exhaustive pass</div>
+  <h1>The home vector is probably stored in synapses, not in activity. Several hΔ sites have the ingredients, and none of them inverts it: the return needs hΔM.</h1>
   <p class="lede">Flies add up their movements and walk back to food, but no neuron has been shown to do the adding. A systematic search of every fan-shaped-body population finds that none has recurrent wiring strong enough to hold a vector as ongoing activity. What the wiring does have, at one place, is everything a synaptic integrator needs: the travel-direction bump (hΔB) synapsing column by column onto hΔJ; dopamine cells driven by walking (FB4M, FB1H) on every hΔJ cell; a reward octopamine neuron (OA-VPM3) on the same cells; and an output from hΔJ into the goal population that is anatomically flipped by 180°, so a stored displacement comes out pointing home. A closed-loop model built from the measured wiring returns to food; remove the flip and it walks away.</p>
 
   <figure>
@@ -55,6 +55,11 @@
     </svg>
     <figcaption>Synapse counts from MaleCNS. Everything in the boxes is measured wiring; "weights", "permit writing" and "reset" are the hypothesis.</figcaption>
   </figure>
+
+  <div class="card" style="border-color:#b4432c">
+    <p><b>Correction (2026-09-12).</b> The first version of this page said hΔJ's 194° output "flips the stored displacement toward home". Anchoring every phase to two published conventions (hΔ labels are dendritic columns, Hulse 2021; the hΔB travel bump sits on its axon, Lyu 2022) shows that hΔB's axon lands on the <i>axonal</i> arbor of hΔA, hΔH, hΔG and hΔI and on both arbors of hΔJ, so those routes deliver the travel direction to FC2/PFL3 with its sign preserved (Δ = +15° to +21°), and hΔJ carries both signs (its stored vector cancels to 14 % of ideal). The closed-loop model still requires a net inversion for return; the wiring provides it downstream of the goal, in hΔM (FC2 → hΔM → PFL3 at 178°) or the hΔK/PFGs loop. The candidate store is now the family hΔH, hΔA, hΔI, hΔG (and the PFN→hΔB synapses), with hΔH and hΔA the cleanest; the walking-driven dopamine (FB4M/FB1H), the OA-VPM3 reward input, and the negative result on activity-based storage all stand. Full derivation: <a href="../exhaustive-search.md">exhaustive-search.md</a>.</p>
+    <p><b>Prior work found in the sweep.</b> Goulard, Heinze &amp; Webb 2023 modelled dopamine-gated synaptic goal memory at tangential→hΔ/PFN synapses. Gorko 2026 (Kim lab) showed experimentally, in the PFL1/FC1/FB2B system, that a stored FB vector is <i>not</i> encoded in presynaptic calcium activity and that FC1 drives a sinusoidal cAMP pattern in FB2B axons: the first evidence that a fan-shaped-body vector memory is synaptic or second-messenger based, in a different column system from the one analysed here.</p>
+  </div>
 
   <h2>Background</h2>
   <div class="card">
@@ -117,10 +122,11 @@
   <h2>What would settle it</h2>
   <div class="card">
     <ul>
-      <li>Image hΔJ during the 1D re-zeroing task: predict a bump pointing back to the fictive food centre, amplitude growing with distance, collapsing at re-zero.</li>
+      <li>Image hΔH and hΔA (and hΔJ) during the 1D re-zeroing task: predict a bump pointing along the outbound displacement in these cells, amplitude growing with distance, collapsing at re-zero; predict its inverse in PFL3 via hΔM.</li>
       <li>Silence OA-VPM3 during local search: predict search that no longer centres on the food, with odometry intact.</li>
       <li>Block dopamine signalling or cAMP in hΔJ: predict loss of the return vector with hΔB travel-direction coding intact.</li>
       <li>Pair OA-VPM3 activation with walking in one direction: predict a displaced search centre with no food present.</li>
+      <li>Silence hΔM during a return versus during menotaxis: the return-path reading predicts return fails and heading maintenance survives.</li>
     </ul>
   </div>
 
