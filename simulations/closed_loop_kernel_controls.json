@@ -1,0 +1,22 @@
+{
+ "measured hDeltaJ->FC2A (194 deg)": {
+  "returned_frac": 0.35,
+  "median_closest": 1.3630075512988675
+ },
+ "ideal 180 deg": {
+  "returned_frac": 0.35,
+  "median_closest": 1.0522104132340426
+ },
+ "135 deg": {
+  "returned_frac": 0.425,
+  "median_closest": 0.9610733418199429
+ },
+ "90 deg": {
+  "returned_frac": 0.2,
+  "median_closest": 2.640045708958608
+ },
+ "no inversion (0 deg)": {
+  "returned_frac": 0.0,
+  "median_closest": 10.289977055957369
+ }
+}

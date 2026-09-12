@@ -86,6 +86,13 @@ Background for all entries: the fly's compass is a ring of about 50 EPG neurons 
 
 5. Findings 1, 3, 4, 6, 8: the shifted PEN wiring, the PEG loop, Delta7 confinement, the PFL3 offset rule and ring-class self-inhibition all match the literature. Their value is that they now hold for every cell in two brains, which is what lets the unknown cells in [uncharacterised-neurons.md](uncharacterised-neurons.md) be interpreted relative to them.
 
+## 10. A synaptic path integrator at hΔB → hΔJ (added 2026-09-12)
+
+- **Known:** flies integrate, re-zero at food, and need PFNd/PFNv/hΔB/PFR for distance memory; no neuron integrates. Maimon & Abbott 2026 and Hulse 2021 suggested memory could be synaptic.
+- **Found:** no columnar type has recurrence strong enough for an activity-based integrator (vector-mode gains ≤ 0.14). But at one site every element of a synaptic integrator converges: hΔB (travel direction) → hΔJ (column-matched, every cell), walking-driven dopamine FB4M/FB1H on every hΔJ cell, the reward octopamine neuron OA-VPM3 on hΔJ/hΔB/PFR, and hΔJ's 194° anatomical output into the FC2 goal, which inverts the stored displacement into a return direction. A closed-loop model with the measured kernels returns home; without the inversion it walks away.
+- **Why it matters:** it is a complete, wiring-consistent account of the missing middle of the return-to-food circuit, with five specific experiments. See [vector-memory-search.md](vector-memory-search.md).
+- **Proof:** synapse counts and angle-corrected phase statistics (`fb_offset_stats.csv`), full-graph trace of OA-VPM3 and FB4M inputs, two simulations. Everything about plasticity and reward is inferred.
+
 ## What none of this shows
 
 Synapse counts do not give synaptic strength, sign (except via transmitter predictions), timing or behaviour. Every "why it matters" above is a hypothesis for physiology or modelling, not a result about what the fly does.

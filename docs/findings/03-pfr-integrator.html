@@ -97,8 +97,8 @@
       <p>PFR has the inputs an integrator needs and a specific recurrent structure.</p>
       <table>
         <tr><th>Connection</th><th class="n">synapses</th><th>column relation</th></tr>
-        <tr><td>hΔB → PFR_a / PFR_b</td><td class="n">6,717 / 5,787</td><td>fixed offset</td></tr>
-        <tr><td>PFNd → PFR_a</td><td class="n">3,430</td><td>same column (99 %)</td></tr>
+        <tr><td>hΔB → PFR_a / PFR_b</td><td class="n">6,717 / 5,787</td><td>~195° (inverted)</td></tr>
+        <tr><td>PFNd → PFR_a</td><td class="n">3,430</td><td>~21° (not inverted)</td></tr>
         <tr><td>PFR_b ↔ PFR_a</td><td class="n">2,199 / 579</td><td>same column (44 %)</td></tr>
         <tr><td>PFR_b → PFR_b</td><td class="n">1,722</td><td>every column except its own</td></tr>
         <tr><td>PFR_b → LAL002; PFR_a → hΔA → PFL3</td><td class="n">2,699 / 2,666</td><td>outputs</td></tr>
@@ -110,7 +110,7 @@
       <p>Rate model on 8 columns with the measured connection kernels. The model fly walks east then north; an integrator should end pointing north-east with growing amplitude, a relay should point wherever the fly is currently going.</p>
       <table>
         <tr><th>Wiring</th><th class="n">direction-pattern gain</th><th>result</th></tr>
-        <tr><td>all excitatory, any gain 0–3</td><td class="n">≤ 0.24</td><td>relays current travel direction (fixed offset); saturates at high gain</td></tr>
+        <tr><td>all excitatory, any gain 0–3</td><td class="n">≤ 0.24</td><td>relays current travel direction inverted (~195°); saturates at high gain</td></tr>
         <tr><td>broad self-loop inhibitory, gain 8–12</td><td class="n">0.9–1.4</td><td>output starts to lag toward the summed displacement</td></tr>
       </table>
       <p style="color:var(--muted);font-size:13px;margin:6px 0 0">Minimal model; it tests what the wiring can and cannot do, not what PFR does.</p>
@@ -120,9 +120,9 @@
   <h2>Why it matters</h2>
   <div class="card">
     <ul>
-      <li><b>The obvious candidate fails as drawn.</b> With every connection excitatory, PFR is a relay: it hands travel direction (rotated by a fixed angle) to the steering neurons and the lateral accessory lobe. That is a real function, but it is not memory.</li>
+      <li><b>The obvious candidate fails as drawn.</b> With every connection excitatory, PFR is a relay, not a memory. And its two velocity inputs arrive in opposite phase (PFNd at ~21°, hΔB at ~195°), so the simplest reading of PFR is a heading-versus-travel mismatch signal: silent when walking straight, active when slipping sideways or backwards.</li>
       <li><b>The gap is one bit of information.</b> If the broad PFR recurrence is inhibitory, either because PFR_a is glutamatergic or because an inhibitory tangential input (FB3C, GABA, targets PFR_b) supplies it, the same wiring becomes an integrator. Nothing else in the fan-shaped body has both a travel-direction input and column-matched recurrence.</li>
-      <li><b>It explains the drift.</b> A relay with a fixed offset predicts exactly what Flores-Valle saw: PFR follows walking direction, and when velocity input stops the population settles wherever its recurrence pushes it. An integrator would predict the opposite: PFR should hold its value when the fly stops.</li>
+      <li><b>It explains the drift.</b> A relay predicts what Flores-Valle saw: PFR follows walking direction (inverted), and when velocity input stops the population settles wherever its recurrence pushes it. An integrator would predict the opposite: PFR should hold its value when the fly stops.</li>
     </ul>
   </div>
 
@@ -130,7 +130,7 @@
   <div class="card">
     <ul>
       <li>Immunostain PFR_a for glutamate vs acetylcholine (VGlut / ChAT). This is the decisive measurement.</li>
-      <li>Two-colour imaging of hΔB and PFR: a relay predicts a fixed ~90–135° phase offset between the two bumps; an integrator predicts PFR lagging hΔB after every turn and holding when the fly stops.</li>
+      <li>Two-colour imaging of hΔB and PFR: a relay predicts a PFR bump ~180° from the hΔB bump whose amplitude falls during straight walking; an integrator predicts PFR lagging hΔB after every turn and holding when the fly stops.</li>
       <li>Image PFR during Behbahani's re-zeroing task: an integrator's amplitude should fall to zero at the fictive food centre.</li>
     </ul>
   </div>

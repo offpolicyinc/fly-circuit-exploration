@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding 9: a synaptic path integrator</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
+  .lede { font-size:18px; margin:0 0 22px; }
+  h2 { font-size:17px; margin:26px 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
+  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
+  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
+  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
+  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
+  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+  a { color:var(--accent2); }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
+</style>
+</head>
+<body>
+<main>
+  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
+  <div class="kicker">Finding 9 of 9 · the missing middle, filled by a hypothesis</div>
+  <h1>The home vector is probably stored in synapses, not in activity, and one site has every ingredient</h1>
+  <p class="lede">Flies add up their movements and walk back to food, but no neuron has been shown to do the adding. A systematic search of every fan-shaped-body population finds that none has recurrent wiring strong enough to hold a vector as ongoing activity. What the wiring does have, at one place, is everything a synaptic integrator needs: the travel-direction bump (hΔB) synapsing column by column onto hΔJ; dopamine cells driven by walking (FB4M, FB1H) on every hΔJ cell; a reward octopamine neuron (OA-VPM3) on the same cells; and an output from hΔJ into the goal population that is anatomically flipped by 180°, so a stored displacement comes out pointing home. A closed-loop model built from the measured wiring returns to food; remove the flip and it walks away.</p>
+
+  <figure>
+    <svg viewBox="0 0 900 340" width="100%" role="img" aria-label="Synaptic path integrator chain">
+      <defs>
+        <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
+        <marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker>
+        <marker id="p" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#6a4c93"/></marker>
+        <marker id="o" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b07a12"/></marker>
+      </defs>
+      <rect x="20" y="120" width="150" height="56" rx="8" fill="#2a6f97"/><text x="95" y="142" text-anchor="middle" fill="#fff" font-weight="700">hΔB</text><text x="95" y="160" text-anchor="middle" fill="#fff">travel direction bump</text>
+      <rect x="290" y="110" width="200" height="76" rx="10" fill="#f6e7e3" stroke="#b4432c" stroke-width="2"/><text x="390" y="134" text-anchor="middle" font-weight="700">hΔJ (31 cells)</text><text x="390" y="152" text-anchor="middle" font-size="12">weights on hΔB synapses</text><text x="390" y="168" text-anchor="middle" font-size="12">= running sum of the path</text>
+      <path d="M170 148 L 288 148" stroke="#1b1b1f" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="229" y="140" text-anchor="middle" font-size="12">4,232 · same column (6°)</text>
+      <rect x="260" y="20" width="260" height="44" rx="8" fill="#b07a12"/><text x="390" y="38" text-anchor="middle" fill="#fff" font-weight="700">FB4M, FB1H dopamine</text><text x="390" y="54" text-anchor="middle" fill="#fff" font-size="12">driven by the velocity system: "walking"</text>
+      <path d="M390 64 L 390 108" stroke="#b07a12" stroke-width="3" fill="none" marker-end="url(#o)"/><text x="400" y="90" font-size="12" fill="#b07a12">permit writing (1,809)</text>
+      <rect x="260" y="240" width="260" height="44" rx="8" fill="#6a4c93"/><text x="390" y="258" text-anchor="middle" fill="#fff" font-weight="700">OA-VPM3 octopamine</text><text x="390" y="274" text-anchor="middle" fill="#fff" font-size="12">reward neuron; input from Kenyon cells</text>
+      <path d="M390 240 L 390 188" stroke="#6a4c93" stroke-width="3" fill="none" marker-end="url(#p)"/><text x="400" y="218" font-size="12" fill="#6a4c93">reset at food (377)</text>
+      <rect x="610" y="120" width="130" height="56" rx="8" fill="#2f7d4a"/><text x="675" y="142" text-anchor="middle" fill="#fff" font-weight="700">FC2 goal</text><text x="675" y="160" text-anchor="middle" fill="#fff">= direction home</text>
+      <path d="M490 148 L 608 148" stroke="#b4432c" stroke-width="3.5" fill="none" marker-end="url(#b)"/><text x="549" y="138" text-anchor="middle" font-size="12" fill="#b4432c" font-weight="700">5,732 · flipped 194°</text>
+      <rect x="770" y="120" width="110" height="56" rx="8" fill="#1b1b1f"/><text x="825" y="142" text-anchor="middle" fill="#fff" font-weight="700">PFL3</text><text x="825" y="160" text-anchor="middle" fill="#fff">steer</text>
+      <path d="M740 148 L 768 148" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+      <text x="20" y="312" fill="#5a5f6a" font-size="12">Closed-loop model with measured kernels: returns within 0.5 units in 35 % of trials, median closest approach 1.4 (random walk: 6.8).</text><text x="20" y="328" fill="#5a5f6a" font-size="12">With the 194° flip removed: 0 % return, closest approach 10.3.</text>
+    </svg>
+    <figcaption>Synapse counts from MaleCNS. Everything in the boxes is measured wiring; "weights", "permit writing" and "reset" are the hypothesis.</figcaption>
+  </figure>
+
+  <h2>Background</h2>
+  <div class="card">
+    <dl>
+      <dt>What the behaviour proves</dt><dd>After leaving sugar, flies search centred on it in darkness, re-zero the centre when they find food again, and lose a learned distance when PFNd/PFNv/hΔB/PFR are silenced (Kim 2017; Behbahani 2021; D'Atri 2025). Some population must accumulate travel over tens of seconds.</dd>
+      <dt>Two ways to accumulate</dt><dd>In <b>activity</b>: a population whose recurrent wiring lets a bump persist and grow (a ring or line attractor). In <b>synapses</b>: a bump that keeps potentiating its own output synapses while a modulator permits it, so the weight pattern becomes the sum. The second was proposed in outline by Hulse 2021 and Maimon & Abbott 2026.</dd>
+      <dt>hΔ neurons</dt><dd>Fan-shaped-body cells with input in one column and output half a turn away. Corrected phase measurements show every hΔ output landing 193–202° from its input. The inversion is anatomy, not computation.</dd>
+      <dt>OA-VPM3</dt><dd>A pair of octopamine neurons that innervate the mushroom body and are implicated in sweet-taste reward. Their central-complex targets had not been described.</dd>
+    </dl>
+  </div>
+
+  <h2>What we found</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag strong">Measured</span>
+      <table>
+        <tr><th>Test</th><th>Result</th></tr>
+        <tr><td>Recurrent vector-mode gain, any columnar type</td><td>≤ 0.14 (most &lt; 0.02): no activity integrator</td></tr>
+        <tr><td>Strongest hΔB → X → FC2 route</td><td>hΔJ: 4,232 in, 5,732 out; next best hΔH 1,010 / 2,776</td></tr>
+        <tr><td>Dopamine on hΔJ, per column</td><td>FB1H 73–129, FB4M 36–67: uniform</td></tr>
+        <tr><td>FB4M's own inputs</td><td>PFNv 1,170 · hΔB 739 · PFNd 701 · FB3A 576: velocity-driven</td></tr>
+        <tr><td>OA-VPM3 targets in the CX</td><td>hΔB 646 · PFR_a 427 · hΔJ 377 · hΔH 361 · PFGs 342 · PFNv 321</td></tr>
+        <tr><td>hΔJ → FC2A / FC2B phase</td><td>194° / 195°, concentration 0.88</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <span class="tag model">Simulated</span>
+      <p>Weights on hΔJ potentiated through the measured hΔB→hΔJ kernel while walking, zeroed at reward: stored vector within 9° of true displacement at every step; partial reset gives Behbahani's running average. Closed loop with PFL3-style steering:</p>
+      <table>
+        <tr><th>hΔJ → FC2 kernel</th><th class="n">returned</th><th class="n">closest</th></tr>
+        <tr><td>measured 194°</td><td class="n">35 %</td><td class="n">1.36</td></tr>
+        <tr><td>ideal 180°</td><td class="n">35 %</td><td class="n">1.05</td></tr>
+        <tr><td>no inversion</td><td class="n">0 %</td><td class="n">10.29</td></tr>
+        <tr><td>no memory</td><td class="n">–</td><td class="n">6.76</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>Why it matters</h2>
+  <div class="card">
+    <ul>
+      <li><b>It fills the three red boxes with one mechanism.</b> Integrate (weights accumulate), store the zero (OA-VPM3 erases at food), invert (hΔJ anatomy). Arrival falls out: the weight vector shrinks to zero, the goal disappears, local search begins.</li>
+      <li><b>It reuses the compass's own plasticity logic.</b> ExR2 dopamine gates ring-to-compass learning by rotational speed (Fisher 2022). FB4M is the translational analogue: driven by the velocity system, delivered to the population that reads travel direction.</li>
+      <li><b>It reinterprets the other candidates.</b> PFR receives inverted travel direction and non-inverted velocity, so it reports heading-versus-travel mismatch, not position. FR1 accumulates a scalar for the mushroom body. hΔA/hΔI hand PFL3 the inverted travel direction as a goal-free "turn back" signal.</li>
+    </ul>
+  </div>
+
+  <h2>What would settle it</h2>
+  <div class="card">
+    <ul>
+      <li>Image hΔJ during the 1D re-zeroing task: predict a bump pointing back to the fictive food centre, amplitude growing with distance, collapsing at re-zero.</li>
+      <li>Silence OA-VPM3 during local search: predict search that no longer centres on the food, with odometry intact.</li>
+      <li>Block dopamine signalling or cAMP in hΔJ: predict loss of the return vector with hΔB travel-direction coding intact.</li>
+      <li>Pair OA-VPM3 activation with walking in one direction: predict a displaced search centre with no food present.</li>
+    </ul>
+  </div>
+
+  <p><span class="tag strong">Wiring and phases: high confidence</span><span class="tag model">Integrator: model-supported hypothesis</span><span class="tag open">Plasticity and reward roles: inferred</span></p>
+  <p class="foot">Sources: <code>docs/vector-memory-search.md</code>; tables <code>vector_memory_screen.csv</code>, <code>recurrence_modes.csv</code>, <code>fb_offset_stats.csv</code>, <code>reward_inputs_trace.json</code>; <code>simulations/synaptic_path_integrator.py</code>, <code>closed_loop_return.py</code>. Hulse 2021; Lu 2022; Behbahani 2021; D'Atri 2025; Fisher 2022; Maimon &amp; Abbott 2026; Burke 2012.</p>
+</main>
+</body>
+</html>

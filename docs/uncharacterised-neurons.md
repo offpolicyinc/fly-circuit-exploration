@@ -4,7 +4,7 @@ Purpose: assign candidate functions to CX cell types with no published physiolog
 
 Scale of the unknown: 292 CX cell types, 2,950 cells; 233 types (2,002 cells) have no functional characterisation in the literature read for this project. 158 of those are predicted glutamatergic fan-shaped-body tangential neurons (FBxx), which in the fly are usually inhibitory.
 
-Two conventions matter for reading the phase claims. FB columns C1–C9 are folded to 8 angular positions (C9 = C1). hDelta neurons receive input at one end and output at the opposite end (verified here cell by cell: hDeltaH_01_C1 outputs to FC2B columns 5–6), so an hDelta output at "offset ±4" is the anatomical 180° inversion described by Hulse 2021; what is new is which signal each hDelta inverts and where it delivers it.
+Two conventions matter for reading the phase claims. Column labels are converted to angles using each type's own column count (12 for hDeltaA/B/C/I/J/K/L, 8 for hDeltaD/E/G/H/M and PFNd, 6 for hDeltaF, and 9-label types where C9 shares C1's heading); an earlier version of this document folded every type to 8 positions, which was wrong for the 12-column hDelta types and has been corrected throughout (see `fb_offset_stats.csv`). hDelta neurons receive input at one end and output at the opposite end, so hDelta outputs land ~180–200° from their input column (measured: 193–202° with concentration 0.86–0.94 for every hDelta→FC2/PFL/PFR/FR1 pair); what is new is which signal each hDelta inverts and where it delivers it.
 
 ## A. Candidates for the missing computations (targeted)
 
@@ -12,13 +12,14 @@ Two conventions matter for reading the phase claims. FB columns C1–C9 are fold
 
 - Wiring: hDeltaB is the largest input to both (16 % of PFR_a, 22 % of PFR_b), PFNd adds a direct column-matched input to PFR_a (99 % at offset 0/+1). PFR_b→PFR_a and PFR_a→PFR_b are column-matched (43–44 % at offset 0); PFR_b→PFR_b is broad and excludes its own column (0 % at offset 0). Both project to the PB (identity glomerulus→column map, so they carry a heading-frame copy) and PFR_b's largest typed output is LAL002, a lateral-accessory-lobe cell; PFR_a's is hDeltaA (which feeds PFL3).
 - Literature anchor: Flores-Valle 2025 (PFR encodes walking direction; drifts ~180° at rest; drift shifts with learning); D'Atri 2025 (PFR silencing abolishes distance memory).
-- Simulation ([simulations/pfr_integrator.py](../simulations/pfr_integrator.py)): a rate model with the measured kernels and all-excitatory signs never integrates: across recurrent gains 0–3 and uniform inhibition 0–4 the PFR population vector points at travel direction rotated by a fixed ~115° (set by the hDeltaB output offset), not at the accumulated displacement, and the cosine-mode gain stays below 0.25 while the uniform mode explodes first. Making the broad within-type recurrence inhibitory (sign flip) raises the cosine-mode gain to ~1 at high gain and the vector starts to lag toward the displacement, i.e. integration becomes possible.
-- Hypothesis: PFR is a heading-registered copy of travel direction sent to the LAL (PFR_b→LAL002) and to the steering input hDeltaA; it can become a displacement integrator only if its broad recurrence is effectively inhibitory (PFR_a's transmitter is "unclear") or if a tangential inhibitory input (FB3C is GABAergic and targets PFR_b) supplies the off-column suppression. Prediction: PFR bump phase is offset from the hDeltaB bump by a fixed ~90–135°; PFR_a transmitter identity decides between relay and integrator.
+- Phases (corrected): hDeltaB→PFR_a arrives at 195° (concentration 0.93), i.e. PFR receives the *inverted* travel direction; PFNd→PFR_a arrives at 21° (0.92), i.e. the non-inverted heading-frame velocity vector. PFR_a therefore sums a forward-velocity vector and the negative of the travel-direction vector: when the fly walks straight ahead the two cancel, when it slips sideways or backwards they do not.
+- Simulation ([simulations/pfr_integrator.py](../simulations/pfr_integrator.py)): a rate model with the measured kernels and all-excitatory signs never integrates: across recurrent gains 0–3 and uniform inhibition 0–4 the PFR population vector points at travel direction + ~195° (the hDeltaB offset), not at the accumulated displacement, and the cosine-mode gain stays below 0.25 while the uniform mode explodes first. Making the broad within-type recurrence inhibitory (sign flip) raises the cosine-mode gain to ~1 at high gain and the vector starts to lag toward the displacement.
+- Hypothesis: PFR is not an integrator. The cleanest reading of its two velocity inputs is a heading-versus-travel mismatch signal (sideslip / backward travel), sent to the LAL (PFR_b→LAL002) and to the steering input hDeltaA. Prediction: PFR bump amplitude is minimal during straight forward walking and grows with sideslip; PFR_a transmitter identity would still decide whether integration is possible in principle.
 - Test: dual-colour imaging of hDeltaB and PFR bumps; PFR_a transmitter immunostaining; PFR imaging during Behbahani's re-zeroing task.
 
 ### A2. FR1: the strongest self-loop in the fan-shaped body, reading travel direction and writing to the mushroom body
 
-- Wiring: 18 cholinergic cells; 30 % of FR1 input is FR1 itself (8,694 synapses, broad, excluding own column), 11 % is hDeltaB (arriving at +1..+4). Outputs: FR1 (38 %), then MBON30, CRE105, FB4C, SMP457, PPL102 (a PPL1 dopamine neuron), FB5H (FB dopamine).
+- Wiring: 18 cholinergic cells; 30 % of FR1 input is FR1 itself (8,694 synapses, broad, excluding own column), 11 % is hDeltaB (arriving inverted, ~195°). Outputs: FR1 (38 %), then MBON30, CRE105, FB4C, SMP457, PPL102 (a PPL1 dopamine neuron), FB5H (FB dopamine).
 - Anchor: none in physiology. Chen 2024 needs both MB and PFNd for scent-marked place learning, with no known bridge.
 - Hypothesis: FR1 is a persistent, self-sustaining representation of recent travel direction that informs the reward-learning system (MBON30, PPL1 dopamine). It is the structural candidate for how "which way I was going" reaches MB-dependent place value. The recurrence is again uniform off-column, so like PFR it would sustain activity level rather than a specific direction unless inhibition shapes it.
 - Test: image FR1 during walking in darkness and after sugar; silence FR1 in Chen 2024's task.
@@ -38,8 +39,8 @@ Two conventions matter for reading the phase claims. FB columns C1–C9 are fold
 
 ### A5. hDeltaA and hDeltaI: travel-direction-derived inputs to PFL3 that rival FC2
 
-- Wiring: hDeltaA (3,881) and hDeltaI (3,468) each give PFL3 more synapses than any single FC2 subtype (2,478–2,700); both also feed PFL2. Both receive hDeltaB at offset 0 (64 % and 48 %) and deliver to PFL at +1..+4 (broad, centred ~+2.5 columns ≈ 110°). hDeltaA's other inputs are vDeltaK/vDeltaL/vDeltaM (which receive FB4G/FB4H, fed by MBON25/MBON34) and PFR_a; hDeltaI's are FB4F/FB4E/FB2G tangentials.
-- Hypothesis: a second steering channel in which the reference is current travel direction rather than a stored goal. With a ~90–135° offset it is not "keep going straight"; with MB-derived tangential gating it could implement value-dependent deflection from the current course (turn away from or toward the direction associated with an MB outcome). This is the most speculative entry and the one where the sign of the hDelta→PFL phase matters most.
+- Wiring (corrected phases): hDeltaA (3,881) and hDeltaI (3,468) each give PFL3 more synapses than any single FC2 subtype (2,478–2,700); both also feed PFL2. Both receive hDeltaB at ~0° (concentration 0.79 and 0.60) and deliver to PFL3 at 194° and 193° (concentration 0.92, 0.90): PFL3 receives the travel direction inverted, i.e. "the way I came from". hDeltaA's other inputs are vDeltaK/vDeltaL/vDeltaM (which receive FB4G/FB4H, fed by MBON25/MBON34) and PFR_a; hDeltaI's are FB4F/FB4E/FB2G tangentials.
+- Hypothesis: a "turn back" channel. Steering toward the inverse of the current travel direction is a reversal; gated by MB-derived tangentials it would let a learned outcome trigger a return along the incoming path without any stored goal. It also gives PFL3 a fallback goal when FC2 is silent.
 - Test: PFL3 tuning to travel direction after FC2 silencing; hDeltaA activity vs MBON25/34 activation.
 
 ### A6. FB5A: GABAergic normaliser of the goal population
@@ -88,6 +89,10 @@ Method: every CX type scored for self-recurrence, strongest reciprocal partner, 
 4. FS1A→oviIN behavioral test (oviposition after FS1A silencing).
 5. FB3A and PS196_b walking-speed tuning (sources of self-motion).
 6. LAL121 sign and timing (what the steering command looks like after the LAL).
+
+## Follow-up
+
+The systematic search for the integrator, store and inversion that this document's task map left open is in [vector-memory-search.md](vector-memory-search.md).
 
 ## Tables and scripts
 
