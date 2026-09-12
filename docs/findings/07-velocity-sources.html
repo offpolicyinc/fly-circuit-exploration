@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding 7: where the velocity signals actually come from</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
+  .lede { font-size:18px; margin:0 0 22px; }
+  h2 { font-size:17px; margin:26px 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
+  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
+  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
+  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
+  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
+  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+  a { color:var(--accent2); }
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">Finding 7 of 8 · unnamed inputs to a solved circuit</div>
+  <h1>The compass and vector systems get their motion signals from cells nobody has named</h1>
+  <p class="lede">To track heading and position, the navigation system needs to know how fast the fly is turning and moving. The neurons that deliver those signals into the compass and into the velocity vectors are known; what drives them is not. Two papers left it open. The wiring points at specific cells: a posterior-slope type, PS196_b, feeds both the rotational and the translational velocity inputs, and a four-cell tangential type, FB3A, carries an ascending signal from the ventral nerve cord into the forward-velocity population and supplies 12 % of its input.</p>
+
+  <figure>
+    <svg viewBox="0 0 900 330" width="100%" role="img" aria-label="Sources of rotational and translational velocity inputs">
+      <defs>
+        <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
+        <marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker>
+        <marker id="g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#8a8f99"/></marker>
+        <marker id="p" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#6a4c93"/></marker>
+      </defs>
+      <text x="220" y="24" text-anchor="middle" font-weight="700" font-size="14">Rotational velocity → compass</text>
+      <text x="670" y="24" text-anchor="middle" font-weight="700" font-size="14">Translational velocity → vectors</text>
+      <!-- left column -->
+      <rect x="40" y="50" width="360" height="40" rx="8" fill="#e3e2dc"/><text x="220" y="75" text-anchor="middle" font-weight="600">PS196_b (posterior slope) · uncharacterised</text>
+      <rect x="120" y="140" width="200" height="40" rx="8" fill="#f6e7e3" stroke="#b4432c"/><text x="220" y="165" text-anchor="middle" font-weight="700">GLNO (rotational velocity)</text>
+      <rect x="120" y="230" width="200" height="40" rx="8" fill="#2a6f97"/><text x="220" y="255" text-anchor="middle" fill="#fff" font-weight="700">PEN shifters → compass</text>
+      <path d="M220 90 L 220 138" stroke="#1b1b1f" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="232" y="118" font-size="12">1,801 (19 % of GLNO input)</text>
+      <path d="M220 180 L 220 228" stroke="#1b1b1f" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="232" y="208" font-size="12">16,371</text>
+      <text x="220" y="300" text-anchor="middle" font-size="12" fill="#5a5f6a">PS196_b also feeds ExR2, ExR4, LPsP and FB3A</text>
+      <!-- right column -->
+      <rect x="490" y="50" width="360" height="40" rx="8" fill="#e3e2dc"/><text x="670" y="75" text-anchor="middle" font-weight="600">AN06B009 (ascending) · PS326 · LAL143 · PS196_b</text>
+      <rect x="570" y="140" width="200" height="40" rx="8" fill="#f6e7e3" stroke="#b4432c"/><text x="670" y="165" text-anchor="middle" font-weight="700">FB3A (4 cells, glutamate)</text>
+      <rect x="570" y="230" width="200" height="40" rx="8" fill="#2a6f97"/><text x="670" y="255" text-anchor="middle" fill="#fff" font-weight="700">PFNd forward velocity</text>
+      <path d="M670 90 L 670 138" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/><text x="682" y="118" font-size="12">319 · 511 · 727 · 195</text>
+      <path d="M670 180 L 670 228" stroke="#1b1b1f" stroke-width="3.5" fill="none" marker-end="url(#a)"/><text x="682" y="208" font-size="12">5,765 (12 % of PFNd input)</text>
+      <path d="M580 230 C 560 205, 560 205, 580 180" stroke="#8a8f99" stroke-width="2" fill="none" marker-end="url(#g)"/><text x="556" y="213" text-anchor="end" font-size="11" fill="#8a8f99">PFNd → FB3A 4,020</text>
+      <text x="670" y="300" text-anchor="middle" font-size="12" fill="#5a5f6a">Known PFNd velocity inputs for scale: LNO2 9,610 · SpsP 2,384</text>
+    </svg>
+    <figcaption>Synapse counts (MaleCNS). PS196_b and FB3A have no published physiology. "Ascending" means the cell body is in the ventral nerve cord and the axon rises into the brain, the route for leg-derived signals.</figcaption>
+  </figure>
+
+  <h2>Background</h2>
+  <div class="card">
+    <dl>
+      <dt>Two velocity signals</dt><dd>The compass needs <b>rotational</b> velocity to slide its bump when the fly turns; the vector system needs <b>translational</b> velocity (forward, sideways) to build travel direction and, in principle, distance.</dd>
+      <dt>What is known</dt><dd>Rotational: a single pair of <b>GLNO</b> neurons is the only lateralised velocity input to the PEN shifters and encodes turning from both vision and "motor" information; the motor source was not identified (Hulse 2023). Translational: <b>PFNd</b> cells get their forward-velocity scaling from the inhibitory <b>LNO2</b> and <b>SpsP</b> neurons (Lu 2022); where LNO2 and SpsP get it from was not resolved.</dd>
+      <dt>Posterior slope (PS)</dt><dd>A brain region next to the descending-neuron zone where motor-related and ascending signals converge. PS neurons are numbered, mostly uncharacterised.</dd>
+    </dl>
+  </div>
+
+  <h2>What we found</h2>
+  <div class="card">
+    <span class="tag strong">Measured, unbiased screen</span>
+    <table>
+      <tr><th>Cell type</th><th>Receives from</th><th>Sends to</th></tr>
+      <tr><td><b>PS196_b</b></td><td>not profiled (outside CX)</td><td>GLNO 1,801 (19 % of its input) · LPsP 942 · ExR2 899 · ExR4 686 · FB3A 195</td></tr>
+      <tr><td><b>FB3A</b> (4 cells)</td><td>PFNd 4,020 · LAL143 727 · PS326 511 · AN06B009 319 (ascending) · PS196_b 195</td><td>PFNd 5,765 (12 % of PFNd input, third largest source) · hΔB 883 · FB4M 576</td></tr>
+    </table>
+    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">ExR2 is the dopamine neuron that gates compass learning by rotational speed (Fisher 2022); ExR4 provides global feedback onto the shifters. PS196_b reaches all of them.</p>
+  </div>
+
+  <h2>Why it matters</h2>
+  <div class="card">
+    <ul>
+      <li><b>One source for several velocity consumers.</b> If PS196_b carries a copy of the motor command, it explains at once why GLNO prefers motor over visual information, where ExR2's rotational-speed signal originates, and how the translational side (via FB3A) sees the same command.</li>
+      <li><b>A leg-derived input to the vector system.</b> FB3A is the only large PFNd input fed by an ascending neuron. That is the candidate for the proprioceptive velocity estimate that walking-based path integration needs and that vision cannot supply in the dark.</li>
+      <li><b>FB3A is also reciprocal with PFNd</b> (4,020 in, 5,765 out) and glutamatergic, so it is more likely a gain control on PFNd than a simple feed-forward speed signal.</li>
+    </ul>
+  </div>
+
+  <h2>What would settle it</h2>
+  <div class="card">
+    <ul>
+      <li>Image PS196_b during walking: predict tuning to turning velocity that persists in darkness and precedes the compass bump shift.</li>
+      <li>Image FB3A during forward walking with and without visual motion: predict speed tuning that survives loss of vision.</li>
+      <li>Silence FB3A and test Behbahani-style distance behaviour and PFNd speed scaling.</li>
+    </ul>
+  </div>
+
+  <p><span class="tag strong">Wiring: high confidence</span><span class="tag open">Signal content: predicted only</span></p>
+  <p class="foot">Sources: <code>docs/uncharacterised-neurons.md</code> §B2, §B3; tables <code>cx_type_profiles.json</code>, <code>cx_screen.csv</code>. Hulse 2023; Lu 2022; Fisher 2022.</p>
+</main>
+</body>
+</html>

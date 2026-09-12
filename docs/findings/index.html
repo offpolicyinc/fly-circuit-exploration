@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fly navigation connectome findings</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
+  .lede { font-size:17px; color:var(--muted); margin:0 0 22px; }
+  h2 { font-size:15px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin:26px 0 8px; }
+  a.card { display:block; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:8px 0; }
+  a.card:hover { border-color:var(--accent2); }
+  .t { font-weight:700; } .s { color:var(--muted); font-size:14px; margin-top:2px; }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:11px; font-weight:600; margin-left:6px; vertical-align:middle; }
+  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
+  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>What the wiring diagrams say about fly navigation</h1>
+  <p class="lede">Eight findings from analysing the MaleCNS (2026) and hemibrain (2020) synapse-level connectomes against the published circuit models, ranked by how much they should change current thinking. Each page is self-contained: background, figure, evidence, why it matters, what would settle it. Everything beyond the synapse counts is a hypothesis.</p>
+
+  <h2>Against the literature</h2>
+  <a class="card" href="01-compass-brake.html"><div class="t">1. The compass has a built-in brake that no published model includes<span class="tag strong">two brains</span><span class="tag model">simulated</span></div><div class="s">The shifter neurons that rotate the compass get three times more input from the position they write to than from the position they read from. Both sides do it, so it anchors the bump; in simulation rotation collapses.</div></a>
+  <a class="card" href="02-steering-stage.html"><div class="t">2. The turn command is reprocessed before it reaches the legs<span class="tag strong">whole graph</span></div><div class="s">The published PFL3 → DNa02 link is 1.5 % of DNa02's input. Most of the steering signal goes to inhibitory LAL interneurons that fan out to five descending neurons; Feng's steering hierarchy gets nothing from PFL.</div></a>
+
+  <h2>Missing computation</h2>
+  <a class="card" href="03-pfr-integrator.html"><div class="t">3. The path integrator is not there as excitatory wiring<span class="tag model">simulated</span><span class="tag open">one measurement decides</span></div><div class="s">PFR has the inputs and recurrence an integrator needs, but with excitatory signs it only relays travel direction. It integrates only if its broad self-loop is inhibitory; PFR_a's transmitter is unknown.</div></a>
+
+  <h2>Unknown unknowns</h2>
+  <a class="card" href="04-mb-bridges.html"><div class="t">4. The learning centre and the navigation system are wired together, three ways<span class="tag strong">screen</span></div><div class="s">MBON21/09 → FB4R → hΔB; MBON25/34 → FB4G/H → hΔA → PFL3; and hΔB → FR1 → MBON30/PPL1 dopamine. The bridges Chen 2024's result requires, all uncharacterised.</div></a>
+  <a class="card" href="05-goal-to-egglaying.html"><div class="t">5. The navigation goal has a two-way line to the egg-laying circuit<span class="tag strong">screen</span><span class="tag open">male brain</span></div><div class="s">FC2 and its FS1A readouts send ~3,500 synapses to oviIN, the egg-laying gate, which projects back into the goal layer.</div></a>
+  <a class="card" href="06-anti-goal.html"><div class="t">6. The steering neurons receive the goal twice, once flipped by 180°<span class="tag strong">phase measured</span></div><div class="s">hΔM inverts the FC2 goal and delivers it to PFL3 and PFL2 with almost as many synapses as the direct route, under a GABAergic gate. A candidate valence switch and source of PFL2's anti-goal tuning.</div></a>
+  <a class="card" href="07-velocity-sources.html"><div class="t">7. The velocity signals come from cells nobody has named<span class="tag strong">screen</span></div><div class="s">PS196_b feeds the rotational (GLNO) and translational (FB3A) velocity inputs plus ExR2/ExR4; FB3A carries an ascending signal into PFNd and supplies 12 % of its input.</div></a>
+
+  <h2>Prediction from a published mechanism</h2>
+  <a class="card" href="08-cue-specific-octopamine.html"><div class="t">8. Compass learning should be cue-specific<span class="tag strong">measured</span><span class="tag open">prediction</span></div><div class="s">EL octopamine feedback concentrates on ER4d/ER3p/ER3d/ER2_c and barely reaches ER4m or ER6, which get direct EPG feedback instead. ER5 (sleep) is EL's largest input.</div></a>
+
+  <p class="foot">Repository docs: <code>findings.md</code>, <code>uncharacterised-neurons.md</code>, <code>behavioral-task-map.md</code>, <code>compass-recurrence.md</code>, <code>goal-and-plasticity-motifs.md</code>, <code>descending-trace.md</code>. Data: MaleCNS v1.0 flat connectome; hemibrain v1.2 traced adjacencies. Analyses 2026-09-10/11.</p>
+</main>
+</body>
+</html>
