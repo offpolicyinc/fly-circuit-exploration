@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding 4: the learning centre and the navigation system are wired together</title>
+<style>
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
+  .lede { font-size:18px; margin:0 0 22px; }
+  h2 { font-size:17px; margin:26px 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
+  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
+  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
+  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
+  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
+  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">Finding 4 of 8 · least known, high value</div>
+  <h1>The learning centre and the navigation system are wired together, three ways</h1>
+  <p class="lede">Flies have two separate systems that navigation research has kept apart: the mushroom body, which learns what is good and bad, and the central complex, which computes headings and vectors. A 2024 experiment showed flies need both to learn a place, with no known connection between them. The wiring diagram has three. Two carry learned value from the mushroom body into the travel-direction and steering populations; one carries "which way I have been going" back to the mushroom body's dopamine system. None of the bridge neurons has been recorded.</p>
+
+  <figure>
+    <svg viewBox="0 0 900 330" width="100%" role="img" aria-label="Three routes between mushroom body and navigation system">
+      <defs>
+        <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
+        <marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker>
+        <marker id="p" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#6a4c93"/></marker>
+      </defs>
+      <!-- column headers -->
+      <text x="90" y="24" text-anchor="middle" font-weight="700" font-size="14">Mushroom body</text>
+      <text x="90" y="42" text-anchor="middle" fill="#5a5f6a" font-size="12">learned value</text>
+      <text x="400" y="24" text-anchor="middle" font-weight="700" font-size="14">Bridge cells (uncharacterised)</text>
+      <text x="400" y="42" text-anchor="middle" fill="#5a5f6a" font-size="12">fan-shaped-body tangentials</text>
+      <text x="740" y="24" text-anchor="middle" font-weight="700" font-size="14">Navigation system</text>
+      <text x="740" y="42" text-anchor="middle" fill="#5a5f6a" font-size="12">vectors and steering</text>
+      <!-- Route 1 -->
+      <rect x="20" y="70" width="140" height="40" rx="8" fill="#6a4c93"/><text x="90" y="95" text-anchor="middle" fill="#fff" font-weight="700">MBON21, MBON09</text>
+      <rect x="340" y="70" width="120" height="40" rx="8" fill="#f6e7e3" stroke="#b4432c"/><text x="400" y="95" text-anchor="middle" font-weight="700">FB4R</text>
+      <rect x="660" y="70" width="160" height="40" rx="8" fill="#2a6f97"/><text x="740" y="95" text-anchor="middle" fill="#fff" font-weight="700">hΔB travel direction</text>
+      <path d="M160 90 L 338 90" stroke="#6a4c93" stroke-width="2.5" fill="none" marker-end="url(#p)"/><text x="249" y="82" text-anchor="middle" font-size="11" fill="#6a4c93">1,248</text>
+      <path d="M460 90 L 658 90" stroke="#b4432c" stroke-width="3.5" fill="none" marker-end="url(#b)"/><text x="559" y="82" text-anchor="middle" font-size="11" fill="#b4432c">3,647 (8 % of hΔB input)</text>
+      <!-- Route 2 -->
+      <rect x="20" y="150" width="140" height="40" rx="8" fill="#6a4c93"/><text x="90" y="175" text-anchor="middle" fill="#fff" font-weight="700">MBON25, MBON34</text>
+      <rect x="340" y="150" width="120" height="40" rx="8" fill="#f6e7e3" stroke="#b4432c"/><text x="400" y="175" text-anchor="middle" font-weight="700">FB4G, FB4H</text>
+      <rect x="560" y="150" width="90" height="40" rx="8" fill="#5a86a8"/><text x="605" y="175" text-anchor="middle" fill="#fff" font-weight="700">vΔK/vΔM</text>
+      <rect x="680" y="150" width="60" height="40" rx="8" fill="#5a86a8"/><text x="710" y="175" text-anchor="middle" fill="#fff" font-weight="700">hΔA</text>
+      <rect x="760" y="150" width="120" height="40" rx="8" fill="#2a6f97"/><text x="820" y="175" text-anchor="middle" fill="#fff" font-weight="700">PFL3 steering</text>
+      <path d="M160 170 L 338 170" stroke="#6a4c93" stroke-width="2" fill="none" marker-end="url(#p)"/><text x="249" y="162" text-anchor="middle" font-size="11" fill="#6a4c93">512</text>
+      <path d="M460 170 L 558 170" stroke="#b4432c" stroke-width="3" fill="none" marker-end="url(#b)"/><text x="509" y="162" text-anchor="middle" font-size="11" fill="#b4432c">4,900</text>
+      <path d="M650 170 L 678 170" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+      <path d="M740 170 L 758 170" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+      <text x="665" y="205" font-size="11" fill="#5a5f6a">3,168</text><text x="742" y="205" font-size="11" fill="#5a5f6a">3,881</text>
+      <!-- Route 3 (reverse) -->
+      <rect x="660" y="240" width="160" height="40" rx="8" fill="#2a6f97"/><text x="740" y="265" text-anchor="middle" fill="#fff" font-weight="700">hΔB travel direction</text>
+      <rect x="340" y="240" width="120" height="40" rx="8" fill="#f6e7e3" stroke="#b4432c"/><text x="400" y="265" text-anchor="middle" font-weight="700">FR1</text>
+      <path d="M355 240 C 370 210, 430 210, 445 240" stroke="#b07a12" stroke-width="3" fill="none" marker-end="url(#b)"/><text x="400" y="207" text-anchor="middle" font-size="11" fill="#b07a12">self-loop 8,694</text>
+      <rect x="20" y="240" width="140" height="40" rx="8" fill="#6a4c93"/><text x="90" y="258" text-anchor="middle" fill="#fff" font-weight="700" font-size="12">MBON30, PPL1 and</text><text x="90" y="273" text-anchor="middle" fill="#fff" font-weight="700" font-size="12">FB dopamine cells</text>
+      <path d="M660 260 L 462 260" stroke="#b4432c" stroke-width="2.5" fill="none" marker-end="url(#b)"/><text x="561" y="252" text-anchor="middle" font-size="11" fill="#b4432c">3,168</text>
+      <path d="M340 260 L 162 260" stroke="#6a4c93" stroke-width="2.5" fill="none" marker-end="url(#p)"/><text x="251" y="252" text-anchor="middle" font-size="11" fill="#6a4c93">1,335</text>
+      <text x="20" y="312" fill="#5a5f6a" font-size="12">Routes 1 and 2: value into navigation. Route 3: travel direction back to the learning system. Numbers are synapse counts (MaleCNS).</text>
+    </svg>
+    <figcaption>MBON = mushroom-body output neuron (carries learned value). PPL1 = a dopamine cell class that teaches the mushroom body. FB4R, FB4G/H and FR1 are the bridges; all three are functionally uncharacterised.</figcaption>
+  </figure>
+
+  <h2>Background</h2>
+  <div class="card">
+    <dl>
+      <dt>Mushroom body (MB)</dt><dd>The fly's associative-learning centre. Odors and other cues are represented sparsely; dopamine neurons (PAM, PPL1) carry reward and punishment and adjust the synapses onto <b>MB output neurons (MBONs)</b>, whose activity therefore reports learned value (Hige 2015).</dd>
+      <dt>Central complex (CX)</dt><dd>The navigation system: compass, velocity vectors, travel direction (<b>hΔB</b>), goal and steering (<b>PFL3</b>). Its fan-shaped body also contains ~160 types of <b>tangential neurons</b> (FBxx) that span all columns and mostly have no known function.</dd>
+      <dt>The experiment that needs a bridge</dt><dd>Chen et al. 2024: in a featureless arena, flies learn to return to a rewarded spot by marking it with their own scent, and the learning needs both the mushroom body (to value the scent) and <b>PFNd</b> (the self-motion input to hΔB). The authors had no circuit connecting the two.</dd>
+      <dt>Data</dt><dd>MaleCNS 2026 whole-brain connectome; every CX cell type profiled for inputs and outputs from outside the CX.</dd>
+    </dl>
+  </div>
+
+  <h2>What we found</h2>
+  <div class="card">
+    <span class="tag strong">Measured, unbiased screen</span>
+    <p>Screening all CX types for external inputs flagged the ones fed by MBONs. Three routes connect the systems:</p>
+    <table>
+      <tr><th>Route</th><th>Path</th><th>Key numbers</th></tr>
+      <tr><td>1 · value → travel direction</td><td>MBON21 + MBON09 → FB4R (6 glutamatergic cells) → hΔB</td><td>FB4R gets 18 % of its input from the two MBONs; sends 3,647 synapses to hΔB, 8 % of hΔB's total input</td></tr>
+      <tr><td>2 · value → steering</td><td>MBON25 + MBON34 → FB4G, FB4H → vΔK, vΔM → hΔA → PFL3</td><td>hΔA gives PFL3 3,881 synapses, more than any single goal (FC2) subtype</td></tr>
+      <tr><td>3 · travel direction → learning</td><td>hΔB → FR1 → MBON30, PPL1 dopamine (PPL102), FB dopamine (FB5H)</td><td>FR1 is 30 % self-recurrent (8,694 synapses), the strongest self-loop in the fan-shaped body</td></tr>
+    </table>
+    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">Glutamate is usually inhibitory in the fly, so routes 1 and 2 most likely suppress rather than drive their targets. Signs are predictions.</p>
+  </div>
+
+  <h2>Why it matters</h2>
+  <div class="card">
+    <ul>
+      <li><b>Learned value can bias where the fly thinks it is going.</b> Route 1 lets an MB verdict ("this smells like the rewarded place") modulate hΔB, the population that represents travel direction. That is a mechanism for scent-marked place learning without a map, and it is the missing piece of Chen 2024.</li>
+      <li><b>Learned value can bias steering without touching the goal.</b> Route 2 reaches PFL3 through hΔA, bypassing the FC2 goal population entirely. Value-driven turning and goal-driven turning would then be separate channels that sum at the same steering neurons.</li>
+      <li><b>The navigation system can teach the mushroom body.</b> Route 3 sends a persistent copy of recent travel direction to the dopamine cells that write MB memories. That is what you would need to associate an odor or a scent mark with the direction you were moving when you met it.</li>
+    </ul>
+  </div>
+
+  <h2>What would settle it</h2>
+  <div class="card">
+    <ul>
+      <li>Activate MBON21 or MBON09 while imaging hΔB: route 1 predicts a change in hΔB bump amplitude or offset, likely suppression.</li>
+      <li>Silence FR1 in Chen 2024's scent-marking task: route 3 predicts loss of the PFNd-dependent component of learning while odor learning itself is spared.</li>
+      <li>Image FR1 during walking: predict a slowly changing, direction-tuned signal that outlasts turns.</li>
+    </ul>
+  </div>
+
+  <p><span class="tag strong">Wiring: high confidence</span><span class="tag open">Signs and function: predicted only</span></p>
+  <p class="foot">Sources: <code>docs/uncharacterised-neurons.md</code> §A2, §B4; tables <code>cx_type_profiles.json</code>, <code>cx_screen.csv</code>. Hige 2015; Lu 2022; Chen 2024; Titova 2023.</p>
+</main>
+</body>
+</html>
