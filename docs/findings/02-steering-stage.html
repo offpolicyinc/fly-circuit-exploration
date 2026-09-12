@@ -21,10 +21,12 @@
   svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
   ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
   .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
 </style>
 </head>
 <body>
 <main>
+  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html">List view</a><a href="../index.html">Home</a></nav>
   <div class="kicker">Finding 2 of 8 · a hole in the published pathway</div>
   <h1>The turn command is not delivered to the legs. It is reprocessed first.</h1>
   <p class="lede">The steering neurons compare the fly's heading with its goal and output a left-or-right turn signal. The published account sends that signal straight to a descending neuron that drives turning. In the whole-brain wiring that direct connection is a rounding error: 1.5 % of the descending neuron's input. Most of the turn signal goes to a set of interneurons, several inhibitory, that fan out to five different descending neurons. And the separately described "steering hierarchy" in that same region receives nothing from the steering neurons at all. There is a computation between the compass and the legs that no one has recorded from.</p>

@@ -23,10 +23,12 @@
   .pin { display:inline-block; background:var(--ink); color:#fff; border-radius:999px; font-size:11px; font-weight:700; padding:0 7px; margin-left:4px; text-decoration:none; }
   a { color:var(--accent2); }
   .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
 </style>
 </head>
 <body>
 <main>
+  <nav class="nav"><a href="circuit.html" class="on">Circuit view</a><a href="findings/index.html">List view</a><a href="index.html">Home</a></nav>
   <h1>Leaving food and coming back: the whole circuit, with what is proven and what is not</h1>
   <p class="lede">One behaviour, start to finish: a walking fly finds sugar, wanders off in the dark, and returns. Below is the wiring that would have to carry it, drawn in the order information has to flow, with every box coloured by the kind of evidence behind it. The eight findings sit where they belong in that flow. Boxes with a red dashed outline are computations the behaviour proves exist and for which no neuron has been shown to do the job.</p>
 

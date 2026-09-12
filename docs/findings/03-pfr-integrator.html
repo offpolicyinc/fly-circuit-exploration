@@ -21,10 +21,12 @@
   svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
   ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
   .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
 </style>
 </head>
 <body>
 <main>
+  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html">List view</a><a href="../index.html">Home</a></nav>
   <div class="kicker">Finding 3 of 8 · the most important negative</div>
   <h1>The fly's path integrator is not in the wiring as excitatory circuitry. One measurement decides whether it is there at all.</h1>
   <p class="lede">Flies provably add up their movements: they walk a loop in the dark and return to where food was, and silencing a population called PFR abolishes their memory of distance. So PFR is the prime suspect for the integrator. Its wiring has the right ingredients, a travel-direction input and mutual excitation between its two subtypes, but a simulation with the measured wiring shows PFR only relays travel direction; it never accumulates. Integration becomes possible only if PFR's broad self-connections are inhibitory. PFR_a's transmitter is unresolved, so one immunostain settles whether the fly's path integrator has been found.</p>
