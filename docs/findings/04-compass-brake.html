@@ -3,34 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Finding 4: the compass has a built-in brake</title>
+<title>Finding 4: The fly&#x27;s compass has a built-in brake that no published model includes</title>
 <style>
-  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
-  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
-  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
-  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
-  .lede { font-size:18px; margin:0 0 22px; }
-  h2 { font-size:17px; margin:26px 0 8px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
-  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
-  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
-  .grid { display:block; }
-  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
-  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
-  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
-  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
-  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
-  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; --purple:#6a4c93; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:780px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 14px; }
+  h2 { font-size:19px; margin:32px 0 8px; padding-top:12px; border-top:1px solid var(--line); }
+  p { margin:0 0 14px; } p.summary { font-size:17px; background:#f3f7fa; border-left:4px solid var(--accent2); padding:10px 14px; }
+  table { border-collapse:collapse; width:100%; font-size:14.5px; margin:8px 0 16px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; } th { color:var(--muted); font-weight:600; } td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  ul, ol { margin:6px 0 14px; padding-left:22px; } li { margin:4px 0; }
+  code { font-size:13px; background:#f1f0eb; padding:1px 4px; border-radius:3px; }
+  figure { margin:16px 0 20px; } figcaption { color:var(--muted); font-size:13px; margin-top:6px; }
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; }
+  .anim { border:1px solid var(--line); border-radius:10px; background:var(--card); padding:12px 14px; margin:16px 0 20px; }
+  .anim .ctl { display:flex; gap:10px; align-items:center; font-size:13px; color:var(--muted); margin-top:6px; flex-wrap:wrap; }
+  .anim button { font:13px inherit; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
+  .anim input[type=range] { width:160px; }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; margin-bottom:6px; }
+  .methods { color:var(--muted); font-size:14px; } .methods h2 { color:var(--ink); }
+  a { color:var(--accent2); }
 </style>
 </head>
 <body>
 <main>
-  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html">List view</a><a href="../index.html">Home</a></nav>
-  <div class="kicker">Finding 4 of 4 · most against the models</div>
-  <h1>The fly's compass has a built-in brake that no published model includes</h1>
-  <p class="lede">The compass is a ring attractor moved by "shifter" neurons that read the activity bump at one position and write it one step over. They are supposed to be one-way conveyors. The wiring shows each shifter gets three times more input from the position it writes <i>to</i> than from the position it reads <i>from</i>. Both left and right shifters do this, so the effect has no direction: it makes the shifters anchor the bump where it is. In simulation the anchor beats the turn signal and rotation collapses. Real flies turn fine, so these synapses cannot be acting the way a naive reading of the wiring says.</p>
-  <figure>
+  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
+<div class="kicker">Finding 4 of 4 · most against the models</div><h1>The fly's compass has a built-in brake that no published model includes</h1>
+<p class="summary"><b>Summary.</b> The compass ring attractor is moved by the PEN shifter neurons, which every model treats as one-way conveyors: read the heading bump at position x, write it to x±1. The connectome shows each PEN receives about three times more input from the position it writes to than from the position it reads from. Both left and right shifters do this, so the effect has no direction: the neurons a shifter pushes on push back on it, and the shifters anchor the bump where it already is. In a standard ring-attractor model, adding this feedback at the measured strength collapses rotation. Real flies turn normally, so these synapses cannot be acting the way a naive reading of the wiring says.</p>
+<figure>
     <svg viewBox="0 0 900 300" width="100%" role="img" aria-label="Shifter loop: read, write and the measured feedback">
       <defs>
         <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
@@ -69,64 +70,77 @@
     </svg>
     <figcaption>One left shifter shown. Because the shifter that targets a position is driven mostly by that position, it holds the bump rather than moving it. Right shifters mirror this toward x−1, so the effect is symmetric.</figcaption>
   </figure>
+<h2>The question</h2>
+<p>A fly keeps track of which way it is facing with a ring of about fifty EPG neurons in a structure called the ellipsoid body. One patch of the ring is active at a time, and the position of that patch is the fly's heading. When the fly turns, the patch has to slide around the ring by the right amount.</p>
+<p>The sliding is done by about forty PEN neurons, the shifters. Half push the patch clockwise, half push it anticlockwise. Each shifter reads the EPG activity at one position and writes it back onto the EPGs one position over. When the fly turns left, the left-pushing shifters get stronger, so the patch moves. This is the mechanism in every compass model since 2017, and it depends on the shifters being feed-forward: input from position x, output to position x+1.</p>
+<h2>What is known</h2>
+<p>The read contact (EPG onto PEN) lives in a structure called the protocerebral bridge. The write contact (PEN onto EPG) lives in the ellipsoid body. That anatomical separation is why the models treat read and write as two distinct one-way steps. Turner-Evans et al. (2020) noticed some EPG-to-PEN synapses inside the ellipsoid body and called them unexpected. Hulse et al. (2021) wrote that EPG and PEN neurons are so densely interconnected within the ellipsoid body that their subnetwork forms a ring, but did not compare this with the bridge route or model it.</p>
+<h2>What the wiring shows</h2>
+<p>Counting every EPG-to-PEN synapse in the hemibrain and binning it by location gives the following.</p>
+<table>
+<tr><th class="">EPG → PEN synapses (hemibrain)</th><th class="n">at read position (bridge)</th><th class="n">at write position (ellipsoid body)</th></tr>
+<tr><td class="">PENa</td><td class="n">1,281</td><td class="n">3,844</td></tr>
+<tr><td class="">PENb</td><td class="n">1,512</td><td class="n">3,645</td></tr></table>
+<p>The write-position input is three times the read-position input. It comes from exactly the EPGs the shifter writes onto. The same 3:1 ratio appears in MaleCNS, a second brain of the other sex.</p>
+<p>So the largest EPG-to-PEN pathway in the brain is not the one in the models. It is a loop: the shifter excites a set of EPGs, and that same set excites the shifter back.</p>
+<h2>What the model shows</h2>
+<div class="anim" id="brakeAnim">
+  <svg viewBox="0 0 820 260" width="100%" role="img" aria-label="Animation: the compass ring with the write-position feedback">
+    <text x="20" y="22" font-weight="700" font-size="14">Compass ring (16 EPG wedges), constant turn signal</text>
+    <g id="baRing"></g>
+    <line id="baPVA" x1="200" y1="150" x2="200" y2="150" stroke="#b4432c" stroke-width="4"/>
+    <text x="420" y="60" font-size="14">write-position feedback: <tspan id="baK" font-weight="700">0.0×</tspan> read input</text>
+    <text x="420" y="90" font-size="14">bump rotation: <tspan id="baRate" font-weight="700">–</tspan> °/s</text>
+    <text x="420" y="130" font-size="12" fill="#5a5f6a">0× is the textbook model. 2.7× is what the</text>
+    <text x="420" y="146" font-size="12" fill="#5a5f6a">hemibrain measures. Same turn signal throughout.</text>
+    <text x="420" y="180" font-size="12" fill="#5a5f6a">The red line is the bump's position. Watch how</text>
+    <text x="420" y="196" font-size="12" fill="#5a5f6a">fast it goes round as you raise the feedback.</text>
+  </svg>
+  <div class="ctl"><label>feedback strength: <input type="range" id="baSlider" min="0" max="5.4" step="0.1" value="0"></label><button id="baMeas">set to measured (2.7×)</button><button id="baZero">set to 0</button></div>
+</div>
+<script>
+(function(){
+  const NW=16,NG=8,dt=0.002,tau=0.05,wpb=1,wpe=1.6,winh=1.2,wself=0.6,vel=0.3;
+  const ang=[...Array(NW).keys()].map(i=>i*2*Math.PI/NW);
+  const wedgeOf=(side,gI)=>side==='L'?2*gI:2*(NG-1-gI)+1;
+  let E2P,P2E; function build(web){E2P=Array.from({length:2*NG},()=>new Array(NW).fill(0));P2E=Array.from({length:NW},()=>new Array(2*NG).fill(0));let idx=0;for(const side of 'LR'){const sh=side==='L'?-2:2;for(let gI=0;gI<NG;gI++){const w0=wedgeOf(side,gI);const tile=[((w0+sh)%NW+NW)%NW,((w0+sh+(side==='L'?1:-1))%NW+NW)%NW];E2P[idx][w0]+=wpb;for(const t of tile){E2P[idx][t]+=web/2;P2E[t][idx]+=wpe/2;}idx++;}}}
+  const Wee=ang.map((_,i)=>ang.map((_,j)=>{const d=((i-j+NW/2)%NW+NW)%NW-NW/2;return wself*Math.exp(-d*d/2);}));
+  let e=ang.map(a=>Math.max(0,Math.cos(a))),p=new Array(2*NG).fill(0),hist=[],simT=0;
+  function pva(){let re=0,im=0;e.forEach((v,i)=>{re+=v*Math.cos(ang[i]);im+=v*Math.sin(ang[i]);});return Math.atan2(im,re);}
+  function stepSim(){const pin=E2P.map((row,i)=>{let s=0;row.forEach((w,j)=>s+=w*e[j]);return s*(i<NG?1+vel:1-vel);});for(let i=0;i<p.length;i++)p[i]+=dt/tau*(-p[i]+Math.max(0,pin[i]));
+    const mean=e.reduce((a,b)=>a+b,0)/NW;const ein=e.map((_,i)=>{let s=0;for(let j=0;j<NW;j++)s+=Wee[i][j]*e[j];for(let k=0;k<p.length;k++)s+=P2E[i][k]*p[k];return s-winh*mean*NW/4+(Math.random()-0.5)*0.04;});
+    for(let i=0;i<NW;i++)e[i]=Math.min(5,e[i]+dt/tau*(-e[i]+Math.max(0,ein[i])));simT+=dt;}
+  const g=id=>document.getElementById(id);
+  function draw(){let s='';const mx=Math.max(...e,1e-6);e.forEach((v,i)=>{const x=200+95*Math.cos(ang[i]),y=150-95*Math.sin(ang[i]);const c=v/mx;s+=`<circle cx="${x}" cy="${y}" r="13" fill="rgb(${Math.round(255-c*(255-42))},${Math.round(255-c*(255-111))},${Math.round(255-c*(255-151))})" stroke="#e3e2dc"/>`;});g('baRing').innerHTML=s;
+    const a=pva();g('baPVA').setAttribute('x2',200+80*Math.cos(a));g('baPVA').setAttribute('y2',150-80*Math.sin(a));
+    hist.push([simT,a]);while(hist.length&&hist[0][0]<simT-1)hist.shift();
+    if(hist.length>10){let un=0,prev=hist[0][1];for(const [,x] of hist){let d=x-prev;d=Math.atan2(Math.sin(d),Math.cos(d));un+=d;prev=x;}g("baRate").textContent=Math.abs(un*180/Math.PI/(hist[hist.length-1][0]-hist[0][0])).toFixed(0);}}
+  function frame(){for(let i=0;i<12;i++)stepSim();draw();requestAnimationFrame(frame);}
+  function setK(v){g('baSlider').value=v;g('baK').textContent=Number(v).toFixed(1)+'×';build(Number(v));}
+  g('baSlider').oninput=()=>setK(g('baSlider').value);g('baMeas').onclick=()=>setK(2.7);g('baZero').onclick=()=>setK(0);
+  setK(0);frame();
+})();
+</script>
 
-
-  <h2>Background</h2>
-  <div class="card">
-    <dl>
-      <dt>Ring attractor</dt><dd>~50 <b>EPG</b> neurons arranged in a ring hold one bump of activity; the bump's position is the fly's heading. Local excitation plus global inhibition keeps exactly one bump alive.</dd>
-      <dt>Shifters</dt><dd>~40 <b>PEN</b> neurons, half "left", half "right". Each reads the EPG bump at one position and writes it back to EPGs one step over. When the fly turns, one shifter population gets stronger, so the bump slides. The whole computation depends on shifters being feed-forward: input from position x, output to x+1.</dd>
-      <dt>Where the two contacts live</dt><dd>The read contact (EPG→PEN) is in a structure called the bridge; the write contact (PEN→EPG) is in the ring. That anatomical split is why every model since 2017 treats read and write as separate, one-way steps.</dd>
-      <dt>Data</dt><dd>Two synapse-level wiring diagrams: hemibrain (female, 2020, synapses labelled by location) and MaleCNS (male, 2026).</dd>
-    </dl>
-  </div>
-
-  <h2>What we found</h2>
-  <div class="grid">
-    <div class="card">
-      <span class="tag strong">Measured, two brains</span>
-      <p>Each shifter receives EPG input at two places: the expected read position (in the bridge) and, three times more, at its own write position (in the ring). So the EPGs a shifter pushes on push back on it.</p>
-      <table>
-        <tr><th>EPG → PEN synapses (hemibrain)</th><th class="n">at read position</th><th class="n">at write position</th></tr>
-        <tr><td>PEN type a</td><td class="n">1,281</td><td class="n">3,844</td></tr>
-        <tr><td>PEN type b</td><td class="n">1,512</td><td class="n">3,645</td></tr>
-      </table>
-    </div>
-    <div class="card">
-      <span class="tag model">Simulated</span>
-      <p>Standard ring-attractor model, constant turn signal, with the write-position feedback added at increasing strength.</p>
-      <table>
-        <tr><th>Write-position feedback vs read input</th><th class="n">Bump rotation (°/s)</th></tr>
-        <tr><td>0 (textbook)</td><td class="n">139</td></tr>
-        <tr><td>0.5×</td><td class="n">72</td></tr>
-        <tr><td>1×</td><td class="n">0</td></tr>
-        <tr><td>2.7× (measured)</td><td class="n">0</td></tr>
-      </table>
-      <p style="color:var(--muted);font-size:13px;margin:6px 0 0">"0" is partly a rate-saturation artefact of the minimal model; the defensible claim is that rotation gain collapses as the anchor strengthens.</p>
-    </div>
-  </div>
-
-
-  <h2>Why it matters</h2>
-  <div class="card">
-    <ul>
-      <li><b>Shifters double as anchors.</b> Normal stalling is two equal pushes cancelling; this is different: both shifter populations pile excitation onto wherever the bump already is, and the anchor feeds on itself. Turning harder also feeds the hold. Models omit this, the largest EPG→PEN pathway; if it works as drawn the compass is stable in darkness but sluggish under rotation.</li>
-      <li><b>Only three ways out,</b> each a different compass: the write-position synapses are functionally weak; they sit on the shifter's axon and modulate its output rather than drive it; or they are cancelled by inhibition (Delta7, ExR4/ExR6) the model lacks.</li>
-      <li><b>Prior work:</b> Turner-Evans et al. 2020 noticed some of these synapses and called them unexpected; Hulse et al. 2021 wrote that "EPG and PEN_a neurons are so densely interconnected within the EB that a network graph of their subnetwork forms a ring" but did not compare it with the bridge route or model it. New here: the 3:1 count against the bridge route, the placement on the write-back tile, conservation across two sexes, and the simulated brake.</li>
-    </ul>
-  </div>
-
-  <h2>What would settle it</h2>
-  <div class="card">
-    <ul>
-      <li>Record a shifter while stimulating EPGs at its read position vs its write position; compare response size.</li>
-      <li>At EM level, check whether the write-position contacts sit on shifter dendrites or on their axon terminals.</li>
-      <li>Refit a ring-attractor model with the loop; if rotation gain and dark stability cannot both be matched, the loop must be gated or silent.</li>
-    </ul>
-  </div>
-
-  <p><span class="tag strong">Wiring: high confidence</span><span class="tag model">Consequence: qualitative</span><span class="tag open">Function: unknown</span></p>
-  <p class="foot">Sources: <code>docs/compass-recurrence.md</code>; <code>simulations/eb_epg_pen_loop.py</code>. Turner-Evans 2017, 2020; Green 2017; Hulse 2021; Maimon &amp; Abbott 2026.</p>
+<p>Take the standard ring-attractor model with a constant turn signal, and add the write-position feedback at increasing strength.</p>
+<table>
+<tr><th class="">write-position feedback relative to read input</th><th class="n">bump rotation (°/s)</th></tr>
+<tr><td class="">0 (textbook)</td><td class="n">139</td></tr>
+<tr><td class="">0.5×</td><td class="n">72</td></tr>
+<tr><td class="">1×</td><td class="n">0</td></tr>
+<tr><td class="">2.7× (measured)</td><td class="n">0</td></tr></table>
+<p>Rotation collapses as the feedback grows. The zero at high feedback is partly an artefact of rate saturation in a minimal model; the defensible claim is that rotation gain falls steeply as the anchor strengthens.</p>
+<h2>Why it matters</h2>
+<p>The loop turns the shifters into anchors. Normal stalling of a ring attractor is two equal and opposite pushes cancelling. This is different: both shifter populations pile excitation onto wherever the bump already is, and the anchor feeds on itself, because a stronger turn signal drives the shifters harder and so drives the anchor harder too. A compass with this loop is very stable in darkness and very sluggish under rotation.</p>
+<p>Flies are not sluggish, so one of three things is true, and each is a different compass:</p>
+<ol><li>The write-position synapses are functionally weak despite their number.</li><li>They sit on the shifter's axon terminals and modulate its output rather than driving the cell.</li><li>They are cancelled by inhibition the models leave out (Δ7, ExR4, ExR6).</li></ol>
+<h2>What would settle it</h2>
+<ul><li>Record a shifter while stimulating EPGs at its read position versus its write position, and compare the response.</li><li>At the EM level, check whether the write-position contacts sit on shifter dendrites or on axon terminals.</li><li>Refit a ring-attractor model with the loop included. If rotation gain and dark stability cannot both be matched, the loop must be gated or silent.</li></ul>
+<div class="methods">
+<h2>Methods</h2>
+<p>Synapse counts are from the hemibrain v1.2 traced adjacencies, with each synapse assigned to a brain region, and from MaleCNS v1.0. Read-position synapses are EPG→PEN synapses in the protocerebral bridge; write-position synapses are EPG→PEN synapses in the ellipsoid body, restricted to the EPG wedge the PEN projects to. The simulation is a rate-based ring attractor with eight EPG positions and left and right PEN populations, constant asymmetric drive to one PEN population, and an added EPG→PEN term from the write position whose strength is varied. Analysis: <code>docs/compass-recurrence.md</code>; script: <code>scripts/compass_recurrence.py</code>, <code>scripts/hemibrain_compass_comparison.py</code>; simulation: <code>simulations/eb_epg_pen_loop.py</code>.</p>
+<p>References: Turner-Evans et al. 2017, 2020; Green et al. 2017; Hulse et al. 2021; Maimon &amp; Abbott 2026.</p>
+</div>
 </main>
 </body>
 </html>

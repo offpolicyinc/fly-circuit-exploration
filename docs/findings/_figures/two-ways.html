@@ -1,0 +1,22 @@
+<figure>
+    <svg viewBox="0 0 820 250" width="100%" role="img" aria-label="Activity versus synaptic integration">
+      <defs><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b4432c"/></marker></defs>
+      <text x="20" y="22" font-weight="700">A · activity integrator</text>
+      <rect x="20" y="40" width="120" height="44" rx="8" fill="#2a6f97"/><text x="80" y="66" text-anchor="middle" fill="#fff" font-weight="700">hΔB bump</text>
+      <rect x="230" y="40" width="170" height="44" rx="8" fill="#5a86a8"/><text x="315" y="60" text-anchor="middle" fill="#fff" font-weight="700">integrator population</text><text x="315" y="76" text-anchor="middle" fill="#fff" font-size="12">bump = running total</text>
+      <line x1="140" y1="62" x2="228" y2="62" stroke="#1b1b1f" stroke-width="2" marker-end="url(#b)"/>
+      <path d="M330 84 C 380 130, 250 130, 300 86" fill="none" stroke="#b4432c" stroke-width="3" marker-end="url(#r)"/><text x="315" y="145" text-anchor="middle" fill="#b4432c" font-size="12" font-weight="700">recurrence, gain ≈ 1 required</text>
+      <text x="20" y="200" font-size="12" fill="#5a5f6a">Memory = firing pattern. Needs strong, structured self-connections.</text>
+      <text x="440" y="16" font-weight="700">B · synaptic integrator</text>
+      <rect x="440" y="40" width="120" height="44" rx="8" fill="#2a6f97"/><text x="500" y="66" text-anchor="middle" fill="#fff" font-weight="700">hΔB bump</text>
+      <rect x="650" y="40" width="150" height="44" rx="8" fill="#f6e7e3" stroke="#b4432c" stroke-width="2"/><text x="725" y="60" text-anchor="middle" font-weight="700">store population</text><text x="725" y="76" text-anchor="middle" font-size="12">fires only when driven</text>
+      <g stroke="#b4432c" stroke-width="2"><line x1="560" y1="50" x2="648" y2="50"/><line x1="560" y1="62" x2="648" y2="62" stroke-width="5"/><line x1="560" y1="74" x2="648" y2="74" stroke-width="3"/></g>
+      <text x="604" y="34" text-anchor="middle" fill="#b4432c" font-size="12" font-weight="700">memory = these synapse strengths</text>
+      <rect x="440" y="130" width="130" height="34" rx="8" fill="#b07a12"/><text x="505" y="152" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">"walking" modulator</text>
+      <line x1="560" y1="136" x2="604" y2="84" stroke="#b07a12" stroke-width="2" marker-end="url(#b)"/>
+      <rect x="440" y="180" width="130" height="34" rx="8" fill="#6a4c93"/><text x="505" y="202" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">"at food" reset</text>
+      <line x1="570" y1="184" x2="630" y2="84" stroke="#6a4c93" stroke-width="2" marker-end="url(#b)"/>
+      <text x="440" y="240" font-size="12" fill="#5a5f6a">Memory = weights. Needs a write gate and a reset, not recurrence.</text>
+    </svg>
+    <figcaption>Left: an activity integrator must feed back on itself with gain near one. Right: a synaptic integrator needs no feedback, but needs a write gate and a reset. The connectome can tell these apart.</figcaption>
+  </figure>

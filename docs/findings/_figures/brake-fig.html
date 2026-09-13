@@ -1,0 +1,39 @@
+<figure>
+    <svg viewBox="0 0 900 300" width="100%" role="img" aria-label="Shifter loop: read, write and the measured feedback">
+      <defs>
+        <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker>
+        <marker id="g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#8a8f99"/></marker>
+        <marker id="b" markerWidth="5" markerHeight="5" refX="4.5" refY="2.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L5,2.5 L0,5 z" fill="#b4432c"/></marker>
+      </defs>
+      <!-- LEFT: textbook -->
+      <g>
+        <text x="20" y="24" font-weight="700" font-size="15">Textbook: shifter is a one-way conveyor</text>
+        <text x="20" y="62" fill="#5a5f6a" font-size="12">compass ring (EPG)</text>
+        <circle cx="110" cy="130" r="26" fill="#dbe6f0" stroke="#2a6f97" stroke-width="2"/><text x="110" y="135" text-anchor="middle" font-weight="600">x−1</text>
+        <circle cx="210" cy="130" r="26" fill="#2a6f97" stroke="#2a6f97" stroke-width="2"/><text x="210" y="135" text-anchor="middle" fill="#fff" font-weight="700">x</text>
+        <circle cx="310" cy="130" r="26" fill="#dbe6f0" stroke="#2a6f97" stroke-width="2"/><text x="310" y="135" text-anchor="middle" font-weight="600">x+1</text>
+        <text x="210" y="90" text-anchor="middle" fill="#2a6f97" font-size="12">bump is here</text>
+        <rect x="170" y="240" width="80" height="40" rx="8" fill="#b4432c"/><text x="210" y="265" text-anchor="middle" fill="#fff" font-weight="700">left shifter</text>
+        <path d="M200 158 L 195 240" fill="none" stroke="#1b1b1f" stroke-width="2" marker-end="url(#a)"/>
+        <text x="130" y="205" font-size="12">reads x</text>
+        <path d="M240 240 C 275 215, 295 190, 305 158" fill="none" stroke="#1b1b1f" stroke-width="2.5" marker-end="url(#a)"/>
+        <text x="280" y="225" font-size="12">writes x+1</text>
+      </g>
+      <!-- RIGHT: measured -->
+      <g transform="translate(430,0)">
+        <text x="20" y="24" font-weight="700" font-size="15">Measured: the target feeds back, 3× stronger</text>
+        <text x="20" y="62" fill="#5a5f6a" font-size="12">compass ring (EPG)</text>
+        <circle cx="90" cy="130" r="26" fill="#dbe6f0" stroke="#2a6f97" stroke-width="2"/><text x="90" y="135" text-anchor="middle" font-weight="600">x−1</text>
+        <circle cx="190" cy="130" r="26" fill="#2a6f97" stroke="#2a6f97" stroke-width="2"/><text x="190" y="135" text-anchor="middle" fill="#fff" font-weight="700">x</text>
+        <circle cx="290" cy="130" r="26" fill="#dbe6f0" stroke="#2a6f97" stroke-width="2"/><text x="290" y="135" text-anchor="middle" font-weight="600">x+1</text>
+        <rect x="150" y="240" width="80" height="40" rx="8" fill="#b4432c"/><text x="190" y="265" text-anchor="middle" fill="#fff" font-weight="700">left shifter</text>
+        <path d="M182 158 L 178 240" fill="none" stroke="#8a8f99" stroke-width="1.5" marker-end="url(#g)"/>
+        <text x="95" y="205" fill="#8a8f99" font-size="12">reads x (1×)</text>
+        <path d="M212 240 C 245 215, 270 190, 282 158" fill="none" stroke="#1b1b1f" stroke-width="2.5" marker-end="url(#a)"/>
+        <text x="232" y="232" font-size="12">writes x+1</text>
+        <path d="M314 140 C 345 165, 330 245, 236 264" fill="none" stroke="#b4432c" stroke-width="4" marker-end="url(#b)"/>
+        <text x="352" y="200" fill="#b4432c" font-size="12" font-weight="700">x+1 excites</text><text x="352" y="215" fill="#b4432c" font-size="12" font-weight="700">the shifter (3×)</text>
+      </g>
+    </svg>
+    <figcaption>One left shifter shown. Because the shifter that targets a position is driven mostly by that position, it holds the bump rather than moving it. Right shifters mirror this toward x−1, so the effect is symmetric.</figcaption>
+  </figure>

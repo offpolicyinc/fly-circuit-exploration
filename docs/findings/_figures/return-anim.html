@@ -1,0 +1,37 @@
+<div class="anim" id="retAnim">
+  <svg viewBox="0 0 820 340" width="100%" role="img" aria-label="Animation: returning with and without the half-turn rotation">
+    <rect x="20" y="10" width="780" height="300" fill="#fff" stroke="#e3e2dc"/>
+    <circle cx="410" cy="160" r="7" fill="#b4432c"/><text x="410" y="182" text-anchor="middle" font-size="11">food</text>
+    <polyline id="raOut" points="" fill="none" stroke="#c9c6bd" stroke-width="2"/>
+    <polyline id="raA" points="" fill="none" stroke="#b4432c" stroke-width="2.5"/>
+    <polyline id="raB" points="" fill="none" stroke="#2a6f97" stroke-width="2.5"/>
+    <circle id="raDotA" r="6" fill="#b4432c"/><circle id="raDotB" r="6" fill="#2a6f97"/>
+    <text x="30" y="30" font-size="12" fill="#5a5f6a">grey: outbound walk (same for both) · <tspan fill="#b4432c" font-weight="700">red: stored vector sent straight to steering</tspan> · <tspan fill="#2a6f97" font-weight="700">blue: rotated by the slider first</tspan></text>
+    <text id="raStatus" x="30" y="300" font-size="12" fill="#5a5f6a"></text>
+  </svg>
+  <div class="ctl"><button id="raPlay">Pause</button><button id="raReset">New walk</button><label>rotation before steering: <input type="range" id="raRot" min="0" max="180" step="10" value="180"> <span id="raRotV">180°</span></label></div>
+</div>
+<script>
+(function(){
+  const g=id=>document.getElementById(id); const cx=410,cy=160,S=6;
+  let seed=1, rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+  let out=[],A=null,B=null,phase=0,playing=true,f=0;
+  function agent(rot){return {x:out[out.length-1].x,y:out[out.length-1].y,h:out[out.length-1].h,rot:rot,trail:[]};}
+  function newWalk(){seed=Math.floor(Math.random()*1e6)+1;out=[{x:0,y:0,h:rnd()*2*Math.PI}];for(let i=0;i<60;i++){const p=out[out.length-1];const h=p.h+(rnd()-0.5)*0.9;out.push({x:p.x+0.5*Math.cos(h),y:p.y+0.5*Math.sin(h),h:h});}
+    A=agent(0);B=agent(g('raRot').value*Math.PI/180);phase=0;f=0;
+    g('raOut').setAttribute('points',out.map(p=>`${cx+S*p.x},${cy-S*p.y}`).join(' '));g('raA').setAttribute('points','');g('raB').setAttribute('points','');}
+  function step(ag){const D=Math.atan2(ag.y,ag.x); // vector from food to fly
+    const goal=D+ag.rot; let d=goal-ag.h; d=Math.atan2(Math.sin(d),Math.cos(d)); ag.h+=0.35*d; ag.x+=0.4*Math.cos(ag.h); ag.y+=0.4*Math.sin(ag.h); ag.trail.push(`${cx+S*ag.x},${cy-S*ag.y}`);}
+  function tick(){if(!playing)return;f++;
+    if(f%3===0){ if(phase<out.length){const p=out[phase];g('raDotA').setAttribute('cx',cx+S*p.x);g('raDotA').setAttribute('cy',cy-S*p.y);g('raDotB').setAttribute('cx',cx+S*p.x);g('raDotB').setAttribute('cy',cy-S*p.y);phase++;g('raStatus').textContent='outbound: both agents store the same running sum';}
+      else if(phase<out.length+90){step(A);step(B);g('raA').setAttribute('points',A.trail.join(' '));g('raB').setAttribute('points',B.trail.join(' '));g('raDotA').setAttribute('cx',cx+S*A.x);g('raDotA').setAttribute('cy',cy-S*A.y);g('raDotB').setAttribute('cx',cx+S*B.x);g('raDotB').setAttribute('cy',cy-S*B.y);phase++;
+        g('raStatus').textContent=`return: red is ${Math.hypot(A.x,A.y).toFixed(1)} from food, blue is ${Math.hypot(B.x,B.y).toFixed(1)}`;}
+      else if(phase<out.length+150){phase++;} else newWalk(); }
+    requestAnimationFrame(tick);}
+  g('raRot').oninput=()=>{g('raRotV').textContent=g('raRot').value+'°';if(B)B.rot=g('raRot').value*Math.PI/180;};
+  g('raPlay').onclick=()=>{playing=!playing;g('raPlay').textContent=playing?'Pause':'Play';if(playing)tick();};
+  g('raReset').onclick=newWalk;
+  newWalk();tick();
+})();
+</script>
+<p style="color:var(--muted);font-size:13px">Both agents carry the same stored vector, pointing from the food to themselves. Red steers toward it and walks away. Blue rotates it first; at 180° it walks home, at 90° it circles, at 0° it is red.</p>

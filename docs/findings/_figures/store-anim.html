@@ -1,0 +1,55 @@
+<div class="anim" id="storeAnim">
+  <svg viewBox="0 0 820 300" width="100%" role="img" aria-label="Animation: a walk being written into synapse strengths">
+    <defs><marker id="sa" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" fill="#1b1b1f"/></marker></defs>
+    <text x="20" y="22" font-weight="700" font-size="14">The walk</text>
+    <circle cx="110" cy="230" r="7" fill="#b4432c"/><text x="110" y="250" text-anchor="middle" font-size="11">food</text>
+    <polyline id="saTrail" points="" fill="none" stroke="#9dbdd3" stroke-width="3"/>
+    <circle id="saFly" cx="110" cy="230" r="6" fill="#1b1b1f"/>
+    <text id="saStep" x="20" y="285" font-size="12" fill="#5a5f6a"></text>
+    <text x="300" y="22" font-weight="700" font-size="14">hΔB right now</text>
+    <g id="saBump"></g>
+    <text x="300" y="150" font-weight="700" font-size="14">Synapse strengths (the store)</text>
+    <g id="saW"></g>
+    <text x="640" y="22" font-weight="700" font-size="14">What the store holds</text>
+    <circle cx="720" cy="120" r="55" fill="none" stroke="#e3e2dc"/>
+    <text x="720" y="58" text-anchor="middle" font-size="10" fill="#5a5f6a">N</text>
+    <line id="saVec" x1="720" y1="120" x2="720" y2="120" stroke="#1b1b1f" stroke-width="4" marker-end="url(#sa)"/>
+    <text id="saVecT" x="720" y="200" text-anchor="middle" font-size="13" font-weight="700"></text>
+    <text x="720" y="220" text-anchor="middle" font-size="11" fill="#5a5f6a">read from the weights</text>
+  </svg>
+  <div class="ctl"><button id="saPlay">Pause</button><button id="saReset">Restart</button><span>The fly walks 6 steps north, 4 south, 3 east. Each step, hΔB's bump strengthens the synapses in its own column. The weights are the running sum; the arrow is what a downstream reader sees. <a href="01-how-it-works.html">Step-by-step version →</a></span></div>
+</div>
+<script>
+(function(){
+  const N=8, cols=[...Array(N).keys()].map(i=>i*2*Math.PI/N); // 0=E, 2=N, 4=W, 6=S
+  const disp=[4,5,6,7,0,1,2,3], lab={4:'W',6:'S',0:'E',2:'N'};
+  const plan=[...Array(6).fill(Math.PI/2),...Array(4).fill(-Math.PI/2),...Array(3).fill(0)];
+  let W=new Array(N).fill(0), k=0, t=0, playing=true, trail=[[110,230]];
+  const g=id=>document.getElementById(id);
+  function bars(gid,vals,base,scale,fill){const el=g(gid);let s='';disp.forEach((c,i)=>{const x=300+i*36,h=vals[c]*scale;s+=`<rect x="${x}" y="${base-h}" width="28" height="${h}" fill="${fill}"/>`;if(lab[c]!==undefined)s+=`<text x="${x+14}" y="${base+14}" text-anchor="middle" font-size="11" fill="#5a5f6a">${lab[c]}</text>`;});s+=`<line x1="296" y1="${base}" x2="${300+N*36}" y2="${base}" stroke="#c9c6bd"/>`;el.innerHTML=s;}
+  function bump(h){return cols.map(c=>Math.max(0,Math.cos(c-h)));}
+  function draw(h){
+    bars('saBump',h===null?new Array(N).fill(0):bump(h),110,60,'#2a6f97');
+    bars('saW',W,270,14,'#1b1b1f');
+    let re=0,im=0;W.forEach((w,i)=>{re+=w*Math.cos(cols[i]);im+=w*Math.sin(cols[i]);});
+    const L=Math.hypot(re,im)/2, a=Math.atan2(im,re);
+    g('saVec').setAttribute('x2',720+L*9*Math.cos(a));g('saVec').setAttribute('y2',120-L*9*Math.sin(a));
+    g('saVecT').textContent=L<0.2?'nothing stored':`${L.toFixed(1)} steps at ${((450-Math.round(a*180/Math.PI))%360)}°`;
+    g('saStep').textContent=k>=plan.length?'done: fly is 2 north, 3 east of the food':`step ${k+1} of ${plan.length}: ${k<6?'north':k<10?'south':'east'}`;
+  }
+  function tick(){
+    if(!playing)return;
+    t+=1;
+    if(k<plan.length){const h=plan[k];const f=(t%40)/40;const last=trail[trail.length-1];const [x0,y0]=trail[trail.length-1];
+      g('saFly').setAttribute('cx',x0+15*f*Math.cos(h));g('saFly').setAttribute('cy',y0-15*f*Math.sin(h));
+      draw(h);
+      if(t%40===0){bump(h).forEach((b,i)=>W[i]+=b);trail.push([x0+15*Math.cos(h),y0-15*Math.sin(h)]);g('saTrail').setAttribute('points',trail.map(p=>p.join(',')).join(' '));k++;draw(k<plan.length?plan[k]:null);}
+    } else if(t%40===0&&t>plan.length*40+120){reset();}
+    requestAnimationFrame(tick);
+  }
+  function reset(){W=new Array(N).fill(0);k=0;t=0;trail=[[110,230]];g('saTrail').setAttribute('points','');g('saFly').setAttribute('cx',110);g('saFly').setAttribute('cy',230);draw(plan[0]);}
+  g('saPlay').onclick=()=>{playing=!playing;g('saPlay').textContent=playing?'Pause':'Play';if(playing)tick();};
+  g('saReset').onclick=()=>{reset();};
+  reset();tick();
+})();
+</script>

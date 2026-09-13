@@ -3,50 +3,127 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Finding 1: the home vector is stored in synapses</title>
+<title>Finding 1: The fly&#x27;s running sum of its own steps is held in synapse strengths, on four neuron types nobody has assigned a function</title>
 <style>
-  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
-  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
-  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
-  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
-  .lede { font-size:18px; margin:0 0 22px; }
-  h2 { font-size:17px; margin:26px 0 8px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
-  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
-  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
-  .grid { display:block; }
-  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
-  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
-  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
-  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
-  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
-  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
-  .plain p { margin:0 0 14px; } .plain b { color:var(--ink); }
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; --purple:#6a4c93; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:780px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 14px; }
+  h2 { font-size:19px; margin:32px 0 8px; padding-top:12px; border-top:1px solid var(--line); }
+  p { margin:0 0 14px; } p.summary { font-size:17px; background:#f3f7fa; border-left:4px solid var(--accent2); padding:10px 14px; }
+  table { border-collapse:collapse; width:100%; font-size:14.5px; margin:8px 0 16px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; } th { color:var(--muted); font-weight:600; } td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  ul, ol { margin:6px 0 14px; padding-left:22px; } li { margin:4px 0; }
+  code { font-size:13px; background:#f1f0eb; padding:1px 4px; border-radius:3px; }
+  figure { margin:16px 0 20px; } figcaption { color:var(--muted); font-size:13px; margin-top:6px; }
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; }
+  .anim { border:1px solid var(--line); border-radius:10px; background:var(--card); padding:12px 14px; margin:16px 0 20px; }
+  .anim .ctl { display:flex; gap:10px; align-items:center; font-size:13px; color:var(--muted); margin-top:6px; flex-wrap:wrap; }
+  .anim button { font:13px inherit; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
+  .anim input[type=range] { width:160px; }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; margin-bottom:6px; }
+  .methods { color:var(--muted); font-size:14px; } .methods h2 { color:var(--ink); }
+  a { color:var(--accent2); }
 </style>
 </head>
 <body>
 <main>
-  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html">List view</a><a href="../index.html">Home</a></nav>
-  <div class="kicker">Finding 1 of 4 · the missing middle of the circuit</div>
-  <h1>The fly's running sum of its own steps is held in synapse strengths, on four neuron types nobody has assigned a function</h1>
-  <div class="plain">
-  <p><b>The problem.</b> A fly that leaves food and wanders in the dark can walk straight back. To do that it must keep a running sum of every step it has taken: a vector pointing from the food to where it is now. The neurons that report each step are known: hΔB, whose activity bump sits at the column matching the direction the fly is currently moving. What adds those steps up over time has never been found.</p>
-  <p><b>Two ways to hold a running sum.</b> One: a population of neurons keeps firing the current total, and adds each new step to it. For that to work the population must excite itself with a gain of almost exactly one, or the total leaks away. Every published model assumes this. Two: nothing keeps firing. Instead, each step makes hΔB strengthen the synapses it is currently using. After a walk, the pattern of synapse strengths across the columns is the sum. That needs no self-excitation, but it does need a signal that says "write now" while the fly walks and a signal that erases the store when the fly is back at food.</p>
-  <p><b>What the wiring rules out.</b> No population in the fan-shaped body excites itself anywhere near strongly enough for option one. The best of about forty populations has a self-excitation gain of 0.14; every hΔ type, every PFN type, and every two-population loop is at 0.02 or less. Option one is out.</p>
-  </div>
-  <div class="card">
-    <table>
-      <tr><th>self-excitation, cosine mode (an activity integrator needs ≈ 1)</th><th class="n">gain</th></tr>
-      <tr><td>vΔA_a, the highest of ~40 populations</td><td class="n">0.14</td></tr>
-      <tr><td>every hΔ, PFN, PFR, FR1 type</td><td class="n">≤ 0.02</td></tr>
-      <tr><td>strongest two-population loops</td><td class="n">&lt; 0.01</td></tr>
-    </table>
-    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">Within-type synapses binned by column offset, normalised by total input, signed by transmitter. Same result in the hemibrain.</p>
-  </div>
-  <div class="plain">
-  <p><b>What the wiring points to.</b> Option two needs hΔB to land on its target in the matching column, so that a step north strengthens the "north" synapses and nothing else. Four cell types with no known function, hΔH, hΔA, hΔI and hΔG, receive hΔB in exactly that way. The figure below shows what happens when a walk is written into one of them, and what happens in hΔJ, which receives more hΔB synapses than any of them but in two opposite columns, so that it cancels itself.</p>
-  </div>
+  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
+<div class="kicker">Finding 1 of 4 · the missing middle of the circuit</div><h1>The fly's running sum of its own steps is held in synapse strengths, on four neuron types nobody has assigned a function</h1>
+<p class="summary"><b>Summary.</b> A fly that leaves food and wanders in the dark can walk straight back, so it keeps a running vector sum of its steps. The neurons that report each step, hΔB, are known; whatever adds them up has never been found, and every model assumes a population that keeps firing the total. No fan-shaped-body population has anywhere near the self-excitation that requires. Four types with no assigned function, hΔH, hΔA, hΔI and hΔG, have exactly the wiring a synaptic store needs: hΔB's travel-direction bump lands on them in the matching column, so each step would strengthen only the synapses for that direction and the weight pattern across columns becomes the vector sum; two dopamine types active while the fly walks contact every one of them as a write gate; the reward-driven octopamine neuron OA-VPM3 contacts them as a candidate reset; and their outputs go to the goal and steering neurons. The home vector is probably a pattern of weights, which is why imaging has not found it.</p>
+<div class="anim" id="storeAnim">
+  <svg viewBox="0 0 820 300" width="100%" role="img" aria-label="Animation: a walk being written into synapse strengths">
+    <defs><marker id="sa" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" fill="#1b1b1f"/></marker></defs>
+    <text x="20" y="22" font-weight="700" font-size="14">The walk</text>
+    <circle cx="110" cy="230" r="7" fill="#b4432c"/><text x="110" y="250" text-anchor="middle" font-size="11">food</text>
+    <polyline id="saTrail" points="" fill="none" stroke="#9dbdd3" stroke-width="3"/>
+    <circle id="saFly" cx="110" cy="230" r="6" fill="#1b1b1f"/>
+    <text id="saStep" x="20" y="285" font-size="12" fill="#5a5f6a"></text>
+    <text x="300" y="22" font-weight="700" font-size="14">hΔB right now</text>
+    <g id="saBump"></g>
+    <text x="300" y="150" font-weight="700" font-size="14">Synapse strengths (the store)</text>
+    <g id="saW"></g>
+    <text x="640" y="22" font-weight="700" font-size="14">What the store holds</text>
+    <circle cx="720" cy="120" r="55" fill="none" stroke="#e3e2dc"/>
+    <text x="720" y="58" text-anchor="middle" font-size="10" fill="#5a5f6a">N</text>
+    <line id="saVec" x1="720" y1="120" x2="720" y2="120" stroke="#1b1b1f" stroke-width="4" marker-end="url(#sa)"/>
+    <text id="saVecT" x="720" y="200" text-anchor="middle" font-size="13" font-weight="700"></text>
+    <text x="720" y="220" text-anchor="middle" font-size="11" fill="#5a5f6a">read from the weights</text>
+  </svg>
+  <div class="ctl"><button id="saPlay">Pause</button><button id="saReset">Restart</button><span>The fly walks 6 steps north, 4 south, 3 east. Each step, hΔB's bump strengthens the synapses in its own column. The weights are the running sum; the arrow is what a downstream reader sees. <a href="01-how-it-works.html">Step-by-step version →</a></span></div>
+</div>
+<script>
+(function(){
+  const N=8, cols=[...Array(N).keys()].map(i=>i*2*Math.PI/N); // 0=E, 2=N, 4=W, 6=S
+  const disp=[4,5,6,7,0,1,2,3], lab={4:'W',6:'S',0:'E',2:'N'};
+  const plan=[...Array(6).fill(Math.PI/2),...Array(4).fill(-Math.PI/2),...Array(3).fill(0)];
+  let W=new Array(N).fill(0), k=0, t=0, playing=true, trail=[[110,230]];
+  const g=id=>document.getElementById(id);
+  function bars(gid,vals,base,scale,fill){const el=g(gid);let s='';disp.forEach((c,i)=>{const x=300+i*36,h=vals[c]*scale;s+=`<rect x="${x}" y="${base-h}" width="28" height="${h}" fill="${fill}"/>`;if(lab[c]!==undefined)s+=`<text x="${x+14}" y="${base+14}" text-anchor="middle" font-size="11" fill="#5a5f6a">${lab[c]}</text>`;});s+=`<line x1="296" y1="${base}" x2="${300+N*36}" y2="${base}" stroke="#c9c6bd"/>`;el.innerHTML=s;}
+  function bump(h){return cols.map(c=>Math.max(0,Math.cos(c-h)));}
+  function draw(h){
+    bars('saBump',h===null?new Array(N).fill(0):bump(h),110,60,'#2a6f97');
+    bars('saW',W,270,14,'#1b1b1f');
+    let re=0,im=0;W.forEach((w,i)=>{re+=w*Math.cos(cols[i]);im+=w*Math.sin(cols[i]);});
+    const L=Math.hypot(re,im)/2, a=Math.atan2(im,re);
+    g('saVec').setAttribute('x2',720+L*9*Math.cos(a));g('saVec').setAttribute('y2',120-L*9*Math.sin(a));
+    g('saVecT').textContent=L<0.2?'nothing stored':`${L.toFixed(1)} steps at ${((450-Math.round(a*180/Math.PI))%360)}°`;
+    g('saStep').textContent=k>=plan.length?'done: fly is 2 north, 3 east of the food':`step ${k+1} of ${plan.length}: ${k<6?'north':k<10?'south':'east'}`;
+  }
+  function tick(){
+    if(!playing)return;
+    t+=1;
+    if(k<plan.length){const h=plan[k];const f=(t%40)/40;const last=trail[trail.length-1];const [x0,y0]=trail[trail.length-1];
+      g('saFly').setAttribute('cx',x0+15*f*Math.cos(h));g('saFly').setAttribute('cy',y0-15*f*Math.sin(h));
+      draw(h);
+      if(t%40===0){bump(h).forEach((b,i)=>W[i]+=b);trail.push([x0+15*Math.cos(h),y0-15*Math.sin(h)]);g('saTrail').setAttribute('points',trail.map(p=>p.join(',')).join(' '));k++;draw(k<plan.length?plan[k]:null);}
+    } else if(t%40===0&&t>plan.length*40+120){reset();}
+    requestAnimationFrame(tick);
+  }
+  function reset(){W=new Array(N).fill(0);k=0;t=0;trail=[[110,230]];g('saTrail').setAttribute('points','');g('saFly').setAttribute('cx',110);g('saFly').setAttribute('cy',230);draw(plan[0]);}
+  g('saPlay').onclick=()=>{playing=!playing;g('saPlay').textContent=playing?'Pause':'Play';if(playing)tick();};
+  g('saReset').onclick=()=>{reset();};
+  reset();tick();
+})();
+</script>
+
+<h2>The question</h2>
+<p>To return to a place it cannot see, the fly must know the vector from that place to itself. That vector is the sum of every step it has taken since leaving, each step counted in world coordinates. The fan-shaped body has the neurons that report each step: about twenty hΔB cells whose bump of activity sits at the column matching the direction the fly is currently moving, with height proportional to speed (Lu 2022; Lyu 2022). Each column of the fan-shaped body is a compass direction, so the bump is the current step as a vector. What is missing is the thing that adds these steps up over time.</p>
+<h2>Two ways to hold a running sum</h2>
+<figure>
+    <svg viewBox="0 0 820 250" width="100%" role="img" aria-label="Activity versus synaptic integration">
+      <defs><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b4432c"/></marker></defs>
+      <text x="20" y="22" font-weight="700">A · activity integrator</text>
+      <rect x="20" y="40" width="120" height="44" rx="8" fill="#2a6f97"/><text x="80" y="66" text-anchor="middle" fill="#fff" font-weight="700">hΔB bump</text>
+      <rect x="230" y="40" width="170" height="44" rx="8" fill="#5a86a8"/><text x="315" y="60" text-anchor="middle" fill="#fff" font-weight="700">integrator population</text><text x="315" y="76" text-anchor="middle" fill="#fff" font-size="12">bump = running total</text>
+      <line x1="140" y1="62" x2="228" y2="62" stroke="#1b1b1f" stroke-width="2" marker-end="url(#b)"/>
+      <path d="M330 84 C 380 130, 250 130, 300 86" fill="none" stroke="#b4432c" stroke-width="3" marker-end="url(#r)"/><text x="315" y="145" text-anchor="middle" fill="#b4432c" font-size="12" font-weight="700">recurrence, gain ≈ 1 required</text>
+      <text x="20" y="200" font-size="12" fill="#5a5f6a">Memory = firing pattern. Needs strong, structured self-connections.</text>
+      <text x="440" y="16" font-weight="700">B · synaptic integrator</text>
+      <rect x="440" y="40" width="120" height="44" rx="8" fill="#2a6f97"/><text x="500" y="66" text-anchor="middle" fill="#fff" font-weight="700">hΔB bump</text>
+      <rect x="650" y="40" width="150" height="44" rx="8" fill="#f6e7e3" stroke="#b4432c" stroke-width="2"/><text x="725" y="60" text-anchor="middle" font-weight="700">store population</text><text x="725" y="76" text-anchor="middle" font-size="12">fires only when driven</text>
+      <g stroke="#b4432c" stroke-width="2"><line x1="560" y1="50" x2="648" y2="50"/><line x1="560" y1="62" x2="648" y2="62" stroke-width="5"/><line x1="560" y1="74" x2="648" y2="74" stroke-width="3"/></g>
+      <text x="604" y="34" text-anchor="middle" fill="#b4432c" font-size="12" font-weight="700">memory = these synapse strengths</text>
+      <rect x="440" y="130" width="130" height="34" rx="8" fill="#b07a12"/><text x="505" y="152" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">"walking" modulator</text>
+      <line x1="560" y1="136" x2="604" y2="84" stroke="#b07a12" stroke-width="2" marker-end="url(#b)"/>
+      <rect x="440" y="180" width="130" height="34" rx="8" fill="#6a4c93"/><text x="505" y="202" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">"at food" reset</text>
+      <line x1="570" y1="184" x2="630" y2="84" stroke="#6a4c93" stroke-width="2" marker-end="url(#b)"/>
+      <text x="440" y="240" font-size="12" fill="#5a5f6a">Memory = weights. Needs a write gate and a reset, not recurrence.</text>
+    </svg>
+    <figcaption>Left: an activity integrator must feed back on itself with gain near one. Right: a synaptic integrator needs no feedback, but needs a write gate and a reset. The connectome can tell these apart.</figcaption>
+  </figure>
+<p>The first is in activity. A population keeps firing the current total and adds each new step to it. For the total not to leak away, the population must excite itself with a gain of almost exactly one: each pass around the loop must regenerate the bump neither weaker nor stronger. Every published model of path integration assumes this.</p>
+<p>The second is in synapses. Nothing keeps firing. Instead, each step makes hΔB strengthen the synapses it is currently using. After a walk, the pattern of synapse strengths across the columns is the sum: six steps north and four south leave the north synapses at six and the south ones at four, and the difference is a vector of length two pointing north. This needs no self-excitation. It does need hΔB to land on its target in the matching column, a signal that says "write now" while the fly walks, a way of resetting the store when the fly is back at food, and a path from the store to the neurons that steer.</p>
+<p>The two options make different demands on the wiring, so a connectome can tell them apart.</p>
+<h2>What the wiring rules out</h2>
+<p>For every population in the fan-shaped body, I counted the synapses it makes onto itself, binned by the column offset between the two cells, and extracted the cosine mode: the component of self-feedback that holds a bump in place. An activity integrator needs this gain near one.</p>
+<table>
+<tr><th class="">population</th><th class="n">cosine-mode self-excitation</th></tr>
+<tr><td class="">vΔA_a, the highest of ~40 populations</td><td class="n">0.14</td></tr>
+<tr><td class="">every hΔ, PFN, PFR and FR1 type</td><td class="n">≤ 0.02</td></tr>
+<tr><td class="">strongest two-population loops</td><td class="n">&lt; 0.01</td></tr></table>
+<p>Nothing comes within an order of magnitude. The same holds in the hemibrain. Unless a few synapses are ten times more effective than all others, or cells have intrinsic persistence the connectome cannot see, the running sum is not held as activity here.</p>
+<h2>What the wiring points to</h2>
 <figure>
 <svg viewBox="0 0 820 480" width="100%" role="img" aria-label="Worked example: the same walk written into hΔH and into hΔJ">
 <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" fill="#1b1b1f"/></marker><marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" fill="#b4432c"/></marker></defs>
@@ -153,11 +230,7 @@
 <text x="700" y="442.0" text-anchor="middle" font-size="14" font-weight="700" fill="#b4432c">0.3 north</text><text x="700" y="458.0" text-anchor="middle" font-size="11" fill="#5a5f6a">grey: the truth, 2 north</text>
 </svg>
     <figcaption>Worked example computed from the measured wiring. The fly walks 6 steps north then 4 south, so the truth is 2 north. Top: hΔB lands in hΔH's own column, so the weights it leaves point north with about the right length. Bottom: hΔB lands in hΔJ's own column and the opposite one, so every step writes both directions and the total cancels. hΔA, hΔI and hΔG behave like hΔH.</figcaption>
-  </figure>
-  <div class="plain">
-  <p><b>The write and erase signals are there too.</b> Two dopamine cell types, FB4M and FB1H, contact every one of the store cells across all columns. They are themselves driven by the velocity neurons, so they are on while the fly moves and off when it stops: the "write now" signal. Their counterpart in the compass is ExR2, the dopamine neuron that gates compass learning by rotation speed. One octopamine neuron, OA-VPM3, driven by the mushroom body and reward tangentials, also contacts the store cells: the candidate for erasing the store at food.</p>
-  </div>
-<figure>
+  </figure><figure>
     <svg viewBox="0 0 820 300" width="100%" role="img" aria-label="Where the synaptic-store ingredients converge">
       <defs><marker id="c" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="d" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker><marker id="e" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b07a12"/></marker><marker id="f" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#6a4c93"/></marker></defs>
       <rect x="20" y="110" width="140" height="56" rx="8" fill="#2a6f97"/><text x="90" y="132" text-anchor="middle" fill="#fff" font-weight="700">hΔB</text><text x="90" y="150" text-anchor="middle" fill="#fff" font-size="12">travel direction bump</text>
@@ -173,54 +246,35 @@
     </svg>
     <figcaption>Everything a synaptic store needs meets on the same four cell types. Synapse counts from MaleCNS; every connection shown is also present in the hemibrain.</figcaption>
   </figure>
-  <div class="card">
+<p>Scoring every target of hΔB for the four requirements of a synaptic store, the same four cell types come out on top.</p>
 <table>
-      <tr><th>type</th><th class="n">hΔB synapses</th><th class="n">same column</th><th class="n">dopamine (FB4M, FB1H)</th><th class="n">octopamine (OA-VPM3)</th><th>sends to</th></tr>
-      <tr><td>hΔH (8 cells)</td><td class="n">1,010</td><td class="n">82 %</td><td class="n">165</td><td class="n">361</td><td>FC2, PFL3</td></tr>
-      <tr><td>hΔA (12)</td><td class="n">2,216</td><td class="n">64 %</td><td class="n">1,098+</td><td class="n">124</td><td>PFL3, PFL2</td></tr>
-      <tr><td>hΔI (17)</td><td class="n">3,575</td><td class="n">48 %</td><td class="n">380+</td><td class="n">72</td><td>PFL3, PFL2</td></tr>
-      <tr><td>hΔG (8)</td><td class="n">736</td><td class="n">63 %</td><td class="n">134</td><td class="n">113</td><td>FC2</td></tr>
-      <tr><td>hΔJ (31), rejected</td><td class="n">4,232</td><td class="n">35 % (+28 % opposite)</td><td class="n">1,809</td><td class="n">377</td><td>FC2</td></tr>
-    </table>
-    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">MaleCNS synapse counts; every entry replicates in the hemibrain. "Same column" is the share of hΔB synapses landing at zero column offset.</p>
-  </div>
-
-  <div class="plain">
-  <p><b>How the store is read.</b> There is no recall step. Each store cell fires as hΔB's drive times its synapse strength. hΔB is active whenever the fly moves, so as soon as it walks, the store's output across the columns is the stored pattern, and it goes straight to the goal neurons FC2 and the steering neurons PFL3. Walking home strengthens the opposite columns until the pattern is flat: that is arrival. What the readout points at, and why it has to be turned around before it can steer, is finding 2.</p>
-  <p><b>Why nobody has seen it.</b> The memory is a set of synapse strengths, not a firing pattern. Imaging hΔB shows the current step, not the sum. Imaging the store cells at rest shows nothing, because nothing fires until hΔB drives them. A stored vector in a neighbouring fan-shaped-body system was recently found to be visible as cAMP but not as calcium (Gorko &amp; Kim 2026), which is what this predicts here.</p>
-  <p><b>The simulation checks.</b> An agent walking a random path, writing into each candidate through its measured wiring and reading out through its measured output path, retains 56 % to 86 % of the walk in hΔH, hΔA and hΔI; hΔJ retains 14 %. Only a running vector sum reproduces the fly's search behaviour in the standard assays; remembering the direction at the food or the distance walked does not. In closed loop, the agent returns to the food, provided the readout is turned around before steering.</p>
-  </div>
-  <div class="card">
-<table>
-      <tr><th>site</th><th class="n">stored length, fraction of ideal</th></tr>
-      <tr><td>hΔH</td><td class="n">0.86</td></tr>
-      <tr><td>hΔA</td><td class="n">0.76</td></tr>
-      <tr><td>hΔI</td><td class="n">0.56</td></tr>
-      <tr><td>hΔG</td><td class="n">0.45</td></tr>
-      <tr><td>hΔJ</td><td class="n">0.14</td></tr>
-    </table>
-    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">How much of a random walk each site retains, given where hΔB's synapses land on it. Direction is recovered by all of them; in closed loop the readout, which is skewed toward the current heading because the store is read through hΔB's bump, self-corrects as the fly turns.</p>
-    <table style="margin-top:10px">
-      <tr><th>strategy (Kim and Titova search assays)</th><th class="n">search-centre error</th></tr>
-      <tr><td>running vector sum</td><td class="n">0.8</td></tr>
-      <tr><td>random walk</td><td class="n">12.7</td></tr>
-      <tr><td>remember direction at food</td><td class="n">26.8</td></tr>
-      <tr><td>distance walked + last heading</td><td class="n">26.8</td></tr>
-    </table>
-    <table style="margin-top:10px">
-      <tr><th>closed loop (60 runs)</th><th class="n">returned to food</th><th class="n">closest approach</th></tr>
-      <tr><td>store, readout rotated 180°</td><td class="n">35 %</td><td class="n">1.1</td></tr>
-      <tr><td>store, readout not rotated</td><td class="n">0 %</td><td class="n">10.3</td></tr>
-      <tr><td>no memory</td><td class="n">–</td><td class="n">6.8</td></tr>
-    </table>
-  </div>
-  <div class="plain">
-  <p><b>What is not known.</b> Nobody has recorded plasticity at these synapses, or dopamine or octopamine acting on them. If synapses only strengthen, every trip leaves them higher (6 north and 6 south after a round trip, not 0 and 0), so they would saturate; either a reset at food or a rule that weakens the opposite synapses on the return is required, and the connectome cannot tell which. This is the least supported part. During the outbound walk the store also pushes the goal layer to keep going, which is either useful for dispersal or needs to be gated. A fly standing still has no hΔB drive and so no readout.</p>
-  <p><b>What would settle it.</b> Image hΔH or hΔA in a fly that is re-zeroing its home vector: the bump should grow with distance from the food and collapse at re-zero. Block dopamine or cAMP signalling in those cells: the fly should stop returning while hΔB and the compass stay intact. Silence OA-VPM3 while the fly feeds: its search afterwards should no longer be centred on the food.</p>
-  <p><b>Prior work.</b> hΔB as the step signal (Lu 2022; Lyu 2022). Synaptic storage of a vector as an idea (Hulse 2021; Goulard 2023; Maimon &amp; Abbott 2026), without a candidate cell. New here: activity storage ruled out for every population; the four candidate types and hΔJ's rejection; FB4M/FB1H and OA-VPM3 as the write and erase signals; the readout and closed-loop tests.</p>
-  </div>
-  <p><span class="tag strong">Wiring: two brains</span><span class="tag model">Store: model-supported</span><span class="tag open">Plasticity, erase: inferred</span></p>
-  <p class="foot">Sources: <code>docs/exhaustive-search.md</code>; <code>data/derived/recurrence_modes.csv</code>, <code>fb_column_offsets.csv</code>, <code>synaptic_site_screen.csv</code>, <code>reward_inputs_trace.json</code>; <code>simulations/site_readout_error.py</code>, <code>strategy_discrimination.py</code>, <code>closed_loop_sites.py</code>. <a href="01-how-it-works.html">Step-through animation of write and read.</a></p>
+<tr><th class="">type</th><th class="n">hΔB synapses</th><th class="">same column</th><th class="n">dopamine (FB4M, FB1H)</th><th class="n">octopamine (OA-VPM3)</th><th class="">sends to</th></tr>
+<tr><td class="">hΔH (8 cells)</td><td class="n">1,010</td><td class="">82 %</td><td class="n">165</td><td class="n">361</td><td class="">FC2, PFL3</td></tr>
+<tr><td class="">hΔA (12)</td><td class="n">2,216</td><td class="">64 %</td><td class="n">1,098+</td><td class="n">124</td><td class="">PFL3, PFL2</td></tr>
+<tr><td class="">hΔI (17)</td><td class="n">3,575</td><td class="">48 %</td><td class="n">380+</td><td class="n">72</td><td class="">PFL3, PFL2</td></tr>
+<tr><td class="">hΔG (8)</td><td class="n">736</td><td class="">63 %</td><td class="n">134</td><td class="n">113</td><td class="">FC2</td></tr>
+<tr><td class="">hΔJ (31), rejected</td><td class="n">4,232</td><td class="">35 % (+28 % opposite)</td><td class="n">1,809</td><td class="n">377</td><td class="">FC2</td></tr></table>
+<p>Column matching is what makes the store work. hΔB lands on hΔH in hΔH's own column 82 percent of the time, so a step north strengthens the north synapses and little else. hΔJ receives more hΔB synapses than any candidate, but in two opposite columns, so every step strengthens both north and south and the total cancels. In a simulation that writes a random walk through each type's measured landing pattern, hΔH retains 86 percent of an ideal store, hΔA 76, hΔI 56, hΔG 45, and hΔJ 14.</p>
+<p>The write signal is there. Two dopamine cell types, FB4M and FB1H, contact every cell of all four types across all columns. They are driven by the velocity neurons PFNv, PFNd and hΔB, so they fire while the fly moves and not when it stands still. They are the translational counterpart of ExR2, the dopamine neuron that gates compass learning by rotation speed (Fisher 2022).</p>
+<p>The reset candidate is there. OA-VPM3 is an octopamine neuron, octopamine being the fly's reward transmitter, driven by Kenyon cells and reward-related tangentials. It contacts hΔH, hΔB and PFR.</p>
+<p>And the output goes to the right place: FC2, the goal neurons, and PFL3, the steering neurons, which are known to turn a stored direction into walking (Mussells Pires 2024; Westeinde 2024). Every one of these edges is present in both connectomes.</p>
+<h2>How the store is read</h2>
+<p>There is no recall step. A store cell fires as hΔB's drive times its synapse strength. hΔB is active whenever the fly moves, so as soon as it walks, the store's output across the columns is the stored pattern, and it flows to FC2 and PFL3 continuously. The same walking that reads also writes: every step drives the store and strengthens the synapses it is driving. Walking home strengthens the opposite columns until the difference is zero, which is arrival.</p>
+<p>The output points from food to fly. Delivered straight to steering it says keep going, which is harmless on the outbound walk. Turning it into go back is a separate neuron, and is finding 2.</p>
+<h2>Why nobody has seen it</h2>
+<p>The memory is a set of synapse strengths, not a firing pattern. Imaging hΔB shows the current step, not the sum. Imaging the store cells at rest shows nothing, because nothing fires until hΔB drives them. In a neighbouring fan-shaped-body system, a stored vector was recently found to be visible as cAMP but not as calcium (Gorko &amp; Kim 2026), which is what this predicts here.</p>
+<h2>What the simulations show</h2>
+<p>Only a running vector sum reproduces the fly's search behaviour. In Kim's and Titova's assays the search-centre error is 0.8 units for a vector sum, 12.7 for a random walk, and 26.8 for either remembering the direction at the food or the distance walked. In closed loop, an agent using the store returns to the food (median closest approach 1.1 units versus 6.8 without memory), provided the readout is rotated by half a turn before steering. Without the rotation it walks away every time.</p>
+<h2>What is not known</h2>
+<p>Nobody has recorded plasticity at these synapses, or dopamine or octopamine acting on them. If synapses only strengthen, every trip leaves them higher (six north and six south after a round trip, not zero and zero), so they would saturate; either a reset at food or a rule that weakens the opposite synapses on the return is required, and the connectome cannot tell which. During the outbound walk the store also pushes the goal layer to keep going, which is either useful for dispersal or needs to be gated; FB5A is the candidate gate. A fly standing still has no hΔB drive and so no readout.</p>
+<h2>What would settle it</h2>
+<ul><li>Image hΔH or hΔA in a fly re-zeroing its home vector (the Behbahani 2021 task): the bump should grow with distance from the food and collapse at re-zero.</li><li>Block dopamine or cAMP signalling in those cells: the fly should stop returning while hΔB and the compass stay intact.</li><li>Silence OA-VPM3 while the fly feeds: its subsequent search should no longer be centred on the food.</li></ul>
+<h2>Prior work</h2>
+<p>hΔB as the travel-direction signal: Lu 2022; Lyu 2022. Sinusoidal vector arithmetic across fan-shaped-body columns: Lyu 2022; Maimon &amp; Abbott 2026. Synaptic storage of a vector as an idea: Hulse 2021; Goulard 2023 (model); Maimon &amp; Abbott 2026; none named a cell type. New here: activity storage ruled out for every population; the four candidate types and hΔJ's rejection; FB4M/FB1H and OA-VPM3 as the write and reset signals; the readout and closed-loop tests.</p>
+<div class="methods">
+<h2>Methods</h2>
+<p>Column offsets: every fan-shaped-body neuron in MaleCNS v1.0 carries a column label; angular offsets use the true column count per type (12 for hΔA/B/C/I/J/K/L, 8 for hΔD/E/G/H/M and PFNd, 6 for hΔF; C9≡C1 for nine-label types). hΔ cells are named by their dendritic column (Hulse 2021), and hΔB's bump sits on its axonal arbor (Lyu 2022); these conventions fix the sign of every offset. Recurrence: within-type synapses binned by offset, normalised by total input, signed by transmitter, Fourier-decomposed; cosine-mode gain is the first harmonic. Site screen: every synapse from a travel- or heading-tuned population onto every columnar population scored for column matching, modulator coverage, reset coverage, and output to FC2/PFL3. Simulations: rate-based agent, eight columns, rectified-cosine hΔB bump, weights incremented by the bump passed through each candidate's measured landing kernel, readout as weights times drive passed through the candidate's measured output kernel. Tables: <code>data/derived/recurrence_modes.csv</code>, <code>fb_column_offsets.csv</code>, <code>synaptic_site_screen.csv</code>, <code>reward_inputs_trace.json</code>, <code>hemibrain_key_edges.csv</code>. Scripts: <code>scripts/recurrence_modes.py</code>, <code>synaptic_site_screen.py</code>, <code>reward_inputs_trace.py</code>; simulations: <code>simulations/site_readout_error.py</code>, <code>strategy_discrimination.py</code>, <code>closed_loop_sites.py</code>. Full analysis notes: <code>docs/exhaustive-search.md</code>.</p>
+</div>
 </main>
 </body>
 </html>

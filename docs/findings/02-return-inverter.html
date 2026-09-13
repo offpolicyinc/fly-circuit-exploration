@@ -3,38 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Finding 2: the neuron that turns the memory around</title>
+<title>Finding 2: The stored vector points away from food. One unassigned neuron type, hΔM, is the only thing that turns it around</title>
 <style>
-  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
-  main { max-width:760px; margin:0 auto; padding:36px 22px 60px; }
-  h1 { font-size:27px; line-height:1.2; margin:0 0 10px; }
-  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; }
-  .lede { font-size:18px; margin:0 0 22px; }
-  h2 { font-size:17px; margin:26px 0 8px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:10px 0; }
-  dt { font-weight:600; margin-top:8px; } dd { margin:0; color:var(--muted); }
-  table { border-collapse:collapse; width:100%; font-size:15px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
-  .grid { display:block; }
-  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; font-weight:600; margin-right:6px; }
-  .strong{background:#e6f2ea;color:var(--good)} .model{background:#fdf3e1;color:var(--warn)} .open{background:#e8f0f6;color:var(--accent2)}
-  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; } figure{margin:14px 0} figcaption{color:var(--muted);font-size:13px}
-  ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
-  .foot { color:var(--muted); font-size:13px; margin-top:28px; border-top:1px solid var(--line); padding-top:10px; }
-  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; } .nav a.on { color:var(--ink); font-weight:700; border-bottom:2px solid var(--accent); } .nav a:hover { color:var(--ink); }
-  .plain p { margin:0 0 14px; } .plain b { color:var(--ink); }
+  :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; --purple:#6a4c93; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width:780px; margin:0 auto; padding:36px 22px 60px; }
+  h1 { font-size:27px; line-height:1.2; margin:0 0 14px; }
+  h2 { font-size:19px; margin:32px 0 8px; padding-top:12px; border-top:1px solid var(--line); }
+  p { margin:0 0 14px; } p.summary { font-size:17px; background:#f3f7fa; border-left:4px solid var(--accent2); padding:10px 14px; }
+  table { border-collapse:collapse; width:100%; font-size:14.5px; margin:8px 0 16px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; } th { color:var(--muted); font-weight:600; } td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  ul, ol { margin:6px 0 14px; padding-left:22px; } li { margin:4px 0; }
+  code { font-size:13px; background:#f1f0eb; padding:1px 4px; border-radius:3px; }
+  figure { margin:16px 0 20px; } figcaption { color:var(--muted); font-size:13px; margin-top:6px; }
+  svg text { font:13px -apple-system,Helvetica,Arial,sans-serif; }
+  .anim { border:1px solid var(--line); border-radius:10px; background:var(--card); padding:12px 14px; margin:16px 0 20px; }
+  .anim .ctl { display:flex; gap:10px; align-items:center; font-size:13px; color:var(--muted); margin-top:6px; flex-wrap:wrap; }
+  .anim button { font:13px inherit; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
+  .anim input[type=range] { width:160px; }
+  .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; }
+  .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; margin-bottom:6px; }
+  .methods { color:var(--muted); font-size:14px; } .methods h2 { color:var(--ink); }
+  a { color:var(--accent2); }
 </style>
 </head>
 <body>
 <main>
-  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html">List view</a><a href="../index.html">Home</a></nav>
-  <div class="kicker">Finding 2 of 4 · the sign problem</div>
-  <h1>The stored vector points away from food. One unassigned neuron type, hΔM, is the only thing that turns it around</h1>
-  <div class="plain">
-  <p><b>The problem.</b> The store of finding 1 holds the fly's displacement from the food: "I am 2 north of the food". To walk home the steering neurons need the opposite vector: "walk 2 south". Somewhere between the store and the steering neurons the vector has to be rotated by 180°. The question is which neuron does that.</p>
-  <p><b>Why the store cells looked like the answer.</b> Every hΔ neuron has its dendrites in one column of the fan-shaped body and its axon in the column 180° away. A signal that arrives on the dendrites at the "north" column is emitted at the "south" column: a built-in 180° rotation. The store candidates are hΔ cells, so the store would receive "north" and automatically emit "south", which is "go home". The rotation would come free with the anatomy.</p>
-  <p><b>Why that is wrong.</b> The connectome shows hΔB's synapses onto the store cells land on the store cells' axons, not their dendrites. A signal that enters at the axon leaves from that same axon, in that same column. So the store receives "north" and emits "north". It passes the displacement along unchanged, pointing away from the food.</p>
-  </div>
+  <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
+<div class="kicker">Finding 2 of 4 · the sign problem</div><h1>The stored vector points away from food. One unassigned neuron type, hΔM, is the only thing that turns it around</h1>
+<p class="summary"><b>Summary.</b> A stored displacement points from food to fly, but steering needs the reverse, so something between the store and the steering neurons must rotate the vector by half a turn. The store cells do not do it: hΔB's synapses land on their axonal arbors, not their dendrites, so they relay the vector unrotated. Between the goal neurons FC2 and the steering neurons PFL3, the only columnar type that rotates is hΔM, eight cells with no assigned function: FC2 contacts its dendrites and its axon, 178° away, contacts PFL3 and PFL2. PFL3 therefore receives the stored vector twice, unrotated via FC2 ("keep going") and rotated via hΔM ("go back"); in a closed-loop model only the rotated copy produces return.</p>
+<figure>
+    <svg viewBox="0 0 820 200" width="100%" role="img" aria-label="The sign question">
+      <defs><marker id="q" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="qr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b4432c"/></marker></defs>
+      <circle cx="120" cy="150" r="8" fill="#b4432c"/><text x="120" y="176" text-anchor="middle" font-size="12">food</text>
+      <circle cx="120" cy="60" r="7" fill="#1b1b1f"/><text x="140" y="64" font-size="12">fly, 2 north of food</text>
+      <line x1="120" y1="142" x2="120" y2="70" stroke="#2a6f97" stroke-width="3" marker-end="url(#q)"/><text x="60" y="110" text-anchor="middle" fill="#2a6f97" font-size="12">stored: "2 north"</text>
+      <rect x="330" y="40" width="200" height="50" rx="8" fill="#f6e7e3" stroke="#b4432c" stroke-width="2"/><text x="430" y="61" text-anchor="middle" font-weight="700">store says</text><text x="430" y="79" text-anchor="middle">"2 north" (+D)</text>
+      <rect x="330" y="120" width="200" height="50" rx="8" fill="#1b1b1f"/><text x="430" y="141" text-anchor="middle" fill="#fff" font-weight="700">steering needs</text><text x="430" y="159" text-anchor="middle" fill="#fff">"walk 2 south" (−D)</text>
+      <line x1="430" y1="90" x2="430" y2="118" stroke="#b4432c" stroke-width="3" marker-end="url(#qr)"/>
+      <text x="570" y="88" font-size="14" font-weight="700" fill="#b4432c">Where does the minus sign</text><text x="570" y="106" font-size="14" font-weight="700" fill="#b4432c">come from?</text>
+      <text x="570" y="130" font-size="12">Something between the store and</text><text x="570" y="146" font-size="12">the steering neurons must rotate</text><text x="570" y="162" font-size="12">the vector by half a turn. Which neuron?</text>
+    </svg>
+    <figcaption>The question this finding answers.</figcaption>
+  </figure>
+<h2>The problem</h2>
+<p>The store of finding 1 holds the fly's displacement from the food: "I am 2 north of the food". To walk home the steering neurons need the opposite vector: "walk 2 south". Somewhere between the store and the steering neurons the vector has to be rotated by 180°. The question is which neuron does that.</p>
+<h2>Why the store cells looked like the answer</h2>
+<p>Every hΔ neuron has its dendrites in one column of the fan-shaped body and its axon in the column 180° away. A signal that arrives on the dendrites at the "north" column is emitted at the "south" column: a built-in half-turn rotation. The store candidates are hΔ cells, so the store would receive "north" and automatically emit "south", which is "go home". The rotation would come free with the anatomy.</p>
+<h2>Why that is wrong</h2>
 <figure>
     <svg viewBox="0 0 820 322" width="100%" role="img" aria-label="Contact on dendrite versus axonal arbor">
       <defs><marker id="h" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="i" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b4432c"/></marker></defs>
@@ -75,9 +90,17 @@
     </svg>
     <figcaption>Same cell, opposite outcome, depending on which arbor hΔB reaches. Right: the measured share of hΔB synapses on each candidate's axon.</figcaption>
   </figure>
-  <div class="plain">
-  <p><b>Where the rotation actually happens.</b> From the store the signal goes to the goal neurons FC2, and from FC2 to the steering neurons PFL3. Both connections stay in the same column, so by that route PFL3 receives "north" and steers the fly further north, away from the food. There is one other route from FC2 to PFL3: through hΔM. FC2 contacts hΔM's dendrites, and hΔM's axon, 180° away, contacts PFL3. Through hΔM, PFL3 receives "south". hΔM is the only cell type between the goal and the steering neurons that does this, and nobody has assigned it a function.</p>
-  </div>
+<p>The connectome shows where hΔB's synapses land on each store cell. They land on the axon, not the dendrites. A signal that enters at the axon leaves from that same axon, in that same column. So the store receives "north" and emits "north". It passes the displacement along unchanged, pointing away from the food.</p>
+<table>
+<tr><th class="">hΔB synapses onto</th><th class="n">on the axonal arbor</th><th class="">result</th></tr>
+<tr><td class="">hΔH</td><td class="n">95 %</td><td class="">relays, no rotation</td></tr>
+<tr><td class="">hΔA</td><td class="n">92 %</td><td class="">relays</td></tr>
+<tr><td class="">hΔI</td><td class="n">82 %</td><td class="">relays</td></tr>
+<tr><td class="">hΔG</td><td class="n">73 %</td><td class="">relays</td></tr>
+<tr><td class="">hΔJ</td><td class="n">58 %</td><td class="">both arbors, cancels</td></tr>
+<tr><td class="">hΔK</td><td class="n">1 %</td><td class="">dendrite: does rotate, but is not a store</td></tr></table>
+<p>Hulse 2021 drew this two-arbor contact motif anatomically without following its sign. The same shares appear in the hemibrain.</p>
+<h2>Where the rotation actually happens</h2>
 <figure>
     <svg viewBox="0 0 820 268" width="100%" role="img" aria-label="Two routes from FC2 to PFL3">
       <defs><marker id="j" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="k" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker></defs>
@@ -92,36 +115,74 @@
       <line x1="570" y1="198" x2="638" y2="198" stroke="#b4432c" stroke-width="3.5" marker-end="url(#k)"/><text x="604" y="188" text-anchor="middle" font-size="12" fill="#b4432c">3,983</text>
       <text x="410" y="244" text-anchor="middle" font-size="12" fill="#5a5f6a">Both PFL3 boxes are the same neurons; which input dominates decides whether the fly continues or returns.</text><text x="410" y="258" text-anchor="middle" font-size="12" fill="#5a5f6a">FB5A (GABA) inhibits FC2, PFL3 and hΔM together and could set that balance. Total rotation via hΔM: 336° + 202° = 178°.</text>
     </svg>
-    <figcaption>The goal reaches the steering neurons twice: unchanged through FC2 (about 7,700 synapses) and rotated by half a turn through hΔM (about 4,000). Only the rotated copy points home.</figcaption>
+    <figcaption>The goal reaches the steering neurons twice: unchanged through FC2 and rotated by half a turn through hΔM. Only the rotated copy points home.</figcaption>
   </figure>
-  <div class="card">
-    <table>
-      <tr><th>FC2 → PFL3 route</th><th class="n">synapses</th><th class="n">rotation</th></tr>
-      <tr><td>direct</td><td class="n">7,690</td><td class="n">2°</td></tr>
-      <tr><td>through hΔM (1,073 in, 3,983 out)</td><td class="n">3,983</td><td class="n">178°</td></tr>
-      <tr><td>through hΔM to PFL2</td><td class="n">1,555</td><td class="n">178°</td></tr>
-    </table>
-  </div>
-  <div class="plain">
-  <p><b>The simulation check.</b> A model fly with the store wired to steering with no rotation walks away from the food on every run. With 180° rotation, or with hΔM's measured 178°, it returns.</p>
-  </div>
-  <div class="card">
-    <table>
-      <tr><th>rotation between store and PFL3</th><th class="n">returned to food</th><th class="n">closest approach</th></tr>
-      <tr><td>180° / 178° (hΔM)</td><td class="n">35 %</td><td class="n">1.05 / 1.36</td></tr>
-      <tr><td>90°</td><td class="n">20 %</td><td class="n">2.64</td></tr>
-      <tr><td>0° (direct route only)</td><td class="n">0 %</td><td class="n">10.3, walks away</td></tr>
-      <tr><td>no memory</td><td class="n">–</td><td class="n">6.76</td></tr>
-    </table>
-    <p style="color:var(--muted);font-size:13px;margin:6px 0 0">Distances in units of the outbound walk length; median over 60 runs.</p>
-  </div>
-  <div class="plain">
-  <p><b>Consequence.</b> PFL3 receives the same memory twice: "north" directly, meaning keep going, and "south" through hΔM, meaning go back. Whichever input wins decides whether the fly keeps exploring or returns. Flies that are dispersing do keep going for hours (Green 2019), and a GABA neuron, FB5A, inhibits FC2, PFL3 and hΔM together, so it is placed to set the balance. hΔM is the return path. PFL2, which oddly fires most when the fly faces away from its goal (Westeinde 2024), also receives the rotated goal from hΔM, which explains that tuning with no new anatomy.</p>
-  <p><b>What would settle it.</b> Silence hΔM during a return to food and during straight heading maintenance: return should fail, heading should survive. Image hΔM and FC2 together: bumps half a turn apart. Image hΔH or hΔA during a return: bump along the outbound displacement, not toward the food.</p>
-  <p><b>Prior work.</b> Hulse 2021 drew the two-arbor contact motif on hΔ neurons without following its sign. Liao 2025 describe an anti-goal circuit further downstream in the lateral accessory lobe. Nanni &amp; Lee 2026 propose FB5A as the FC2 normaliser. The hΔM rotation and its necessity for return are not in print.</p>
-  </div>
-  <p><span class="tag strong">Wiring: two brains</span><span class="tag model">Necessity of the rotation: simulated</span><span class="tag open">Function: predicted</span></p>
-  <p class="foot">Sources: <code>docs/exhaustive-search.md</code> §4; <code>data/derived/fb_offset_stats.csv</code>; <code>simulations/closed_loop_kernel_controls.json</code>. Hulse 2021; Lyu 2022; Mussells Pires 2024; Westeinde 2024; Liao 2025.</p>
+<p>From the store the signal goes to the goal neurons FC2, and from FC2 to the steering neurons PFL3. Both connections stay in the same column, so by that route PFL3 receives "north" and steers the fly further north, away from the food. There is one other route from FC2 to PFL3: through hΔM. FC2 contacts hΔM's dendrites, and hΔM's axon, 180° away, contacts PFL3. Through hΔM, PFL3 receives "south". hΔM is the only cell type between the goal and the steering neurons that does this, and nobody has assigned it a function.</p>
+<table>
+<tr><th class="">FC2 → PFL3 route</th><th class="n">synapses</th><th class="n">rotation</th></tr>
+<tr><td class="">direct</td><td class="n">7,690</td><td class="n">2°</td></tr>
+<tr><td class="">through hΔM (1,073 in, 3,983 out)</td><td class="n">3,983</td><td class="n">178°</td></tr>
+<tr><td class="">through hΔM to PFL2</td><td class="n">1,555</td><td class="n">178°</td></tr></table>
+<p>FC2 columns are named directly, so there is no arbor ambiguity on this step.</p>
+<h2>The simulation check</h2>
+<div class="anim" id="retAnim">
+  <svg viewBox="0 0 820 340" width="100%" role="img" aria-label="Animation: returning with and without the half-turn rotation">
+    <rect x="20" y="10" width="780" height="300" fill="#fff" stroke="#e3e2dc"/>
+    <circle cx="410" cy="160" r="7" fill="#b4432c"/><text x="410" y="182" text-anchor="middle" font-size="11">food</text>
+    <polyline id="raOut" points="" fill="none" stroke="#c9c6bd" stroke-width="2"/>
+    <polyline id="raA" points="" fill="none" stroke="#b4432c" stroke-width="2.5"/>
+    <polyline id="raB" points="" fill="none" stroke="#2a6f97" stroke-width="2.5"/>
+    <circle id="raDotA" r="6" fill="#b4432c"/><circle id="raDotB" r="6" fill="#2a6f97"/>
+    <text x="30" y="30" font-size="12" fill="#5a5f6a">grey: outbound walk (same for both) · <tspan fill="#b4432c" font-weight="700">red: stored vector sent straight to steering</tspan> · <tspan fill="#2a6f97" font-weight="700">blue: rotated by the slider first</tspan></text>
+    <text id="raStatus" x="30" y="300" font-size="12" fill="#5a5f6a"></text>
+  </svg>
+  <div class="ctl"><button id="raPlay">Pause</button><button id="raReset">New walk</button><label>rotation before steering: <input type="range" id="raRot" min="0" max="180" step="10" value="180"> <span id="raRotV">180°</span></label></div>
+</div>
+<script>
+(function(){
+  const g=id=>document.getElementById(id); const cx=410,cy=160,S=6;
+  let seed=1, rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+  let out=[],A=null,B=null,phase=0,playing=true,f=0;
+  function agent(rot){return {x:out[out.length-1].x,y:out[out.length-1].y,h:out[out.length-1].h,rot:rot,trail:[]};}
+  function newWalk(){seed=Math.floor(Math.random()*1e6)+1;out=[{x:0,y:0,h:rnd()*2*Math.PI}];for(let i=0;i<60;i++){const p=out[out.length-1];const h=p.h+(rnd()-0.5)*0.9;out.push({x:p.x+0.5*Math.cos(h),y:p.y+0.5*Math.sin(h),h:h});}
+    A=agent(0);B=agent(g('raRot').value*Math.PI/180);phase=0;f=0;
+    g('raOut').setAttribute('points',out.map(p=>`${cx+S*p.x},${cy-S*p.y}`).join(' '));g('raA').setAttribute('points','');g('raB').setAttribute('points','');}
+  function step(ag){const D=Math.atan2(ag.y,ag.x); // vector from food to fly
+    const goal=D+ag.rot; let d=goal-ag.h; d=Math.atan2(Math.sin(d),Math.cos(d)); ag.h+=0.35*d; ag.x+=0.4*Math.cos(ag.h); ag.y+=0.4*Math.sin(ag.h); ag.trail.push(`${cx+S*ag.x},${cy-S*ag.y}`);}
+  function tick(){if(!playing)return;f++;
+    if(f%3===0){ if(phase<out.length){const p=out[phase];g('raDotA').setAttribute('cx',cx+S*p.x);g('raDotA').setAttribute('cy',cy-S*p.y);g('raDotB').setAttribute('cx',cx+S*p.x);g('raDotB').setAttribute('cy',cy-S*p.y);phase++;g('raStatus').textContent='outbound: both agents store the same running sum';}
+      else if(phase<out.length+90){step(A);step(B);g('raA').setAttribute('points',A.trail.join(' '));g('raB').setAttribute('points',B.trail.join(' '));g('raDotA').setAttribute('cx',cx+S*A.x);g('raDotA').setAttribute('cy',cy-S*A.y);g('raDotB').setAttribute('cx',cx+S*B.x);g('raDotB').setAttribute('cy',cy-S*B.y);phase++;
+        g('raStatus').textContent=`return: red is ${Math.hypot(A.x,A.y).toFixed(1)} from food, blue is ${Math.hypot(B.x,B.y).toFixed(1)}`;}
+      else if(phase<out.length+150){phase++;} else newWalk(); }
+    requestAnimationFrame(tick);}
+  g('raRot').oninput=()=>{g('raRotV').textContent=g('raRot').value+'°';if(B)B.rot=g('raRot').value*Math.PI/180;};
+  g('raPlay').onclick=()=>{playing=!playing;g('raPlay').textContent=playing?'Pause':'Play';if(playing)tick();};
+  g('raReset').onclick=newWalk;
+  newWalk();tick();
+})();
+</script>
+<p style="color:var(--muted);font-size:13px">Both agents carry the same stored vector, pointing from the food to themselves. Red steers toward it and walks away. Blue rotates it first; at 180° it walks home, at 90° it circles, at 0° it is red.</p>
+
+<p>A model fly with the store wired to steering with no rotation walks away from the food on every run. With 180° rotation, or with hΔM's measured 178°, it returns.</p>
+<table>
+<tr><th class="">rotation between store and PFL3</th><th class="n">returned to food</th><th class="">median closest approach</th></tr>
+<tr><td class="">180° / 178° (hΔM)</td><td class="n">35 %</td><td class="">1.05 / 1.36</td></tr>
+<tr><td class="">90°</td><td class="n">20 %</td><td class="">2.64</td></tr>
+<tr><td class="">0° (direct route only)</td><td class="n">0 %</td><td class="">10.3, walks away</td></tr>
+<tr><td class="">no memory</td><td class="n">–</td><td class="">6.76</td></tr></table>
+<p>Distances in units of the outbound walk length, 60 runs.</p>
+<h2>Consequence</h2>
+<p>PFL3 receives the same memory twice: "north" directly, meaning keep going, and "south" through hΔM, meaning go back. Whichever input wins decides whether the fly keeps exploring or returns. Dispersing flies do keep going for hours (Green 2019), and FB5A, a GABA neuron that inhibits FC2, PFL3 and hΔM together, is placed to set the balance. hΔM is the return path.</p>
+<p>PFL2 also receives the rotated goal from hΔM. PFL2 is known to fire most when the fly faces away from its goal (Westeinde 2024), which this explains with no new anatomy.</p>
+<h2>What would settle it</h2>
+<ul><li>Silence hΔM during a return to food and during straight heading maintenance: return should fail, heading should survive.</li><li>Image hΔM and FC2 together: bumps half a turn apart.</li><li>Image hΔH or hΔA during a return: bump along the outbound displacement, not toward the food.</li></ul>
+<h2>Prior work</h2>
+<p>Hulse 2021 drew the two-arbor contact motif on hΔ neurons without its sign consequence. Liao 2025 describe an anti-goal circuit further downstream in the lateral accessory lobe. Nanni &amp; Lee 2026 propose FB5A as the FC2 normaliser. The hΔM rotation and its necessity for return are not in print.</p>
+<div class="methods">
+<h2>Methods</h2>
+<p>Arbor assignment uses the column offset between hΔB's name and each target's name, with hΔ cells named by dendritic column (Hulse 2021) and hΔB's output on its axonal arbor (Lyu 2022): an offset of 180° from hΔB's name means contact on the target's dendrite, 0° means contact on the target's axon. Route rotations are the mean angular offsets of FC2→hΔM (336°) and hΔM→PFL3 (202°) summed. Closed-loop agent: rate-based, eight columns, store from finding 1, PFL3 steering as left minus right proportional to sin(goal − heading), rotation between store readout and goal varied as a parameter. Tables: <code>data/derived/fb_offset_stats.csv</code>; simulation results: <code>simulations/closed_loop_kernel_controls.json</code>; notes: <code>docs/exhaustive-search.md</code> §4.</p>
+<p>References: Hulse 2021; Lyu 2022; Mussells Pires 2024; Westeinde 2024; Green 2019; Liao 2025; Nanni &amp; Lee 2026.</p>
+</div>
 </main>
 </body>
 </html>

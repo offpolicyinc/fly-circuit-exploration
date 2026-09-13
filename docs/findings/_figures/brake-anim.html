@@ -1,0 +1,37 @@
+<div class="anim" id="brakeAnim">
+  <svg viewBox="0 0 820 260" width="100%" role="img" aria-label="Animation: the compass ring with the write-position feedback">
+    <text x="20" y="22" font-weight="700" font-size="14">Compass ring (16 EPG wedges), constant turn signal</text>
+    <g id="baRing"></g>
+    <line id="baPVA" x1="200" y1="150" x2="200" y2="150" stroke="#b4432c" stroke-width="4"/>
+    <text x="420" y="60" font-size="14">write-position feedback: <tspan id="baK" font-weight="700">0.0×</tspan> read input</text>
+    <text x="420" y="90" font-size="14">bump rotation: <tspan id="baRate" font-weight="700">–</tspan> °/s</text>
+    <text x="420" y="130" font-size="12" fill="#5a5f6a">0× is the textbook model. 2.7× is what the</text>
+    <text x="420" y="146" font-size="12" fill="#5a5f6a">hemibrain measures. Same turn signal throughout.</text>
+    <text x="420" y="180" font-size="12" fill="#5a5f6a">The red line is the bump's position. Watch how</text>
+    <text x="420" y="196" font-size="12" fill="#5a5f6a">fast it goes round as you raise the feedback.</text>
+  </svg>
+  <div class="ctl"><label>feedback strength: <input type="range" id="baSlider" min="0" max="5.4" step="0.1" value="0"></label><button id="baMeas">set to measured (2.7×)</button><button id="baZero">set to 0</button></div>
+</div>
+<script>
+(function(){
+  const NW=16,NG=8,dt=0.002,tau=0.05,wpb=1,wpe=1.6,winh=1.2,wself=0.6,vel=0.3;
+  const ang=[...Array(NW).keys()].map(i=>i*2*Math.PI/NW);
+  const wedgeOf=(side,gI)=>side==='L'?2*gI:2*(NG-1-gI)+1;
+  let E2P,P2E; function build(web){E2P=Array.from({length:2*NG},()=>new Array(NW).fill(0));P2E=Array.from({length:NW},()=>new Array(2*NG).fill(0));let idx=0;for(const side of 'LR'){const sh=side==='L'?-2:2;for(let gI=0;gI<NG;gI++){const w0=wedgeOf(side,gI);const tile=[((w0+sh)%NW+NW)%NW,((w0+sh+(side==='L'?1:-1))%NW+NW)%NW];E2P[idx][w0]+=wpb;for(const t of tile){E2P[idx][t]+=web/2;P2E[t][idx]+=wpe/2;}idx++;}}}
+  const Wee=ang.map((_,i)=>ang.map((_,j)=>{const d=((i-j+NW/2)%NW+NW)%NW-NW/2;return wself*Math.exp(-d*d/2);}));
+  let e=ang.map(a=>Math.max(0,Math.cos(a))),p=new Array(2*NG).fill(0),hist=[],simT=0;
+  function pva(){let re=0,im=0;e.forEach((v,i)=>{re+=v*Math.cos(ang[i]);im+=v*Math.sin(ang[i]);});return Math.atan2(im,re);}
+  function stepSim(){const pin=E2P.map((row,i)=>{let s=0;row.forEach((w,j)=>s+=w*e[j]);return s*(i<NG?1+vel:1-vel);});for(let i=0;i<p.length;i++)p[i]+=dt/tau*(-p[i]+Math.max(0,pin[i]));
+    const mean=e.reduce((a,b)=>a+b,0)/NW;const ein=e.map((_,i)=>{let s=0;for(let j=0;j<NW;j++)s+=Wee[i][j]*e[j];for(let k=0;k<p.length;k++)s+=P2E[i][k]*p[k];return s-winh*mean*NW/4+(Math.random()-0.5)*0.04;});
+    for(let i=0;i<NW;i++)e[i]=Math.min(5,e[i]+dt/tau*(-e[i]+Math.max(0,ein[i])));simT+=dt;}
+  const g=id=>document.getElementById(id);
+  function draw(){let s='';const mx=Math.max(...e,1e-6);e.forEach((v,i)=>{const x=200+95*Math.cos(ang[i]),y=150-95*Math.sin(ang[i]);const c=v/mx;s+=`<circle cx="${x}" cy="${y}" r="13" fill="rgb(${Math.round(255-c*(255-42))},${Math.round(255-c*(255-111))},${Math.round(255-c*(255-151))})" stroke="#e3e2dc"/>`;});g('baRing').innerHTML=s;
+    const a=pva();g('baPVA').setAttribute('x2',200+80*Math.cos(a));g('baPVA').setAttribute('y2',150-80*Math.sin(a));
+    hist.push([simT,a]);while(hist.length&&hist[0][0]<simT-1)hist.shift();
+    if(hist.length>10){let un=0,prev=hist[0][1];for(const [,x] of hist){let d=x-prev;d=Math.atan2(Math.sin(d),Math.cos(d));un+=d;prev=x;}g("baRate").textContent=Math.abs(un*180/Math.PI/(hist[hist.length-1][0]-hist[0][0])).toFixed(0);}}
+  function frame(){for(let i=0;i<12;i++)stepSim();draw();requestAnimationFrame(frame);}
+  function setK(v){g('baSlider').value=v;g('baK').textContent=Number(v).toFixed(1)+'×';build(Number(v));}
+  g('baSlider').oninput=()=>setK(g('baSlider').value);g('baMeas').onclick=()=>setK(2.7);g('baZero').onclick=()=>setK(0);
+  setK(0);frame();
+})();
+</script>
