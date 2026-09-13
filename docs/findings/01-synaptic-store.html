@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Finding 2: the home vector is stored in synapses</title>
+<title>Finding 1: the home vector is stored in synapses</title>
 <style>
   :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; }
   body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
@@ -28,7 +28,7 @@
 <body>
 <main>
   <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="../findings/index.html">List view</a><a href="../index.html">Home</a></nav>
-  <div class="kicker">Finding 2 of 4 · the missing middle of the circuit</div>
+  <div class="kicker">Finding 1 of 4 · the missing middle of the circuit</div>
   <h1>The fly's running sum of its own steps is held in synapse strengths, on four neuron types nobody has assigned a function</h1>
   <div class="plain">
   <p><b>The problem.</b> A fly that leaves food and wanders in the dark can walk straight back. To do that it must keep a running sum of every step it has taken: a vector pointing from the food to where it is now. The neurons that report each step are known: hΔB, whose activity bump sits at the column matching the direction the fly is currently moving. What adds those steps up over time has never been found.</p>
@@ -186,7 +186,7 @@
   </div>
 
   <div class="plain">
-  <p><b>How the store is read.</b> There is no recall step. Each store cell fires as hΔB's drive times its synapse strength. hΔB is active whenever the fly moves, so as soon as it walks, the store's output across the columns is the stored pattern, and it goes straight to the goal neurons FC2 and the steering neurons PFL3. Walking home strengthens the opposite columns until the pattern is flat: that is arrival. What the readout points at, and why it has to be turned around before it can steer, is finding 3.</p>
+  <p><b>How the store is read.</b> There is no recall step. Each store cell fires as hΔB's drive times its synapse strength. hΔB is active whenever the fly moves, so as soon as it walks, the store's output across the columns is the stored pattern, and it goes straight to the goal neurons FC2 and the steering neurons PFL3. Walking home strengthens the opposite columns until the pattern is flat: that is arrival. What the readout points at, and why it has to be turned around before it can steer, is finding 2.</p>
   <p><b>Why nobody has seen it.</b> The memory is a set of synapse strengths, not a firing pattern. Imaging hΔB shows the current step, not the sum. Imaging the store cells at rest shows nothing, because nothing fires until hΔB drives them. A stored vector in a neighbouring fan-shaped-body system was recently found to be visible as cAMP but not as calcium (Gorko &amp; Kim 2026), which is what this predicts here.</p>
   <p><b>The simulation checks.</b> An agent walking a random path, writing into each candidate through its measured wiring and reading out through its measured output path, retains 56 % to 86 % of the walk in hΔH, hΔA and hΔI; hΔJ retains 14 %. Only a running vector sum reproduces the fly's search behaviour in the standard assays; remembering the direction at the food or the distance walked does not. In closed loop, the agent returns to the food, provided the readout is turned around before steering.</p>
   </div>
@@ -220,7 +220,7 @@
   <p><b>Prior work.</b> hΔB as the step signal (Lu 2022; Lyu 2022). Synaptic storage of a vector as an idea (Hulse 2021; Goulard 2023; Maimon &amp; Abbott 2026), without a candidate cell. New here: activity storage ruled out for every population; the four candidate types and hΔJ's rejection; FB4M/FB1H and OA-VPM3 as the write and erase signals; the readout and closed-loop tests.</p>
   </div>
   <p><span class="tag strong">Wiring: two brains</span><span class="tag model">Store: model-supported</span><span class="tag open">Plasticity, erase: inferred</span></p>
-  <p class="foot">Sources: <code>docs/exhaustive-search.md</code>; <code>data/derived/recurrence_modes.csv</code>, <code>fb_column_offsets.csv</code>, <code>synaptic_site_screen.csv</code>, <code>reward_inputs_trace.json</code>; <code>simulations/site_readout_error.py</code>, <code>strategy_discrimination.py</code>, <code>closed_loop_sites.py</code>. <a href="02-how-it-works.html">Step-through animation of write and read.</a></p>
+  <p class="foot">Sources: <code>docs/exhaustive-search.md</code>; <code>data/derived/recurrence_modes.csv</code>, <code>fb_column_offsets.csv</code>, <code>synaptic_site_screen.csv</code>, <code>reward_inputs_trace.json</code>; <code>simulations/site_readout_error.py</code>, <code>strategy_discrimination.py</code>, <code>closed_loop_sites.py</code>. <a href="01-how-it-works.html">Step-through animation of write and read.</a></p>
 </main>
 </body>
 </html>

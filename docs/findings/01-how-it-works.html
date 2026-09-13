@@ -24,7 +24,7 @@
 </head>
 <body>
 <main>
-  <nav class="nav"><a href="02-synaptic-store.html">← back to finding 2</a><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a></nav>
+  <nav class="nav"><a href="01-synaptic-store.html">← back to finding 1</a><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a></nav>
   <h1>How a home vector can live in synapse strengths</h1>
   <p class="lede">A worked example with four direction columns. The fly walks 6 north, then 4 south, ends up 2 north of the food, and comes back. Step through it. Left: the world. Middle: the strength of the synapse from the travel-direction bump onto each direction column. Right: what the steering neurons receive.</p>
 
@@ -74,12 +74,12 @@
   <div class="stage" style="padding:14px 18px">
     <ol>
       <li><b>Write.</b> While the fly walks, the active hΔB column (its current travel direction) strengthens its synapse onto the matching store column, by an amount proportional to distance. Measured: hΔB synapses column-matched onto hΔH/hΔA/hΔI/hΔG; dopamine cells FB4M/FB1H, driven by the velocity system, contact every store cell. Assumed: that the synapses actually potentiate under that dopamine.</li>
-      <li><b>Read.</b> Whenever hΔB is active, each store cell fires in proportion to its synapse strength, and the steering neurons sum the columns as vectors, with opposite columns pulling opposite ways. 6 north and 4 south are both present; the sum is 2 north. Measured: this vector summation is the operation the fan-shaped body already uses to combine PFN inputs (Lyu 2022; Maimon &amp; Abbott 2026). The sum points <i>away</i> from food; hΔM inverts it (finding 3).</li>
+      <li><b>Read.</b> Whenever hΔB is active, each store cell fires in proportion to its synapse strength, and the steering neurons sum the columns as vectors, with opposite columns pulling opposite ways. 6 north and 4 south are both present; the sum is 2 north. Measured: this vector summation is the operation the fan-shaped body already uses to combine PFN inputs (Lyu 2022; Maimon &amp; Abbott 2026). The sum points <i>away</i> from food; hΔM inverts it (finding 2).</li>
       <li><b>Cancel and reset.</b> Walking back fills the opposite column until the pushes cancel and the fly stops; that is arrival. But the strengths are then 6/6, not 0/0, and would saturate over trips. Something must scale them all down at food. Measured: the reward octopamine neuron OA-VPM3 contacts the store cells. Assumed: that it depresses or renormalises the synapses. This is the least supported step and the first thing to test.</li>
     </ol>
     <p class="k">Path independence: any path with the same endpoint produces the same net vector, because only totals per direction are kept and opposite directions cancel at readout. The path itself is never stored.</p>
   </div>
-  <p class="foot">Companion to <a href="02-synaptic-store.html">finding 2</a> and <a href="03-return-inverter.html">finding 3</a>. Numbers in the example are arbitrary; the circuit pages give the measured synapse counts.</p>
+  <p class="foot">Companion to <a href="01-synaptic-store.html">finding 1</a> and <a href="02-return-inverter.html">finding 2</a>. Numbers in the example are arbitrary; the circuit pages give the measured synapse counts.</p>
 
 <script>
 (function(){

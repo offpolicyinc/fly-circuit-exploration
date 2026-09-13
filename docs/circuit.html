@@ -80,9 +80,9 @@
     <path d="M380 200 L 380 188" stroke="#1b1b1f" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
     <path d="M190 263 L 328 225" stroke="#b07a12" stroke-width="2" fill="none" marker-end="url(#o)"/>
     <path d="M300 380 L 300 122" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="292" y="310" text-anchor="end">learn</text>
-    <a href="findings/01-compass-brake.html"><circle cx="432" cy="188" r="11" fill="#1b1b1f"/><text x="432" y="192" text-anchor="middle" fill="#fff" font-weight="700">1</text></a>
+    <a href="findings/04-compass-brake.html"><circle cx="432" cy="188" r="11" fill="#1b1b1f"/><text x="432" y="192" text-anchor="middle" fill="#fff" font-weight="700">4</text></a>
     <a href="findings/05-confirmations.html"><circle cx="432" cy="442" r="11" fill="#1b1b1f"/><text x="432" y="446" text-anchor="middle" fill="#fff" font-weight="700">C</text></a>
-    <a href="findings/04-velocity-sources.html"><circle cx="192" cy="342" r="11" fill="#1b1b1f"/><text x="192" y="346" text-anchor="middle" fill="#fff" font-weight="700">4</text></a>
+    <a href="findings/03-velocity-sources.html"><circle cx="192" cy="342" r="11" fill="#1b1b1f"/><text x="192" y="346" text-anchor="middle" fill="#fff" font-weight="700">3</text></a>
 
     <!-- ===== 3 Velocity ===== -->
     <rect x="480" y="50" width="180" height="60" rx="10" fill="#2f7d4a"/><text x="570" y="74" text-anchor="middle" fill="#fff" font-weight="700">hΔB</text><text x="570" y="90" text-anchor="middle" fill="#fff">world travel direction</text>
@@ -122,7 +122,7 @@
     <path d="M902 246 L 902 268" stroke="#b4432c" stroke-width="2" fill="none" stroke-dasharray="4 3" marker-end="url(#r)"/>
     <path d="M770 420 L 770 346" stroke="#8a8f99" stroke-width="2" fill="none" marker-end="url(#g)"/><text x="762" y="385" text-anchor="end">via hΔC / hΔF</text>
     <path d="M845 443 L 832 443" stroke="#b07a12" stroke-width="2" fill="none" marker-end="url(#o)"/>
-        <a href="findings/02-synaptic-store.html"><circle cx="832" cy="108" r="11" fill="#1b1b1f"/><text x="832" y="112" text-anchor="middle" fill="#fff" font-weight="700">2</text></a>
+        <a href="findings/01-synaptic-store.html"><circle cx="832" cy="108" r="11" fill="#1b1b1f"/><text x="832" y="112" text-anchor="middle" fill="#fff" font-weight="700">1</text></a>
 
     <!-- ===== 5 Steer ===== -->
     <rect x="1000" y="50" width="180" height="70" rx="10" fill="#2f7d4a"/><text x="1090" y="74" text-anchor="middle" fill="#fff" font-weight="700">PFL3 / PFL2</text><text x="1090" y="90" text-anchor="middle" fill="#fff">heading vs goal</text><text x="1090" y="106" text-anchor="middle" fill="#fff">→ L / R error</text>
@@ -132,7 +132,7 @@
     <path d="M960 300 L 985 300 L 985 100 L 998 100" stroke="#1b1b1f" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="975" y="205" text-anchor="middle" transform="rotate(-90 975 205)">goal 7,690</text>
     <path d="M1042 150 L 1042 122" stroke="#b07a12" stroke-width="2.5" fill="none" marker-end="url(#o)"/><text x="1050" y="140">3,983</text>
     <path d="M1137 150 L 1137 122" stroke="#b07a12" stroke-width="2.5" fill="none" marker-end="url(#o)"/><text x="1145" y="140">7,349</text>
-    <a href="findings/03-return-inverter.html"><circle cx="1085" cy="212" r="11" fill="#1b1b1f"/><text x="1085" y="216" text-anchor="middle" fill="#fff" font-weight="700">3</text></a>
+    <a href="findings/02-return-inverter.html"><circle cx="1085" cy="212" r="11" fill="#1b1b1f"/><text x="1085" y="216" text-anchor="middle" fill="#fff" font-weight="700">2</text></a>
 
     <!-- ===== 6 Move ===== -->
     <rect x="1200" y="50" width="180" height="70" rx="10" fill="#b07a12" stroke="#6a4c93" stroke-width="3"/><text x="1290" y="72" text-anchor="middle" fill="#fff" font-weight="700">LAL interneurons</text><text x="1290" y="88" text-anchor="middle" fill="#fff">get most of PFL3 output</text><text x="1290" y="104" text-anchor="middle" fill="#fff">contralateral, inhibitory</text>
@@ -167,13 +167,13 @@
 
   <div class="stage"><h3>1 · Sense</h3><div class="row">
     <span class="k p">Proven</span><span>Visual and wind cues reach the compass through ring-neuron classes whose synapses onto EPG are learned (Kim 2019; Fisher 2019; Okubo 2020). Sugar contact switches the fly into local search through several sensory routes (Corfas 2019). Flies also mark rewarded spots with their own scent and use it (Chen 2024; Titova 2023).</span>
-    <span class="k n">New</span><span>The self-motion sources are named for the first time: PS196_b feeds the rotational velocity neuron GLNO and the dopamine/feedback cells; FB3A carries an ascending (leg-derived) signal into PFNd and supplies 12 % of its input. <a class="pin" href="findings/04-velocity-sources.html">4</a></span>
+    <span class="k n">New</span><span>The self-motion sources are named for the first time: PS196_b feeds the rotational velocity neuron GLNO and the dopamine/feedback cells; FB3A carries an ascending (leg-derived) signal into PFNd and supplies 12 % of its input. <a class="pin" href="findings/03-velocity-sources.html">4</a></span>
     <span class="k m">Missing</span><span>Which signal tells the navigation system "food is here". Candidates only: the dopamine tangentials FB4M/FB4L (target hΔB, PFNd, PFR) and FB1H (targets the goal input hΔJ).</span>
   </div></div>
 
   <div class="stage"><h3>2 · Heading</h3><div class="row">
     <span class="k p">Proven</span><span>EPG ring attractor, PEN shifters, Δ7 inhibition, GLNO velocity input, EL octopamine and ExR2 dopamine for cue learning (Seelig 2015; Kim 2017; Green 2017; Turner-Evans 2017/2020; Hulse 2023; Plitt 2025; Fisher 2022). The shifted PEN wiring is confirmed cell by cell in both connectomes.</span>
-    <span class="k c">Controversial</span><span>The shifters receive three times more compass input at the position they write to than at the position they read from. Every published model omits this; in simulation it brakes rotation. Either the synapses are weak, axo-axonic, or cancelled by inhibition, and each answer is a different compass. <a class="pin" href="findings/01-compass-brake.html">1</a></span>
+    <span class="k c">Controversial</span><span>The shifters receive three times more compass input at the position they write to than at the position they read from. Every published model omits this; in simulation it brakes rotation. Either the synapses are weak, axo-axonic, or cancelled by inhibition, and each answer is a different compass. <a class="pin" href="findings/04-compass-brake.html">1</a></span>
     <span class="k n">New</span><span>EL feedback is ring-class specific, so cue learning should depend on octopamine for some cue types and not others. ExR4/ExR6 provide a global glutamatergic feedback that could set bump amplitude. <a class="pin" href="findings/05-confirmations.html">C</a></span>
   </div></div>
 
@@ -186,12 +186,12 @@
   <div class="stage"><h3>4 · Integrate, store, choose a goal</h3><div class="row">
     <span class="k p">Proven</span><span>Behaviourally only: flies integrate distance and re-zero at food (Kim 2017; Behbahani 2021; Titova 2023; D'Atri 2025), and the PFNd/PFNv/hΔB/PFR pathway is required. FC2 holds the goal and drives steering (Mussells Pires 2024). The hΔK/PFGs loop holds an odor working memory (Kathman 2026; Lanz 2025).</span>
     <span class="k m">Missing</span><span>Physiology for all three red boxes. No recording has shown a population integrating travel direction, no recording has shown the zero being written at food, and the inversion is anatomical inference. hΔB has no direct route to FC2 (fewer than 150 synapses), so the goal is built through hΔ inputs to FC2, none of which has been recorded during a return.</span>
-    <span class="k n">New</span><span>A systematic search finds no population with recurrence strong enough to hold a vector in activity. Several hΔ types (hΔH, hΔA, hΔI, hΔG; hΔJ with cancellation) have the ingredients of a <b>synaptic</b> integrator: hΔB input, walking-driven dopamine (FB4M, FB1H), and the reward octopamine neuron OA-VPM3. But anchored to the published column conventions, every one of them delivers the stored displacement to FC2 or PFL3 with its sign preserved, i.e. as the outbound direction; only hΔM (FC2 → PFL3 at 178°) and the hΔK/PFGs loop invert. A closed-loop model returns only with that inversion. PFR sums travel direction and heading (Lyu 2022), not a memory. FR1 is a scalar accumulator feeding MB dopamine. Gorko &amp; Kim 2026 independently found a stored FB vector that is not held in presynaptic calcium. <a class="pin" href="findings/02-synaptic-store.html">2</a> <a class="pin" href="findings/03-return-inverter.html">3</a> <a class="pin" href="findings/05-confirmations.html">C</a></span>
+    <span class="k n">New</span><span>A systematic search finds no population with recurrence strong enough to hold a vector in activity. Several hΔ types (hΔH, hΔA, hΔI, hΔG; hΔJ with cancellation) have the ingredients of a <b>synaptic</b> integrator: hΔB input, walking-driven dopamine (FB4M, FB1H), and the reward octopamine neuron OA-VPM3. But anchored to the published column conventions, every one of them delivers the stored displacement to FC2 or PFL3 with its sign preserved, i.e. as the outbound direction; only hΔM (FC2 → PFL3 at 178°) and the hΔK/PFGs loop invert. A closed-loop model returns only with that inversion. PFR sums travel direction and heading (Lyu 2022), not a memory. FR1 is a scalar accumulator feeding MB dopamine. Gorko &amp; Kim 2026 independently found a stored FB vector that is not held in presynaptic calcium. <a class="pin" href="findings/01-synaptic-store.html">2</a> <a class="pin" href="findings/02-return-inverter.html">3</a> <a class="pin" href="findings/05-confirmations.html">C</a></span>
   </div></div>
 
   <div class="stage"><h3>5 · Steer</h3><div class="row">
     <span class="k p">Proven</span><span>PFL3 compares heading with the FC2 goal and outputs a lateralised error; PFL2 scales the response with error size (Mussells Pires 2024; Westeinde 2024). The ±67° PFL3 phase offset is visible in every cell's anatomy.</span>
-    <span class="k n">New</span><span>PFL3 also receives the goal inverted by 180° through hΔM (about half the direct route) and a travel-direction-derived input through hΔA/hΔI that outweighs any single FC2 subtype. The published steering model has neither. <a class="pin" href="findings/03-return-inverter.html">3</a></span>
+    <span class="k n">New</span><span>PFL3 also receives the goal inverted by 180° through hΔM (about half the direct route) and a travel-direction-derived input through hΔA/hΔI that outweighs any single FC2 subtype. The published steering model has neither. <a class="pin" href="findings/02-return-inverter.html">3</a></span>
     <span class="k m">Missing</span><span>What PFL3 does with three goal-like inputs at once, and how arrival (home vector near zero) stops the steering.</span>
   </div></div>
 
@@ -207,7 +207,7 @@
   </div></div>
 
   <h2>What the picture says</h2>
-  <p>Every box on the left and right is green or blue: sensing, heading, velocity, steering and descending control each have named neurons with recordings and, mostly, causal tests. The middle of the flow, where the behaviour requires memory, has no physiology. The fly demonstrably integrates, stores, inverts and stops. The orange chain in the middle is the one wiring-consistent account found by searching every fan-shaped-body population: the memory is synaptic, at hΔB's synapses onto a family of hΔ types, written while walking under dopamine, erased at food by octopamine, delivered to the goal layer as the outbound direction, and inverted into a return direction by hΔM. The experiments that would promote it to blue are on <a href="findings/02-synaptic-store.html">finding 9</a> and <a href="findings/03-return-inverter.html">finding 6</a>. The two purple outlines mark where the wiring disagrees with the models of stages everyone considers solved.</p>
+  <p>Every box on the left and right is green or blue: sensing, heading, velocity, steering and descending control each have named neurons with recordings and, mostly, causal tests. The middle of the flow, where the behaviour requires memory, has no physiology. The fly demonstrably integrates, stores, inverts and stops. The orange chain in the middle is the one wiring-consistent account found by searching every fan-shaped-body population: the memory is synaptic, at hΔB's synapses onto a family of hΔ types, written while walking under dopamine, erased at food by octopamine, delivered to the goal layer as the outbound direction, and inverted into a return direction by hΔM. The experiments that would promote it to blue are on <a href="findings/01-synaptic-store.html">finding 9</a> and <a href="findings/02-return-inverter.html">finding 6</a>. The two purple outlines mark where the wiring disagrees with the models of stages everyone considers solved.</p>
 
   <p class="foot">Sources: <a href="findings/index.html">findings</a>; repository docs <code>behavioral-task-map.md</code>, <code>uncharacterised-neurons.md</code>, <code>findings.md</code>. Data: MaleCNS v1.0 (2026) and hemibrain v1.2 (2020). Colours reflect the state of evidence as read for this project, not a consensus.</p>
 </main>
