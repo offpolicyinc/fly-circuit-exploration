@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#060d14">
+<title>Journey → Vector</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="app">
+  <canvas id="world" aria-label="A fly's outbound flight is frozen and folded into one stored vector, then flipped to point home"></canvas>
+  <div id="vignette"></div>
+  <svg id="leaders" aria-hidden="true"></svg>
+  <div id="callouts" aria-hidden="true"></div>
+
+  <header>
+    <a class="wordmark" href="#" id="wordmark">JOURNEY → VECTOR<span>FLIGHT ILLUSTRATION / 002</span></a>
+    <div class="edition">HYPOTHESIS VISUALIZATION<span>NOT A MEASUREMENT · 20 SECONDS</span></div>
+  </header>
+
+  <div id="freeze" class="freeze"><i></i><span>TIME HELD · GEOMETRY REVEALED</span></div>
+  <div id="slowmo" class="freeze"><i></i><span>SLOW MOTION · ×0.35</span></div>
+
+  <section id="editorial">
+    <div class="eyebrow"><span id="chapter-no">01</span><span id="chapter-name">THE JOURNEY BECOMES MEMORY</span></div>
+    <h1 id="headline"></h1>
+  </section>
+
+  <footer>
+    <div class="transport">
+      <button id="play" aria-label="Pause">Ⅱ</button>
+      <button id="restart" aria-label="Restart">↺</button>
+      <span id="time">00.0 <em>/ 20.0</em></span>
+      <span class="hint">SPACE PAUSE · ← → STEP · DRAG TO SCRUB</span>
+    </div>
+    <input id="timeline" type="range" min="0" max="20" step="0.01" value="0" aria-label="Time">
+    <nav>
+      <button data-time="0"><b>01</b> Journey → memory<span>9.0s</span></button>
+      <button data-time="9"><b>02</b> Reverse it to get home<span>6.0s</span></button>
+      <button data-time="15"><b>03</b> Movement inputs<span>2.5s</span></button>
+      <button data-time="17.5"><b>04</b> Compass puzzle<span>2.5s</span></button>
+    </nav>
+  </footer>
+  <div id="error" hidden></div>
+</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
