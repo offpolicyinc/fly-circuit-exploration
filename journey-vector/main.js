@@ -391,9 +391,9 @@ const rotArcHead = new Arrow(CORAL, 0.0001, 0.12, 0.28);
 const camKeys = [
   { t: -PRE, f: (t, P) => fixed(4.8, 3.3, 8.8, -1.0, 0.9, 0.6) },     // establishing: the banana on the island, kitchen behind
   { t: -0.3, f: (t, P) => fixed(3.9, 2.5, 6.4, -0.5, 1.0, 0.6) },
-  { t: 0.2, f: (t, P) => chase(P, 7.5, 2.6, 3.6, 2.2) },
-  { t: 2.4, f: (t, P) => chase(P, 7.0, 2.2, -4.2, 1.8) },
-  { t: 3.4, f: (t, P) => orbit(P, 8.0, 2.8, 0.9 + (t - 3) * 0.55) },
+  { t: 0.2, f: (t, P) => chase(P, 7.5, 2.6, 3.4, 2.2) },
+  { t: 2.4, f: (t, P) => chase(P, 7.2, 2.4, 2.6, 1.8) },
+  { t: 3.4, f: (t, P) => orbit(P, 8.0, 2.8, 0.6 + (t - 3) * 0.4) },
   { t: 4.6, f: (t, P) => fixed(5.0, 9.0, 17.0, 6.0, 3.4, -3.0) },
   { t: 6.2, f: (t, P) => fixed(2.0, 7.6, 18.5, 6.0, 3.6, -3.5) },
   { t: 9.0, f: (t, P) => fixed(8.0, 7.2, 17.5, 6.6, 3.5, -3.5) },
@@ -428,7 +428,7 @@ function cameraAt(t, P) {
     camPos.addScaledVector(rightV, shift); camTarget.addScaledVector(rightV, shift);
   }
   // handheld float
-  camPos.x += Math.sin(t * 0.9) * 0.05; camPos.y += Math.sin(t * 1.3 + 1) * 0.04; camPos.z += Math.cos(t * 0.7) * 0.05;
+  camPos.x += Math.sin(t * 0.9) * 0.03; camPos.y += Math.sin(t * 1.3 + 1) * 0.025; camPos.z += Math.cos(t * 0.7) * 0.03;
 }
 
 // ---------- DOM callouts ----------
@@ -438,7 +438,7 @@ const CALLOUTS = [
   { id: 'hda', name: 'hΔA', color: '#ffc857', tin: 6.35, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.38), dx: -40, dy: -110 },
   { id: 'hdi', name: 'hΔI', color: '#ffc857', tin: 6.7, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.60), dx: -30, dy: -150 },
   { id: 'hdg', name: 'hΔG', color: '#ffc857', tin: 7.05, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.82), dx: -30, dy: -190 },
-  { id: 'store', cls: 'qual', name: 'THE SYNAPTIC STORE', color: '#ffc857', tin: 7.5, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.5).add(V(0, -0.3, 0)), dx: -60, dy: 70, spin: false },
+  { id: 'store', cls: 'store', name: 'THE SYNAPTIC STORE', color: '#ffc857', tin: 7.5, tout: 9.4, anchor: () => brain.roseScreen(), dx: -640, dy: 170, spin: false },
   { id: 'hdm', cls: 'hero', name: 'hΔM', color: '#ff6f61', tin: 10.5, tout: 14.6, anchor: () => rotArcTip(), dx: 40, dy: -40 },
   { id: 'return', cls: 'qual', name: 'THE RETURN PATH', color: '#ff6f61', tin: 12.0, tout: 14.6, anchor: () => P_END.clone().addScaledVector(DISP, -0.45), dx: -80, dy: 70, spin: false },
   { id: 'cancel', cls: 'qual', name: 'HOME VECTOR SHRINKS AS THE STORE CANCELS', color: '#ff6f61', tin: 14.9, tout: 16.4, anchor: () => currentPose.pos.clone().add(V(0, -0.3, 0)), dx: -270, dy: 80, spin: false },
@@ -462,7 +462,7 @@ function updateCallouts(t, W, H) {
     const a = kin * (1 - kout); const vis = a > 0.001 && t >= c.tin;
     c.el.style.opacity = vis ? a : 0; c.line.setAttribute('opacity', vis ? a * 0.8 : 0); c.dot.setAttribute('opacity', vis ? a : 0);
     if (!vis) continue;
-    _s.copy(c.anchor()).project(camera); const sx = (_s.x * 0.5 + 0.5) * W, sy = (-_s.y * 0.5 + 0.5) * H;
+    const A = c.anchor(); let sx, sy; if (A.screen) { sx = A.x; sy = A.y; } else { _s.copy(A).project(camera); sx = (_s.x * 0.5 + 0.5) * W; sy = (-_s.y * 0.5 + 0.5) * H; }
     const stamp = c.spin === false ? 1 : backOut((t - c.tin) / 0.42); const scale = c.spin === false ? 1 : lerp(1.6, 1, stamp); const rot = c.spin === false ? 0 : lerp(-7, 0, stamp);
     const lx = sx + c.dx * (W / 1400 + 0.4), ly = sy + c.dy * (H / 900 + 0.35);
     c.el.style.transform = `translate(${lx.toFixed(1)}px, ${(ly - c.el.offsetHeight).toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;

@@ -18,6 +18,7 @@ export function initBrain(canvas, N_COL) {
   };
   const link = (x0, y0, x1, y1, color, lit, dash = [3, 4]) => { g.strokeStyle = rgba(color, 0.18 + 0.7 * lit); g.lineWidth = 1 + lit; g.setLineDash(dash); g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke(); g.setLineDash([]); };
   const arrowHead = (x, y, ang, size, color) => { g.fillStyle = color; g.beginPath(); g.moveTo(x, y); g.lineTo(x - Math.cos(ang - 0.45) * size, y - Math.sin(ang - 0.45) * size); g.lineTo(x - Math.cos(ang + 0.45) * size, y - Math.sin(ang + 0.45) * size); g.closePath(); g.fill(); };
+  let rose = { x: 0, y: 0 };
   let peakW = 1; // running scale for the wedges: the largest weight seen so far, so the rose grows into its frame
 
   function update(t, tScene, S) {
@@ -30,7 +31,7 @@ export function initBrain(canvas, N_COL) {
     for (let c = 0; c < N_COL; c++) { const a = c * TAU / N_COL; wmax = Math.max(wmax, weights[c]); sx += Math.sin(a) * weights[c]; sy += Math.cos(a) * weights[c]; }
     peakW = Math.max(peakW, wmax);
     const storeLit = wmax > 0.05 ? 1 : 0; const sumLen = Math.hypot(sx, sy);
-    const cx = W * 0.5; const unit = Math.min(W, H * 0.62);
+    const cx = W * 0.5; const unit = Math.min(W * 0.92, H * 0.62);
 
     // ---- EPG ring attractor: heading bump ----
     const ry = H * 0.16, rr = unit * 0.16;
@@ -38,19 +39,19 @@ export function initBrain(canvas, N_COL) {
     const nRing = 16; const heading = S.heading || 0;
     for (let i = 0; i < nRing; i++) { const a = i * TAU / nRing; let d = a - heading; d = Math.atan2(Math.sin(d), Math.cos(d)); const bump = Math.exp(-(d * d) / 0.32) * (S.landed ? 0.55 : 1);
       // screen angle: heading 0 = up, clockwise positive (matches the rose below)
-      const x = cx + Math.sin(a) * rr, y = ry - Math.cos(a) * rr; glowDot(x, y, 2 + bump * 2.6, C.violet, bump); }
-    label('EPG', cx, ry + rr + 14, C.violet, 11, 'center', cond);
+      const x = cx + Math.sin(a) * rr, y = ry - Math.cos(a) * rr; glowDot(x, y, 2.8 + bump * 3.4, C.violet, bump); }
+    label('EPG', cx, ry + rr + 18, C.violet, 16, 'center', cond);
 
     // ---- hΔB travel-direction bump: a short strip of eight columns ----
-    const by = ry + rr + 36, bw = unit * 0.5, bx0 = cx - bw / 2, cellW = bw / N_COL;
+    const by = ry + rr + 48, bw = unit * 0.5, bx0 = cx - bw / 2, cellW = bw / N_COL;
     for (let c = 0; c < N_COL; c++) { const a = c * TAU / N_COL; let d = a - heading; d = Math.atan2(Math.sin(d), Math.cos(d)); const v = Math.max(0, Math.cos(d)) * moving;
-      g.fillStyle = rgba(C.white, 0.08 + 0.75 * v); g.fillRect(bx0 + c * cellW + 1, by - 5, cellW - 2, 10); }
-    label('hΔB', cx, by + 17, C.dim, 10, 'center', cond);
+      g.fillStyle = rgba(C.white, 0.08 + 0.75 * v); g.fillRect(bx0 + c * cellW + 1, by - 7, cellW - 2, 14); }
+    label('hΔB', cx, by + 22, C.dim, 14, 'center', cond);
     link(cx, ry + rr + 2, cx, by - 7, C.violet, moving * 0.6, [2, 3]);
 
     // ---- the store: eight columns as a rose of wedges; the vector sum is the home vector ----
-    const oy = by + 40 + unit * 0.27, R = unit * 0.25;
-    link(cx, by + 24, cx, oy - R - 14, C.gold, moving, [2, 3]);
+    const oy = by + 46 + unit * 0.27, R = unit * 0.25; { const r = canvas.getBoundingClientRect(); rose = { x: r.left + cx, y: r.top + oy }; }
+    link(cx, by + 32, cx, oy - R - 14, C.gold, moving, [2, 3]);
     g.strokeStyle = C.faint; g.lineWidth = 1; g.beginPath(); g.arc(cx, oy, R, 0, TAU); g.stroke();
     g.beginPath(); g.arc(cx, oy, R * 0.5, 0, TAU); g.stroke();
     for (let c = 0; c < N_COL; c++) { const a = c * TAU / N_COL; g.strokeStyle = C.faint; g.beginPath(); g.moveTo(cx, oy); g.lineTo(cx + Math.sin(a) * R, oy - Math.cos(a) * R); g.stroke(); }
@@ -62,18 +63,18 @@ export function initBrain(canvas, N_COL) {
     // reset flash: a teal ring collapsing inward over the rose
     if (reset > 0) { g.strokeStyle = rgba(C.teal, reset); g.lineWidth = 2 + 6 * reset; g.beginPath(); g.arc(cx, oy, R * (0.2 + 0.9 * (1 - reset)), 0, TAU); g.stroke(); }
     // home vector = vector sum
-    if (sumLen * scale > 2) { const ex = cx + sx * scale * 0.98, ey = oy - sy * scale * 0.98; g.strokeStyle = C.gold; g.lineWidth = 2.5; g.shadowColor = C.gold; g.shadowBlur = 10; g.beginPath(); g.moveTo(cx, oy); g.lineTo(ex, ey); g.stroke(); g.shadowBlur = 0; arrowHead(ex, ey, Math.atan2(ey - oy, ex - cx), 9, C.gold); }
+    if (sumLen * scale > 2) { const ex = cx + sx * scale * 0.98, ey = oy - sy * scale * 0.98; g.strokeStyle = C.gold; g.lineWidth = 3.5; g.shadowColor = C.gold; g.shadowBlur = 14; g.beginPath(); g.moveTo(cx, oy); g.lineTo(ex, ey); g.stroke(); g.shadowBlur = 0; arrowHead(ex, ey, Math.atan2(ey - oy, ex - cx), 13, C.gold); }
     glowDot(cx, oy, 2.2, C.gold, storeLit);
-    label('hΔH · hΔA · hΔI · hΔG', cx, oy + R + 18, storeLit ? C.gold : C.dim, 11, 'center', cond);
+    label('hΔH · hΔA · hΔI · hΔG', cx, oy + R + 24, storeLit ? C.gold : C.dim, 17, 'center', cond);
 
     // ---- dopamine write gate on the left, octopamine reset on the right ----
-    const gx = 12, gy = oy - R * 0.3; const dop = moving;
-    glowDot(gx, gy, 4.5, C.pink, dop); link(gx + 5, gy, cx - R * 0.72, oy - R * 0.2, C.pink, dop);
-    label('FB4M · FB1H', gx - 4, gy - 26, dop ? C.pink : C.dim, 10, 'left', cond); label('DOPAMINE', gx - 4, gy - 14, C.dim, 6.5, 'left');
-    const ox = W - 12, oyy = oy + R * 0.3; const oa = Math.min(1, reset * 1.6);
-    glowDot(ox, oyy, 4.5, C.teal, oa); link(ox - 5, oyy, cx + R * 0.72, oy + R * 0.2, C.teal, oa);
-    label('OA‑VPM3', ox + 4, oyy + 16, oa > 0.05 ? C.teal : C.dim, 10, 'right', cond); label('OCTOPAMINE', ox + 4, oyy + 28, C.dim, 6.5, 'right');
+    const gx = Math.max(40, W * 0.16), gy = oy - R * 0.3; const dop = moving;
+    glowDot(gx, gy, 6, C.pink, dop); link(gx + 5, gy, cx - R * 0.72, oy - R * 0.2, C.pink, dop);
+    label('FB4M · FB1H', gx - 4, gy - 30, dop ? C.pink : C.dim, 15, 'left', cond); label('DOPAMINE', gx - 4, gy - 15, C.dim, 9, 'left');
+    const ox = W - 16, oyy = oy + R * 0.3; const oa = Math.min(1, reset * 1.6);
+    glowDot(ox, oyy, 6, C.teal, oa); link(ox - 5, oyy, cx + R * 0.72, oy + R * 0.2, C.teal, oa);
+    label('OA‑VPM3', ox + 4, oyy + 20, oa > 0.05 ? C.teal : C.dim, 15, 'right', cond); label('OCTOPAMINE', ox + 4, oyy + 35, C.dim, 9, 'right');
 
   }
-  return { update };
+  return { update, roseScreen: () => ({ screen: true, x: rose.x, y: rose.y }) };
 }

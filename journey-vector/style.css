@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-:root{--panel:24%;--ink:#eef0ea;--muted:#7d929a;--gold:#ffc857;--coral:#ff6f61;--blue:#5cc8ff;--violet:#b48cff;--mono:'IBM Plex Mono',monospace;--cond:'Barlow Condensed','Arial Narrow',sans-serif}
+:root{--panel:32%;--ink:#eef0ea;--muted:#7d929a;--gold:#ffc857;--coral:#ff6f61;--blue:#5cc8ff;--violet:#b48cff;--mono:'IBM Plex Mono',monospace;--cond:'Barlow Condensed','Arial Narrow',sans-serif}
 *{box-sizing:border-box}
 html,body{margin:0;background:#060d14;color:var(--ink);font-family:'DM Sans',sans-serif;overflow:hidden;height:100%}
 #app{position:relative;width:100vw;height:100svh;min-height:480px}
@@ -12,6 +12,7 @@ canvas#world{display:block;width:100%;height:100%}
 .callout .name small{font-size:.55em;font-weight:600;letter-spacing:.02em;opacity:.85}
 .callout .sub{font:500 10px var(--mono);letter-spacing:2px;margin-top:6px;color:#c8d2d6;opacity:.9}
 .callout.hero .name{font-size:clamp(44px,6.4vw,104px)}
+.callout.store .name{font:800 clamp(28px,3.2vw,60px)/.95 var(--cond);letter-spacing:.5px;text-shadow:0 0 40px currentColor,0 2px 0 rgba(0,0,0,.4)}
 .callout.mini .name{font-size:clamp(11px,1.1vw,14px);font-family:var(--mono);font-weight:500;letter-spacing:2px;text-shadow:none}
 .callout.qual .name{font:600 clamp(11px,1.15vw,15px) var(--mono);letter-spacing:2.5px;text-shadow:none;color:#d6dee2}
 .callout .loop{display:inline-block;vertical-align:middle;margin-left:14px;width:.9em;height:.9em}
@@ -54,7 +55,7 @@ nav button.active{color:var(--ink)}
 
 /* connectome panel */
 #brainpanel{position:absolute;top:0;right:0;bottom:0;width:var(--panel);min-width:200px;display:flex;flex-direction:column;padding:26px 22px 22px;pointer-events:none;background:linear-gradient(90deg,rgba(5,7,10,0) 0%,rgba(5,7,10,.86) 9%,rgba(5,7,10,.94) 100%);border-left:1px solid rgba(255,255,255,.05)}
-.bp-eyebrow{font:500 9px var(--mono);letter-spacing:2px;color:var(--muted)}
+.bp-eyebrow{font:500 12px var(--mono);letter-spacing:2.5px;color:var(--muted)}
 .bp-title{font:700 22px var(--cond);letter-spacing:1px;margin-top:6px;color:var(--ink)}
 .bp-title span{font:9px var(--mono);letter-spacing:1.5px;color:var(--muted);margin-left:8px}
 .bp-sub{font:9px var(--mono);letter-spacing:.8px;color:#5d7079;margin-top:8px;line-height:1.6;max-width:26ch}
