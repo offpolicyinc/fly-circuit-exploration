@@ -476,9 +476,9 @@ function updateCallouts(t, W, H) {
 // ---------- headline / chapters ----------
 const headlineEl = document.getElementById('headline'), chapNo = document.getElementById('chapter-no'), chapName = document.getElementById('chapter-name'), eyebrow = document.querySelector('.eyebrow');
 const HEADLINES = [
-  { no: '01', tin: 6.3, tout: 9.4, text: "The fly's home vector is not stored in activity,\nbut in synaptic weights of\nhΔH, hΔA, hΔI and hΔG." },
-  { no: '02', tin: 11.2, tout: 15.2, text: 'hΔM reverses the memory vector\nfor homing.' },
-  { no: '03', tin: LAND + 0.9, tout: 99, text: 'Home! Dopamine gates learning;\nOctopamine erases the store.' },
+  { no: '01', accent: '#ffc857', tin: 6.3, tout: 9.4, text: "The fly's home vector is not stored in activity,\nbut in synaptic weights of hΔH, hΔA, hΔI and hΔG." },
+  { no: '02', accent: '#ff6f61', tin: 11.2, tout: 15.2, text: 'hΔM reverses the memory vector for homing.' },
+  { no: '03', accent: '#5ee6c8', tin: LAND + 0.9, tout: 99, text: 'Home! Dopamine gates learning; Octopamine erases the store.' },
 ];
 const CHAPTERS = [[0, '01', 'THE JOURNEY BECOMES MEMORY', '#ffc857'], [9, '02', 'REVERSE IT TO GET HOME', '#ff6f61'], [LAND - 0.2, '03', 'HOME, AND RESET', '#5ee6c8']];
 let curHeadline = -1, curChapter = -1;
@@ -486,7 +486,7 @@ function updateText(t) {
   let h = -1; HEADLINES.forEach((x, i) => { if (t >= x.tin && t < x.tout) h = i; });
   if (h !== curHeadline) {
     curHeadline = h; headlineEl.innerHTML = '';
-    if (h >= 0) { const num = document.createElement('span'); num.className = 'w num'; num.textContent = HEADLINES[h].no; headlineEl.appendChild(num); HEADLINES[h].text.split('\n').forEach((line, li) => { line.split(' ').forEach((w, wi) => { const s = document.createElement('span'); s.className = 'w'; s.textContent = w + ' '; s.style.transitionDelay = `${120 + (li * 5 + wi) * 55}ms`; headlineEl.appendChild(s); }); headlineEl.appendChild(document.createElement('br')); }); requestAnimationFrame(() => requestAnimationFrame(() => headlineEl.querySelectorAll('.w').forEach(w => w.classList.add('in')))); }
+    if (h >= 0) { const num = document.createElement('span'); num.className = 'w num'; num.textContent = HEADLINES[h].no; num.style.color = HEADLINES[h].accent; headlineEl.appendChild(num); HEADLINES[h].text.split('\n').forEach((line, li) => { line.split(' ').forEach((w, wi) => { const s = document.createElement('span'); s.className = 'w'; s.textContent = w + ' '; if (/hΔ/.test(w)) s.style.color = HEADLINES[h].accent; s.style.transitionDelay = `${120 + (li * 5 + wi) * 55}ms`; headlineEl.appendChild(s); }); headlineEl.appendChild(document.createElement('br')); }); requestAnimationFrame(() => requestAnimationFrame(() => headlineEl.querySelectorAll('.w').forEach(w => w.classList.add('in')))); }
   }
   let c = 0; CHAPTERS.forEach((x, i) => { if (t >= x[0]) c = i; });
   if (c !== curChapter) { curChapter = c; chapNo.textContent = CHAPTERS[c][1]; chapName.textContent = CHAPTERS[c][2]; eyebrow.style.color = CHAPTERS[c][3]; document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', i === c)); }
