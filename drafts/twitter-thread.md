@@ -1,10 +1,6 @@
 # Thread draft
 
-## POST 1: 
-
-The same way levent gets to do better math because of ai, someone should be doing better neuroscience because of ai. I have been unplugged from systems neuroscience for the last two years and but have iterated heavily with fable 5.1 over the course of two days to do this.
-
-## POST 2:
+## POST:
 
 I scraped the fly connectome and found a group of neurons (hΔH, hΔA, hΔI and hΔG) that could allow the fly to navigate using synaptic weights, not neural activations. This is fast-weight continual learning, something frozen LLMs cannot do.
 
@@ -19,7 +15,12 @@ This is the key finding, but I have posted 3 other findings in links below. Thes
 Background, methods, experiments, results, as well as relevant citations: https://pwang724.github.io/fly-circuit-exploration/findings/index.html
 Panoramic circuit view: https://pwang724.github.io/fly-circuit-exploration/circuit.html
 GH repo: https://github.com/pwang724/fly-circuit-exploration 
-___
+
+## REPOST: 
+
+The same way levent gets to do better math because of ai, someone should be doing better neuroscience because of ai. I have been unplugged from systems neuroscience for the last two years and but have iterated heavily with fable 5.1 over the course of two days to do this.
+
+_____________
 
 **2 / the neuron that turns the memory around**
 
