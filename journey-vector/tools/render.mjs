@@ -15,8 +15,13 @@ const n = Math.min(LIMIT, Math.ceil(total * FPS)); const t0 = Date.now();
 for (let i = 0; i < n; i++) {
   const t = i / FPS;
   await page.evaluate(async t => { seek(t); await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))); }, t);
-  const buf = await page.screenshot({ type: 'png', animations: 'disabled' });
+  let buf = null;
+  for (let attempt = 0; attempt < 4 && !buf; attempt++) { // an occluded window can stall a capture; retry rather than die
+    try { buf = await page.screenshot({ type: 'png', animations: 'disabled', timeout: 20000 }); }
+    catch (e) { console.log(`retry frame ${i} (${attempt + 1}): ${e.message.split('\n')[0]}`); await page.bringToFront(); await page.waitForTimeout(500); }
+  }
+  if (!buf) throw new Error(`frame ${i} could not be captured`);
   writeFileSync(`${outDir}/f${String(i).padStart(5, '0')}.png`, buf);
   if (i % 30 === 0) console.log(`frame ${i}/${n} t=${t.toFixed(2)} ${((Date.now() - t0) / 1000).toFixed(0)}s`);
 }
-await browser.close(); console.log('done', n, 'frames');
+await browser.close(); console.log('done', n, 'frames'); writeFileSync(`${outDir}/COMPLETE`, String(n));

@@ -167,9 +167,9 @@ const peelTex = (() => { const c = document.createElement('canvas'); c.width = 1
   const tip = (x0, w) => { const lg = g.createLinearGradient(x0, 0, x0 + w, 0); lg.addColorStop(0, 'rgba(50,28,10,0.85)'); lg.addColorStop(1, 'rgba(50,28,10,0)'); g.fillStyle = lg; g.fillRect(Math.min(x0, x0 + w), 0, Math.abs(w), 512); };
   tip(0, 70); tip(1024, -90);
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; return t; })();
-const peelMat = new THREE.MeshStandardMaterial({ map: peelTex, color: 0xffffff, roughness: 0.92, metalness: 0.0, emissive: 0xffd84a, emissiveMap: peelTex, emissiveIntensity: 0.18 });
-const peelStripMat = new THREE.MeshStandardMaterial({ map: peelTex, color: 0xffffff, roughness: 0.92, side: THREE.DoubleSide, emissive: 0xffd84a, emissiveMap: peelTex, emissiveIntensity: 0.18 });
-const fleshMat = new THREE.MeshStandardMaterial({ color: 0xefe2b4, roughness: 0.95, emissive: 0xefe2b4, emissiveIntensity: 0.1 });
+const peelMat = new THREE.MeshStandardMaterial({ map: peelTex, color: 0xf2f2f2, roughness: 0.95, metalness: 0.0 });
+const peelStripMat = new THREE.MeshStandardMaterial({ map: peelTex, color: 0xf2f2f2, roughness: 0.95, side: THREE.DoubleSide });
+const fleshMat = new THREE.MeshStandardMaterial({ color: 0xd8cc9c, roughness: 0.97 });
 const stemMat = new THREE.MeshStandardMaterial({ color: 0x3a2a14, roughness: 0.9 });
 // swept tube with a radius profile and a 5-ridge cross-section; u0..u1 selects the portion of the spine to sweep
 function sweep(curve, radiusAt, u0 = 0, u1 = 1, segs = 120, sides = 28, ridges = true) {
