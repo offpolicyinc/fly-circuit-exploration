@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Finding 2: The stored vector points away from food. One unassigned neuron type, hΔM, is the only thing that turns it around</title>
+<title>Finding 2: The stored vector points away from food. Two unassigned neuron types, hΔM and hΔI, are the only things that turn it around</title>
 <style>
   :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; --purple:#6a4c93; }
   body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
@@ -29,8 +29,8 @@
 <body>
 <main>
   <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
-<div class="kicker">Finding 2 of 4 · the sign problem</div><h1>The stored vector points away from food. One unassigned neuron type, hΔM, is the only thing that turns it around</h1>
-<p class="summary"><b>Summary.</b> A stored displacement points from food to fly, but steering needs the reverse, so something between the store and the steering neurons must rotate the vector by half a turn. The store cells do not do it: hΔB's synapses land on their axonal arbors, not their dendrites, so they relay the vector unrotated. Between the goal neurons FC2 and the steering neurons PFL3, the only columnar type that rotates is hΔM, eight cells with no assigned function: FC2 contacts its dendrites and its axon, 178° away, contacts PFL3 and PFL2. PFL3 therefore receives the stored vector twice, unrotated via FC2 ("keep going") and rotated via hΔM ("go back"); in a closed-loop model only the rotated copy produces return.</p>
+<div class="kicker">Finding 2 of 4 · the sign problem</div><h1>The stored vector points away from food. Two unassigned neuron types, hΔM and hΔI, are the only things that turn it around</h1>
+<p class="summary"><b>Summary.</b> A stored displacement points from food to fly, but steering needs the reverse, so something between the store and the steering neurons must rotate the vector by half a turn. The store cells do not do it: hΔB's synapses land on their axonal arbors, not their dendrites, so they relay the vector unrotated. The wiring supplies exactly two rotating routes to the steering neurons PFL3 and PFL2, both through cells with no assigned function: after the goal neurons FC2, only hΔM rotates (FC2 contacts its dendrites; its axon, 178° away, contacts PFL3); before FC2, the store candidate hΔA contacts the dendrites of hΔI, whose axon reaches PFL3 half a turn away. PFL3 therefore receives the stored vector unrotated ("keep going") directly and rotated ("go back") by these two; in a closed-loop model only the rotated copies produce return.</p>
 <figure>
     <svg viewBox="0 0 820 200" width="100%" role="img" aria-label="The sign question">
       <defs><marker id="q" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="qr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b4432c"/></marker></defs>
@@ -45,7 +45,6 @@
     </svg>
     <figcaption>The question this finding answers.</figcaption>
   </figure>
-<p>&gt; <b>Audit note (2026-09-13).</b> hΔM is not the only inverter. hΔA's axon contacts hΔI's dendrites (1,388 synapses, 63 % at 180° in the hemibrain, every hΔI cell), and hΔI's axon reaches PFL3 (3,468) and PFL2 (1,942), so the stored vector reaches steering rotated by a second route that bypasses FC2. hΔM remains the only inverter downstream of FC2. In the axon frame both inverting routes return and both direct routes walk away; with synapse-count weights the direct routes dominate. Details: <a href="../docs/audit-2026-09-13.md">docs/audit-2026-09-13.md</a>.</p>
 <h2>The problem</h2>
 <p>The store of finding 1 holds the fly's displacement from the food: "I am 2 north of the food". To walk home the steering neurons need the opposite vector: "walk 2 south". Somewhere between the store and the steering neurons the vector has to be rotated by 180°. The question is which neuron does that.</p>
 <h2>Why the store cells looked like the answer</h2>
@@ -100,31 +99,39 @@
 <tr><td class="">hΔG</td><td class="n">73 %</td><td class="">relays</td></tr>
 <tr><td class="">hΔJ</td><td class="n">58 %</td><td class="">both arbors, cancels</td></tr>
 <tr><td class="">hΔK</td><td class="n">1 %</td><td class="">dendrite: does rotate, but is not a store</td></tr></table>
-<p>Hulse 2021 drew this two-arbor contact motif anatomically without following its sign. The same shares appear in the hemibrain.</p>
+<p>Hulse 2021 drew this two-arbor contact motif anatomically without following its sign. The same shares appear in the hemibrain, and hΔB's own PFNd input splits across both arbors the same way, which Lyu 2022 modelled as a subtraction.</p>
 <h2>Where the rotation actually happens</h2>
 <figure>
-    <svg viewBox="0 0 820 268" width="100%" role="img" aria-label="Two routes from FC2 to PFL3">
+    <svg viewBox="0 0 820 300" width="100%" role="img" aria-label="Rotating and non-rotating routes from the store to PFL3">
       <defs><marker id="j" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="k" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#b4432c"/></marker></defs>
-      <rect x="20" y="100" width="140" height="56" rx="8" fill="#f6e7e3" stroke="#b4432c" stroke-width="2"/><text x="90" y="122" text-anchor="middle" font-weight="700">store (hΔH/A/I/G)</text><text x="90" y="140" text-anchor="middle" font-size="12">holds +D</text>
+      <rect x="20" y="100" width="140" height="56" rx="8" fill="#f6e7e3" stroke="#b4432c" stroke-width="2"/><text x="90" y="122" text-anchor="middle" font-weight="700">store (hΔA / hΔH)</text><text x="90" y="140" text-anchor="middle" font-size="12">holds +D</text>
       <rect x="240" y="100" width="130" height="56" rx="8" fill="#2f7d4a"/><text x="305" y="122" text-anchor="middle" fill="#fff" font-weight="700">FC2 goal</text><text x="305" y="140" text-anchor="middle" fill="#fff" font-size="12">receives +D</text>
       <line x1="160" y1="128" x2="238" y2="128" stroke="#1b1b1f" stroke-width="3" marker-end="url(#j)"/><text x="199" y="120" text-anchor="middle" font-size="12">+15°</text>
       <rect x="640" y="30" width="160" height="56" rx="8" fill="#1b1b1f"/><text x="720" y="52" text-anchor="middle" fill="#fff" font-weight="700">PFL3 ← +D</text><text x="720" y="70" text-anchor="middle" fill="#fff" font-size="12">steer away: keep going</text>
       <path d="M370 116 C 470 80, 560 58, 638 58" stroke="#1b1b1f" stroke-width="3" fill="none" marker-end="url(#j)"/><text x="500" y="66" text-anchor="middle" font-size="12">direct · 7,690 · 2°</text>
+      <path d="M90 100 C 120 30, 500 20, 638 44" stroke="#1b1b1f" stroke-width="2" fill="none" marker-end="url(#j)"/><text x="330" y="28" text-anchor="middle" font-size="12">hΔA → PFL3 direct · 3,881 · +14°</text>
       <rect x="450" y="170" width="120" height="56" rx="8" fill="#b07a12"/><text x="510" y="192" text-anchor="middle" fill="#fff" font-weight="700">hΔM</text><text x="510" y="210" text-anchor="middle" fill="#fff" font-size="12">336° in, 202° out</text>
       <path d="M370 140 C 400 170, 420 195, 448 198" stroke="#b4432c" stroke-width="3" fill="none" marker-end="url(#k)"/><text x="390" y="185" text-anchor="middle" font-size="12" fill="#b4432c">1,073</text>
       <rect x="640" y="170" width="160" height="56" rx="8" fill="#1b1b1f"/><text x="720" y="192" text-anchor="middle" fill="#fff" font-weight="700">PFL3 ← −D</text><text x="720" y="210" text-anchor="middle" fill="#fff" font-size="12">steer toward food: return</text>
-      <line x1="570" y1="198" x2="638" y2="198" stroke="#b4432c" stroke-width="3.5" marker-end="url(#k)"/><text x="604" y="188" text-anchor="middle" font-size="12" fill="#b4432c">3,983</text>
-      <text x="410" y="244" text-anchor="middle" font-size="12" fill="#5a5f6a">Both PFL3 boxes are the same neurons; which input dominates decides whether the fly continues or returns.</text><text x="410" y="258" text-anchor="middle" font-size="12" fill="#5a5f6a">FB5A (GABA) inhibits FC2, PFL3 and hΔM together and could set that balance. Total rotation via hΔM: 336° + 202° = 178°.</text>
+      <line x1="570" y1="198" x2="638" y2="198" stroke="#b4432c" stroke-width="3.5" marker-end="url(#k)"/><text x="604" y="188" text-anchor="middle" font-size="12" fill="#b4432c">2,428</text>
+      <rect x="240" y="232" width="120" height="50" rx="8" fill="#b07a12"/><text x="300" y="252" text-anchor="middle" fill="#fff" font-weight="700">hΔI</text><text x="300" y="268" text-anchor="middle" fill="#fff" font-size="12">183° in, 192° out</text>
+      <path d="M90 156 C 100 240, 160 257, 238 257" stroke="#b4432c" stroke-width="3" fill="none" marker-end="url(#k)"/><text x="150" y="240" text-anchor="middle" font-size="12" fill="#b4432c">hΔA → hΔI dendrite · 1,388</text>
+      <path d="M360 257 C 480 262, 580 240, 638 212" stroke="#b4432c" stroke-width="3.5" fill="none" marker-end="url(#k)"/><text x="500" y="262" text-anchor="middle" font-size="12" fill="#b4432c">3,468</text>
+      <text x="410" y="294" text-anchor="middle" font-size="12" fill="#5a5f6a">All PFL3 boxes are the same neurons; which input dominates decides whether the fly continues or returns. FB5A (GABA) inhibits FC2, PFL3, hΔM and hΔH together and could set that balance.</text>
     </svg>
-    <figcaption>The goal reaches the steering neurons twice: unchanged through FC2 and rotated by half a turn through hΔM. Only the rotated copy points home.</figcaption>
+    <figcaption>The stored vector reaches the steering neurons unrotated by the direct routes and rotated by half a turn through hΔM (after FC2) or through hΔI (before it). Only the rotated copies point home.</figcaption>
   </figure>
-<p>From the store the signal goes to the goal neurons FC2, and from FC2 to the steering neurons PFL3. Both connections stay in the same column, so by that route PFL3 receives "north" and steers the fly further north, away from the food. There is one other route from FC2 to PFL3: through hΔM. FC2 contacts hΔM's dendrites, and hΔM's axon, 180° away, contacts PFL3. Through hΔM, PFL3 receives "south". hΔM is the only cell type between the goal and the steering neurons that does this, and nobody has assigned it a function.</p>
+
+<p>From the store the signal goes to the goal neurons FC2, and from FC2 to the steering neurons PFL3. Both connections stay in the same column, so by that route PFL3 receives "north" and steers the fly further north, away from the food. Of every two-step columnar route from the stores or FC2 to PFL3 and PFL2 with at least 150 synapses per step, exactly two rotate: FC2 contacts hΔM's dendrites, and hΔM's axon, 180° away, contacts PFL3; hΔA's axon contacts hΔI's dendrites in all 17 hΔI cells, and hΔI's axon, 180° away, contacts PFL3 and PFL2. Nobody has assigned either cell a function.</p>
 <table>
-<tr><th class="">FC2 → PFL3 route</th><th class="n">synapses</th><th class="n">rotation</th></tr>
-<tr><td class="">direct</td><td class="n">7,690</td><td class="n">2°</td></tr>
-<tr><td class="">through hΔM (1,073 in, 3,983 out)</td><td class="n">3,983</td><td class="n">178°</td></tr>
-<tr><td class="">through hΔM to PFL2</td><td class="n">1,555</td><td class="n">178°</td></tr></table>
-<p>FC2 columns are named directly, so there is no arbor ambiguity on this step.</p>
+<tr><th class="">route to PFL3</th><th class="n">synapses</th><th class="n">rotation</th></tr>
+<tr><td class="">FC2 → PFL3 direct</td><td class="n">7,690</td><td class="n">2°</td></tr>
+<tr><td class="">FC2B → hΔM → PFL3 (1,073 in, 2,428 out)</td><td class="n">2,428</td><td class="n">178°</td></tr>
+<tr><td class="">FC2B → hΔM → PFL2</td><td class="n">1,555</td><td class="n">178°</td></tr>
+<tr><td class="">hΔA → PFL3 direct</td><td class="n">3,881</td><td class="n">14°</td></tr>
+<tr><td class="">hΔA → hΔI → PFL3 (1,388 in, 3,468 out)</td><td class="n">3,468</td><td class="n">195°</td></tr>
+<tr><td class="">hΔA → hΔI → PFL2</td><td class="n">1,942</td><td class="n">197°</td></tr></table>
+<p>FC2 columns are named directly, so there is no arbor ambiguity on that step. hΔI also receives the current step from hΔB on its axon, unrotated, so if hΔA is the store, hΔI sends PFL3 the current step minus the stored vector: a comparison, not a relay.</p>
 <h2>The simulation check</h2>
 <div class="anim" id="retAnim">
   <svg viewBox="0 0 820 340" width="100%" role="img" aria-label="Animation: returning with and without the half-turn rotation">
@@ -164,24 +171,24 @@
 </script>
 <p style="color:var(--muted);font-size:13px">Both agents carry the same stored vector, pointing from the food to themselves. Red steers toward it and walks away. Blue rotates it first; at 180° it walks home, at 90° it circles, at 0° it is red.</p>
 
-<p>A model fly with the store wired to steering with no rotation walks away from the food on every run. With 180° rotation, or with hΔM's measured 178°, it returns.</p>
+<p>A model fly with the store wired to steering with no rotation walks away from the food on every run. With 180° rotation, or with either measured route, it returns.</p>
 <table>
 <tr><th class="">rotation between store and PFL3</th><th class="n">returned to food</th><th class="">median closest approach</th></tr>
-<tr><td class="">180° / 178° (hΔM)</td><td class="n">35 %</td><td class="">1.05 / 1.36</td></tr>
+<tr><td class="">180° ideal / 178° (hΔM)</td><td class="n">35 %</td><td class="">1.05 / 1.36</td></tr>
 <tr><td class="">90°</td><td class="n">20 %</td><td class="">2.64</td></tr>
 <tr><td class="">0° (direct route only)</td><td class="n">0 %</td><td class="">10.3, walks away</td></tr>
 <tr><td class="">no memory</td><td class="n">–</td><td class="">6.76</td></tr></table>
-<p>Distances in units of the outbound walk length, 60 runs.</p>
+<p>Distances in units of the outbound walk length, 60 runs. Through the measured kernels the readout points 34° from home via either rotating route and 145° or more from home via every direct route. Weighted by synapse count the direct routes win; something must tip the balance.</p>
 <h2>Consequence</h2>
-<p>PFL3 receives the same memory twice: "north" directly, meaning keep going, and "south" through hΔM, meaning go back. Whichever input wins decides whether the fly keeps exploring or returns. Dispersing flies do keep going for hours (Green 2019), and FB5A, a GABA neuron that inhibits FC2, PFL3 and hΔM together, is placed to set the balance. hΔM is the return path.</p>
-<p>PFL2 also receives the rotated goal from hΔM. PFL2 is known to fire most when the fly faces away from its goal (Westeinde 2024), which this explains with no new anatomy.</p>
+<p>PFL3 receives the same memory twice: "north" directly, meaning keep going, and "south" through hΔM and through hΔI, meaning go back. Whichever input wins decides whether the fly keeps exploring or returns. Dispersing flies do keep going for hours (Green 2019), and FB5A, a GABA neuron that inhibits FC2, PFL3, hΔM and hΔH together, is placed to set the balance. hΔM and hΔI are the return path.</p>
+<p>PFL2 also receives the rotated goal from both. PFL2 is known to fire most when the fly faces away from its goal (Westeinde 2024), which this explains with no new anatomy.</p>
 <h2>What would settle it</h2>
-<ul><li>Silence hΔM during a return to food and during straight heading maintenance: return should fail, heading should survive.</li><li>Image hΔM and FC2 together: bumps half a turn apart.</li><li>Image hΔH or hΔA during a return: bump along the outbound displacement, not toward the food.</li></ul>
+<ul><li>Silence hΔM, and separately hΔI, during a return to food and during straight heading maintenance: return should fail, heading should survive.</li><li>Image hΔM and FC2 together, and hΔI and hΔA together: bumps half a turn apart.</li><li>Image hΔH or hΔA during a return: bump along the outbound displacement, not toward the food.</li></ul>
 <h2>Prior work</h2>
-<p>Hulse 2021 drew the two-arbor contact motif on hΔ neurons without its sign consequence. Liao 2025 describe an anti-goal circuit further downstream in the lateral accessory lobe. Nanni &amp; Lee 2026 propose FB5A as the FC2 normaliser. The hΔM rotation and its necessity for return are not in print.</p>
+<p>Hulse 2021 drew the two-arbor contact motif on hΔ neurons without its sign consequence. Liao 2025 describe an anti-goal circuit further downstream in the lateral accessory lobe. Nanni &amp; Lee 2026 propose FB5A as the FC2 normaliser. The hΔM and hΔI rotations and their necessity for return are not in print.</p>
 <div class="methods">
 <h2>Methods</h2>
-<p>Arbor assignment uses the column offset between hΔB's name and each target's name, with hΔ cells named by dendritic column (Hulse 2021) and hΔB's output on its axonal arbor (Lyu 2022): an offset of 180° from hΔB's name means contact on the target's dendrite, 0° means contact on the target's axon. Route rotations are the mean angular offsets of FC2→hΔM (336°) and hΔM→PFL3 (202°) summed. Closed-loop agent: rate-based, eight columns, store from finding 1, PFL3 steering as left minus right proportional to sin(goal − heading), rotation between store readout and goal varied as a parameter. Tables: <code>data/derived/fb_offset_stats.csv</code>; simulation results: <code>simulations/closed_loop_kernel_controls.json</code>; notes: <code>docs/exhaustive-search.md</code> §4.</p>
+<p>Arbor assignment uses the column offset between presynaptic and target labels, with hΔ cells named by dendritic column (Hulse 2021) and hΔB's output on its axonal arbor (Lyu 2022): 180° from a presynaptic hΔ label means contact on the target's dendrite, 0° on its axon. Route rotations are the summed mean offsets of the steps (FC2B→hΔM 336° + hΔM→PFL3 202°; hΔA→hΔI 183° + hΔI→PFL3 192°) relative to the travel bump. Route screen: every columnar intermediate with ≥ 150 synapses on both legs to PFL3, PFL2, PFL1. Closed-loop agent: rate-based, eight columns, store from finding 1, PFL3 steering as left minus right proportional to sin(goal − heading), rotation as a parameter, then each measured route with the bump at the axon column. Tables: <code>data/derived/fb_offset_stats.csv</code> (hemibrain: hΔA→hΔI 1,170 synapses, 63 % at 180°); results: <code>simulations/closed_loop_kernel_controls.json</code>, <code>closed_loop_routes_tspace_results.json</code>; notes: <code>docs/audit-2026-09-13.md</code> §2.</p>
 <p>References: Hulse 2021; Lyu 2022; Mussells Pires 2024; Westeinde 2024; Green 2019; Liao 2025; Nanni &amp; Lee 2026.</p>
 </div>
 </main>

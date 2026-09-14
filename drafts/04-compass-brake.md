@@ -36,26 +36,25 @@ Take the standard ring-attractor model with a constant turn signal, and add the 
 | 1× | 0 |
 | 2.7× (measured) | 0 |
 
-Rotation collapses as the feedback grows. The zero at high feedback is partly an artefact of rate saturation in a minimal model; the defensible claim is that rotation gain falls steeply as the anchor strengthens.
+Rotation collapses as the feedback grows. The zero at high feedback is partly an artefact of rate saturation in a minimal model; the defensible claim is that rotation gain falls steeply as the anchor strengthens. The collapse does not depend on how the contact is implemented: as a presynaptic gain on the shifter's terminals that only redistributes a fixed release toward the write position, rotation falls to 25°/s at 1× and 0 at the measured ratio; with divisive normalisation of the shifter population, to 34°/s and 0. The dark bump is stable in every version.
 
 ## Why it matters
 
 The loop turns the shifters into anchors. Normal stalling of a ring attractor is two equal and opposite pushes cancelling. This is different: both shifter populations pile excitation onto wherever the bump already is, and the anchor feeds on itself, because a stronger turn signal drives the shifters harder and so drives the anchor harder too. A compass with this loop is very stable in darkness and very sluggish under rotation.
 
-Flies are not sluggish, so one of three things is true, and each is a different compass:
+Flies are not sluggish, so one of two things is true, and each is a different compass:
 
-1. The write-position synapses are functionally weak despite their number.
-2. They sit on the shifter's axon terminals and modulate its output rather than driving the cell.
-3. They are cancelled by inhibition the models leave out (Δ7, ExR4, ExR6).
+1. The write-position synapses are functionally weak despite their number, whether they drive the cell or modulate its terminals.
+2. They are cancelled by inhibition the models leave out (Δ7, ExR4, ExR6).
 
 ## What would settle it
 
 - Record a shifter while stimulating EPGs at its read position versus its write position, and compare the response.
-- At the EM level, check whether the write-position contacts sit on shifter dendrites or on axon terminals.
+- At the EM level, check whether the write-position contacts carry the receptors of a driving synapse or of a terminal modulator.
 - Refit a ring-attractor model with the loop included. If rotation gain and dark stability cannot both be matched, the loop must be gated or silent.
 
 ## Methods
 
-Synapse counts are from the hemibrain v1.2 traced adjacencies, with each synapse assigned to a brain region, and from MaleCNS v1.0. Read-position synapses are EPG→PEN synapses in the protocerebral bridge; write-position synapses are EPG→PEN synapses in the ellipsoid body, restricted to the EPG wedge the PEN projects to. The simulation is a rate-based ring attractor with eight EPG positions and left and right PEN populations, constant asymmetric drive to one PEN population, and an added EPG→PEN term from the write position whose strength is varied. Analysis: `docs/compass-recurrence.md`; script: `scripts/compass_recurrence.py`, `scripts/hemibrain_compass_comparison.py`; simulation: `simulations/eb_epg_pen_loop.py`.
+Synapse counts are from the hemibrain v1.2 traced adjacencies, with each synapse assigned to a brain region, and from MaleCNS v1.0. Read-position synapses are EPG→PEN synapses in the protocerebral bridge; write-position synapses are EPG→PEN synapses in the ellipsoid body, restricted to the EPG wedge the PEN projects to. The simulation is a rate-based ring attractor with eight EPG positions and left and right PEN populations, constant asymmetric drive to one PEN population, and an added EPG→PEN term from the write position whose strength is varied. Analysis: `docs/compass-recurrence.md`; script: `scripts/compass_recurrence.py`, `scripts/hemibrain_compass_comparison.py`; simulations: `simulations/eb_epg_pen_loop.py`, `simulations/eb_epg_pen_loop_variants.py` (somatic drive, presynaptic release gain, divisive normalisation).
 
 References: Turner-Evans et al. 2017, 2020; Green et al. 2017; Hulse et al. 2021; Maimon & Abbott 2026.
