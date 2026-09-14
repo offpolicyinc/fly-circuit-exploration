@@ -433,14 +433,15 @@ function cameraAt(t, P) {
 
 // ---------- DOM callouts ----------
 const calloutsEl = document.getElementById('callouts'), leadersEl = document.getElementById('leaders');
+leadersEl.innerHTML = `<defs><marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#ffc857"/></marker><filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
 const CALLOUTS = [
   { id: 'hdh', name: 'hΔH', color: '#ffc857', tin: 6.0, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.16), dx: 16, dy: -70 },
   { id: 'hda', name: 'hΔA', color: '#ffc857', tin: 6.35, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.38), dx: -40, dy: -110 },
   { id: 'hdi', name: 'hΔI', color: '#ffc857', tin: 6.7, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.60), dx: -30, dy: -150 },
   { id: 'hdg', name: 'hΔG', color: '#ffc857', tin: 7.05, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.82), dx: -30, dy: -190 },
-  { id: 'store', cls: 'store', name: 'THE SYNAPTIC STORE', color: '#ffc857', tin: 7.5, tout: 9.4, anchor: () => brain.roseScreen(), dx: -640, dy: 170, spin: false },
+  { id: 'store', cls: 'store', name: 'THE SYNAPTIC STORE', color: '#ffc857', tin: 7.5, tout: 9.4, anchor: () => brain.roseScreen(), dx: -440, dy: -60, spin: false, arrow: true },
   { id: 'hdm', cls: 'hero', name: 'hΔM', color: '#ff6f61', tin: 10.5, tout: 14.6, anchor: () => rotArcTip(), dx: 40, dy: -40 },
-  { id: 'return', cls: 'qual', name: 'THE RETURN PATH', color: '#ff6f61', tin: 12.0, tout: 14.6, anchor: () => P_END.clone().addScaledVector(DISP, -0.45), dx: -80, dy: 70, spin: false },
+  { id: 'return', cls: 'qual', name: 'THE RETURN PATH', color: '#ff6f61', tin: 12.0, tout: 14.6, anchor: () => P_END.clone().addScaledVector(DISP, -0.45), dx: 30, dy: 90, spin: false },
   { id: 'cancel', cls: 'qual', name: 'HOME VECTOR SHRINKS AS THE STORE CANCELS', color: '#ff6f61', tin: 14.9, tout: 16.4, anchor: () => currentPose.pos.clone().add(V(0, -0.3, 0)), dx: -270, dy: 80, spin: false },
   { id: 'oa', name: 'OA‑VPM3', color: '#5ee6c8', tin: LAND + 0.35, tout: 99, anchor: () => FOOD.clone().add(V(0, 0.25, 0)), dx: 60, dy: -90 },
   { id: 'reset', cls: 'qual', name: 'OCTOPAMINE · RESET AT FOOD', color: '#5ee6c8', tin: LAND + 0.8, tout: 99, anchor: () => FOOD.clone().add(V(0.4, 0.1, 0.4)), dx: -200, dy: 90, spin: false },
@@ -449,8 +450,8 @@ for (const c of CALLOUTS) {
   const el = document.createElement('div'); el.className = 'callout ' + (c.cls || ''); el.style.color = c.color;
   el.innerHTML = `<div class="name">${c.name}${c.loop ? `<svg class="loop" viewBox="0 0 100 100"><circle class="fill" cx="50" cy="50" r="34"/><path d="M78 36 A34 34 0 1 0 84 56"/><path d="M84 56 L74 44 M84 56 L94 46"/></svg>` : ''}</div>${c.sub ? `<div class="sub">${c.sub}</div>` : ''}`;
   calloutsEl.appendChild(el); c.el = el;
-  const line = document.createElementNS('http://www.w3.org/2000/svg', 'path'); line.setAttribute('fill', 'none'); line.setAttribute('stroke', c.color); line.setAttribute('stroke-width', c.cls ? '1' : '1.5'); line.setAttribute('opacity', '0'); leadersEl.appendChild(line); c.line = line;
-  const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); dot.setAttribute('r', c.cls ? '2.5' : '4'); dot.setAttribute('fill', c.color); dot.setAttribute('opacity', '0'); leadersEl.appendChild(dot); c.dot = dot;
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'path'); line.setAttribute('fill', 'none'); line.setAttribute('stroke', c.color); line.setAttribute('stroke-width', c.arrow ? '5' : c.cls ? '1' : '1.5'); line.setAttribute('stroke-linejoin', 'round'); line.setAttribute('opacity', '0'); if (c.arrow) { line.setAttribute('marker-end', 'url(#arrowhead)'); line.setAttribute('filter', 'url(#glow)'); } leadersEl.appendChild(line); c.line = line;
+  const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); dot.setAttribute('r', c.arrow ? '0' : c.cls ? '2.5' : '4'); dot.setAttribute('fill', c.color); dot.setAttribute('opacity', '0'); leadersEl.appendChild(dot); c.dot = dot;
 }
 let currentPose = flyPose(0);
 const anchorState = { rotTip: V(0, 0, 0) };
@@ -468,6 +469,7 @@ function updateCallouts(t, W, H) {
     c.el.style.transform = `translate(${lx.toFixed(1)}px, ${(ly - c.el.offsetHeight).toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
     const ex = c.dx < 0 ? lx + c.el.offsetWidth * 0.5 : lx, ey = ly + 4;
     const mx = (ex + sx) / 2, my = ey; // elbow
+    if (c.arrow) { const ex2 = lx + c.el.offsetWidth + 14, ey2 = ly - c.el.offsetHeight * 0.5; const tx = sx - 0.14 * (sx - ex2), ty = sy - 0.14 * (sy - ey2); c.line.setAttribute('d', `M${ex2.toFixed(1)} ${ey2.toFixed(1)} L${tx.toFixed(1)} ${ty.toFixed(1)}`); continue; }
     c.line.setAttribute('d', `M${ex.toFixed(1)} ${ey.toFixed(1)} L${mx.toFixed(1)} ${my.toFixed(1)} L${sx.toFixed(1)} ${sy.toFixed(1)}`);
     c.dot.setAttribute('cx', sx.toFixed(1)); c.dot.setAttribute('cy', sy.toFixed(1));
   }
