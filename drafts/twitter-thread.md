@@ -2,38 +2,23 @@
 
 ## POST 1: 
 
-The same way levent gets to do better math because of ai, someone should be doing better neuroscience because of ai
-
-The navigational system of the fruit fly is a crown jewel of systems neuroscience due to the work of some seminal neuroscientists (Larry Abbott, Gaby Maimon, Vivek Jayaraman, Barbara Webb), but it is an unfinished story. 
-
-A fly that leaves a drop of food and wanders in the dark walks straight back to the food. To do that it must keep a running vector sum of every step it has taken. The neurons that report each step are known, but the neurons that add those steps up over time have never been found.
-
-There are two ways to add steps up. (1) In activity: a population keeps firing the running total. For the total not to leak away, the population must excite itself with a gain of almost exactly one. Most published model of fly path integration works this way, and so does an RNN. (2) In synapses: nothing keeps firing. Each step, neurons strengthen the synapses they are driving at that moment, and each direction of travel drives a different set of synapses. After a walk, the strengths are the sum: six steps north and four south leave the "north" synapses at 6, the "south" synapses at 4, and the difference is the vector home. I call the set of synapses that does this the "store". Maimon & Abbott (2026) and Hulse et al. (2021) proposed a synaptic memory of this kind, and Goulard, Heinze & Webb (2023) modelled one, but none identified the neurons.
-
-I scraped the fly brain connectome to find where its spatial memory lives and found that it appears to be stored not in activity but in synaptic weights in 4 sets of neurons (hΔH, hΔA, hΔI and hΔG).
-
-For every population in the region, I measured how strongly it excites itself in the way an activity integrator needs (gain near one). The best is 0.14, and almost everything is at or below 0.02. So I couldn't find a substrate for stateful storage of spatial memory in activity (Option 1).
-
-Instead, I found that there are four neuron types with no known function, hΔH, hΔA, hΔI and hΔG, and these neurons have every ingredient option 2 needs. They receive input from neurons that report each step taken, they receive velocity-sensitive dopamine input that could gate memory writing, and they receive a reward-sensitive octopamine neuron that could reset the synaptic "store" at food arrival. 
-
-So the fly's home vector is likely a set of synaptic weights, written continuously while it walks, gated by dopamine, and erased at reward: continual learning through fast weights, on a timescale of seconds, in a brain of about 140,000 neurons. These results are also supported by neural simulations during random walks. This is not possible in current LLMs, since its weights are frozen after training.
-
-Unlike math however, systems neuroscience requires talented experimentalists handling a lot of complex equipment to test hypotheses like these. So this is just the start of an exciting journey.
-
-For more information into background, methods, experiments, results, as well as relevant citations, see here: https://pwang724.github.io/fly-circuit-exploration/findings/01-synaptic-store.html
-
----
+The same way levent gets to do better math because of ai, someone should be doing better neuroscience because of ai. I have been unplugged from systems neuroscience for the last two years and but have iterated heavily with fable 5.1 over the course of two days to do this.
 
 ## POST 2:
 
-There are 3 other findings but this is imo the most important one. 
+I scraped the fly connectome and found a group of neurons (hΔH, hΔA, hΔI and hΔG) that could allow the fly to navigate using synaptic weights, not neural activations. This is fast-weight continual learning, something frozen LLMs cannot do.
 
-I invite the cogniscenti to engage. I have been so unplugged from systems neuroscience for the last two years and have also done this in the course of two days (with my friend Fable 5.1). While I tried to be exhaustive with published papers, I may have very well missed some key published results.   
+A fly that leaves a drop of food and wanders in the dark can always find its way back. To do that it has to keep a running sum of every step it has taken, a process called path integration. The neurons that report each step are known, but the neurons that add the steps up have never been found.
 
-All findings: https://pwang724.github.io/fly-circuit-exploration/findings/index.html
-Panoramic view of the entire circuit: https://pwang724.github.io/fly-circuit-exploration/circuit.html
+There are two ways a brain can hold a sum like that. The usual answer is that some neurons holds it in activations and sustains these activations by exciting each other in a loop tuned so precisely that the signal neither fades nor blows up. Most models of navigation assumes this, and it is how RNNs and LLMs hold state too. The other answer is that nothing keeps firing at all. Each step is encoded into synaptic strengths (aka weights), and the sum of all synaptic strengths is the sum of the journey. A few papers have suggested the fly works this way but nobody has pointed to the neurons, until now.
+
+Four neuron types, hΔH, hΔA, hΔI and hΔG, have no known functions, but I found that they have every ingredient option 2 needs. They receive input from neurons that report each step taken, they receive velocity-sensitive dopamine input that could gate memory writing, and they receive a reward-sensitive octopamine neuron that could reset the synaptic weights at food arrival. Simulations confirm this is a viable candidate for path integration.
+
+This is the key finding, but I have posted 3 other findings in links below. These findings are built upon the work of some seminal neuroscientists (Larry Abbott, Gaby Maimon, Vivek Jayaraman, Barbara Webb). I tried to be exhaustive with published papers but may have very well missed some key published results, so inviting the cogniscenti to engage.
+
+Background, methods, experiments, results, as well as relevant citations: https://pwang724.github.io/fly-circuit-exploration/findings/index.html
+Panoramic circuit view: https://pwang724.github.io/fly-circuit-exploration/circuit.html
 GH repo: https://github.com/pwang724/fly-circuit-exploration 
-
 ___
 
 **2 / the neuron that turns the memory around**
