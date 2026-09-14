@@ -439,8 +439,8 @@ const CALLOUTS = [
   { id: 'hdi', name: 'hΔI', color: '#ffc857', tin: 6.7, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.60), dx: -30, dy: -150 },
   { id: 'hdg', name: 'hΔG', color: '#ffc857', tin: 7.05, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.82), dx: -30, dy: -190 },
   { id: 'store', cls: 'qual', name: 'THE SYNAPTIC STORE', color: '#ffc857', tin: 7.5, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.5).add(V(0, -0.3, 0)), dx: -60, dy: 70, spin: false },
-  { id: 'hdm', name: 'hΔM', color: '#ff6f61', tin: 10.5, tout: 14.6, anchor: () => rotArcTip(), dx: 40, dy: -40 },
-  { id: 'return', cls: 'qual', name: 'THE RETURN PATH', color: '#ff6f61', tin: 11.7, tout: 14.6, anchor: () => P_END.clone().addScaledVector(DISP, -0.45), dx: -80, dy: 70, spin: false },
+  { id: 'hdm', cls: 'hero', name: 'hΔM', color: '#ff6f61', tin: 10.5, tout: 14.6, anchor: () => rotArcTip(), dx: 40, dy: -40 },
+  { id: 'return', cls: 'qual', name: 'THE RETURN PATH', color: '#ff6f61', tin: 12.0, tout: 14.6, anchor: () => P_END.clone().addScaledVector(DISP, -0.45), dx: -80, dy: 70, spin: false },
   { id: 'cancel', cls: 'qual', name: 'HOME VECTOR SHRINKS AS THE STORE CANCELS', color: '#ff6f61', tin: 14.9, tout: 16.4, anchor: () => currentPose.pos.clone().add(V(0, -0.3, 0)), dx: -270, dy: 80, spin: false },
   { id: 'oa', name: 'OA‑VPM3', color: '#5ee6c8', tin: LAND + 0.35, tout: 99, anchor: () => FOOD.clone().add(V(0, 0.25, 0)), dx: 60, dy: -90 },
   { id: 'reset', cls: 'qual', name: 'OCTOPAMINE · RESET AT FOOD', color: '#5ee6c8', tin: LAND + 0.8, tout: 99, anchor: () => FOOD.clone().add(V(0.4, 0.1, 0.4)), dx: -200, dy: 90, spin: false },
@@ -476,11 +476,9 @@ function updateCallouts(t, W, H) {
 // ---------- headline / chapters ----------
 const headlineEl = document.getElementById('headline'), chapNo = document.getElementById('chapter-no'), chapName = document.getElementById('chapter-name'), eyebrow = document.querySelector('.eyebrow');
 const HEADLINES = [
-  { tin: 6.3, tout: 9.0, text: 'A whole journey.\nOne stored vector.' },
-  { tin: 11.2, tout: 14.6, text: 'Flip the vector.\nPoint home.' },
-  { tin: 14.9, tout: LAND + 0.3, text: 'Fly it back.\nThe store cancels.' },
-  { tin: LAND + 0.9, tout: LAND + 2.6, text: 'Home.\nOctopamine wipes the store.' },
-  { tin: LAND + 2.7, tout: 99, text: 'Ready for the\nnext trip.' },
+  { no: '01', tin: 6.3, tout: 9.4, text: "The fly's home vector is not stored in activity,\nbut in synaptic weights of\nhΔH, hΔA, hΔI and hΔG." },
+  { no: '02', tin: 11.2, tout: 15.2, text: 'hΔM reverses the memory vector\nfor homing.' },
+  { no: '03', tin: LAND + 0.9, tout: 99, text: 'Home! Dopamine gates learning;\nOctopamine erases the store.' },
 ];
 const CHAPTERS = [[0, '01', 'THE JOURNEY BECOMES MEMORY', '#ffc857'], [9, '02', 'REVERSE IT TO GET HOME', '#ff6f61'], [LAND - 0.2, '03', 'HOME, AND RESET', '#5ee6c8']];
 let curHeadline = -1, curChapter = -1;
@@ -488,7 +486,7 @@ function updateText(t) {
   let h = -1; HEADLINES.forEach((x, i) => { if (t >= x.tin && t < x.tout) h = i; });
   if (h !== curHeadline) {
     curHeadline = h; headlineEl.innerHTML = '';
-    if (h >= 0) { HEADLINES[h].text.split('\n').forEach((line, li) => { line.split(' ').forEach((w, wi) => { const s = document.createElement('span'); s.className = 'w'; s.textContent = w + ' '; s.style.transitionDelay = `${(li * 4 + wi) * 60}ms`; headlineEl.appendChild(s); }); headlineEl.appendChild(document.createElement('br')); }); requestAnimationFrame(() => requestAnimationFrame(() => headlineEl.querySelectorAll('.w').forEach(w => w.classList.add('in')))); }
+    if (h >= 0) { const num = document.createElement('span'); num.className = 'w num'; num.textContent = HEADLINES[h].no; headlineEl.appendChild(num); HEADLINES[h].text.split('\n').forEach((line, li) => { line.split(' ').forEach((w, wi) => { const s = document.createElement('span'); s.className = 'w'; s.textContent = w + ' '; s.style.transitionDelay = `${120 + (li * 5 + wi) * 55}ms`; headlineEl.appendChild(s); }); headlineEl.appendChild(document.createElement('br')); }); requestAnimationFrame(() => requestAnimationFrame(() => headlineEl.querySelectorAll('.w').forEach(w => w.classList.add('in')))); }
   }
   let c = 0; CHAPTERS.forEach((x, i) => { if (t >= x[0]) c = i; });
   if (c !== curChapter) { curChapter = c; chapNo.textContent = CHAPTERS[c][1]; chapName.textContent = CHAPTERS[c][2]; eyebrow.style.color = CHAPTERS[c][3]; document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', i === c)); }
@@ -536,7 +534,7 @@ function update(tScene) {
   const resetT = LAND + 0.35; const pulse = t >= 3 && t < 4.2 ? (t - 3) / 1.2 : (t >= 12.5 && t < 13.7 ? (t - 12.5) / 1.2 : (t >= resetT && t < resetT + 1.4 ? (t - resetT) / 1.4 : 0));
   ground.material.uniforms.uPulse.value = pulse; ground.material.uniforms.uPulseCenter.value.copy(t >= resetT ? FOOD : P.pos); ground.material.uniforms.uPulseColor.value.copy(t >= resetT ? TEAL : GOLD);
   // the reveal: 5.9–9.6 s the kitchen goes dark around the four named neurons and the stored vector
-  const kReveal = ss(5.9, 6.7, t) * (1 - ss(9.0, 9.8, t)); const dimL = 1 - 0.9 * kReveal;
+  const kReveal = Math.max(ss(5.9, 6.7, t) * (1 - ss(9.0, 9.8, t)), ss(10.2, 11.0, t) * (1 - ss(13.4, 14.4, t))); const dimL = 1 - 0.9 * kReveal;
   for (const l of lights) l.intensity = l.userData.base * dimL;
   for (const m of dimmable) m.material.color.setHex(m.userData.base).multiplyScalar(1 - 0.85 * kReveal);
   scene.background.setHex(0x1a2028).multiplyScalar(1 - 0.8 * kReveal); scene.fog.color.copy(scene.background);
