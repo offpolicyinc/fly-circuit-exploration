@@ -622,5 +622,6 @@ addEventListener('keydown', e => {
 });
 window.__update = (t) => { update(t); updateCallouts(warp(t - PRE), canvas.clientWidth, canvas.clientHeight); };
 window.seek = (t) => { setTime(t); playing = false; playBtn.textContent = '▶'; };
+if (new URLSearchParams(location.search).has('video')) document.body.classList.add('video');
 addEventListener('error', e => { const el = document.getElementById('error'); el.hidden = false; el.textContent = 'Scene error: ' + (e.error && e.error.stack || e.message); });
 requestAnimationFrame(frame);

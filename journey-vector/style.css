@@ -67,3 +67,8 @@ canvas#brain{flex:1;width:100%;min-height:0;display:block;margin:8px -6px}
 .bp-legend span{display:block;font:8px var(--mono);letter-spacing:.6px;color:#6f8188;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bp-tag{position:absolute;font:8px var(--mono);letter-spacing:1.5px;color:#4f616a}
 @media(max-width:620px){:root{--panel:0%}#brainpanel{display:none}}
+
+/* video export: no transport */
+body.video footer{display:none}
+body.video #editorial{bottom:56px}
+body.video .freeze{top:96px}
