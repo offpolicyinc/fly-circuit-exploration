@@ -86,7 +86,7 @@ export function initBrain(canvas) {
     const hdm = ss(10.5, 11.2, t) * (1 - ss(15.2, 15.9, t));
     const fb3a = ss(15.3, 15.8, t) * (1 - ss(17.8, 18.3, t)), ps = ss(15.95, 16.4, t) * (1 - ss(17.8, 18.3, t));
     const loop = ss(18.55, 18.9, t); const compass = ss(18.0, 18.6, t) * (0.75 + 0.25 * Math.sin(tScene * 9) * loop);
-    const motor = flying ? 0.85 + 0.15 * Math.sin(tScene * 40) : 0.0;
+    const motor = flying ? 0.55 + 0.1 * Math.sin(tScene * 40) : 0.0;
     uLit[0] = 0; uLit[1] = store; uLit[2] = hdm; uLit[3] = fb3a; uLit[4] = ps; uLit[5] = compass; uLit[6] = motor;
     mat.uniforms.uAct.value = flying ? 0.55 : 0.3; mat.uniforms.uTime.value = tScene;
     legend.motor.classList.toggle('on', motor > 0.2); legend.store.classList.toggle('on', store > 0.2); legend.hdm.classList.toggle('on', hdm > 0.2);
