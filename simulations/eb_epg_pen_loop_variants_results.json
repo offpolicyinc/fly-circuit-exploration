@@ -1,0 +1,56 @@
+{
+ "somatic drive (original) | EB/PB = 0.0": {
+  "dark_bump_len": 0.922,
+  "dark_drift": -0.0,
+  "rotation_gain_deg_s": -138.6,
+  "rot_bump_len": 0.893
+ },
+ "somatic drive (original) | EB/PB = 1.0": {
+  "dark_bump_len": 0.789,
+  "dark_drift": 0.0,
+  "rotation_gain_deg_s": 0.0,
+  "rot_bump_len": 0.789
+ },
+ "somatic drive (original) | EB/PB = 2.7": {
+  "dark_bump_len": 0.789,
+  "dark_drift": 0.0,
+  "rotation_gain_deg_s": 0.0,
+  "rot_bump_len": 0.789
+ },
+ "presynaptic release gain | EB/PB = 0.0": {
+  "dark_bump_len": 0.922,
+  "dark_drift": -0.0,
+  "rotation_gain_deg_s": -138.6,
+  "rot_bump_len": 0.893
+ },
+ "presynaptic release gain | EB/PB = 1.0": {
+  "dark_bump_len": 0.089,
+  "dark_drift": 155.4,
+  "rotation_gain_deg_s": 275.8,
+  "rot_bump_len": 0.094
+ },
+ "presynaptic release gain | EB/PB = 2.7": {
+  "dark_bump_len": 0.075,
+  "dark_drift": 31.7,
+  "rotation_gain_deg_s": 151.8,
+  "rot_bump_len": 0.076
+ },
+ "somatic drive + divisive normalisation | EB/PB = 0.0": {
+  "dark_bump_len": 0.926,
+  "dark_drift": -0.0,
+  "rotation_gain_deg_s": -102.0,
+  "rot_bump_len": 0.922
+ },
+ "somatic drive + divisive normalisation | EB/PB = 1.0": {
+  "dark_bump_len": 0.962,
+  "dark_drift": 0.0,
+  "rotation_gain_deg_s": -34.2,
+  "rot_bump_len": 0.96
+ },
+ "somatic drive + divisive normalisation | EB/PB = 2.7": {
+  "dark_bump_len": 0.981,
+  "dark_drift": -0.0,
+  "rotation_gain_deg_s": 0.0,
+  "rot_bump_len": 0.976
+ }
+}

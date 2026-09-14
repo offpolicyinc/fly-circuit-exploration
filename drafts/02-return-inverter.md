@@ -2,6 +2,8 @@
 
 **Summary.** A stored displacement points from food to fly, but steering needs the reverse, so something between the store and the steering neurons must rotate the vector by half a turn. The store cells do not do it: hΔB's synapses land on their axonal arbors, not their dendrites, so they relay the vector unrotated. Between the goal neurons FC2 and the steering neurons PFL3, the only columnar type that rotates is hΔM, eight cells with no assigned function: FC2 contacts its dendrites and its axon, 178° away, contacts PFL3 and PFL2. PFL3 therefore receives the stored vector twice, unrotated via FC2 ("keep going") and rotated via hΔM ("go back"); in a closed-loop model only the rotated copy produces return.
 
+> **Audit note (2026-09-13).** hΔM is not the only inverter. hΔA's axon contacts hΔI's dendrites (1,388 synapses, 63 % at 180° in the hemibrain, every hΔI cell), and hΔI's axon reaches PFL3 (3,468) and PFL2 (1,942), so the stored vector reaches steering rotated by a second route that bypasses FC2. hΔM remains the only inverter downstream of FC2. In the axon frame both inverting routes return and both direct routes walk away; with synapse-count weights the direct routes dominate. Details: [docs/audit-2026-09-13.md](../docs/audit-2026-09-13.md).
+
 ## The problem
 
 The store of finding 1 holds the fly's displacement from the food: "I am 2 north of the food". To walk home the steering neurons need the opposite vector: "walk 2 south". Somewhere between the store and the steering neurons the vector has to be rotated by 180°. The question is which neuron does that.

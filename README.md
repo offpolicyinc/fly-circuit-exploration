@@ -7,6 +7,7 @@ A research workspace for understanding navigation in the Drosophila central comp
 - [Reading map](docs/literature.md): canonical results and 2024–2026 developments.
 - [Circuit map and open questions](docs/circuit-and-open-questions.md).
 - [First graph analysis](docs/connectome.md).
+- [Audit of the findings and whole-brain screens, 2026-09-13](docs/audit-2026-09-13.md).
 
 ## Reproduce the data work
 

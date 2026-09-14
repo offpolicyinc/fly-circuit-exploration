@@ -1,0 +1,74 @@
+{
+ "hDeltaA -> PFL3 (direct)": {
+  "T_on_axon_readout_err_deg": 147.7688697451744,
+  "T_on_axon_returned": 0.0,
+  "T_on_axon_closest": 11.088743248984915,
+  "label_space_readout_err_deg": 32.231130254825594,
+  "label_space_returned": 0.1,
+  "label_space_closest": 3.0281737625277776
+ },
+ "hDeltaA -> hDeltaI -> PFL3": {
+  "T_on_axon_readout_err_deg": 33.516073539244516,
+  "T_on_axon_returned": 0.125,
+  "T_on_axon_closest": 3.2610738388635507,
+  "label_space_readout_err_deg": 146.48392646075547,
+  "label_space_returned": 0.0,
+  "label_space_closest": 11.088743248984915
+ },
+ "hDeltaA -> PFL3 + hDeltaA -> hDeltaI -> PFL3 (synapse-weighted)": {
+  "T_on_axon_readout_err_deg": 148.20126051423324,
+  "T_on_axon_returned": 0.0,
+  "T_on_axon_closest": 11.088743248984915,
+  "label_space_readout_err_deg": 31.79873948576671,
+  "label_space_returned": 0.15,
+  "label_space_closest": 2.542634534518098
+ },
+ "hDeltaI -> PFL3 (direct)": {
+  "T_on_axon_readout_err_deg": 147.2017674215914,
+  "T_on_axon_returned": 0.0,
+  "T_on_axon_closest": 11.088743248984915,
+  "label_space_readout_err_deg": 32.79823257840863,
+  "label_space_returned": 0.1,
+  "label_space_closest": 3.5848493421215535
+ },
+ "hDeltaH -> FC2B -> PFL3 (direct)": {
+  "T_on_axon_readout_err_deg": 144.5923370902229,
+  "T_on_axon_returned": 0.05,
+  "T_on_axon_closest": 11.088743248984915,
+  "label_space_readout_err_deg": 35.407662909777045,
+  "label_space_returned": 0.075,
+  "label_space_closest": 4.26636274719816
+ },
+ "hDeltaH -> FC2B -> hDeltaM -> PFL3": {
+  "T_on_axon_readout_err_deg": 34.02850229261706,
+  "T_on_axon_returned": 0.125,
+  "T_on_axon_closest": 3.550225708263669,
+  "label_space_readout_err_deg": 145.97149770738292,
+  "label_space_returned": 0.0,
+  "label_space_closest": 11.088743248984915
+ },
+ "hDeltaH -> FC2B -> {PFL3 direct + via hDeltaM} (synapse-weighted)": {
+  "T_on_axon_readout_err_deg": 143.94576464884017,
+  "T_on_axon_returned": 0.125,
+  "T_on_axon_closest": 11.088743248984915,
+  "label_space_readout_err_deg": 36.054235351159804,
+  "label_space_returned": 0.075,
+  "label_space_closest": 5.2227167644965515
+ },
+ "hDeltaJ -> FC2A -> PFL3 (direct)": {
+  "T_on_axon_readout_err_deg": 145.73301580161146,
+  "T_on_axon_returned": 0.05,
+  "T_on_axon_closest": 11.088743248984915,
+  "label_space_readout_err_deg": 34.26698419838851,
+  "label_space_returned": 0.05,
+  "label_space_closest": 4.720346846846933
+ },
+ "hDeltaG -> FC2C -> PFL3 (direct)": {
+  "T_on_axon_readout_err_deg": 142.17523143995882,
+  "T_on_axon_returned": 0.1,
+  "T_on_axon_closest": 11.088743248984915,
+  "label_space_readout_err_deg": 37.82476856004118,
+  "label_space_returned": 0.025,
+  "label_space_closest": 5.537520006289318
+ }
+}
