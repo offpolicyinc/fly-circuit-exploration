@@ -8,7 +8,7 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { initBrain } from './brain.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
-const PRE = 1.2, FLIGHT = 3.0, MAIN = 20 + (FLIGHT - 3), DUR = PRE + MAIN, HOLD = 2.4;
+const PRE = 1.2, FLIGHT = 3.5, MAIN = 20 + (FLIGHT - 3), DUR = PRE + MAIN, HOLD = 2.4;
 // beat time: the storyboard is written on a 20 s clock whose first 3 s is the flight; scene time stretches that flight to FLIGHT s
 const warp = x => x < 0 ? x : x < FLIGHT ? x * (3 / FLIGHT) : x - (FLIGHT - 3);
 const unwarp = b => b < 3 ? b * (FLIGHT / 3) : b + (FLIGHT - 3);
@@ -20,6 +20,8 @@ const ss = (a, b, x) => { const k = clamp01((x - a) / (b - a)); return k * k * (
 const ease = x => 1 - Math.pow(1 - clamp01(x), 3);
 const backOut = x => { x = clamp01(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
 const lerp = (a, b, k) => a + (b - a) * k;
+// outbound speed profile: a slow lift-off that gathers pace, then settles before the freeze
+const flightProfile = x => { x = clamp01(x); const s = x * x * (3 - 2 * x); return lerp(s, x, 0.15); };
 
 // ---------- renderer / scene ----------
 const canvas = document.getElementById('world');
@@ -191,7 +193,7 @@ const _p = new THREE.Vector3(), _q = new THREE.Vector3();
 function flyPose(t) { // {pos, fwd, yawRate}
   const out = {};
   const pose = (curve, u) => { out.pos = curve.getPointAt(u); out.fwd = curve.getTangentAt(u).normalize(); const u2 = Math.min(1, u + 0.004); const f2 = curve.getTangentAt(u2); out.turn = Math.atan2(out.fwd.x * f2.z - out.fwd.z * f2.x, out.fwd.x * f2.x + out.fwd.z * f2.z) / 0.004; };
-  if (t < 3) pose(outCurve, clamp01(ease(t / 3) * 0.999 + 0.0005 * (t / 3)));
+  if (t < 3) pose(outCurve, clamp01(flightProfile(t / 3) * 0.999 + 0.0005 * (t / 3)));
   else if (t < 12.5) pose(outCurve, 1);
   else pose(retCurve, retParam(t));
   out.yaw = Math.atan2(out.fwd.x, out.fwd.z);
@@ -492,7 +494,7 @@ function update(tScene) {
   flyLight.intensity = flying ? 0.9 : 0.3;
   shadow.position.set(P.pos.x, 0.012, P.pos.z); const sh = 0.5 + P.pos.y * 0.35; shadow.scale.set(sh, sh * 0.8, 1); shadow.material.opacity = clamp01(1.2 - P.pos.y * 0.3);
   // trails
-  const outProg = t < 3 ? ease(t / 3) : 1; const outDim = lerp(1, 0.32, ss(3.6, 5.0, t));
+  const outProg = t < 3 ? flightProfile(t / 3) : 1; const outDim = lerp(1, 0.32, ss(3.6, 5.0, t));
   trailOut.material.uniforms.uProgress.value = outProg; trailOut.material.uniforms.uOpacity.value = outDim; trailOut.material.uniforms.uHead.value = t < 3 ? 1 : 0;
   trailOutGlow.material.uniforms.uProgress.value = outProg; trailOutGlow.material.uniforms.uOpacity.value = 0.12 * outDim; trailOutGlow.material.uniforms.uHead.value = t < 3 ? 1 : 0;
   const rp = retParam(t); trailRet.material.uniforms.uProgress.value = rp; trailRetGlow.material.uniforms.uProgress.value = rp; trailRet.visible = trailRetGlow.visible = rp > 0;
