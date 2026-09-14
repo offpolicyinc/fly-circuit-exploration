@@ -48,6 +48,18 @@
       <button data-time="17.5"><b>04</b> Compass puzzle<span>2.5s</span></button>
     </nav>
   </footer>
+  <aside id="brainpanel" aria-label="Connectome activity panel">
+    <div class="bp-eyebrow">NEURAL ACTIVITY</div>
+    <div class="bp-sub">Schematic. Cell counts from the male CNS connectome v1.0; positions are not.</div>
+    <canvas id="brain"></canvas>
+    <ul class="bp-legend">
+      <li data-ch="motor"><i style="--c:#e6eeff"></i><b>VNC flight motor</b><span>WINGS BEATING</span></li>
+      <li data-ch="store"><i style="--c:#ffc857"></i><b>hΔH · hΔA · hΔI · hΔG</b><span>45 CELLS · CANDIDATE SYNAPTIC STORE</span></li>
+      <li data-ch="hdm"><i style="--c:#ff6f61"></i><b>hΔM</b><span>8 CELLS · PROPOSED RETURN PATH</span></li>
+      <li data-ch="move"><i style="--c:#5cc8ff"></i><b>FB3A · PS196_b</b><span>CANDIDATE MOVEMENT INPUTS</span></li>
+      <li data-ch="compass"><i style="--c:#b48cff"></i><b>EPG ↔ PEN</b><span>46 · 42 CELLS · COMPASS FEEDBACK LOOP</span></li>
+    </ul>
+  </aside>
   <div id="error" hidden></div>
 </div>
 <script type="module" src="main.js"></script>
