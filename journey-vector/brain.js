@@ -9,8 +9,7 @@ const rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${
 
 export function initBrain(canvas, N_COL) {
   const g = canvas.getContext('2d');
-  const legend = Object.fromEntries([...document.querySelectorAll('.bp-legend li')].map(li => [li.dataset.ch, li]));
-  let W = 0, H = 0, dpr = 1;
+    let W = 0, H = 0, dpr = 1;
   const mono = px => `500 ${px}px "IBM Plex Mono", monospace`, cond = px => `700 ${px}px "Barlow Condensed", sans-serif`;
   const label = (text, x, y, color, px = 9, align = 'center', font = mono) => { g.font = font(px); g.fillStyle = color; g.textAlign = align; g.textBaseline = 'middle'; g.fillText(text, x, y); };
   const glowDot = (x, y, r, color, lit) => {
@@ -40,13 +39,13 @@ export function initBrain(canvas, N_COL) {
     for (let i = 0; i < nRing; i++) { const a = i * TAU / nRing; let d = a - heading; d = Math.atan2(Math.sin(d), Math.cos(d)); const bump = Math.exp(-(d * d) / 0.32) * (S.landed ? 0.55 : 1);
       // screen angle: heading 0 = up, clockwise positive (matches the rose below)
       const x = cx + Math.sin(a) * rr, y = ry - Math.cos(a) * rr; glowDot(x, y, 2 + bump * 2.6, C.violet, bump); }
-    label('EPG · RING ATTRACTOR · HEADING', cx, ry + rr + 14, C.dim, 8);
+    label('EPG', cx, ry + rr + 14, C.violet, 11, 'center', cond);
 
     // ---- hΔB travel-direction bump: a short strip of eight columns ----
     const by = ry + rr + 36, bw = unit * 0.5, bx0 = cx - bw / 2, cellW = bw / N_COL;
     for (let c = 0; c < N_COL; c++) { const a = c * TAU / N_COL; let d = a - heading; d = Math.atan2(Math.sin(d), Math.cos(d)); const v = Math.max(0, Math.cos(d)) * moving;
       g.fillStyle = rgba(C.white, 0.08 + 0.75 * v); g.fillRect(bx0 + c * cellW + 1, by - 5, cellW - 2, 10); }
-    label('hΔB · TRAVEL-DIRECTION BUMP', cx, by + 16, C.dim, 8);
+    label('hΔB', cx, by + 17, C.dim, 10, 'center', cond);
     link(cx, ry + rr + 2, cx, by - 7, C.violet, moving * 0.6, [2, 3]);
 
     // ---- the store: eight columns as a rose of wedges; the vector sum is the home vector ----
@@ -65,8 +64,7 @@ export function initBrain(canvas, N_COL) {
     // home vector = vector sum
     if (sumLen * scale > 2) { const ex = cx + sx * scale * 0.98, ey = oy - sy * scale * 0.98; g.strokeStyle = C.gold; g.lineWidth = 2.5; g.shadowColor = C.gold; g.shadowBlur = 10; g.beginPath(); g.moveTo(cx, oy); g.lineTo(ex, ey); g.stroke(); g.shadowBlur = 0; arrowHead(ex, ey, Math.atan2(ey - oy, ex - cx), 9, C.gold); }
     glowDot(cx, oy, 2.2, C.gold, storeLit);
-    label('hΔH · hΔA · hΔI · hΔG', cx, oy + R + 18, storeLit ? C.gold : C.dim, 10, 'center', cond);
-    label('8 COLUMNS · SUM = HOME VECTOR', cx, oy + R + 32, C.dim, 7);
+    label('hΔH · hΔA · hΔI · hΔG', cx, oy + R + 18, storeLit ? C.gold : C.dim, 11, 'center', cond);
 
     // ---- dopamine write gate on the left, octopamine reset on the right ----
     const gx = 12, gy = oy - R * 0.3; const dop = moving;
@@ -76,11 +74,6 @@ export function initBrain(canvas, N_COL) {
     glowDot(ox, oyy, 4.5, C.teal, oa); link(ox - 5, oyy, cx + R * 0.72, oy + R * 0.2, C.teal, oa);
     label('OA‑VPM3', ox + 4, oyy + 16, oa > 0.05 ? C.teal : C.dim, 10, 'right', cond); label('OCTOPAMINE', ox + 4, oyy + 28, C.dim, 6.5, 'right');
 
-    // ---- output ----
-    const outy = oy + R + 52; link(cx, oy + R + 40, cx, outy - 6, C.coral, storeLit * 0.7, [2, 3]);
-    label('→ hΔM FLIPS IT → PFL3 STEERS HOME', cx, outy + 6, storeLit ? C.coral : C.dim, 7);
-
-    legend.ring.classList.toggle('on', true); legend.store.classList.toggle('on', storeLit > 0); legend.dopa.classList.toggle('on', dop > 0); legend.oa.classList.toggle('on', oa > 0.05);
   }
   return { update };
 }

@@ -42,6 +42,8 @@ const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.45, 0.5, 0.96);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 
+// the big reveal: every light in the kitchen can be pulled down while the unlit diagram stays bright
+const dimmable = [], lights = [];
 scene.add(new THREE.HemisphereLight(0x9cb8d4, 0x2a241e, 1.1));
 // morning sun through the window: low, warm, casting long shadows across the island
 const sun = new THREE.DirectionalLight(0xffe3bd, 2.4); sun.position.set(-26, 34, -58); sun.target.position.set(6, 0, -2); scene.add(sun, sun.target);
@@ -49,16 +51,17 @@ sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.
 Object.assign(sun.shadow.camera, { left: -40, right: 40, top: 40, bottom: -40, near: 10, far: 140 });
 const key = new THREE.DirectionalLight(0xfff1de, 0.7); key.position.set(10, 30, 8); scene.add(key);
 const rim = new THREE.DirectionalLight(0xbfd8ff, 1.2); rim.position.set(-10, 40, -60); scene.add(rim);
-const pendant = new THREE.SpotLight(0xffd6a0, 90, 90, 0.6, 0.7, 1.4);
-const fill = new THREE.PointLight(0xffd2a8, 160, 80, 1.6); fill.position.set(-4, 22, -30); scene.add(fill); pendant.position.set(8, 30, -4); pendant.target.position.set(6, 0, -2); scene.add(pendant, pendant.target);
+scene.traverse(o => { if (o.isLight) { o.userData.base = o.intensity; lights.push(o); } });
+const pendant = new THREE.SpotLight(0xffd6a0, 90, 90, 0.6, 0.7, 1.4); pendant.userData.base = 90; lights.push(pendant);
+const fill = new THREE.PointLight(0xffd2a8, 160, 80, 1.6); fill.position.set(-4, 22, -30); scene.add(fill); fill.userData.base = 160; lights.push(fill); pendant.position.set(8, 30, -4); pendant.target.position.set(6, 0, -2); scene.add(pendant, pendant.target);
 const flyLight = new THREE.PointLight(0xffc857, 0, 4, 2); scene.add(flyLight);
 
 // ---------- ground grid ----------
 const ground = new THREE.Mesh(new THREE.PlaneGeometry(140, 140), new THREE.ShaderMaterial({
   transparent: true, depthWrite: false,
-  uniforms: { uFog: { value: scene.fog.color }, uPulse: { value: 0 }, uPulseCenter: { value: new THREE.Vector3() }, uPulseColor: { value: new THREE.Color(1, 0.78, 0.34) } },
+  uniforms: { uFog: { value: scene.fog.color }, uPulse: { value: 0 }, uPulseCenter: { value: new THREE.Vector3() }, uPulseColor: { value: new THREE.Color(1, 0.78, 0.34) }, uDim: { value: 1 } },
   vertexShader: `varying vec3 vW; void main(){ vec4 w = modelMatrix*vec4(position,1.0); vW=w.xyz; gl_Position = projectionMatrix*viewMatrix*w; }`,
-  fragmentShader: `varying vec3 vW; uniform vec3 uFog; uniform float uPulse; uniform vec3 uPulseCenter; uniform vec3 uPulseColor;
+  fragmentShader: `varying vec3 vW; uniform vec3 uFog; uniform float uPulse; uniform vec3 uPulseCenter; uniform vec3 uPulseColor; uniform float uDim;
     float grid(vec2 p, float s, float w){ vec2 g = abs(fract(p/s-0.5)-0.5)/fwidth(p/s); float l = min(g.x,g.y); return 1.0-smoothstep(0.0,w,l); }
     void main(){
       float minor = grid(vW.xz, 1.0, 1.2)*0.22, major = grid(vW.xz, 5.0, 1.4)*0.55;
@@ -68,7 +71,7 @@ const ground = new THREE.Mesh(new THREE.PlaneGeometry(140, 140), new THREE.Shade
       float a = max(minor, major) * fade;
       float ring = 1.0 - smoothstep(0.0, 0.5, abs(length(vW.xz-uPulseCenter.xz) - uPulse*6.0));
       a += ring * (1.0-uPulse) * 0.8 * float(uPulse>0.0);
-      gl_FragColor = vec4(mix(col, uPulseColor, ring*(1.0-uPulse)), a);
+      gl_FragColor = vec4(mix(col * uDim, uPulseColor, ring*(1.0-uPulse)), a);
     }`
 }));
 ground.rotation.x = -Math.PI / 2; ground.position.y = 0.004; scene.add(ground);
@@ -97,9 +100,9 @@ tileTex.repeat.set(14, 10);
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), matte(0x0a0c0f, 0.95)); floor.rotation.x = -Math.PI / 2; floor.position.y = -37; scene.add(floor);
   // back wall: subway tile, a window with mullions and a moon, upper cabinets, a shelf of jars
   const wall = new THREE.Mesh(new THREE.PlaneGeometry(400, 160), new THREE.MeshStandardMaterial({ map: tileTex, roughness: 0.6 })); wall.position.set(0, 38, -64); scene.add(wall);
-  const win = new THREE.Mesh(new THREE.PlaneGeometry(30, 22), new THREE.MeshBasicMaterial({ color: 0xa8c0d4 })); win.position.set(-9, 17, -63.6); scene.add(win);
+  const win = new THREE.Mesh(new THREE.PlaneGeometry(30, 22), new THREE.MeshBasicMaterial({ color: 0xa8c0d4 })); win.userData.base = 0xa8c0d4; dimmable.push(win); win.position.set(-9, 17, -63.6); scene.add(win);
   const winGlow = new THREE.Mesh(new THREE.PlaneGeometry(38, 30), new THREE.MeshBasicMaterial({ color: 0xffe9c8, transparent: true, opacity: 0.08, blending: THREE.AdditiveBlending, depthWrite: false })); winGlow.position.set(-9, 17, -63.5); scene.add(winGlow);
-  const sunDisc = new THREE.Mesh(new THREE.CircleGeometry(2.6, 40), new THREE.MeshBasicMaterial({ color: 0xfff4dc })); sunDisc.position.set(-17, 22, -63.55); scene.add(sunDisc);
+  const sunDisc = new THREE.Mesh(new THREE.CircleGeometry(2.6, 40), new THREE.MeshBasicMaterial({ color: 0xfff4dc })); sunDisc.userData.base = 0xfff4dc; dimmable.push(sunDisc); sunDisc.position.set(-17, 22, -63.55); scene.add(sunDisc);
   // (no volumetric shafts: the sun and its shadows carry the morning light)
   for (const dx of [-15.2, -5, 5, 15.2]) { const m = new THREE.Mesh(new THREE.BoxGeometry(dx === -15.2 || dx === 15.2 ? 1.4 : 0.9, 23, 0.8), matte(0x0a0c0e)); m.position.set(-9 + dx, 17, -63.2); scene.add(m); }
   for (const dy of [-11.2, 0, 11.2]) { const m = new THREE.Mesh(new THREE.BoxGeometry(31.4, dy === 0 ? 0.9 : 1.4, 0.8), matte(0x0a0c0e)); m.position.set(-9, 17 + dy, -63.2); scene.add(m); }
@@ -111,7 +114,7 @@ tileTex.repeat.set(14, 10);
   for (let i = 0; i < 3; i++) { const j = new THREE.Mesh(new THREE.CylinderGeometry(2.4, 2.4, 6 + i, 24), jarMat); j.position.set(41 + i * 8, 9.4 + i * 0.5, -60); scene.add(j); const lid = new THREE.Mesh(new THREE.CylinderGeometry(2.5, 2.5, 0.8, 24), matte(0x2a2e33, 0.4)); lid.position.set(41 + i * 8, 12.8 + i * 1, -60); scene.add(lid); }
   // pendant lamp above the island
   const shade = new THREE.Mesh(new THREE.ConeGeometry(7, 6, 40, 1, true), new THREE.MeshStandardMaterial({ color: 0x1a1d20, roughness: 0.6, side: THREE.DoubleSide })); shade.position.set(8, 33, -4); scene.add(shade);
-  const bulb = new THREE.Mesh(new THREE.SphereGeometry(1.1, 16, 12), new THREE.MeshBasicMaterial({ color: 0xffe3b8 })); bulb.position.set(8, 31, -4); scene.add(bulb);
+  const bulb = new THREE.Mesh(new THREE.SphereGeometry(1.1, 16, 12), new THREE.MeshBasicMaterial({ color: 0xffe3b8 })); bulb.userData.base = 0xffe3b8; dimmable.push(bulb); bulb.position.set(8, 31, -4); scene.add(bulb);
   const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 40, 6), matte(0x0a0a0a)); cord.position.set(8, 56, -4); scene.add(cord);
   // props on the island: cutting board + knife, fruit bowl, mug, salt, folded towel, spoon
   const board = new THREE.Mesh(new RoundedBoxGeometry(16, 1.2, 10, 3, 0.4), matte(0x3a2a1c, 0.7)); board.position.set(-18, 0.6, -12); board.rotation.y = 0.25; board.castShadow = true; scene.add(board);
@@ -164,9 +167,9 @@ const peelTex = (() => { const c = document.createElement('canvas'); c.width = 1
   const tip = (x0, w) => { const lg = g.createLinearGradient(x0, 0, x0 + w, 0); lg.addColorStop(0, 'rgba(50,28,10,0.85)'); lg.addColorStop(1, 'rgba(50,28,10,0)'); g.fillStyle = lg; g.fillRect(Math.min(x0, x0 + w), 0, Math.abs(w), 512); };
   tip(0, 70); tip(1024, -90);
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; return t; })();
-const peelMat = new THREE.MeshPhysicalMaterial({ map: peelTex, color: 0xffffff, roughness: 0.55, metalness: 0.0, clearcoat: 0.25, clearcoatRoughness: 0.55, sheen: 0.25, sheenColor: 0xfff2b0, emissive: 0xffd84a, emissiveMap: peelTex, emissiveIntensity: 0.16 });
-const peelStripMat = new THREE.MeshPhysicalMaterial({ map: peelTex, color: 0xffffff, roughness: 0.6, clearcoat: 0.2, clearcoatRoughness: 0.6, side: THREE.DoubleSide, emissive: 0xffd84a, emissiveMap: peelTex, emissiveIntensity: 0.16 });
-const fleshMat = new THREE.MeshPhysicalMaterial({ color: 0xf3e6b8, roughness: 0.62, clearcoat: 0.15, sheen: 0.5, sheenColor: 0xffffff, emissive: 0xf3e6b8, emissiveIntensity: 0.12 });
+const peelMat = new THREE.MeshStandardMaterial({ map: peelTex, color: 0xffffff, roughness: 0.92, metalness: 0.0, emissive: 0xffd84a, emissiveMap: peelTex, emissiveIntensity: 0.18 });
+const peelStripMat = new THREE.MeshStandardMaterial({ map: peelTex, color: 0xffffff, roughness: 0.92, side: THREE.DoubleSide, emissive: 0xffd84a, emissiveMap: peelTex, emissiveIntensity: 0.18 });
+const fleshMat = new THREE.MeshStandardMaterial({ color: 0xefe2b4, roughness: 0.95, emissive: 0xefe2b4, emissiveIntensity: 0.1 });
 const stemMat = new THREE.MeshStandardMaterial({ color: 0x3a2a14, roughness: 0.9 });
 // swept tube with a radius profile and a 5-ridge cross-section; u0..u1 selects the portion of the spine to sweep
 function sweep(curve, radiusAt, u0 = 0, u1 = 1, segs = 120, sides = 28, ridges = true) {
@@ -224,7 +227,9 @@ const outCurve = new THREE.CatmullRomCurve3(outPts, false, 'centripetal', 0.5);
 const P_END = outPts[outPts.length - 1].clone();
 const DISP = P_END.clone().sub(FOOD);
 const outTan = outCurve.getTangentAt(1).normalize();
-const retPts = [P_END.clone(), P_END.clone().addScaledVector(outTan, 1.6), V(12.8, 4.8, -3.4), V(12.4, 5.0, -5.2), V(10.8, 5.0, -6.0), V(8.9, 4.6, -5.0), V(7.4, 4.2, -3.3), V(6.1, 4.0, -1.5), V(4.5, 3.4, -0.6), V(3.0, 2.9, -1.6), V(1.2, 2.3, -1.9), V(-0.9, 1.9, -0.6), V(-0.3, 1.4, 0.0), PERCH.clone()];
+const turnEnd = P_END.clone().add(V(-2.2, 0.2, -2.6));
+const retPts = [P_END.clone(), P_END.clone().addScaledVector(outTan, 1.3), P_END.clone().add(V(1.5, 0.3, -2.3)), P_END.clone().add(V(-0.3, 0.4, -3.2)), turnEnd,
+  turnEnd.clone().lerp(PERCH, 0.3).add(V(0, 0.25, 0)), turnEnd.clone().lerp(PERCH, 0.6).add(V(0, 0.2, 0)), turnEnd.clone().lerp(PERCH, 0.86).add(V(0, 0.25, 0)), PERCH.clone()];
 const retCurve = new THREE.CatmullRomCurve3(retPts, false, 'centripetal', 0.5);
 
 // flight-time mapping (fly parameter as function of beat time)
@@ -429,7 +434,6 @@ function cameraAt(t, P) {
 // ---------- DOM callouts ----------
 const calloutsEl = document.getElementById('callouts'), leadersEl = document.getElementById('leaders');
 const CALLOUTS = [
-  { id: 'dopa', cls: 'qual', name: 'FB4M · FB1H · DOPAMINE · WRITES WHILE MOVING', color: '#ff8ad4', tin: 1.1, tout: 2.85, anchor: () => currentPose.pos.clone().add(V(0, 0.35, 0)), dx: 40, dy: -70, spin: false },
   { id: 'hdh', name: 'hΔH', color: '#ffc857', tin: 6.0, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.16), dx: 16, dy: -70 },
   { id: 'hda', name: 'hΔA', color: '#ffc857', tin: 6.35, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.38), dx: -40, dy: -110 },
   { id: 'hdi', name: 'hΔI', color: '#ffc857', tin: 6.7, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.60), dx: -30, dy: -150 },
@@ -488,7 +492,6 @@ function updateText(t) {
   }
   let c = 0; CHAPTERS.forEach((x, i) => { if (t >= x[0]) c = i; });
   if (c !== curChapter) { curChapter = c; chapNo.textContent = CHAPTERS[c][1]; chapName.textContent = CHAPTERS[c][2]; eyebrow.style.color = CHAPTERS[c][3]; document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', i === c)); }
-  document.getElementById('freeze').style.opacity = t >= 3 && t < 12.5 ? 1 : 0;
 }
 
 // ---------- per-frame scene update (pure function of t) ----------
@@ -532,7 +535,13 @@ function update(tScene) {
   // freeze pulse on the grid
   const resetT = LAND + 0.35; const pulse = t >= 3 && t < 4.2 ? (t - 3) / 1.2 : (t >= 12.5 && t < 13.7 ? (t - 12.5) / 1.2 : (t >= resetT && t < resetT + 1.4 ? (t - resetT) / 1.4 : 0));
   ground.material.uniforms.uPulse.value = pulse; ground.material.uniforms.uPulseCenter.value.copy(t >= resetT ? FOOD : P.pos); ground.material.uniforms.uPulseColor.value.copy(t >= resetT ? TEAL : GOLD);
-  bloom.strength = 0.6 + 1.2 * Math.max(0, 1 - Math.abs(t - 3) * 5) + 1.1 * Math.max(0, 1 - Math.abs(t - 12.5) * 5) + 0.8 * Math.max(0, 1 - Math.abs(t - 10.5) * 4) + 1.0 * Math.max(0, 1 - Math.abs(t - resetT) * 3);
+  // the reveal: 5.9–9.6 s the kitchen goes dark around the four named neurons and the stored vector
+  const kReveal = ss(5.9, 6.7, t) * (1 - ss(9.0, 9.8, t)); const dimL = 1 - 0.9 * kReveal;
+  for (const l of lights) l.intensity = l.userData.base * dimL;
+  for (const m of dimmable) m.material.color.setHex(m.userData.base).multiplyScalar(1 - 0.85 * kReveal);
+  scene.background.setHex(0x1a2028).multiplyScalar(1 - 0.8 * kReveal); scene.fog.color.copy(scene.background);
+  ground.material.uniforms.uDim.value = 1 - 0.55 * kReveal;
+  bloom.strength = 0.35 * kReveal + 0.6 + 1.2 * Math.max(0, 1 - Math.abs(t - 3) * 5) + 1.1 * Math.max(0, 1 - Math.abs(t - 12.5) * 5) + 0.8 * Math.max(0, 1 - Math.abs(t - 10.5) * 4) + 1.0 * Math.max(0, 1 - Math.abs(t - resetT) * 3);
 
   // --- 3–4s: movement arrows paint along the trail; fade 6.6–8 ---
   const segFade = 1 - ss(6.6, 8.0, t);
@@ -560,7 +569,7 @@ function update(tScene) {
   const kCopy = ease((t - 9.5) / 0.8), kRot = ss(10.5, 12.5, t); const rotOp = 1;
   if (kCopy > 0 && rotOp > 0) {
     const ang = kRot * Math.PI; const dx = DISP.x, dz = DISP.z; const c = Math.cos(ang), s = Math.sin(ang);
-    _dir.set(dx * c - dz * s, lerp(DISP.y, -DISP.y, kRot), dx * s + dz * c);
+    _dir.set(dx * c + dz * s, lerp(DISP.y, -DISP.y, kRot), dz * c - dx * s);
     const SHORT = 0.42; const kExt = ss(12.0, 12.55, t); const len = lerp(SHORT, 1, kExt);
     const tip = P_END.clone().addScaledVector(_dir, len);
     dispCopy.set(P_END, tip, kCopy * (kRot > 0.985 ? 0 : 1), 0.85 * rotOp);
@@ -602,7 +611,7 @@ timeline.max = DUR; timeline.addEventListener('input', e => { setTime(parseFloat
 timeline.addEventListener('pointerdown', () => { playing = false; playBtn.textContent = '▶'; });
 playBtn.addEventListener('click', () => { playing = !playing; playBtn.textContent = playing ? 'Ⅱ' : '▶'; });
 document.getElementById('restart').addEventListener('click', () => { setTime(0); playing = true; playBtn.textContent = 'Ⅱ'; });
-document.getElementById('wordmark').addEventListener('click', e => { e.preventDefault(); setTime(0); playing = true; playBtn.textContent = 'Ⅱ'; });
+
 document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => { setTime(unwarp(parseFloat(b.dataset.time)) + PRE); playing = true; playBtn.textContent = 'Ⅱ'; }));
 addEventListener('keydown', e => {
   if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
