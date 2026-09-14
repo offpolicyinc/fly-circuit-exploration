@@ -43,7 +43,7 @@ button{color:inherit;background:none;border:0;cursor:pointer;font-family:inherit
 .hint{margin-left:auto;color:#55707b;font:8px var(--mono);letter-spacing:1.2px}
 input[type=range]{appearance:none;display:block;width:100%;height:2px;margin:0 0 16px;background:linear-gradient(to right,var(--gold) var(--progress,0%),#1f3340 var(--progress,0%));cursor:pointer}
 input[type=range]::-webkit-slider-thumb{appearance:none;width:10px;height:10px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 4px #060d1480}
-nav{display:grid;grid-template-columns:9fr 6fr 2.5fr 2.5fr;gap:14px}
+nav{display:grid;grid-template-columns:9fr 8fr 5fr;gap:14px}
 nav button{text-align:left;font-size:10px;white-space:nowrap;color:#6b8590;padding:0;transition:color .3s}
 nav b{font:9px var(--mono);margin-right:10px}nav span{float:right;font:8px var(--mono);opacity:.5;margin-left:12px}
 nav button.active{color:var(--ink)}
@@ -56,7 +56,7 @@ nav button.active{color:var(--ink)}
 .bp-title{font:700 22px var(--cond);letter-spacing:1px;margin-top:6px;color:var(--ink)}
 .bp-title span{font:9px var(--mono);letter-spacing:1.5px;color:var(--muted);margin-left:8px}
 .bp-sub{font:9px var(--mono);letter-spacing:.8px;color:#5d7079;margin-top:8px;line-height:1.6;max-width:26ch}
-canvas#brain{flex:1;width:100%;min-height:0;display:block;margin:8px -6px}
+canvas#brain{flex:1;width:100%;min-height:0;display:block;margin:10px 0}
 .bp-legend{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
 .bp-legend li{display:grid;grid-template-columns:10px 1fr;column-gap:10px;align-items:start;opacity:.32;transition:opacity .35s;font-size:11px}
 .bp-legend li.on{opacity:1}

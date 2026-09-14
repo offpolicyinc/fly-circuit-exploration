@@ -13,7 +13,8 @@ const PRE = 1.2, FLIGHT = 3.5, MAIN = 20 + (FLIGHT - 3), DUR = PRE + MAIN, HOLD 
 const warp = x => x < 0 ? x : x < FLIGHT ? x * (3 / FLIGHT) : x - (FLIGHT - 3);
 const unwarp = b => b < 3 ? b * (FLIGHT / 3) : b + (FLIGHT - 3);
 const GOLD = new THREE.Color(1.0, 0.78, 0.34), CORAL = new THREE.Color(1.0, 0.43, 0.38),
-      BLUE = new THREE.Color(0.36, 0.78, 1.0), VIOLET = new THREE.Color(0.7, 0.55, 1.0);
+      BLUE = new THREE.Color(0.36, 0.78, 1.0), VIOLET = new THREE.Color(0.7, 0.55, 1.0),
+      TEAL = new THREE.Color(0.37, 0.9, 0.78), PINK = new THREE.Color(1.0, 0.54, 0.83);
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const clamp01 = x => Math.max(0, Math.min(1, x));
 const ss = (a, b, x) => { const k = clamp01((x - a) / (b - a)); return k * k * (3 - 2 * k); };
@@ -55,9 +56,9 @@ const flyLight = new THREE.PointLight(0xffc857, 0, 4, 2); scene.add(flyLight);
 // ---------- ground grid ----------
 const ground = new THREE.Mesh(new THREE.PlaneGeometry(140, 140), new THREE.ShaderMaterial({
   transparent: true, depthWrite: false,
-  uniforms: { uFog: { value: scene.fog.color }, uPulse: { value: 0 }, uPulseCenter: { value: new THREE.Vector3() } },
+  uniforms: { uFog: { value: scene.fog.color }, uPulse: { value: 0 }, uPulseCenter: { value: new THREE.Vector3() }, uPulseColor: { value: new THREE.Color(1, 0.78, 0.34) } },
   vertexShader: `varying vec3 vW; void main(){ vec4 w = modelMatrix*vec4(position,1.0); vW=w.xyz; gl_Position = projectionMatrix*viewMatrix*w; }`,
-  fragmentShader: `varying vec3 vW; uniform vec3 uFog; uniform float uPulse; uniform vec3 uPulseCenter;
+  fragmentShader: `varying vec3 vW; uniform vec3 uFog; uniform float uPulse; uniform vec3 uPulseCenter; uniform vec3 uPulseColor;
     float grid(vec2 p, float s, float w){ vec2 g = abs(fract(p/s-0.5)-0.5)/fwidth(p/s); float l = min(g.x,g.y); return 1.0-smoothstep(0.0,w,l); }
     void main(){
       float minor = grid(vW.xz, 1.0, 1.2)*0.22, major = grid(vW.xz, 5.0, 1.4)*0.55;
@@ -67,7 +68,7 @@ const ground = new THREE.Mesh(new THREE.PlaneGeometry(140, 140), new THREE.Shade
       float a = max(minor, major) * fade;
       float ring = 1.0 - smoothstep(0.0, 0.5, abs(length(vW.xz-uPulseCenter.xz) - uPulse*6.0));
       a += ring * (1.0-uPulse) * 0.8 * float(uPulse>0.0);
-      gl_FragColor = vec4(mix(col, vec3(1.0,0.78,0.34), ring*(1.0-uPulse)), a);
+      gl_FragColor = vec4(mix(col, uPulseColor, ring*(1.0-uPulse)), a);
     }`
 }));
 ground.rotation.x = -Math.PI / 2; ground.position.y = 0.004; scene.add(ground);
@@ -145,50 +146,93 @@ const glowTex = (() => { const c = document.createElement('canvas'); c.width = c
   return new THREE.CanvasTexture(c); })();
 const sprite = (color, size) => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false })); s.scale.setScalar(size); return s; };
 
-// ---------- the sugar cube ----------
-const FOOD = V(0.2, 1.0, 0.2);
-// granular crystal texture: bright facets over an off-white ground, used as colour + bump so the cube sparkles
-const sugarTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d'); g.fillStyle = '#ded9cf'; g.fillRect(0, 0, 512, 512);
-  for (let i = 0; i < 9000; i++) { const v = 205 + Math.random() * 50; const w = 3 + Math.random() * 6; g.fillStyle = `rgba(${v},${v},${v - 4},${0.55 + Math.random() * 0.45})`; g.save(); g.translate(Math.random() * 512, Math.random() * 512); g.rotate(Math.random() * 3); g.fillRect(-w / 2, -w / 2, w, w * (0.6 + Math.random() * 0.8)); g.restore(); }
-  for (let i = 0; i < 700; i++) { g.fillStyle = `rgba(255,255,255,${0.5 + Math.random() * 0.5})`; g.fillRect(Math.random() * 512, Math.random() * 512, 1.5, 1.5); }
-  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1.5, 1.5); return t; })();
-const sugarMat = new THREE.MeshPhysicalMaterial({ map: sugarTex, bumpMap: sugarTex, bumpScale: 0.6, color: 0xd6d2c9, roughness: 0.66, metalness: 0.0, clearcoat: 0.35, clearcoatRoughness: 0.5, sheen: 0.4, sheenColor: 0xffffff });
+// ---------- the banana (peeled open, ripe, heavily spotted) ----------
+const PERCH = V(0.3, 1.16, 0.3);           // the fly stands on the exposed flesh, a little back from the peeled tip
+const FOOD = V(0.3, 1.12, 0.3);
+const peelTex = (() => { const c = document.createElement('canvas'); c.width = 1024; c.height = 512; const g = c.getContext('2d');
+  const base = g.createLinearGradient(0, 0, 1024, 0); base.addColorStop(0, '#d9b93a'); base.addColorStop(0.15, '#f4d84e'); base.addColorStop(0.5, '#fbe25c'); base.addColorStop(0.85, '#f0d44a'); base.addColorStop(1, '#c9a532');
+  g.fillStyle = base; g.fillRect(0, 0, 1024, 512);
+  // fine grain
+  for (let i = 0; i < 14000; i++) { const v = Math.random(); g.fillStyle = `rgba(${v > 0.5 ? 255 : 90},${v > 0.5 ? 240 : 60},${v > 0.5 ? 150 : 20},${0.05 + Math.random() * 0.08})`; g.fillRect(Math.random() * 1024, Math.random() * 512, 2, 2 + Math.random() * 6); }
+  // ridges: five long darker bands
+  for (let k = 0; k < 5; k++) { g.fillStyle = 'rgba(120,90,20,0.14)'; g.fillRect(0, k * 102 + 30, 1024, 14); }
+  // heavy brown spotting, denser toward both ends
+  const spot = (x, y, r, a) => { const rg = g.createRadialGradient(x, y, 0, x, y, r); rg.addColorStop(0, `rgba(58,32,12,${a})`); rg.addColorStop(0.7, `rgba(74,42,16,${a * 0.85})`); rg.addColorStop(1, 'rgba(74,42,16,0)'); g.fillStyle = rg; g.beginPath(); g.ellipse(x, y, r, r * (0.6 + Math.random() * 0.6), Math.random() * 3, 0, Math.PI * 2); g.fill(); };
+  for (let i = 0; i < 800; i++) { const x = Math.random() * 1024; const endBias = Math.pow(Math.abs(x / 1024 - 0.5) * 2, 1.5); if (Math.random() > 0.3 + endBias * 0.7) continue; spot(x, Math.random() * 512, 3 + Math.random() * 12, 0.5 + Math.random() * 0.4); }
+  for (let i = 0; i < 18; i++) { const x = Math.random() * 1024; spot(x, Math.random() * 512, 16 + Math.random() * 22, 0.3 + Math.random() * 0.3); }
+  // bruised tips
+  const tip = (x0, w) => { const lg = g.createLinearGradient(x0, 0, x0 + w, 0); lg.addColorStop(0, 'rgba(50,28,10,0.85)'); lg.addColorStop(1, 'rgba(50,28,10,0)'); g.fillStyle = lg; g.fillRect(Math.min(x0, x0 + w), 0, Math.abs(w), 512); };
+  tip(0, 70); tip(1024, -90);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8; return t; })();
+const peelMat = new THREE.MeshPhysicalMaterial({ map: peelTex, color: 0xffffff, roughness: 0.55, metalness: 0.0, clearcoat: 0.25, clearcoatRoughness: 0.55, sheen: 0.25, sheenColor: 0xfff2b0, emissive: 0xffd84a, emissiveMap: peelTex, emissiveIntensity: 0.16 });
+const peelStripMat = new THREE.MeshPhysicalMaterial({ map: peelTex, color: 0xffffff, roughness: 0.6, clearcoat: 0.2, clearcoatRoughness: 0.6, side: THREE.DoubleSide, emissive: 0xffd84a, emissiveMap: peelTex, emissiveIntensity: 0.16 });
+const fleshMat = new THREE.MeshPhysicalMaterial({ color: 0xf3e6b8, roughness: 0.62, clearcoat: 0.15, sheen: 0.5, sheenColor: 0xffffff, emissive: 0xf3e6b8, emissiveIntensity: 0.12 });
+const stemMat = new THREE.MeshStandardMaterial({ color: 0x3a2a14, roughness: 0.9 });
+// swept tube with a radius profile and a 5-ridge cross-section; u0..u1 selects the portion of the spine to sweep
+function sweep(curve, radiusAt, u0 = 0, u1 = 1, segs = 120, sides = 28, ridges = true) {
+  const geo = new THREE.BufferGeometry(); const P = [], N = [], UVs = [], I = [];
+  const fr = curve.computeFrenetFrames(segs, false);
+  for (let i = 0; i <= segs; i++) { const u = u0 + (u1 - u0) * i / segs; const p = curve.getPointAt(u); const f = Math.round(u * segs); const nrm = fr.normals[Math.min(f, segs)], bin = fr.binormals[Math.min(f, segs)];
+    for (let j = 0; j <= sides; j++) { const th = j / sides * Math.PI * 2; const r = radiusAt(u) * (ridges ? 1 + 0.07 * Math.cos(th * 5) : 1);
+      const nx = Math.cos(th) * nrm.x + Math.sin(th) * bin.x, ny = Math.cos(th) * nrm.y + Math.sin(th) * bin.y, nz = Math.cos(th) * nrm.z + Math.sin(th) * bin.z;
+      P.push(p.x + nx * r, p.y + ny * r, p.z + nz * r); N.push(nx, ny, nz); UVs.push(u, j / sides); } }
+  for (let i = 0; i < segs; i++) for (let j = 0; j < sides; j++) { const a = i * (sides + 1) + j, b = a + sides + 1; I.push(a, b, a + 1, b, b + 1, a + 1); }
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); geo.setAttribute('normal', new THREE.Float32BufferAttribute(N, 3)); geo.setAttribute('uv', new THREE.Float32BufferAttribute(UVs, 2)); geo.setIndex(I); return geo;
+}
+// a peel strip: ribbon along a curve, width tapering toward the free end, outside spotted, inside pale
+function ribbon(curve, widthAt, segs = 40) {
+  const geo = new THREE.BufferGeometry(); const P = [], UVs = [], I = []; const fr = curve.computeFrenetFrames(segs, false);
+  for (let i = 0; i <= segs; i++) { const u = i / segs; const p = curve.getPointAt(u); const b = fr.binormals[i]; const w = widthAt(u);
+    for (let k = -1; k <= 1; k += 2) { P.push(p.x + b.x * w * k * 0.5, p.y + b.y * w * k * 0.5, p.z + b.z * w * k * 0.5); UVs.push(0.55 + u * 0.35, k > 0 ? 0.14 : 0.0); } }
+  for (let i = 0; i < segs; i++) { const a = i * 2; I.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); }
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); geo.setAttribute('uv', new THREE.Float32BufferAttribute(UVs, 2)); geo.setIndex(I); geo.computeVertexNormals(); return geo;
+}
 const food = new THREE.Group();
+function makeBanana(peeled) {
+  const g = new THREE.Group();
+  // spine lies along local +x, resting on its belly with both tips lifted; the peeled tip is at +x
+  const spine = new THREE.CatmullRomCurve3([V(-3.6, 1.0, 0), V(-2.4, 0.7, 0.05), V(-0.8, 0.62, 0), V(1.0, 0.62, -0.05), V(2.6, 0.72, 0), V(3.7, 1.0, 0)], false, 'centripetal');
+  const radius = u => 0.6 * Math.pow(Math.sin(Math.PI * Math.min(0.97, Math.max(0.03, u))), 0.32) * (u > 0.92 ? lerp(1, 0.55, (u - 0.92) / 0.08) : 1);
+  const split = peeled ? 0.6 : 1.0;
+  const peel = new THREE.Mesh(sweep(spine, radius, 0, split), peelMat); peel.castShadow = true; g.add(peel);
+  if (peeled) {
+    const flesh = new THREE.Mesh(sweep(spine, u => radius(u) * 0.86, 0.54, 0.985, 60, 24, false), fleshMat); flesh.castShadow = true; g.add(flesh);
+    const cap = new THREE.Mesh(new THREE.SphereGeometry(radius(0.985) * 0.86, 20, 14), fleshMat); cap.position.copy(spine.getPointAt(0.985)); cap.scale.set(0.5, 1, 1); g.add(cap);
+    // four strips peel back from the split, curl outward and droop to the counter
+    const sp = spine.getPointAt(split); const tan = spine.getTangentAt(split).normalize();
+    for (let k = 0; k < 4; k++) { const th = k / 4 * Math.PI * 2 + 0.5; const side = V(0, Math.cos(th), Math.sin(th)); const r0 = radius(split);
+      const up = Math.max(0, Math.cos(th)); // strips near the top curl up and back; lower ones splay out and droop to the counter
+      // folded back over the body: each strip stays just outside the peel and droops as it runs toward the stem
+      const pts = [sp.clone().addScaledVector(side, r0), sp.clone().addScaledVector(side, r0 * 1.2).addScaledVector(tan, -0.45), sp.clone().addScaledVector(side, r0 * 1.3).addScaledVector(tan, -1.25).add(V(0, -(1 - up) * 0.2, 0)), sp.clone().addScaledVector(side, r0 * 1.35).addScaledVector(tan, -2.0).add(V(0, -(1 - up) * 0.55, 0))];
+      for (const p of pts) p.y = Math.max(0.05, p.y);
+      const c = new THREE.CatmullRomCurve3(pts, false, 'centripetal'); const geo = ribbon(c, u => r0 * 0.8 * (1 - u * 0.35));
+      const strip = new THREE.Mesh(geo, peelStripMat); strip.castShadow = true; g.add(strip); }
+  }
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.22, 0.9, 10), stemMat); stem.position.copy(spine.getPointAt(0.01)).add(V(-0.35, 0.3, 0)); stem.rotation.z = 1.1; g.add(stem);
+  return g;
+}
 {
-  const cube = new THREE.Mesh(new RoundedBoxGeometry(1.0, 0.92, 1.0, 4, 0.06), sugarMat); cube.position.set(0, 0.46, 0); cube.rotation.y = 0.18; cube.castShadow = true; food.add(cube);
-  const cube2 = new THREE.Mesh(new RoundedBoxGeometry(1.0, 0.92, 1.0, 4, 0.06), sugarMat); cube2.position.set(1.9, 0.46, 0.9); cube2.rotation.y = -0.5; cube2.rotation.z = 0.02; cube2.castShadow = true; food.add(cube2);
-  const crystalMat = new THREE.MeshPhysicalMaterial({ color: 0xf6f3ec, roughness: 0.4, clearcoat: 0.6, transmission: 0.2, thickness: 0.05 });
-  for (let i = 0; i < 40; i++) { const sz = 0.03 + Math.random() * 0.05; const g = new THREE.Mesh(new THREE.BoxGeometry(sz, sz * 0.7, sz), crystalMat); const a = Math.random() * Math.PI * 2, r = 0.7 + Math.random() * 1.7; g.position.set(0.9 + Math.cos(a) * r, sz * 0.35, 0.4 + Math.sin(a) * r); g.rotation.set(Math.random(), Math.random() * 3, Math.random()); food.add(g); }
+  const b1 = makeBanana(true); b1.rotation.y = 0.53; b1.position.set(-1.66, 0, 1.45); food.add(b1);
+  const b2 = makeBanana(false); b2.rotation.y = 0.68; b2.position.set(-2.4, 0, -0.2); b2.rotation.z = 0.03; food.add(b2);
   scene.add(food);
 }
+window.__food = food;
 
 // ---------- flight paths ----------
-const outPts = [V(0.3, 1.05, 0.3), V(1.4, 1.9, -0.7), V(3.0, 3.0, -2.5), V(5.4, 3.4, -2.2), V(6.7, 4.6, 0.5), V(8.5, 4.0, 2.0), V(10.4, 5.2, 0.6), V(11.6, 4.6, -1.6)];
+const outPts = [V(0.3, 1.18, 0.3), V(1.4, 2.0, -0.7), V(3.0, 3.0, -2.5), V(5.4, 3.4, -2.2), V(6.7, 4.6, 0.5), V(8.5, 4.0, 2.0), V(10.4, 5.2, 0.6), V(11.6, 4.6, -1.6)];
 const outCurve = new THREE.CatmullRomCurve3(outPts, false, 'centripetal', 0.5);
 const P_END = outPts[outPts.length - 1].clone();
 const DISP = P_END.clone().sub(FOOD);
 const outTan = outCurve.getTangentAt(1).normalize();
-const retPts = [P_END.clone(), P_END.clone().addScaledVector(outTan, 1.6), V(12.8, 4.8, -3.4), V(12.4, 5.0, -5.2), V(10.8, 5.0, -6.0), V(8.9, 4.6, -5.0), V(7.4, 4.2, -3.3), V(6.1, 4.0, -1.5), V(4.5, 3.4, -0.6), V(3.0, 2.8, -1.5), V(1.6, 2.0, -1.2), V(0.5, 1.3, -0.2)];
+const retPts = [P_END.clone(), P_END.clone().addScaledVector(outTan, 1.6), V(12.8, 4.8, -3.4), V(12.4, 5.0, -5.2), V(10.8, 5.0, -6.0), V(8.9, 4.6, -5.0), V(7.4, 4.2, -3.3), V(6.1, 4.0, -1.5), V(4.5, 3.4, -0.6), V(3.0, 2.9, -1.6), V(1.2, 2.3, -1.9), V(-0.9, 1.9, -0.6), V(-0.3, 1.4, 0.0), PERCH.clone()];
 const retCurve = new THREE.CatmullRomCurve3(retPts, false, 'centripetal', 0.5);
 
-// flight-time mapping (fly parameter as function of scene time)
-const V_AT_15 = 0.42, RATE = V_AT_15 / 2.5;
-function retParam(t) {
-  if (t < 12.5) return 0;
-  if (t < 15) return RATE * (t - 12.5);
-  if (t < 17.5) return V_AT_15 + RATE * 0.35 * (t - 15);
-  return Math.min(0.985, V_AT_15 + RATE * 0.35 * 2.5 + RATE * 0.55 * (t - 17.5));
-}
-function timeScale(t) { return t < 3 ? 1 : t < 12.5 ? 0 : t < 15 ? 1 : t < 17.5 ? 0.35 : 0.55; }
+// flight-time mapping (fly parameter as function of beat time)
+const RET0 = 12.5, RET1 = 17.0, LAND = RET1;
+function retParam(t) { if (t < RET0) return 0; if (t >= RET1) return 1; const x = (t - RET0) / (RET1 - RET0); return lerp(x, 1 - Math.pow(1 - x, 2.2), 0.55); } // eases into the landing
+function timeScale(t) { return t < 3 ? 1 : t < RET0 ? 0 : t < RET1 ? 1 : 0; }
 // accumulated flap phase (closed form) so scrubbing is exact
-function flapPhase(t) {
-  const f = 26;
-  let p = f * (FLIGHT / 3) * Math.min(t, 3);
-  if (t > 12.5) p += f * (Math.min(t, 15) - 12.5);
-  if (t > 15) p += f * 0.35 * (Math.min(t, 17.5) - 15);
-  if (t > 17.5) p += f * 0.55 * (t - 17.5);
-  return p;
-}
+function flapPhase(t) { const f = 26; let p = f * (FLIGHT / 3) * Math.min(t, 3); if (t > RET0) p += f * (Math.min(t, RET1) - RET0); return p; }
 const _p = new THREE.Vector3(), _q = new THREE.Vector3();
 function flyPose(t) { // {pos, fwd, yawRate}
   const out = {};
@@ -200,6 +244,18 @@ function flyPose(t) { // {pos, fwd, yawRate}
   return out;
 }
 const headingOf = fwd => Math.atan2(fwd.x, fwd.z);
+
+
+// ---------- the synaptic store, as the model computes it ----------
+// eight direction columns; while the fly moves, each column's weight grows by the travel-direction bump (rectified cosine)
+// times the distance flown. The vector sum of the columns is the stored home vector. Octopamine zeroes every column at food.
+const N_COL = 8, STORE_DT = 0.01, STORE_T1 = 21;
+const storeTable = (() => { const n = Math.ceil(STORE_T1 / STORE_DT) + 1; const w = new Float32Array(n * N_COL); const acc = new Float32Array(N_COL); let prev = flyPose(0).pos.clone();
+  for (let i = 1; i < n; i++) { const t = i * STORE_DT; const P = flyPose(t); const d = P.pos.clone().sub(prev); prev = P.pos.clone(); const ds = Math.hypot(d.x, d.z);
+    if (timeScale(t) > 0 && ds > 1e-6) { const h = Math.atan2(d.x, d.z); for (let c = 0; c < N_COL; c++) acc[c] += Math.max(0, Math.cos(h - c * Math.PI * 2 / N_COL)) * ds; }
+    const wipe = 1 - ss(LAND + 0.35, LAND + 1.1, t); for (let c = 0; c < N_COL; c++) w[i * N_COL + c] = acc[c] * wipe; }
+  return w; })();
+const storeWeights = t => { const i = Math.max(0, Math.min(Math.round(t / STORE_DT), storeTable.length / N_COL - 1)); return storeTable.subarray(i * N_COL, i * N_COL + N_COL); };
 
 // ---------- the fly ----------
 const fly = new THREE.Group(); scene.add(fly);
@@ -307,50 +363,29 @@ const dispArrow = new Arrow(GOLD, 0.075, 0.24, 0.6);
 const dispCopy = new Arrow(CORAL, 0.06, 0.2, 0.55);
 const homeArrow = new Arrow(CORAL, 0.06, 0.2, 0.55);
 
-// rotation arc (around the fly) + turning arc (blue) + compass dial (violet)
-class ArcTube { // unit circle tube in XZ; set() positions/scales/rotates it and draws a sweep via the progress shader
-  constructor(color, tubeR, opacity = 1, additive = false) {
-    const circle = new THREE.Curve(); circle.getPoint = (u, o = new THREE.Vector3()) => o.set(Math.sin(u * Math.PI * 2), 0, Math.cos(u * Math.PI * 2));
-    this.base = opacity;
-    this.mat = new THREE.ShaderMaterial({ transparent: true, depthWrite: false, blending: additive ? THREE.AdditiveBlending : THREE.NormalBlending,
-      uniforms: { uProgress: { value: 0 }, uOpacity: { value: opacity }, uColor: { value: color }, uHead: { value: 1 } },
-      vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
-      fragmentShader: `varying vec2 vUv; uniform float uProgress,uOpacity,uHead; uniform vec3 uColor;
-        void main(){ if(vUv.x>uProgress) discard; float head = smoothstep(uProgress-0.04,uProgress,vUv.x)*uHead;
-        gl_FragColor = vec4(uColor*(1.0+head*1.2), uOpacity*(0.75+0.25*head)); }` });
-    this.mesh = new THREE.Mesh(new THREE.TubeGeometry(circle, 160, tubeR, 6, true), this.mat); this.mesh.frustumCulled = false; this.mesh.visible = false; scene.add(this.mesh);
+// rotation arc (around the fly) for the 180° flip
+class Arc {
+  constructor(color, n, opacity = 1, additive = false) {
+    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 3), 3));
+    this.line = new THREE.Line(geo, new THREE.LineBasicMaterial({ color, transparent: true, opacity, blending: additive ? THREE.AdditiveBlending : THREE.NormalBlending, depthWrite: false }));
+    this.line.frustumCulled = false; this.line.visible = false; scene.add(this.line);
   }
   set(center, radius, a0, a1, y = 0, k = 1) {
-    const sweep = (a1 - a0) * k; const dir = sweep >= 0 ? 1 : -1; const prog = Math.abs(sweep) / (Math.PI * 2);
-    this.mesh.position.set(center.x, center.y + y, center.z); this.mesh.scale.set(dir * radius, 1, radius); this.mesh.rotation.y = a0;
-    this.mat.uniforms.uProgress.value = Math.min(1, prog); this.mesh.visible = prog > 0.002;
+    const pos = this.line.geometry.attributes.position; const n = pos.count; const a1k = a0 + (a1 - a0) * k;
+    for (let i = 0; i < n; i++) { const a = a0 + (a1k - a0) * i / (n - 1); pos.setXYZ(i, center.x + Math.sin(a) * radius, center.y + y, center.z + Math.cos(a) * radius); }
+    pos.needsUpdate = true; this.line.visible = Math.abs(a1k - a0) > 0.01;
   }
-  set opacity(v) { this.mat.uniforms.uOpacity.value = v; } set visible(v) { this.mesh.visible = v; } get visible() { return this.mesh.visible; }
+  set visible(v) { this.line.visible = v; } get visible() { return this.line.visible; }
+  set opacity(o) { this.line.material.opacity = o; }
 }
-const arcLine = (color, tubeR, opacity = 1, additive = false) => new ArcTube(color, tubeR, opacity, additive);
 function setArc(arc, center, radius, a0, a1, y = 0, k = 1) { arc.set(center, radius, a0, a1, y, k); }
-const rotArc = arcLine(CORAL, 0.014, 0.95), rotArcGlow = arcLine(CORAL, 0.04, 0.22, true);
+const rotArc = new Arc(CORAL, 96, 0.95), rotArcGlow = new Arc(CORAL, 96, 0.3, true);
 const rotArcHead = new Arrow(CORAL, 0.0001, 0.12, 0.28);
-const turnArc = arcLine(BLUE, 0.03, 1), turnArcGlow = arcLine(BLUE, 0.09, 0.22, true), turnHead = new Arrow(BLUE, 0.0001, 0.11, 0.24);
-const dial = arcLine(VIOLET, 0.016, 0.95), dialGlow = arcLine(VIOLET, 0.05, 0.22, true);
-const dialTicks = (() => { const g = new THREE.BufferGeometry().setFromPoints(Array.from({ length: 24 }, (_, i) => { const a = i * Math.PI / 12, r0 = i % 6 === 0 ? 1.35 : 1.5; return [V(Math.sin(a) * r0, 0, Math.cos(a) * r0), V(Math.sin(a) * 1.62, 0, Math.cos(a) * 1.62)]; }).flat());
-  const l = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: VIOLET, transparent: true, opacity: 0.7 })); l.visible = false; scene.add(l); return l; })();
-const dialDisc = new THREE.Mesh(new THREE.CircleGeometry(1.62, 64), new THREE.MeshBasicMaterial({ color: VIOLET, transparent: true, opacity: 0.05, depthWrite: false })); dialDisc.rotation.x = -Math.PI / 2; dialDisc.visible = false; scene.add(dialDisc);
-const markerActual = new Arrow(new THREE.Color(1.0, 0.95, 1.0), 0.02, 0.09, 0.22);
-const markerModel = new Arrow(VIOLET, 0.02, 0.09, 0.22);
-const gapArc = arcLine(new THREE.Color(1, 0.6, 1), 0.03, 0.95), gapArcGlow = arcLine(new THREE.Color(1, 0.6, 1), 0.08, 0.25, true);
-const dialPost = (() => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3)); const l = new THREE.Line(g, new THREE.LineBasicMaterial({ color: VIOLET, transparent: true, opacity: 0.35 })); l.frustumCulled = false; l.visible = false; scene.add(l); return l; })();
-
-// speed streaks
-const N_STREAK = 9, streakGeo = new THREE.BufferGeometry(); streakGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(N_STREAK * 2 * 3), 3));
-streakGeo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(N_STREAK * 2 * 3), 3));
-const streaks = new THREE.LineSegments(streakGeo, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false })); streaks.frustumCulled = false; streaks.visible = false; scene.add(streaks);
-const streakJit = Array.from({ length: N_STREAK }, (_, i) => ({ y: (Math.random() - .5) * .5, x: (Math.random() - .5) * .6, len: 0.9 + Math.random() * 1.3, ph: Math.random() * 7 }));
 
 // ---------- camera choreography (one continuous blended move) ----------
 const camKeys = [
-  { t: -PRE, f: (t, P) => fixed(7.0, 2.6, 10.5, -0.8, 5.4, -10.0) },     // establishing: sugar cube on the island, kitchen behind
-  { t: -0.3, f: (t, P) => fixed(5.6, 2.4, 7.4, -0.2, 3.0, -5.5) },
+  { t: -PRE, f: (t, P) => fixed(4.8, 3.3, 8.8, -1.0, 0.9, 0.6) },     // establishing: the banana on the island, kitchen behind
+  { t: -0.3, f: (t, P) => fixed(3.9, 2.5, 6.4, -0.5, 1.0, 0.6) },
   { t: 0.2, f: (t, P) => chase(P, 7.5, 2.6, 3.6, 2.2) },
   { t: 2.4, f: (t, P) => chase(P, 7.0, 2.2, -4.2, 1.8) },
   { t: 3.4, f: (t, P) => orbit(P, 8.0, 2.8, 0.9 + (t - 3) * 0.55) },
@@ -360,10 +395,10 @@ const camKeys = [
   { t: 10.6, f: (t, P) => fixed(26.0, 14.0, 8.0, 8.4, 3.4, -4.0) },
   { t: 12.5, f: (t, P) => fixed(24.0, 9.5, 2.5, 10.8, 3.8, -3.5) },
   { t: 13.7, f: (t, P) => chase(P, 6.6, 2.6, -3.2, 1.0, false, 0.6) },
-  { t: 15.2, f: (t, P) => chase(P, 4.6, 2.0, -2.8, 0.1) },
-  { t: 17.4, f: (t, P) => chase(P, 4.8, 2.4, -2.6, 0.3) },
-  { t: 18.7, f: (t, P) => chase(P, 5.4, 6.4, -3.6, -0.3, true, -1.6) },
-  { t: 20.0, f: (t, P) => chase(P, 6.2, 7.4, -4.6, -0.5, true, -1.9) },
+  { t: 15.3, f: (t, P) => chase(P, 6.0, 2.8, 3.4, 1.2) },
+  { t: 16.7, f: (t, P) => fixed(5.6, 3.8, 9.0, -0.6, 1.0, 0.4) },        // the landing, seen from the near side of the island
+  { t: 18.4, f: (t, P) => fixed(4.6, 3.0, 7.4, -0.5, 1.0, 0.5) },
+  { t: 20.0, f: (t, P) => fixed(4.0, 2.6, 6.4, -0.4, 1.0, 0.5) },
 ];
 function chase(P, back, up, side, look, lookGround = false, lat = 0) {
   const right = _q.copy(P.fwd).cross(UP).normalize();
@@ -394,20 +429,17 @@ function cameraAt(t, P) {
 // ---------- DOM callouts ----------
 const calloutsEl = document.getElementById('callouts'), leadersEl = document.getElementById('leaders');
 const CALLOUTS = [
-  { id: 'food', cls: 'mini', name: 'SUGAR', color: '#ffc857', tin: -1.6, tout: 99, anchor: () => FOOD.clone().add(V(0, 0.2, 0)), dx: -70, dy: -34, spin: false },
-  { id: 'hdh', name: 'hΔH', color: '#ffc857', tin: 6.0, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.16), dx: -30, dy: -70 },
+  { id: 'dopa', cls: 'qual', name: 'FB4M · FB1H · DOPAMINE · WRITES WHILE MOVING', color: '#ff8ad4', tin: 1.1, tout: 2.85, anchor: () => currentPose.pos.clone().add(V(0, 0.35, 0)), dx: 40, dy: -70, spin: false },
+  { id: 'hdh', name: 'hΔH', color: '#ffc857', tin: 6.0, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.16), dx: 16, dy: -70 },
   { id: 'hda', name: 'hΔA', color: '#ffc857', tin: 6.35, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.38), dx: -40, dy: -110 },
   { id: 'hdi', name: 'hΔI', color: '#ffc857', tin: 6.7, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.60), dx: -30, dy: -150 },
   { id: 'hdg', name: 'hΔG', color: '#ffc857', tin: 7.05, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.82), dx: -30, dy: -190 },
-  { id: 'store', cls: 'qual', name: 'CANDIDATE SYNAPTIC STORE', color: '#ffc857', tin: 7.5, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.5).add(V(0, -0.3, 0)), dx: -60, dy: 70, spin: false },
-  { id: 'hdm', name: 'hΔM', color: '#ff6f61', tin: 10.5, tout: 15.4, anchor: () => rotArcTip(), dx: 40, dy: -40 },
-  { id: 'return', cls: 'qual', name: 'PROPOSED RETURN PATH', color: '#ff6f61', tin: 11.7, tout: 15.4, anchor: () => P_END.clone().addScaledVector(DISP, -0.45), dx: -80, dy: 70, spin: false },
-  { id: 'fb3a', name: 'FB3A', color: '#5cc8ff', tin: 15.35, tout: 17.9, anchor: () => streakTail(), dx: 30, dy: -50 },
-  { id: 'ps196', name: 'PS196<small>_b</small>', color: '#5cc8ff', tin: 15.95, tout: 17.9, anchor: () => turnArcTip(), dx: -40, dy: -80 },
-  { id: 'inputs', cls: 'qual', name: 'CANDIDATE MOVEMENT INPUTS', color: '#5cc8ff', tin: 16.4, tout: 17.9, anchor: () => currentPose.pos.clone().add(V(0, -0.45, 0)), dx: 70, dy: 70, spin: false },
-  { id: 'epg', name: 'EPG ↔ PEN', color: '#b48cff', tin: 18.0, tout: 99, anchor: () => dialEdge(), dx: 30, dy: -50, loop: true },
-  { id: 'actual', cls: 'mini', name: 'ACTUAL HEADING', color: '#ffffff', tin: 18.7, tout: 99, anchor: () => markerTip(true), dx: 14, dy: -10, spin: false },
-  { id: 'model', cls: 'mini', name: 'MODELED COMPASS', color: '#b48cff', tin: 18.9, tout: 99, anchor: () => markerTip(false), dx: 14, dy: 22, spin: false },
+  { id: 'store', cls: 'qual', name: 'THE SYNAPTIC STORE', color: '#ffc857', tin: 7.5, tout: 9.2, anchor: () => FOOD.clone().addScaledVector(DISP, 0.5).add(V(0, -0.3, 0)), dx: -60, dy: 70, spin: false },
+  { id: 'hdm', name: 'hΔM', color: '#ff6f61', tin: 10.5, tout: 14.6, anchor: () => rotArcTip(), dx: 40, dy: -40 },
+  { id: 'return', cls: 'qual', name: 'THE RETURN PATH', color: '#ff6f61', tin: 11.7, tout: 14.6, anchor: () => P_END.clone().addScaledVector(DISP, -0.45), dx: -80, dy: 70, spin: false },
+  { id: 'cancel', cls: 'qual', name: 'HOME VECTOR SHRINKS AS THE STORE CANCELS', color: '#ff6f61', tin: 14.9, tout: 16.4, anchor: () => currentPose.pos.clone().add(V(0, -0.3, 0)), dx: -270, dy: 80, spin: false },
+  { id: 'oa', name: 'OA‑VPM3', color: '#5ee6c8', tin: LAND + 0.35, tout: 99, anchor: () => FOOD.clone().add(V(0, 0.25, 0)), dx: 60, dy: -90 },
+  { id: 'reset', cls: 'qual', name: 'OCTOPAMINE · RESET AT FOOD', color: '#5ee6c8', tin: LAND + 0.8, tout: 99, anchor: () => FOOD.clone().add(V(0.4, 0.1, 0.4)), dx: -200, dy: 90, spin: false },
 ];
 for (const c of CALLOUTS) {
   const el = document.createElement('div'); el.className = 'callout ' + (c.cls || ''); el.style.color = c.color;
@@ -417,8 +449,8 @@ for (const c of CALLOUTS) {
   const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); dot.setAttribute('r', c.cls ? '2.5' : '4'); dot.setAttribute('fill', c.color); dot.setAttribute('opacity', '0'); leadersEl.appendChild(dot); c.dot = dot;
 }
 let currentPose = flyPose(0);
-const anchorState = { rotTip: V(0, 0, 0), streakTail: V(0, 0, 0), turnTip: V(0, 0, 0), dialEdge: V(0, 0, 0), mA: V(0, 0, 0), mM: V(0, 0, 0) };
-const rotArcTip = () => anchorState.rotTip, streakTail = () => anchorState.streakTail, turnArcTip = () => anchorState.turnTip, dialEdge = () => anchorState.dialEdge, markerTip = a => a ? anchorState.mA : anchorState.mM;
+const anchorState = { rotTip: V(0, 0, 0) };
+const rotArcTip = () => anchorState.rotTip;
 const _s = new THREE.Vector3();
 function updateCallouts(t, W, H) {
   for (const c of CALLOUTS) {
@@ -434,7 +466,6 @@ function updateCallouts(t, W, H) {
     const mx = (ex + sx) / 2, my = ey; // elbow
     c.line.setAttribute('d', `M${ex.toFixed(1)} ${ey.toFixed(1)} L${mx.toFixed(1)} ${my.toFixed(1)} L${sx.toFixed(1)} ${sy.toFixed(1)}`);
     c.dot.setAttribute('cx', sx.toFixed(1)); c.dot.setAttribute('cy', sy.toFixed(1));
-    if (c.loop) c.el.querySelector('.loop').classList.toggle('on', t >= 18.55);
   }
 }
 
@@ -442,12 +473,12 @@ function updateCallouts(t, W, H) {
 const headlineEl = document.getElementById('headline'), chapNo = document.getElementById('chapter-no'), chapName = document.getElementById('chapter-name'), eyebrow = document.querySelector('.eyebrow');
 const HEADLINES = [
   { tin: 6.3, tout: 9.0, text: 'A whole journey.\nOne stored vector.' },
-  { tin: 11.2, tout: 15.0, text: 'Flip the vector.\nPoint home.' },
-  { tin: 15.5, tout: 17.5, text: 'How fast?\nHow much turning?' },
-  { tin: 18.0, tout: 19.3, text: 'Feedback brakes\nthe model.' },
-  { tin: 19.35, tout: 99, text: 'What keeps the real\ncompass moving?' },
+  { tin: 11.2, tout: 14.6, text: 'Flip the vector.\nPoint home.' },
+  { tin: 14.9, tout: LAND + 0.3, text: 'Fly it back.\nThe store cancels.' },
+  { tin: LAND + 0.9, tout: LAND + 2.6, text: 'Home.\nOctopamine wipes the store.' },
+  { tin: LAND + 2.7, tout: 99, text: 'Ready for the\nnext trip.' },
 ];
-const CHAPTERS = [[0, '01', 'THE JOURNEY BECOMES MEMORY', '#ffc857'], [9, '02', 'REVERSE IT TO GET HOME', '#ff6f61'], [15, '03', 'WHERE MOVEMENT SIGNALS ENTER', '#5cc8ff'], [17.5, '04', 'THE COMPASS PUZZLE', '#b48cff']];
+const CHAPTERS = [[0, '01', 'THE JOURNEY BECOMES MEMORY', '#ffc857'], [9, '02', 'REVERSE IT TO GET HOME', '#ff6f61'], [LAND - 0.2, '03', 'HOME, AND RESET', '#5ee6c8']];
 let curHeadline = -1, curChapter = -1;
 function updateText(t) {
   let h = -1; HEADLINES.forEach((x, i) => { if (t >= x.tin && t < x.tout) h = i; });
@@ -458,7 +489,6 @@ function updateText(t) {
   let c = 0; CHAPTERS.forEach((x, i) => { if (t >= x[0]) c = i; });
   if (c !== curChapter) { curChapter = c; chapNo.textContent = CHAPTERS[c][1]; chapName.textContent = CHAPTERS[c][2]; eyebrow.style.color = CHAPTERS[c][3]; document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', i === c)); }
   document.getElementById('freeze').style.opacity = t >= 3 && t < 12.5 ? 1 : 0;
-  document.getElementById('slowmo').style.opacity = t >= 15 && t < 17.5 ? 1 : 0;
 }
 
 // ---------- per-frame scene update (pure function of t) ----------
@@ -466,10 +496,10 @@ const _dir = new THREE.Vector3(), _m = new THREE.Matrix4(), _right = new THREE.V
 function update(tScene) {
   const t = warp(tScene - PRE);
   const P = flyPose(Math.max(0, t)); currentPose = P;
-  // prelude: perched on the cube, feeding; blend into flight over the first 0.3 s
-  const kTake = ss(0, 0.35, t);
+  // perched on the banana at both ends: feeding before take-off, and again after the landing
+  const kTake = t < 8 ? ss(0, 0.35, t) : 1 - ss(LAND - 0.25, LAND + 0.15, t);
   if (kTake < 1) {
-    const perch = V(0.3, 1.0, 0.3); P.pos.lerpVectors(perch, P.pos, kTake); P.pos.y += (1 - kTake) * (0.012 * Math.sin(tScene * 9) + 0.01);
+    P.pos.lerpVectors(PERCH, P.pos, kTake); P.pos.y += (1 - kTake) * (0.012 * Math.sin(tScene * 9) + 0.01);
     const feedFwd = V(0.7, -0.25, 0.7).normalize(); P.fwd.lerpVectors(feedFwd, P.fwd, kTake).normalize(); P.yaw = Math.atan2(P.fwd.x, P.fwd.z);
   }
   // fly orientation: forward = tangent, banked into the turn; tipped into the sugar while feeding
@@ -480,8 +510,9 @@ function update(tScene) {
   fly.rotateZ(bank * kTake); fly.rotateX(lerp(0.32, -0.18, kTake));
   fly.position.copy(P.pos);
   const frozen = timeScale(Math.max(0, t)) === 0 || t < 0;
+  const kReset = ss(LAND + 0.35, LAND + 1.1, t); // octopamine reset: the store and the drawn memory dissolve
   const flap = frozen ? 0 : Math.sin(flapPhase(t) * Math.PI * 2);
-  const wl = t < 0 ? 0.04 : frozen ? 0.15 : 0.35 + flap * 0.85;
+  const wl = (t < 0 || t >= LAND) ? 0.04 : frozen ? 0.15 : 0.35 + flap * 0.85;
   const fold = 1 - kTake; // wings lie flat along the back while feeding
   wingL.rotation.z = wl; wingR.rotation.z = -wl; wingL.rotation.y = lerp(-0.15 + flap * 0.15, 1.3, fold); wingR.rotation.y = lerp(0.15 - flap * 0.15, -1.3, fold);
   // happy: front legs rub together while feeding; proboscis down on the sugar
@@ -494,14 +525,14 @@ function update(tScene) {
   flyLight.intensity = flying ? 0.9 : 0.3;
   shadow.position.set(P.pos.x, 0.012, P.pos.z); const sh = 0.5 + P.pos.y * 0.35; shadow.scale.set(sh, sh * 0.8, 1); shadow.material.opacity = clamp01(1.2 - P.pos.y * 0.3);
   // trails
-  const outProg = t < 3 ? flightProfile(t / 3) : 1; const outDim = lerp(1, 0.32, ss(3.6, 5.0, t));
+  const outProg = t < 3 ? flightProfile(t / 3) : 1; const outDim = lerp(1, 0.32, ss(3.6, 5.0, t)) * (1 - kReset);
   trailOut.material.uniforms.uProgress.value = outProg; trailOut.material.uniforms.uOpacity.value = outDim; trailOut.material.uniforms.uHead.value = t < 3 ? 1 : 0;
   trailOutGlow.material.uniforms.uProgress.value = outProg; trailOutGlow.material.uniforms.uOpacity.value = 0.12 * outDim; trailOutGlow.material.uniforms.uHead.value = t < 3 ? 1 : 0;
-  const rp = retParam(t); trailRet.material.uniforms.uProgress.value = rp; trailRetGlow.material.uniforms.uProgress.value = rp; trailRet.visible = trailRetGlow.visible = rp > 0;
+  const rp = retParam(t); trailRet.material.uniforms.uProgress.value = rp; trailRetGlow.material.uniforms.uProgress.value = rp; trailRet.material.uniforms.uOpacity.value = 0.95 * (1 - kReset); trailRetGlow.material.uniforms.uOpacity.value = 0.14 * (1 - kReset); trailRet.visible = trailRetGlow.visible = rp > 0 && kReset < 1;
   // freeze pulse on the grid
-  const pulse = t >= 3 && t < 4.2 ? (t - 3) / 1.2 : (t >= 12.5 && t < 13.7 ? (t - 12.5) / 1.2 : 0);
-  ground.material.uniforms.uPulse.value = pulse; ground.material.uniforms.uPulseCenter.value.copy(P.pos);
-  bloom.strength = 0.6 + 1.2 * Math.max(0, 1 - Math.abs(t - 3) * 5) + 1.1 * Math.max(0, 1 - Math.abs(t - 12.5) * 5) + 0.8 * Math.max(0, 1 - Math.abs(t - 10.5) * 4);
+  const resetT = LAND + 0.35; const pulse = t >= 3 && t < 4.2 ? (t - 3) / 1.2 : (t >= 12.5 && t < 13.7 ? (t - 12.5) / 1.2 : (t >= resetT && t < resetT + 1.4 ? (t - resetT) / 1.4 : 0));
+  ground.material.uniforms.uPulse.value = pulse; ground.material.uniforms.uPulseCenter.value.copy(t >= resetT ? FOOD : P.pos); ground.material.uniforms.uPulseColor.value.copy(t >= resetT ? TEAL : GOLD);
+  bloom.strength = 0.6 + 1.2 * Math.max(0, 1 - Math.abs(t - 3) * 5) + 1.1 * Math.max(0, 1 - Math.abs(t - 12.5) * 5) + 0.8 * Math.max(0, 1 - Math.abs(t - 10.5) * 4) + 1.0 * Math.max(0, 1 - Math.abs(t - resetT) * 3);
 
   // --- 3–4s: movement arrows paint along the trail; fade 6.6–8 ---
   const segFade = 1 - ss(6.6, 8.0, t);
@@ -523,17 +554,18 @@ function update(tScene) {
     chainArrows[i].set(S, E, 1, chainFade * (0.6 + 0.4 * kLift));
   }
   // --- bold displacement arrow draws at 5.7–6.4, persists until unfreeze then dims ---
-  const kDisp = ease((t - 5.7) / 0.7); const dispOp = t < 12.5 ? 1 : lerp(1, 0.35, ss(12.5, 13.5, t));
+  const kDisp = ease((t - 5.7) / 0.7); const dispOp = (t < 12.5 ? 1 : lerp(1, 0.35, ss(12.5, 13.5, t))) * (1 - kReset);
   if (kDisp > 0) dispArrow.set(FOOD, P_END, kDisp, dispOp); else dispArrow.hide();
-  // --- 9.5–10.5: copy appears at the fly pointing onward; 10.5–12.5 rotates 180° around the fly to point at food ---
-  const kCopy = ease((t - 9.5) / 0.8), kRot = ss(10.5, 12.5, t); const rotOp = t < 15 ? 1 : 1 - ss(15, 16, t);
+  // --- 9.5–10.5: copy appears at the fly pointing onward; 10.5–12.5 rotates 180° around the fly to point at food; then it rides home with the fly ---
+  const kCopy = ease((t - 9.5) / 0.8), kRot = ss(10.5, 12.5, t); const rotOp = 1;
   if (kCopy > 0 && rotOp > 0) {
     const ang = kRot * Math.PI; const dx = DISP.x, dz = DISP.z; const c = Math.cos(ang), s = Math.sin(ang);
     _dir.set(dx * c - dz * s, lerp(DISP.y, -DISP.y, kRot), dx * s + dz * c);
     const SHORT = 0.42; const kExt = ss(12.0, 12.55, t); const len = lerp(SHORT, 1, kExt);
     const tip = P_END.clone().addScaledVector(_dir, len);
     dispCopy.set(P_END, tip, kCopy * (kRot > 0.985 ? 0 : 1), 0.85 * rotOp);
-    homeArrow.set(P_END, tip, kRot > 0.985 ? kCopy : 0, rotOp);
+    if (t < RET0) homeArrow.set(P_END, tip, kRot > 0.985 ? kCopy : 0, rotOp);
+    else { const rem = FOOD.clone().sub(P.pos); const L = rem.length(); const op = clamp01((L - 1.4) / 1.6); if (L > 1.5) homeArrow.set(P.pos.clone().addScaledVector(rem.clone().normalize(), 0.45), FOOD, 1, op); else homeArrow.hide(); }
     // arc around the fly
     const h0 = Math.atan2(DISP.x, DISP.z); const r = DISP.length() * SHORT * 0.72;
     setArc(rotArc, P_END, r, h0, h0 + Math.PI, 0, kRot); setArc(rotArcGlow, P_END, r, h0, h0 + Math.PI, 0, kRot);
@@ -543,54 +575,12 @@ function update(tScene) {
     if (kRot > 0.02 && kRot < 0.995) { const tan = V(Math.cos(aTip), 0, -Math.sin(aTip)); rotArcHead.set(tipP.clone().addScaledVector(tan, -0.3), tipP, 1, rotOp); } else rotArcHead.hide();
     if (kRot < 0.02) anchorState.rotTip.copy(P_END).addScaledVector(_dir, SHORT * 0.7);
   } else { dispCopy.hide(); homeArrow.hide(); rotArc.visible = rotArcGlow.visible = false; rotArcHead.hide(); }
-  // keep home arrow visible (dim) after rotation until 16 — it lives in homeArrow above
-  // --- 15–17.5: speed streaks + turning arc ---
-  const kStreak = ss(15.0, 15.6, t) * (1 - ss(17.4, 17.9, t));
-  if (kStreak > 0) {
-    streaks.visible = true; const pos = streakGeo.attributes.position, col = streakGeo.attributes.color; _right.copy(P.fwd).cross(UP).normalize();
-    for (let i = 0; i < N_STREAK; i++) {
-      const j = streakJit[i]; const flick = 0.75 + 0.25 * Math.sin(t * 9 + j.ph);
-      const a = P.pos.clone().addScaledVector(_right, j.x).addScaledVector(UP, j.y + 0.05).addScaledVector(P.fwd, -0.55);
-      const b = a.clone().addScaledVector(P.fwd, -j.len * kStreak * flick);
-      pos.setXYZ(i * 2, a.x, a.y, a.z); pos.setXYZ(i * 2 + 1, b.x, b.y, b.z);
-      col.setXYZ(i * 2, BLUE.r * 1.1, BLUE.g * 1.1, BLUE.b * 1.1); col.setXYZ(i * 2 + 1, 0, 0, 0);
-    }
-    pos.needsUpdate = true; col.needsUpdate = true;
-    anchorState.streakTail.copy(P.pos).addScaledVector(P.fwd, -1.7).addScaledVector(UP, 0.1);
-    // turning arc: heading swept since 15.0s
-    const h15 = headingOf(flyPose(13.0).fwd); let dh = P.yaw - h15; while (dh > Math.PI) dh -= 2 * Math.PI; while (dh < -Math.PI) dh += 2 * Math.PI;
-    const r = 1.25; const y = -0.05; const kDraw = ss(15.0, 15.9, t);
-    setArc(turnArc, P.pos, r, h15, h15 + dh, y, kDraw); setArc(turnArcGlow, P.pos, r, h15, h15 + dh, y, kDraw);
-    turnArc.opacity = kStreak; turnArcGlow.opacity = 0.22 * kStreak;
-    const tipP = V(P.pos.x + Math.sin(P.yaw) * r, P.pos.y + y, P.pos.z + Math.cos(P.yaw) * r); anchorState.turnTip.copy(tipP);
-    const sgn = Math.sign(dh) || 1; const tan = V(Math.cos(P.yaw) * sgn, 0, -Math.sin(P.yaw) * sgn);
-    if (Math.abs(dh) > 0.08 && kDraw > 0.95) turnHead.set(tipP.clone().addScaledVector(tan, -0.2), tipP, 1, kStreak); else turnHead.hide();
-  } else { streaks.visible = false; turnArc.visible = turnArcGlow.visible = false; turnHead.hide(); }
-  // --- 17.5–20: compass dial beneath the fly ---
-  const kDial = ss(17.5, 18.3, t);
-  if (kDial > 0) {
-    const C = V(P.pos.x, 0.02, P.pos.z); const R = 1.62;
-    setArc(dial, C, R, P.yaw - Math.PI, P.yaw + Math.PI, 0, kDial); setArc(dialGlow, C, R, P.yaw - Math.PI, P.yaw + Math.PI, 0, kDial);
-    dialTicks.visible = dialDisc.visible = true; dialTicks.position.copy(C); dialDisc.position.copy(C); dialTicks.material.opacity = 0.7 * ss(17.9, 18.4, t); dialDisc.material.opacity = 0.05 * kDial;
-    // modeled heading: follows exactly, then brakes at 18.55 (feedback loop on)
-    const hOn = headingOf(flyPose(18.55).fwd); let dAct = P.yaw - hOn; while (dAct > Math.PI) dAct -= 2 * Math.PI; while (dAct < -Math.PI) dAct += 2 * Math.PI;
-    const hModel = t < 18.55 ? P.yaw : hOn + dAct * 0.22;
-    const kMark = ss(18.0, 18.5, t);
-    const tipA = V(C.x + Math.sin(P.yaw) * R * 1.02, 0.03, C.z + Math.cos(P.yaw) * R * 1.02), tipM = V(C.x + Math.sin(hModel) * R * 0.86, 0.035, C.z + Math.cos(hModel) * R * 0.86);
-    markerActual.set(V(C.x, 0.03, C.z), tipA, kMark, kMark); markerModel.set(V(C.x, 0.035, C.z), tipM, kMark, kMark);
-    anchorState.mA.copy(tipA); anchorState.mM.copy(tipM); anchorState.dialEdge.set(C.x + Math.sin(P.yaw + 2.2) * R, 0.02, C.z + Math.cos(P.yaw + 2.2) * R);
-    let gap = P.yaw - hModel; while (gap > Math.PI) gap -= 2 * Math.PI; while (gap < -Math.PI) gap += 2 * Math.PI;
-    if (Math.abs(gap) > 0.02) { setArc(gapArc, C, R * 0.6, hModel, P.yaw, 0.04, 1); setArc(gapArcGlow, C, R * 0.6, hModel, P.yaw, 0.04, 1); } else gapArc.visible = gapArcGlow.visible = false;
-    // vertical post linking fly to dial center
-    const pp = dialPost.geometry.attributes.position; pp.setXYZ(0, C.x, 0.02, C.z); pp.setXYZ(1, P.pos.x, P.pos.y - 0.15, P.pos.z); pp.needsUpdate = true; dialPost.visible = true; dialPost.material.opacity = 0.3 * kDial;
-  } else { dial.visible = dialGlow.visible = dialTicks.visible = dialDisc.visible = dialPost.visible = false; markerActual.hide(); markerModel.hide(); gapArc.visible = gapArcGlow.visible = false; }
-
   cameraAt(t, P); camera.position.copy(camPos); camera.lookAt(camTarget);
   // subtle dutch during the flip & the bank
-  camera.rotateZ(Math.sin(kRot * Math.PI) * 0.06 - bank * 0.08 * (t > 12.5 ? 1 : 0));
+  camera.rotateZ(Math.sin(kRot * Math.PI) * 0.06 - bank * 0.08 * (t > 12.5 && t < LAND ? 1 : 0));
 }
 
-const brain = initBrain(document.getElementById('brain'));
+const brain = initBrain(document.getElementById('brain'), N_COL);
 // ---------- playback ----------
 let time = 0, playing = true, last = performance.now();
 const timeline = document.getElementById('timeline'), timeEl = document.getElementById('time'), playBtn = document.getElementById('play');
@@ -603,7 +593,7 @@ function frame(now) {
   const W = canvas.clientWidth, H = canvas.clientHeight;
   if (canvas.width !== Math.floor(W * renderer.getPixelRatio()) || canvas.height !== Math.floor(H * renderer.getPixelRatio())) { renderer.setSize(W, H, false); composer.setSize(W, H); camera.aspect = W / H; camera.updateProjectionMatrix(); }
   update(tS); composer.render();
-  brain.update(t, tS, !(timeScale(Math.max(0, t)) === 0 || t < 0));
+  brain.update(t, tS, { moving: t >= 0 && timeScale(Math.max(0, t)) > 0, heading: currentPose.yaw, weights: storeWeights(Math.max(0, t)), reset: t >= LAND + 0.35 ? 1 - ss(LAND + 0.35, LAND + 1.6, t) : 0, landed: t >= LAND });
   updateCallouts(t, W, H); updateText(t);
   timeline.value = tS; timeline.style.setProperty('--progress', (tS / DUR * 100) + '%');
   timeEl.innerHTML = `${tS.toFixed(1).padStart(4, '0')} <em>/ ${DUR.toFixed(1)}</em>`;

@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="app">
-  <canvas id="world" aria-label="A fly's outbound flight is frozen and folded into one stored vector, then flipped to point home"></canvas>
+  <canvas id="world" aria-label="A fly's outbound flight is folded into one stored vector, flipped to point home, flown back, and reset at the banana"></canvas>
   <div id="vignette"></div>
   <svg id="leaders" aria-hidden="true"></svg>
   <div id="callouts" aria-hidden="true"></div>
@@ -26,8 +26,7 @@
   </header>
 
   <div id="freeze" class="freeze"><i></i><span>TIME HELD · GEOMETRY REVEALED</span></div>
-  <div id="slowmo" class="freeze"><i></i><span>SLOW MOTION · ×0.35</span></div>
-
+  
   <section id="editorial">
     <div class="eyebrow"><span id="chapter-no">01</span><span id="chapter-name">THE JOURNEY BECOMES MEMORY</span></div>
     <h1 id="headline"></h1>
@@ -43,21 +42,19 @@
     <input id="timeline" type="range" min="0" max="20" step="0.01" value="0" aria-label="Time">
     <nav>
       <button data-time="0"><b>01</b> Journey → memory<span>9.0s</span></button>
-      <button data-time="9"><b>02</b> Reverse it to get home<span>6.0s</span></button>
-      <button data-time="15"><b>03</b> Movement inputs<span>2.5s</span></button>
-      <button data-time="17.5"><b>04</b> Compass puzzle<span>2.5s</span></button>
+      <button data-time="9"><b>02</b> Reverse it to get home<span>8.0s</span></button>
+      <button data-time="16.8"><b>03</b> Home, and reset<span>3.5s</span></button>
     </nav>
   </footer>
-  <aside id="brainpanel" aria-label="Connectome activity panel">
-    <div class="bp-eyebrow">NEURAL ACTIVITY</div>
-    <div class="bp-sub">Schematic. Cell counts from the male CNS connectome v1.0; positions are not.</div>
+  <aside id="brainpanel" aria-label="Circuit panel">
+    <div class="bp-eyebrow">THE CIRCUIT</div>
+    <div class="bp-sub">Cell types and contacts from the male CNS connectome v1.0.</div>
     <canvas id="brain"></canvas>
     <ul class="bp-legend">
-      <li data-ch="motor"><i style="--c:#e6eeff"></i><b>VNC flight motor</b><span>WINGS BEATING</span></li>
-      <li data-ch="store"><i style="--c:#ffc857"></i><b>hΔH · hΔA · hΔI · hΔG</b><span>45 CELLS · CANDIDATE SYNAPTIC STORE</span></li>
-      <li data-ch="hdm"><i style="--c:#ff6f61"></i><b>hΔM</b><span>8 CELLS · PROPOSED RETURN PATH</span></li>
-      <li data-ch="move"><i style="--c:#5cc8ff"></i><b>FB3A · PS196_b</b><span>CANDIDATE MOVEMENT INPUTS</span></li>
-      <li data-ch="compass"><i style="--c:#b48cff"></i><b>EPG ↔ PEN</b><span>46 · 42 CELLS · COMPASS FEEDBACK LOOP</span></li>
+      <li data-ch="ring"><i style="--c:#b48cff"></i><b>EPG</b><span>RING ATTRACTOR · HEADING</span></li>
+      <li data-ch="dopa"><i style="--c:#ff8ad4"></i><b>FB4M · FB1H</b><span>DOPAMINE · WRITE WHILE MOVING</span></li>
+      <li data-ch="store"><i style="--c:#ffc857"></i><b>hΔH · hΔA · hΔI · hΔG</b><span>45 CELLS · THE SYNAPTIC STORE</span></li>
+      <li data-ch="oa"><i style="--c:#5ee6c8"></i><b>OA‑VPM3</b><span>OCTOPAMINE · RESET AT FOOD</span></li>
     </ul>
   </aside>
   <div id="error" hidden></div>

@@ -1,100 +1,86 @@
-// Connectome activity panel: a schematic fly CNS point cloud (brain + ventral nerve cord) whose neuron groups light up
-// in step with the main scene. Positions are schematic; the group names and cell counts come from the male CNS tables.
-import * as THREE from 'three';
-
-const REGION = { bg: 0, store: 1, hdm: 2, fb3a: 3, ps196: 4, compass: 5, motor: 6 };
-const COLORS = [
-  new THREE.Color(0.55, 0.6, 0.62), new THREE.Color(1.0, 0.78, 0.34), new THREE.Color(1.0, 0.43, 0.38),
-  new THREE.Color(0.36, 0.78, 1.0), new THREE.Color(0.36, 0.78, 1.0), new THREE.Color(0.7, 0.55, 1.0), new THREE.Color(0.9, 0.93, 1.0),
-];
+// The circuit panel: only the neurons that matter, drawn as a schematic that computes in step with the flight.
+//   EPG ring attractor (heading bump)  →  hΔB travel-direction bump  →  eight store columns (hΔH · hΔA · hΔI · hΔG)
+//   FB4M · FB1H dopamine gate the write while the fly moves; OA‑VPM3 octopamine zeroes the store at food.
+// Everything drawn is a function of the state handed in each frame, so scrubbing is exact.
+const TAU = Math.PI * 2;
 const ss = (a, b, x) => { const k = Math.max(0, Math.min(1, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+const C = { ink: '#e8ebe6', dim: '#5f717a', faint: 'rgba(120,140,150,0.22)', gold: '#ffc857', coral: '#ff6f61', violet: '#b48cff', pink: '#ff8ad4', teal: '#5ee6c8', white: '#f4f7ff' };
+const rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
 
-// seeded random so the cloud is stable between reloads
-let seed = 7; const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
-const gauss = () => (rnd() + rnd() + rnd() - 1.5) * 1.2;
-
-export function initBrain(canvas) {
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setClearColor(0x000000, 0);
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
-  const rig = new THREE.Group(); scene.add(rig);
-
-  const pos = [], rnds = [], regs = [];
-  const push = (x, y, z, r) => { pos.push(x, y, z); rnds.push(rnd()); regs.push(r); };
-  // ellipsoid blob; bias>1 concentrates points toward the surface (neuropil looks hollow-ish)
-  const blob = (n, cx, cy, cz, rx, ry, rz, r = 0, bias = 0.55) => {
-    for (let i = 0; i < n; i++) { const u = rnd() * 2 - 1, th = rnd() * Math.PI * 2, rad = Math.pow(rnd(), bias); const s = Math.sqrt(1 - u * u);
-      push(cx + rx * rad * s * Math.cos(th), cy + ry * rad * u, cz + rz * rad * s * Math.sin(th), r); }
-  };
-  // ---- brain ----
-  blob(16000, 0, 0, 0, 1.08, 0.72, 0.62);                       // central brain
-  blob(9000, -1.62, 0.02, 0.0, 0.7, 0.86, 0.68); blob(9000, 1.62, 0.02, 0.0, 0.7, 0.86, 0.68); // optic lobes
-  blob(4200, 0, -0.66, 0.08, 0.55, 0.36, 0.42);                  // subesophageal zone
-  blob(1400, -0.5, -0.36, 0.42, 0.2, 0.2, 0.2); blob(1400, 0.5, -0.36, 0.42, 0.2, 0.2, 0.2); // antennal lobes
-  blob(1200, -0.95, 0.35, -0.1, 0.22, 0.2, 0.2); blob(1200, 0.95, 0.35, -0.1, 0.22, 0.2, 0.2); // mushroom body calyces
-  // ---- central complex ----
-  for (let i = 0; i < 1300; i++) { const a = rnd() * Math.PI * 2, rr = 0.2 + gauss() * 0.045; push(Math.cos(a) * rr, -0.03 + gauss() * 0.04, 0.2 + Math.sin(a) * rr * 0.5, REGION.compass); } // ellipsoid body ring (EPG/PEN)
-  for (let i = 0; i < 900; i++) { const x = (rnd() * 2 - 1) * 0.58; push(x, 0.3 - 0.16 * x * x + gauss() * 0.025, -0.28 + gauss() * 0.03, REGION.compass); } // protocerebral bridge (PEN/EPG)
-  for (let i = 0; i < 1500; i++) { const y = 0.1 + rnd() * 0.2, w = 0.16 + (y - 0.1) * 1.4; const x = (rnd() * 2 - 1) * w; const layer = (y - 0.1) / 0.2;
-    push(x, y, 0.02 + gauss() * 0.04 - layer * 0.06, layer > 0.55 ? REGION.store : layer > 0.3 ? REGION.hdm : REGION.fb3a); } // fan-shaped body: upper layers hΔ store, middle hΔM, lower FB3A
-  blob(280, -0.14, -0.22, 0.12, 0.05, 0.05, 0.05); blob(280, 0.14, -0.22, 0.12, 0.05, 0.05, 0.05); // noduli
-  blob(350, -0.44, -0.2, -0.3, 0.11, 0.1, 0.1, REGION.ps196); blob(350, 0.44, -0.2, -0.3, 0.11, 0.1, 0.1, REGION.ps196); // posterior slope (PS196_b)
-  // ---- cervical connective + ventral nerve cord ----
-  for (let i = 0; i < 700; i++) push(gauss() * 0.06, -0.82 - rnd() * 0.55, 0.05 + gauss() * 0.05, 0);
-  blob(5200, 0, -1.72, 0, 0.5, 0.34, 0.34);                        // prothoracic
-  blob(3800, 0, -2.32, 0, 0.56, 0.42, 0.36);                        // mesothoracic (leg)
-  blob(1200, 0, -2.2, 0.12, 0.5, 0.2, 0.22, REGION.motor, 0.8);   // dorsal mesothoracic flight neuropil (wing motor)
-  blob(5200, 0, -2.92, 0, 0.5, 0.34, 0.34);                        // metathoracic
-  blob(3200, 0, -3.5, 0, 0.26, 0.38, 0.22);                         // abdominal
-  const N = regs.length;
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-  geo.setAttribute('aRnd', new THREE.Float32BufferAttribute(rnds, 1));
-  geo.setAttribute('aReg', new THREE.Float32BufferAttribute(regs, 1));
-  const uLit = new Float32Array(7);
-  const mat = new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-    uniforms: { uTime: { value: 0 }, uLit: { value: uLit }, uCol: { value: COLORS }, uAct: { value: 0.4 }, uPix: { value: renderer.getPixelRatio() } },
-    vertexShader: `attribute float aRnd, aReg; uniform float uTime, uAct, uPix; uniform float uLit[7]; uniform vec3 uCol[7];
-      varying vec3 vC; varying float vA;
-      void main(){ int r = int(aReg + 0.5); float lit = uLit[r];
-        float tw = 0.5 + 0.5*sin(uTime*(1.5 + aRnd*4.0) + aRnd*60.0);
-        float spark = smoothstep(0.975, 1.0, tw) * uAct;
-        vec3 grey = uCol[0] * (0.3 + 0.3*tw*uAct + spark*1.2);
-        vec3 col = uCol[r] * (0.55 + 0.35*tw);
-        vC = mix(grey, col, lit);
-        vA = mix(0.028 + 0.04*tw*uAct + spark*0.3, 0.085 + 0.06*tw, lit);
-        vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        float sz = (0.55 + 0.3*spark) * (1.0 - lit) + (1.1 + 0.5*tw) * lit;
-        gl_PointSize = sz * uPix * (2.6 + 110.0 / (mv.z * mv.z));
-        gl_Position = projectionMatrix * mv; }`,
-    fragmentShader: `varying vec3 vC; varying float vA;
-      void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.12, d); gl_FragColor = vec4(vC, a * vA); }`,
-  });
-  const points = new THREE.Points(geo, mat); points.frustumCulled = false; rig.add(points);
-  // faint outline hint of the body plan: thin midline
-  const midline = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0.75, 0.3), new THREE.Vector3(0, -3.9, 0.3)]), new THREE.LineBasicMaterial({ color: 0x1b2430, transparent: true, opacity: 0.5 })); rig.add(midline);
-
+export function initBrain(canvas, N_COL) {
+  const g = canvas.getContext('2d');
   const legend = Object.fromEntries([...document.querySelectorAll('.bp-legend li')].map(li => [li.dataset.ch, li]));
-  let W = 0, H = 0;
-  function update(t, tScene, flying) {
+  let W = 0, H = 0, dpr = 1;
+  const mono = px => `500 ${px}px "IBM Plex Mono", monospace`, cond = px => `700 ${px}px "Barlow Condensed", sans-serif`;
+  const label = (text, x, y, color, px = 9, align = 'center', font = mono) => { g.font = font(px); g.fillStyle = color; g.textAlign = align; g.textBaseline = 'middle'; g.fillText(text, x, y); };
+  const glowDot = (x, y, r, color, lit) => {
+    if (lit > 0.01) { const rg = g.createRadialGradient(x, y, 0, x, y, r * 4); rg.addColorStop(0, rgba(color, 0.55 * lit)); rg.addColorStop(1, rgba(color, 0)); g.fillStyle = rg; g.beginPath(); g.arc(x, y, r * 4, 0, TAU); g.fill(); }
+    g.fillStyle = lit > 0.01 ? color : rgba(color, 0.3); g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill();
+  };
+  const link = (x0, y0, x1, y1, color, lit, dash = [3, 4]) => { g.strokeStyle = rgba(color, 0.18 + 0.7 * lit); g.lineWidth = 1 + lit; g.setLineDash(dash); g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke(); g.setLineDash([]); };
+  const arrowHead = (x, y, ang, size, color) => { g.fillStyle = color; g.beginPath(); g.moveTo(x, y); g.lineTo(x - Math.cos(ang - 0.45) * size, y - Math.sin(ang - 0.45) * size); g.lineTo(x - Math.cos(ang + 0.45) * size, y - Math.sin(ang + 0.45) * size); g.closePath(); g.fill(); };
+  let peakW = 1; // running scale for the wedges: the largest weight seen so far, so the rose grows into its frame
+
+  function update(t, tScene, S) {
     const w = canvas.clientWidth, h = canvas.clientHeight; if (w === 0 || h === 0) return;
-    if (w !== W || h !== H) { W = w; H = h; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
-    // group activity, computed from main-scene time (pure function → scrubbing exact)
-    const store = Math.max(ss(6.0, 6.9, t) * (1 - ss(9.2, 9.9, t)), 0.28 * ss(6.0, 6.9, t)); // the store keeps a dim trace once written
-    const hdm = ss(10.5, 11.2, t) * (1 - ss(15.2, 15.9, t));
-    const fb3a = ss(15.3, 15.8, t) * (1 - ss(17.8, 18.3, t)), ps = ss(15.95, 16.4, t) * (1 - ss(17.8, 18.3, t));
-    const loop = ss(18.55, 18.9, t); const compass = ss(18.0, 18.6, t) * (0.75 + 0.25 * Math.sin(tScene * 9) * loop);
-    const motor = flying ? 0.55 + 0.1 * Math.sin(tScene * 40) : 0.0;
-    uLit[0] = 0; uLit[1] = store; uLit[2] = hdm; uLit[3] = fb3a; uLit[4] = ps; uLit[5] = compass; uLit[6] = motor;
-    mat.uniforms.uAct.value = flying ? 0.55 : 0.3; mat.uniforms.uTime.value = tScene;
-    legend.motor.classList.toggle('on', motor > 0.2); legend.store.classList.toggle('on', store > 0.2); legend.hdm.classList.toggle('on', hdm > 0.2);
-    legend.move.classList.toggle('on', fb3a > 0.2 || ps > 0.2); legend.compass.classList.toggle('on', compass > 0.2);
-    // held steady: a fixed three-quarter view with only a slow drift, so the panel reads as a reference, not a show
-    rig.rotation.y = 0.32 + Math.sin(tScene * 0.12) * 0.05; rig.rotation.x = -0.12;
-    camera.position.set(0, -1.1, 9.0); camera.lookAt(0, -1.4, 0);
-    renderer.render(scene, camera);
+    dpr = Math.min(devicePixelRatio, 2);
+    if (w !== W || h !== H) { W = w; H = h; canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const moving = S.moving ? 1 : 0, reset = S.reset || 0;
+    const weights = S.weights; let wmax = 0, sx = 0, sy = 0;
+    for (let c = 0; c < N_COL; c++) { const a = c * TAU / N_COL; wmax = Math.max(wmax, weights[c]); sx += Math.sin(a) * weights[c]; sy += Math.cos(a) * weights[c]; }
+    peakW = Math.max(peakW, wmax);
+    const storeLit = wmax > 0.05 ? 1 : 0; const sumLen = Math.hypot(sx, sy);
+    const cx = W * 0.5; const unit = Math.min(W, H * 0.62);
+
+    // ---- EPG ring attractor: heading bump ----
+    const ry = H * 0.16, rr = unit * 0.16;
+    g.strokeStyle = rgba(C.violet, 0.25); g.lineWidth = 1.2; g.beginPath(); g.arc(cx, ry, rr, 0, TAU); g.stroke();
+    const nRing = 16; const heading = S.heading || 0;
+    for (let i = 0; i < nRing; i++) { const a = i * TAU / nRing; let d = a - heading; d = Math.atan2(Math.sin(d), Math.cos(d)); const bump = Math.exp(-(d * d) / 0.32) * (S.landed ? 0.55 : 1);
+      // screen angle: heading 0 = up, clockwise positive (matches the rose below)
+      const x = cx + Math.sin(a) * rr, y = ry - Math.cos(a) * rr; glowDot(x, y, 2 + bump * 2.6, C.violet, bump); }
+    label('EPG · RING ATTRACTOR · HEADING', cx, ry + rr + 14, C.dim, 8);
+
+    // ---- hΔB travel-direction bump: a short strip of eight columns ----
+    const by = ry + rr + 36, bw = unit * 0.5, bx0 = cx - bw / 2, cellW = bw / N_COL;
+    for (let c = 0; c < N_COL; c++) { const a = c * TAU / N_COL; let d = a - heading; d = Math.atan2(Math.sin(d), Math.cos(d)); const v = Math.max(0, Math.cos(d)) * moving;
+      g.fillStyle = rgba(C.white, 0.08 + 0.75 * v); g.fillRect(bx0 + c * cellW + 1, by - 5, cellW - 2, 10); }
+    label('hΔB · TRAVEL-DIRECTION BUMP', cx, by + 16, C.dim, 8);
+    link(cx, ry + rr + 2, cx, by - 7, C.violet, moving * 0.6, [2, 3]);
+
+    // ---- the store: eight columns as a rose of wedges; the vector sum is the home vector ----
+    const oy = by + 40 + unit * 0.27, R = unit * 0.25;
+    link(cx, by + 24, cx, oy - R - 14, C.gold, moving, [2, 3]);
+    g.strokeStyle = C.faint; g.lineWidth = 1; g.beginPath(); g.arc(cx, oy, R, 0, TAU); g.stroke();
+    g.beginPath(); g.arc(cx, oy, R * 0.5, 0, TAU); g.stroke();
+    for (let c = 0; c < N_COL; c++) { const a = c * TAU / N_COL; g.strokeStyle = C.faint; g.beginPath(); g.moveTo(cx, oy); g.lineTo(cx + Math.sin(a) * R, oy - Math.cos(a) * R); g.stroke(); }
+    const scale = R / Math.max(peakW, 1e-3);
+    for (let c = 0; c < N_COL; c++) { const a = c * TAU / N_COL; const len = Math.min(R, weights[c] * scale); if (len < 0.5) continue;
+      const half = TAU / N_COL * 0.42; let d = a - heading; d = Math.atan2(Math.sin(d), Math.cos(d)); const writing = Math.max(0, Math.cos(d)) * moving;
+      g.fillStyle = rgba(C.gold, 0.28 + 0.35 * writing); g.strokeStyle = rgba(C.gold, 0.7 + 0.3 * writing); g.lineWidth = 1;
+      g.beginPath(); g.moveTo(cx, oy); g.arc(cx, oy, len, a - half - Math.PI / 2, a + half - Math.PI / 2); g.closePath(); g.fill(); g.stroke(); }
+    // reset flash: a teal ring collapsing inward over the rose
+    if (reset > 0) { g.strokeStyle = rgba(C.teal, reset); g.lineWidth = 2 + 6 * reset; g.beginPath(); g.arc(cx, oy, R * (0.2 + 0.9 * (1 - reset)), 0, TAU); g.stroke(); }
+    // home vector = vector sum
+    if (sumLen * scale > 2) { const ex = cx + sx * scale * 0.98, ey = oy - sy * scale * 0.98; g.strokeStyle = C.gold; g.lineWidth = 2.5; g.shadowColor = C.gold; g.shadowBlur = 10; g.beginPath(); g.moveTo(cx, oy); g.lineTo(ex, ey); g.stroke(); g.shadowBlur = 0; arrowHead(ex, ey, Math.atan2(ey - oy, ex - cx), 9, C.gold); }
+    glowDot(cx, oy, 2.2, C.gold, storeLit);
+    label('hΔH · hΔA · hΔI · hΔG', cx, oy + R + 18, storeLit ? C.gold : C.dim, 10, 'center', cond);
+    label('8 COLUMNS · SUM = HOME VECTOR', cx, oy + R + 32, C.dim, 7);
+
+    // ---- dopamine write gate on the left, octopamine reset on the right ----
+    const gx = 12, gy = oy - R * 0.3; const dop = moving;
+    glowDot(gx, gy, 4.5, C.pink, dop); link(gx + 5, gy, cx - R * 0.72, oy - R * 0.2, C.pink, dop);
+    label('FB4M · FB1H', gx - 4, gy - 26, dop ? C.pink : C.dim, 10, 'left', cond); label('DOPAMINE', gx - 4, gy - 14, C.dim, 6.5, 'left');
+    const ox = W - 12, oyy = oy + R * 0.3; const oa = Math.min(1, reset * 1.6);
+    glowDot(ox, oyy, 4.5, C.teal, oa); link(ox - 5, oyy, cx + R * 0.72, oy + R * 0.2, C.teal, oa);
+    label('OA‑VPM3', ox + 4, oyy + 16, oa > 0.05 ? C.teal : C.dim, 10, 'right', cond); label('OCTOPAMINE', ox + 4, oyy + 28, C.dim, 6.5, 'right');
+
+    // ---- output ----
+    const outy = oy + R + 52; link(cx, oy + R + 40, cx, outy - 6, C.coral, storeLit * 0.7, [2, 3]);
+    label('→ hΔM FLIPS IT → PFL3 STEERS HOME', cx, outy + 6, storeLit ? C.coral : C.dim, 7);
+
+    legend.ring.classList.toggle('on', true); legend.store.classList.toggle('on', storeLit > 0); legend.dopa.classList.toggle('on', dop > 0); legend.oa.classList.toggle('on', oa > 0.05);
   }
-  return { update, count: N };
+  return { update };
 }
