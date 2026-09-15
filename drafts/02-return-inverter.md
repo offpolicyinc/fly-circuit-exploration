@@ -1,6 +1,6 @@
 # The stored vector points away from food. Two unassigned neuron types, hΔM and hΔI, are the only things that turn it around
 
-**Summary.** A stored displacement points from food to fly, but steering needs the reverse, so something between the store and the steering neurons must rotate the vector by half a turn. The store cells do not do it: hΔB's synapses land on their axonal arbors, not their dendrites, so they relay the vector unrotated. The wiring supplies exactly two rotating routes to the steering neurons PFL3 and PFL2, both through cells with no assigned function: after the goal neurons FC2, only hΔM rotates (FC2 contacts its dendrites; its axon, 178° away, contacts PFL3); before FC2, the store candidate hΔA contacts the dendrites of hΔI, whose axon reaches PFL3 half a turn away. PFL3 therefore receives the stored vector unrotated ("keep going") directly and rotated ("go back") by these two; in a closed-loop model only the rotated copies produce return.
+**Summary.** A stored displacement points from food to fly, but steering needs the reverse, so something between the store and the steering neurons must rotate the vector by half a turn. The store cells do not do it: hΔB's synapses land on their axonal arbors, not their dendrites, so they relay the vector unrotated. The wiring supplies exactly two rotating routes to the steering neurons PFL3 and PFL2, both through cells with no assigned function: after the goal neurons FC2, only hΔM rotates (FC2 contacts its dendrites; its axon, 178° away, contacts PFL3); before FC2, hΔA (the recorded travel-direction integrator) contacts the dendrites of hΔI, whose axon reaches PFL3 half a turn away. PFL3 therefore receives the stored vector unrotated ("keep going") directly and rotated ("go back") by these two; in a closed-loop model only the rotated copies produce return.
 
 ## The problem
 
@@ -38,7 +38,7 @@ From the store the signal goes to the goal neurons FC2, and from FC2 to the stee
 | hΔA → hΔI → PFL3 (1,388 in, 3,468 out) | 3,468 | 195° |
 | hΔA → hΔI → PFL2 | 1,942 | 197° |
 
-FC2 columns are named directly, so there is no arbor ambiguity on that step. hΔI also receives the current step from hΔB on its axon, unrotated, so if hΔA is the store, hΔI sends PFL3 the current step minus the stored vector: a comparison, not a relay.
+FC2 columns are named directly, so there is no arbor ambiguity on that step. hΔI also receives the current step from hΔB on its axon, unrotated, so hΔI sends PFL3 the current step minus hΔA's recent-direction memory: a comparison, not a relay.
 
 ## The simulation check
 
@@ -59,6 +59,8 @@ PFL3 receives the same memory twice: "north" directly, meaning keep going, and "
 
 PFL2 also receives the rotated goal from both. PFL2 is known to fire most when the fly faces away from its goal (Westeinde 2024), which this explains with no new anatomy.
 
+The direct route has since been measured. Avritzer 2026 recorded hΔA as a working memory of the fly's recent travel direction that makes it keep going, an inertia term on steering: exactly what an unrotated hΔA→PFL3 route predicts. The rotated route through hΔI then predicts an anti-inertia signal in hΔI, untested.
+
 ## What would settle it
 
 - Silence hΔM, and separately hΔI, during a return to food and during straight heading maintenance: return should fail, heading should survive.
@@ -67,7 +69,7 @@ PFL2 also receives the rotated goal from both. PFL2 is known to fire most when t
 
 ## Prior work
 
-Hulse 2021 drew the two-arbor contact motif on hΔ neurons without its sign consequence. Liao 2025 describe an anti-goal circuit further downstream in the lateral accessory lobe. Nanni & Lee 2026 propose FB5A as the FC2 normaliser. The hΔM and hΔI rotations and their necessity for return are not in print.
+Hulse 2021 drew the two-arbor contact motif on hΔ neurons without its sign consequence. Liao 2025 describe an anti-goal circuit further downstream in the lateral accessory lobe. Nanni & Lee 2026 propose FB5A as the FC2 normaliser. Avritzer 2026 (thesis, abstract) reports hΔA as a 7–10 s working memory that promotes continuing in the recent travel direction. The hΔM and hΔI rotations and their necessity for return are not in print.
 
 ## Methods
 

@@ -22,6 +22,9 @@ STYLE = '''<style>
   .anim button { font:13px inherit; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
   .anim input[type=range] { width:160px; }
   .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; }
+  .status { border:1px solid var(--line); border-left:4px solid var(--warn); background:#fbf7ee; padding:10px 14px; margin:0 0 18px; font-size:14px; }
+  .status b { color:var(--warn); }
+  .status ul { margin:4px 0 0; padding-left:20px; }
   .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; margin-bottom:6px; }
   .methods { color:var(--muted); font-size:14px; } .methods h2 { color:var(--ink); }
   a { color:var(--accent2); }
@@ -44,12 +47,12 @@ def table(lines):
     for r in body: out.append('<tr>' + ''.join(f'<td class="{"n" if numcol[i] else ""}">{inline(c)}</td>' for i, c in enumerate(r)) + '</tr>')
     return '\n'.join(out) + '</table>'
 
-def md_to_html(md, inserts, kicker):
+def md_to_html(md, inserts, kicker, status=''):
     lines = md.split('\n'); out = []; i = 0; in_methods = False
     while i < len(lines):
         l = lines[i]
         if l.startswith('# '):
-            out.append(f'<div class="kicker">{kicker}</div><h1>{inline(l[2:])}</h1>'); i += 1; continue
+            out.append(f'<div class="kicker">{kicker}</div><h1>{inline(l[2:])}</h1>' + status); i += 1; continue
         if l.startswith('## '):
             t = l[3:].strip()
             if t == 'Methods' and not in_methods: out.append('<div class="methods">'); in_methods = True
@@ -78,10 +81,10 @@ def md_to_html(md, inserts, kicker):
     if in_methods: out.append('</div>')
     return '\n'.join(out)
 
-def build(n, slug, kicker, inserts):
+def build(n, slug, kicker, inserts, status=''):
     md = (ROOT/'drafts'/f'{n}-{slug}.md').read_text()
     title = re.search(r'^# (.*)$', md, re.M).group(1)
-    body = md_to_html(md, inserts, kicker)
+    body = md_to_html(md, inserts, kicker, status)
     page = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -103,22 +106,27 @@ def build(n, slug, kicker, inserts):
 
 def snip(name): return (FIG/f'{name}.html').read_text()
 
+S1 = '<div class="status"><b>Status of this page.</b> Nothing here is an experiment; every claim is one of the following.<ul><li><b>Prior work:</b> the idea that the columnar inputs to FC2 store vectors is Maimon &amp; Abbott 2026; synaptic vector memory is Hulse 2021, Goulard 2023, Dan 2024. hΔG (Janke 2025) and hΔA (Avritzer 2026) have been recorded as leaky activity integrators over seconds.</li><li><b>Connectome observation (this work):</b> which hΔ types receive hΔB in the matching column, and per-cell dopamine and octopamine coverage, in two connectomes.</li><li><b>Simulation:</b> a toy agent showing a vector sum can home. It validates nothing experimental.</li><li><b>Hypothesis:</b> a synaptic store at hΔH or hΔI. Untested; both types are unrecorded.</li></ul></div>'
+S2 = '<div class="status"><b>Status of this page.</b> Nothing here is an experiment; every claim is one of the following.<ul><li><b>Connectome observation (this work):</b> the two rotating routes to PFL3, FC2→hΔM and hΔA→hΔI, with their measured column offsets, in two connectomes.</li><li><b>Prior work consistent with it:</b> Avritzer 2026 recorded the unrotated hΔA→PFL3 route as an inertia term.</li><li><b>Simulation:</b> a toy agent; shows the sign matters, not that these cells do it.</li><li><b>Hypothesis:</b> that these routes are the return path. No silencing or imaging of hΔM or hΔI exists.</li></ul></div>'
+S3 = '<div class="status"><b>Status of this page.</b> Nothing here is an experiment; every claim is one of the following.<ul><li><b>Prior work:</b> PS196 as GLNO\'s largest input is Hulse et al. 2023.</li><li><b>Connectome observation (this work):</b> PS196_b\'s fan-out to ExR2, ExR4, LPsP and FB3A; the ascending neuron AN07B037 upstream; FB3A\'s mixed inputs.</li><li><b>Hypothesis:</b> body-derived turning signal; multimodal speed input. No recordings.</li></ul></div>'
+S4 = '<div class="status"><b>Status of this page.</b> Nothing here is an experiment; every claim is one of the following.<ul><li><b>Prior work:</b> the ellipsoid-body EPG→PEN synapses were noted by Turner-Evans 2020 and Hulse 2021; connectome-fitted compass models that include them integrate velocity (Duan 2025; Hulse 2026); Δ7 excites PEN rather than inhibiting it (Eddy 2026).</li><li><b>Connectome observation (this work):</b> the 3:1 ratio against the bridge route and its placement on the write tile, in two connectomes.</li><li><b>Simulation:</b> a textbook ring attractor with the contact added at face value stops rotating; fitted models absorb it through per-type gains.</li><li><b>Hypothesis:</b> the contact is functionally weak or cancelled. Untested.</li></ul></div>'
+
 if __name__ == '__main__':
     build('01', 'synaptic-store', 'Finding 1 of 4 · the missing middle of the circuit', {
         '__after_summary__': snip('store-anim'),
         'Two ways to hold a running sum': snip('two-ways'),
-        'What the wiring points to': snip('worked-example') + snip('convergence'),
-    })
+        'What the wiring points to for a synaptic store': snip('worked-example') + snip('convergence'),
+    }, S1)
     build('02', 'return-inverter', 'Finding 2 of 4 · the sign problem', {
         '__after_summary__': snip('sign-question'),
         'Why that is wrong': snip('arbor-cases'),
         'Where the rotation actually happens': snip('two-routes'),
         'The simulation check': snip('return-anim'),
-    })
+    }, S2)
     build('03', 'velocity-sources', 'Finding 3 of 4 · unnamed inputs to a solved circuit', {
         '__after_summary__': snip('velocity-fig'),
-    })
+    }, S3)
     build('04', 'compass-brake', 'Finding 4 of 4 · most against the models', {
         '__after_summary__': snip('brake-fig'),
         'What the model shows': snip('brake-anim'),
-    })
+    }, S4)

@@ -1,427 +1,451 @@
 [
-  {
-    "title": "Feature detection and orientation tuning in the Drosophila central complex",
-    "doi": "10.1038/nature12601",
-    "folder": "2013-feature-detection-and-orientation-tuning-in-the-drosophila-central-complex",
-    "discovery_note": "Visual feature tuning in ring neurons."
-  },
-  {
-    "title": "Neural dynamics for landmark orientation and angular path integration",
-    "doi": "10.1038/nature14446",
-    "folder": "2015-neural-dynamics-for-landmark-orientation-and-angular-path-integration",
-    "discovery_note": "A persistent heading-related activity bump follows landmarks and self-motion in darkness."
-  },
-  {
-    "title": "Ring attractor dynamics in the Drosophila central brain",
-    "doi": "10.1126/science.aal4835",
-    "folder": "2017-ring-attractor-dynamics-in-the-drosophila-central-brain",
-    "discovery_note": "Optogenetically imposed activity states persist with attractor-like dynamics."
-  },
-  {
-    "title": "A neural circuit architecture for angular integration in Drosophila",
-    "doi": "10.1038/nature22343",
-    "folder": "2017-a-neural-circuit-architecture-for-angular-integration-in-drosophila",
-    "discovery_note": "P-EN pathways shift the heading estimate; perturbations test the updating mechanism."
-  },
-  {
-    "title": "Angular velocity integration in a fly heading circuit",
-    "doi": "10.7554/eLife.23496",
-    "folder": "2017-angular-velocity-integration-in-a-fly-heading-circuit",
-    "discovery_note": "Conjunctive heading/angular-velocity coding and anatomically shifted recurrence."
-  },
-  {
-    "title": "A neural heading estimate is compared with an internal goal to guide oriented navigation",
-    "doi": "10.1038/s41593-019-0444-x",
-    "folder": "2019-a-neural-heading-estimate-is-compared-with-an-internal-goal-to-guide-oriented-navigat",
-    "discovery_note": "Links the compass to correction toward an internal goal bearing."
-  },
-  {
-    "title": "Sensorimotor experience remaps visual input to a heading-direction network",
-    "doi": "10.1038/s41586-019-1772-4",
-    "folder": "2019-sensorimotor-experience-remaps-visual-input-to-a-heading-direction-network",
-    "discovery_note": "Inhibitory visual inputs and experience-dependent remapping."
-  },
-  {
-    "title": "Generation of stable heading representations in diverse visual scenes",
-    "doi": "10.1038/s41586-019-1767-1",
-    "folder": "2019-generation-of-stable-heading-representations-in-diverse-visual-scenes",
-    "discovery_note": "Experiments and modeling connect visual plasticity to a stable heading map."
-  },
-  {
-    "title": "The neuroanatomical ultrastructure and function of a biological ring attractor",
-    "doi": "10.1016/j.neuron.2020.08.006",
-    "folder": "2020-the-neuroanatomical-ultrastructure-and-function-of-a-biological-ring-attractor",
-    "discovery_note": "Combines ultrastructure and functional analysis of compass circuitry."
-  },
-  {
-    "title": "A connectome of the Drosophila central complex reveals network motifs suitable for flexible navigation and context-dependent action selection",
-    "doi": "10.7554/eLife.66039",
-    "folder": "2021-a-connectome-of-the-drosophila-central-complex-reveals-network-motifs-suitable-for-fl",
-    "discovery_note": "Broad hemibrain CX architecture and candidate computational motifs."
-  },
-  {
-    "title": "Building an allocentric travelling direction signal via vector computation",
-    "doi": "10.1038/s41586-021-04067-0",
-    "folder": "2022-lyu-allocentric-travel-vector",
-    "discovery_note": "A vector computation transforms body-relative movement into world-relative travel direction."
-  },
-  {
-    "title": "Transforming representations of movement from body- to world-centric space",
-    "doi": "10.1038/s41586-021-04191-x",
-    "folder": "2022-transforming-representations-of-movement-from-body-to-world-centric-space",
-    "discovery_note": "PFN populations combine heading and translation; h\u0394B represents world-relative velocity."
-  },
-  {
-    "title": "Converting an allocentric goal into an egocentric steering signal",
-    "doi": "10.1038/s41586-023-07006-3",
-    "folder": "2024-converting-an-allocentric-goal-into-an-egocentric-steering-signal",
-    "discovery_note": "FC2 goal representation and PFL3 transformation into steering."
-  },
-  {
-    "title": "Transforming a head direction signal into a goal-oriented steering command",
-    "doi": "10.1038/s41586-024-07039-2",
-    "folder": "2024-transforming-a-head-direction-signal-into-a-goal-oriented-steering-command",
-    "discovery_note": "PFL3 populations support turn direction; PFL2 increases steering strength for large errors."
-  },
-  {
-    "title": "A neural circuit architecture for rapid learning in goal-directed navigation",
-    "doi": "10.1016/j.neuron.2024.04.036",
-    "folder": "2024-a-neural-circuit-architecture-for-rapid-learning-in-goal-directed-navigation",
-    "discovery_note": "Connectome-informed modular architecture for learning navigational goals."
-  },
-  {
-    "title": "Maintaining and updating accurate internal representations of continuous variables with a handful of neurons",
-    "doi": "10.1038/s41593-024-01766-5",
-    "folder": "2024-maintaining-and-updating-accurate-internal-representations-of-continuous-variables-wi",
-    "discovery_note": "Small networks can support continuous representations with tuning/robustness tradeoffs."
-  },
-  {
-    "title": "Connectomic reconstruction predicts visual features used for navigation",
-    "doi": "10.1038/s41586-024-07967-z",
-    "folder": "2024-connectomic-reconstruction-predicts-visual-features-used-for-navigation",
-    "discovery_note": "Uses visual-pathway anatomy to predict features supplied to the navigation system."
-  },
-  {
-    "title": "Multimodal cue integration and learning in a neural representation of head direction",
-    "doi": "10.1038/s41593-024-01823-z",
-    "folder": "2025-multimodal-cue-integration-and-learning-in-a-neural-representation-of-head-direction",
-    "discovery_note": "Examines integration and learning of multiple heading cues."
-  },
-  {
-    "title": "Neuronal calcium spikes enable vector inversion in the Drosophila brain",
-    "doi": "10.1016/j.cell.2025.11.040",
-    "folder": "2026-neuronal-calcium-spikes-enable-vector-inversion-in-the-drosophila-brain",
-    "discovery_note": "Hyperpolarization-elicited T-type calcium spikes enable PFNa population-vector inversion."
-  },
-  {
-    "title": "A vector-based strategy for olfactory navigation in Drosophila",
-    "doi": "10.1038/s41586-026-10827-7",
-    "folder": "2026-a-vector-based-strategy-for-olfactory-navigation-in-drosophila",
-    "discovery_note": "Odor-boundary tracking uses directional memories; FC2 signals the return direction outside the plume."
-  },
-  {
-    "title": "Neural dynamics for working memory and evidence integration during olfactory navigation in Drosophila",
-    "doi": "10.1038/s41467-026-75945-2",
-    "folder": "2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati",
-    "discovery_note": "FB local-neuron activity accumulates odor evidence and persists after odor loss; silencing impairs persistent directional behavior."
-  },
-  {
-    "folder": "2022-matheson-wind-guided-olfactory-navigation",
-    "title": "A neural circuit for wind-guided olfactory navigation",
-    "doi": "10.1038/s41467-022-32247-7",
-    "discovery_note": "Added by following the behavioral synthesis; full reading pending."
-  },
-  {
-    "folder": "2011-visual-place-learning",
-    "title": "Visual place learning in Drosophila melanogaster",
-    "doi": "10.1038/nature10131",
-    "discovery_note": "Added by following the behavioral synthesis; full reading pending."
-  },
-  {
-    "folder": "2020-currier-airflow-orientation",
-    "title": "Encoding and control of orientation to airflow by a set of Drosophila fan-shaped body neurons",
-    "doi": "10.7554/eLife.61510",
-    "discovery_note": "Added by following the behavioral synthesis; full reading pending."
-  },
-  {
-    "folder": "2017-kim-dickinson-idiothetic-path-integration",
-    "title": "Idiothetic Path Integration in the Fruit Fly Drosophila melanogaster",
-    "doi": "10.1016/j.cub.2017.06.026",
-    "discovery_note": "Added by following the behavioral synthesis; full reading pending."
-  },
-  {
-    "folder": "2025-lanz-recurrent-goal-memory",
-    "title": "Disinhibition of a recurrent attractor gates a persistent goal signal for navigation",
-    "doi": "10.1101/2025.10.07.681003",
-    "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
-  },
-  {
-    "folder": "2023-aso-learned-valence-wind",
-    "title": "Neural circuit mechanisms for transforming learned olfactory valences into wind oriented movement",
-    "doi": "10.7554/eLife.85756",
-    "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
-  },
-  {
-    "folder": "2024-chen-spatial-learning",
-    "title": "Spatial learning in feature-impoverished environments in Drosophila",
-    "doi": "10.1101/2024.09.28.615625",
-    "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
-  },
-  {
-    "title": "Displacement experiments provide evidence for path integration in Drosophila",
-    "doi": "10.1242/jeb.245289",
-    "folder": "2023-titova-displacement-path-integration",
-    "discovery_note": "Separates internal navigation from reward-associated chemical cues using passive displacement."
-  },
-  {
-    "folder": "2020-okubo-wind-compass",
-    "title": "A neural network for wind-guided compass navigation",
-    "doi": "10.1016/j.neuron.2020.06.022",
-    "discovery_note": "Airflow anchoring of the heading compass; distinguish from PFN basis input."
-  },
-  {
-    "folder": "2019-suver-wind-direction",
-    "title": "Encoding of wind direction by central neurons in Drosophila",
-    "doi": "10.1016/j.neuron.2019.03.012",
-    "discovery_note": "Upstream mechanosensory computation supplying wind navigation."
-  },
-  {
-    "folder": "2018-currier-multisensory-flight",
-    "title": "Multisensory control of orientation in tethered flying Drosophila",
-    "doi": "10.1016/j.cub.2018.09.020",
-    "discovery_note": "Behavioral basis for wind/visual context and flight versus walking."
-  },
-  {
-    "folder": "2018-alvarez-salvado-olfactory-navigation",
-    "title": "Elementary sensory-motor transformations underlying olfactory navigation in walking fruit-flies",
-    "doi": "10.7554/eLife.37815",
-    "discovery_note": "Odor history, upwind action and search after loss."
-  },
-  {
-    "folder": "2014-van-breugel-plume-tracking",
-    "title": "Plume-tracking behavior of flying Drosophila emerges from a set of distinct sensory-motor reflexes",
-    "doi": "10.1016/j.cub.2013.12.023",
-    "discovery_note": "Natural flight odor/wind/vision policy."
-  },
-  {
-    "folder": "2018-franconville-functional-connectome",
-    "title": "Building a functional connectome of the Drosophila central complex",
-    "doi": "10.7554/eLife.37017",
-    "discovery_note": "Functional connectivity and sign constraints."
-  },
-  {
-    "folder": "2018-namiki-descending-pathways",
-    "title": "The functional organization of descending sensory-motor pathways in Drosophila",
-    "doi": "10.7554/eLife.34272",
-    "discovery_note": "Bridge from central-complex outputs to locomotion."
-  },
-  {
-    "folder": "2018-giraldo-sun-navigation",
-    "title": "Sun navigation requires compass neurons in Drosophila",
-    "doi": "10.1016/j.cub.2018.07.002",
-    "discovery_note": "Menotaxis and necessity of compass for a specific behavioral task."
-  },
-  {
-    "folder": "2019-corfas-food-local-search",
-    "title": "Diverse food-sensing neurons trigger idiothetic local search in Drosophila",
-    "doi": "10.1016/j.cub.2019.03.004",
-    "discovery_note": "Food-reward initiation of local search; read against displacement controls."
-  },
-  {
-    "folder": "2021-behbahani-rezero-path-integrator",
-    "title": "Drosophila re-zero their path integrator at the center of a fictive food patch",
-    "doi": "10.1016/j.cub.2021.08.006",
-    "discovery_note": "Reference-point updating and multiple rewards; reconcile pheromone alternative."
-  },
-  {
-    "folder": "2019-stern-spatial-trial-error",
-    "title": "Learning a spatial task by trial and error in Drosophila",
-    "doi": "10.1016/j.cub.2019.06.045",
-    "discovery_note": "Reward-dependent spatial learning and PAM reinforcement."
-  },
-  {
-    "folder": "2008-neuser-spatial-orientation-memory",
-    "title": "Analysis of a spatial orientation memory in Drosophila",
-    "doi": "10.1038/nature07003",
-    "discovery_note": "Canonical visual working-memory behavior."
-  },
-  {
-    "folder": "2010-foucaud-spatial-search",
-    "title": "Use of spatial information and search strategies in a water maze analog in Drosophila melanogaster",
-    "doi": "10.1371/journal.pone.0015231",
-    "discovery_note": "Visual place learning behavior preceding Ofstad."
-  },
-  {
-    "folder": "2018-brockmann-sugar-search",
-    "title": "Sugar intake elicits intelligent searching behavior in flies and honey bees",
-    "doi": "10.3389/fnbeh.2018.00280",
-    "discovery_note": "Comparative local search and chemical-trail controls; retain species differences."
-  },
-  {
-    "folder": "2019-haberkern-virtual-landscape",
-    "title": "Visually guided behavior and optogenetically induced learning in head-fixed flies exploring a virtual landscape",
-    "doi": "10.1016/j.cub.2019.04.033",
-    "discovery_note": "Bridge between spatial behavior and imaging-compatible preparations."
-  },
-  {
-    "folder": "2017-stone-bee-path-integration",
-    "title": "An anatomically constrained model for path integration in the bee brain",
-    "doi": "10.1016/j.cub.2017.08.052",
-    "discovery_note": "Canonical comparative model; bee evidence must not be treated as fly demonstration."
-  },
-  {
-    "title": "Drosophila maintain a consistent navigational goal angle for days to weeks",
-    "doi": "10.64898/2025.12.09.693277",
-    "folder": "2025-weisman-long-term-goal-angle",
-    "discovery_note": "Preprint: long-term menotaxis and retention after overnight cue removal. Full reading underway; destination memory must be distinguished from bearing."
-  },
-  {
-    "title": "Functional Logic of a Cognitive Brain System for Navigation",
-    "doi": "10.1146/annurev-neuro-112723-062711",
-    "folder": "2026-maimon-abbott-navigation-review",
-    "discovery_note": "Integrative review, July 2026: follow primary references to test coverage of the whole behavioral computation."
-  },
-  {
-    "folder": "2022-fisher-dopamine-compass-plasticity",
-    "doi": "10.1038/s41586-022-05485-4",
-    "title": "Dopamine promotes head direction plasticity during orienting movements",
-    "discovery_note": "State-dependent compass learning and orienting movements.",
-    "metadata_source": "https://api.crossref.org/works/10.1038/s41586-022-05485-4"
-  },
-  {
-    "folder": "2025-plitt-octopamine-compass-plasticity",
-    "doi": "10.64898/2025.12.11.693783",
-    "title": "Octopamine instructs head direction plasticity",
-    "discovery_note": "Complementary neuromodulatory mechanism; check version and compare with dopamine.",
-    "metadata_source": "https://api.crossref.org/works/10.64898/2025.12.11.693783"
-  },
-  {
-    "folder": "2025-datri-odometry",
-    "doi": "10.1101/2025.03.23.644782",
-    "title": "Neural basis of odometry in Drosophila",
-    "metadata_source": "Reference lists of the manuscripts already read",
-    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2025-flores-valle-goal-learning-memory-drift",
-    "doi": "10.1101/2025.03.20.644317",
-    "title": "Goal learning, memory, and drift in the Drosophila head direction system",
-    "metadata_source": "Reference lists of the manuscripts already read",
-    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2023-goulard-emergent-spatial-goals",
-    "doi": "10.1371/journal.pcbi.1011480",
-    "title": "Emergent spatial goals in an integrative model of the insect central complex",
-    "metadata_source": "Reference lists of the manuscripts already read",
-    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2019-lemoel-vector-navigation",
-    "doi": "10.3389/fpsyg.2019.00690",
-    "title": "The Central Complex as a Potential Substrate for Vector Based Navigation",
-    "metadata_source": "Reference lists of the manuscripts already read",
-    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2021-hardcastle-polarization-pathway",
-    "doi": "10.7554/eLife.63225",
-    "title": "A visual pathway for skylight polarization processing in Drosophila",
-    "discovery_note": "Upstream celestial-cue transformation into compass input.",
-    "metadata_source": "https://api.crossref.org/works/10.7554/eLife.63225"
-  },
-  {
-    "folder": "2023-mitchell-cue-integration",
-    "doi": "10.1098/rspb.2023.0767",
-    "title": "A model of cue integration as vector summation in the insect brain",
-    "discovery_note": "Cue reliability and vector combination; comparative model.",
-    "metadata_source": "https://api.crossref.org/works/10.1098/rspb.2023.0767"
-  },
-  {
-    "folder": "2023-hulse-visuomotor-angular-velocity",
-    "doi": "10.1101/2023.09.25.559373",
-    "title": "A rotational velocity estimate constructed through visuomotor competition updates the fly\u2019s neural compass",
-    "metadata_source": "Reference lists of the manuscripts already read",
-    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2025-may-multisensory-wind",
-    "doi": "10.1101/2025.05.09.653128",
-    "title": "Central Complex representations of self-movement are sufficient to compute wind direction in flight",
-    "discovery_note": "Disentangle ambient wind from self-motion and apparent airflow.",
-    "metadata_source": "https://api.crossref.org/works/10.1101/2025.05.09.653128"
-  },
-  {
-    "folder": "2025-rayshubskiy-walking-steering",
-    "doi": "10.7554/eLife.102230",
-    "title": "Neural circuit mechanisms for steering control in walking Drosophila",
-    "discovery_note": "Downstream conversion of navigation signals into walking steering.",
-    "metadata_source": "https://api.crossref.org/works/10.7554/eLife.102230"
-  },
-  {
-    "folder": "2024-feng-central-steering",
-    "doi": "10.1101/2024.06.27.601106",
-    "title": "Hierarchical Transformation of Navigational Variables into Coordinated Turning",
-    "discovery_note": "Descending and premotor steering circuit; verify later publication.",
-    "metadata_source": "https://api.crossref.org/works/10.1101/2024.06.27.601106"
-  },
-  {
-    "folder": "2021-scaplen-mushroom-body-output-pathways",
-    "doi": "10.7554/eLife.63379",
-    "title": "Transsynaptic mapping of Drosophila mushroom body output neurons",
-    "metadata_source": "Reference lists of the manuscripts already read",
-    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2020-demir-complex-odor-plumes",
-    "doi": "10.7554/eLife.57524",
-    "title": "Walking Drosophila navigate complex plumes using stochastic decisions biased by the timing of odor encounters",
-    "discovery_note": "Behavioral policies in intermittent plumes beyond a fixed angular goal.",
-    "metadata_source": "https://api.crossref.org/works/10.7554/eLife.57524"
-  },
-  {
-    "folder": "2023-kutschireiter-bayesian-ring-attractor",
-    "doi": "10.1073/pnas.2210622120",
-    "title": "Bayesian inference in ring attractor networks",
-    "metadata_source": "Reference lists of the manuscripts already read",
-    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2025-wolff-cx-neuropeptides-drivers",
-    "doi": "10.7554/eLife.104764",
-    "title": "Cell type-specific driver lines targeting the Drosophila central complex and their use to investigate neuropeptide expression and sleep regulation",
-    "metadata_source": "Reference lists of the manuscripts already read",
-    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2014-aso-mushroom-body-output-valence",
-    "doi": "10.7554/eLife.04580",
-    "title": "Mushroom body output neurons encode valence and guide memory-based action selection in Drosophila",
-    "metadata_source": "https://doi.org/10.7554/eLife.04580",
-    "discovery_note": "Canonical associative-memory mechanism; connect to learned-valence navigation. Full reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2015-hige-heterosynaptic-memory-plasticity",
-    "doi": "10.1016/j.neuron.2015.11.003",
-    "title": "Heterosynaptic Plasticity Underlies Aversive Olfactory Learning in Drosophila",
-    "metadata_source": "https://doi.org/10.1016/j.neuron.2015.11.003",
-    "discovery_note": "Canonical associative-memory mechanism; connect to learned-valence navigation. Full reading pending.",
-    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
-  },
-  {
-    "folder": "2020-li-mushroom-body-connectome",
-    "doi": "10.7554/eLife.62576",
-    "title": "The connectome of the adult Drosophila mushroom body provides insights into function",
-    "discovery_note": "Memory circuitry and pathways to neighboring navigation networks.",
-    "metadata_source": "https://api.crossref.org/works/10.7554/eLife.62576"
-  }
+ {
+  "title": "Feature detection and orientation tuning in the Drosophila central complex",
+  "doi": "10.1038/nature12601",
+  "folder": "2013-feature-detection-and-orientation-tuning-in-the-drosophila-central-complex",
+  "discovery_note": "Visual feature tuning in ring neurons."
+ },
+ {
+  "title": "Neural dynamics for landmark orientation and angular path integration",
+  "doi": "10.1038/nature14446",
+  "folder": "2015-neural-dynamics-for-landmark-orientation-and-angular-path-integration",
+  "discovery_note": "A persistent heading-related activity bump follows landmarks and self-motion in darkness."
+ },
+ {
+  "title": "Ring attractor dynamics in the Drosophila central brain",
+  "doi": "10.1126/science.aal4835",
+  "folder": "2017-ring-attractor-dynamics-in-the-drosophila-central-brain",
+  "discovery_note": "Optogenetically imposed activity states persist with attractor-like dynamics."
+ },
+ {
+  "title": "A neural circuit architecture for angular integration in Drosophila",
+  "doi": "10.1038/nature22343",
+  "folder": "2017-a-neural-circuit-architecture-for-angular-integration-in-drosophila",
+  "discovery_note": "P-EN pathways shift the heading estimate; perturbations test the updating mechanism."
+ },
+ {
+  "title": "Angular velocity integration in a fly heading circuit",
+  "doi": "10.7554/eLife.23496",
+  "folder": "2017-angular-velocity-integration-in-a-fly-heading-circuit",
+  "discovery_note": "Conjunctive heading/angular-velocity coding and anatomically shifted recurrence."
+ },
+ {
+  "title": "A neural heading estimate is compared with an internal goal to guide oriented navigation",
+  "doi": "10.1038/s41593-019-0444-x",
+  "folder": "2019-a-neural-heading-estimate-is-compared-with-an-internal-goal-to-guide-oriented-navigat",
+  "discovery_note": "Links the compass to correction toward an internal goal bearing."
+ },
+ {
+  "title": "Sensorimotor experience remaps visual input to a heading-direction network",
+  "doi": "10.1038/s41586-019-1772-4",
+  "folder": "2019-sensorimotor-experience-remaps-visual-input-to-a-heading-direction-network",
+  "discovery_note": "Inhibitory visual inputs and experience-dependent remapping."
+ },
+ {
+  "title": "Generation of stable heading representations in diverse visual scenes",
+  "doi": "10.1038/s41586-019-1767-1",
+  "folder": "2019-generation-of-stable-heading-representations-in-diverse-visual-scenes",
+  "discovery_note": "Experiments and modeling connect visual plasticity to a stable heading map."
+ },
+ {
+  "title": "The neuroanatomical ultrastructure and function of a biological ring attractor",
+  "doi": "10.1016/j.neuron.2020.08.006",
+  "folder": "2020-the-neuroanatomical-ultrastructure-and-function-of-a-biological-ring-attractor",
+  "discovery_note": "Combines ultrastructure and functional analysis of compass circuitry."
+ },
+ {
+  "title": "A connectome of the Drosophila central complex reveals network motifs suitable for flexible navigation and context-dependent action selection",
+  "doi": "10.7554/eLife.66039",
+  "folder": "2021-a-connectome-of-the-drosophila-central-complex-reveals-network-motifs-suitable-for-fl",
+  "discovery_note": "Broad hemibrain CX architecture and candidate computational motifs."
+ },
+ {
+  "title": "Building an allocentric travelling direction signal via vector computation",
+  "doi": "10.1038/s41586-021-04067-0",
+  "folder": "2022-lyu-allocentric-travel-vector",
+  "discovery_note": "A vector computation transforms body-relative movement into world-relative travel direction."
+ },
+ {
+  "title": "Transforming representations of movement from body- to world-centric space",
+  "doi": "10.1038/s41586-021-04191-x",
+  "folder": "2022-transforming-representations-of-movement-from-body-to-world-centric-space",
+  "discovery_note": "PFN populations combine heading and translation; hΔB represents world-relative velocity."
+ },
+ {
+  "title": "Converting an allocentric goal into an egocentric steering signal",
+  "doi": "10.1038/s41586-023-07006-3",
+  "folder": "2024-converting-an-allocentric-goal-into-an-egocentric-steering-signal",
+  "discovery_note": "FC2 goal representation and PFL3 transformation into steering."
+ },
+ {
+  "title": "Transforming a head direction signal into a goal-oriented steering command",
+  "doi": "10.1038/s41586-024-07039-2",
+  "folder": "2024-transforming-a-head-direction-signal-into-a-goal-oriented-steering-command",
+  "discovery_note": "PFL3 populations support turn direction; PFL2 increases steering strength for large errors."
+ },
+ {
+  "title": "A neural circuit architecture for rapid learning in goal-directed navigation",
+  "doi": "10.1016/j.neuron.2024.04.036",
+  "folder": "2024-a-neural-circuit-architecture-for-rapid-learning-in-goal-directed-navigation",
+  "discovery_note": "Connectome-informed modular architecture for learning navigational goals."
+ },
+ {
+  "title": "Maintaining and updating accurate internal representations of continuous variables with a handful of neurons",
+  "doi": "10.1038/s41593-024-01766-5",
+  "folder": "2024-maintaining-and-updating-accurate-internal-representations-of-continuous-variables-wi",
+  "discovery_note": "Small networks can support continuous representations with tuning/robustness tradeoffs."
+ },
+ {
+  "title": "Connectomic reconstruction predicts visual features used for navigation",
+  "doi": "10.1038/s41586-024-07967-z",
+  "folder": "2024-connectomic-reconstruction-predicts-visual-features-used-for-navigation",
+  "discovery_note": "Uses visual-pathway anatomy to predict features supplied to the navigation system."
+ },
+ {
+  "title": "Multimodal cue integration and learning in a neural representation of head direction",
+  "doi": "10.1038/s41593-024-01823-z",
+  "folder": "2025-multimodal-cue-integration-and-learning-in-a-neural-representation-of-head-direction",
+  "discovery_note": "Examines integration and learning of multiple heading cues."
+ },
+ {
+  "title": "Neuronal calcium spikes enable vector inversion in the Drosophila brain",
+  "doi": "10.1016/j.cell.2025.11.040",
+  "folder": "2026-neuronal-calcium-spikes-enable-vector-inversion-in-the-drosophila-brain",
+  "discovery_note": "Hyperpolarization-elicited T-type calcium spikes enable PFNa population-vector inversion."
+ },
+ {
+  "title": "A vector-based strategy for olfactory navigation in Drosophila",
+  "doi": "10.1038/s41586-026-10827-7",
+  "folder": "2026-a-vector-based-strategy-for-olfactory-navigation-in-drosophila",
+  "discovery_note": "Odor-boundary tracking uses directional memories; FC2 signals the return direction outside the plume."
+ },
+ {
+  "title": "Neural dynamics for working memory and evidence integration during olfactory navigation in Drosophila",
+  "doi": "10.1038/s41467-026-75945-2",
+  "folder": "2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati",
+  "discovery_note": "FB local-neuron activity accumulates odor evidence and persists after odor loss; silencing impairs persistent directional behavior."
+ },
+ {
+  "folder": "2022-matheson-wind-guided-olfactory-navigation",
+  "title": "A neural circuit for wind-guided olfactory navigation",
+  "doi": "10.1038/s41467-022-32247-7",
+  "discovery_note": "Added by following the behavioral synthesis; full reading pending."
+ },
+ {
+  "folder": "2011-visual-place-learning",
+  "title": "Visual place learning in Drosophila melanogaster",
+  "doi": "10.1038/nature10131",
+  "discovery_note": "Added by following the behavioral synthesis; full reading pending."
+ },
+ {
+  "folder": "2020-currier-airflow-orientation",
+  "title": "Encoding and control of orientation to airflow by a set of Drosophila fan-shaped body neurons",
+  "doi": "10.7554/eLife.61510",
+  "discovery_note": "Added by following the behavioral synthesis; full reading pending."
+ },
+ {
+  "folder": "2017-kim-dickinson-idiothetic-path-integration",
+  "title": "Idiothetic Path Integration in the Fruit Fly Drosophila melanogaster",
+  "doi": "10.1016/j.cub.2017.06.026",
+  "discovery_note": "Added by following the behavioral synthesis; full reading pending."
+ },
+ {
+  "folder": "2025-lanz-recurrent-goal-memory",
+  "title": "Disinhibition of a recurrent attractor gates a persistent goal signal for navigation",
+  "doi": "10.1101/2025.10.07.681003",
+  "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
+ },
+ {
+  "folder": "2023-aso-learned-valence-wind",
+  "title": "Neural circuit mechanisms for transforming learned olfactory valences into wind oriented movement",
+  "doi": "10.7554/eLife.85756",
+  "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
+ },
+ {
+  "folder": "2024-chen-spatial-learning",
+  "title": "Spatial learning in feature-impoverished environments in Drosophila",
+  "doi": "10.1101/2024.09.28.615625",
+  "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
+ },
+ {
+  "title": "Displacement experiments provide evidence for path integration in Drosophila",
+  "doi": "10.1242/jeb.245289",
+  "folder": "2023-titova-displacement-path-integration",
+  "discovery_note": "Separates internal navigation from reward-associated chemical cues using passive displacement."
+ },
+ {
+  "folder": "2020-okubo-wind-compass",
+  "title": "A neural network for wind-guided compass navigation",
+  "doi": "10.1016/j.neuron.2020.06.022",
+  "discovery_note": "Airflow anchoring of the heading compass; distinguish from PFN basis input."
+ },
+ {
+  "folder": "2019-suver-wind-direction",
+  "title": "Encoding of wind direction by central neurons in Drosophila",
+  "doi": "10.1016/j.neuron.2019.03.012",
+  "discovery_note": "Upstream mechanosensory computation supplying wind navigation."
+ },
+ {
+  "folder": "2018-currier-multisensory-flight",
+  "title": "Multisensory control of orientation in tethered flying Drosophila",
+  "doi": "10.1016/j.cub.2018.09.020",
+  "discovery_note": "Behavioral basis for wind/visual context and flight versus walking."
+ },
+ {
+  "folder": "2018-alvarez-salvado-olfactory-navigation",
+  "title": "Elementary sensory-motor transformations underlying olfactory navigation in walking fruit-flies",
+  "doi": "10.7554/eLife.37815",
+  "discovery_note": "Odor history, upwind action and search after loss."
+ },
+ {
+  "folder": "2014-van-breugel-plume-tracking",
+  "title": "Plume-tracking behavior of flying Drosophila emerges from a set of distinct sensory-motor reflexes",
+  "doi": "10.1016/j.cub.2013.12.023",
+  "discovery_note": "Natural flight odor/wind/vision policy."
+ },
+ {
+  "folder": "2018-franconville-functional-connectome",
+  "title": "Building a functional connectome of the Drosophila central complex",
+  "doi": "10.7554/eLife.37017",
+  "discovery_note": "Functional connectivity and sign constraints."
+ },
+ {
+  "folder": "2018-namiki-descending-pathways",
+  "title": "The functional organization of descending sensory-motor pathways in Drosophila",
+  "doi": "10.7554/eLife.34272",
+  "discovery_note": "Bridge from central-complex outputs to locomotion."
+ },
+ {
+  "folder": "2018-giraldo-sun-navigation",
+  "title": "Sun navigation requires compass neurons in Drosophila",
+  "doi": "10.1016/j.cub.2018.07.002",
+  "discovery_note": "Menotaxis and necessity of compass for a specific behavioral task."
+ },
+ {
+  "folder": "2019-corfas-food-local-search",
+  "title": "Diverse food-sensing neurons trigger idiothetic local search in Drosophila",
+  "doi": "10.1016/j.cub.2019.03.004",
+  "discovery_note": "Food-reward initiation of local search; read against displacement controls."
+ },
+ {
+  "folder": "2021-behbahani-rezero-path-integrator",
+  "title": "Drosophila re-zero their path integrator at the center of a fictive food patch",
+  "doi": "10.1016/j.cub.2021.08.006",
+  "discovery_note": "Reference-point updating and multiple rewards; reconcile pheromone alternative."
+ },
+ {
+  "folder": "2019-stern-spatial-trial-error",
+  "title": "Learning a spatial task by trial and error in Drosophila",
+  "doi": "10.1016/j.cub.2019.06.045",
+  "discovery_note": "Reward-dependent spatial learning and PAM reinforcement."
+ },
+ {
+  "folder": "2008-neuser-spatial-orientation-memory",
+  "title": "Analysis of a spatial orientation memory in Drosophila",
+  "doi": "10.1038/nature07003",
+  "discovery_note": "Canonical visual working-memory behavior."
+ },
+ {
+  "folder": "2010-foucaud-spatial-search",
+  "title": "Use of spatial information and search strategies in a water maze analog in Drosophila melanogaster",
+  "doi": "10.1371/journal.pone.0015231",
+  "discovery_note": "Visual place learning behavior preceding Ofstad."
+ },
+ {
+  "folder": "2018-brockmann-sugar-search",
+  "title": "Sugar intake elicits intelligent searching behavior in flies and honey bees",
+  "doi": "10.3389/fnbeh.2018.00280",
+  "discovery_note": "Comparative local search and chemical-trail controls; retain species differences."
+ },
+ {
+  "folder": "2019-haberkern-virtual-landscape",
+  "title": "Visually guided behavior and optogenetically induced learning in head-fixed flies exploring a virtual landscape",
+  "doi": "10.1016/j.cub.2019.04.033",
+  "discovery_note": "Bridge between spatial behavior and imaging-compatible preparations."
+ },
+ {
+  "folder": "2017-stone-bee-path-integration",
+  "title": "An anatomically constrained model for path integration in the bee brain",
+  "doi": "10.1016/j.cub.2017.08.052",
+  "discovery_note": "Canonical comparative model; bee evidence must not be treated as fly demonstration."
+ },
+ {
+  "title": "Drosophila maintain a consistent navigational goal angle for days to weeks",
+  "doi": "10.64898/2025.12.09.693277",
+  "folder": "2025-weisman-long-term-goal-angle",
+  "discovery_note": "Preprint: long-term menotaxis and retention after overnight cue removal. Full reading underway; destination memory must be distinguished from bearing."
+ },
+ {
+  "title": "Functional Logic of a Cognitive Brain System for Navigation",
+  "doi": "10.1146/annurev-neuro-112723-062711",
+  "folder": "2026-maimon-abbott-navigation-review",
+  "discovery_note": "Integrative review, July 2026: follow primary references to test coverage of the whole behavioral computation."
+ },
+ {
+  "folder": "2022-fisher-dopamine-compass-plasticity",
+  "doi": "10.1038/s41586-022-05485-4",
+  "title": "Dopamine promotes head direction plasticity during orienting movements",
+  "discovery_note": "State-dependent compass learning and orienting movements.",
+  "metadata_source": "https://api.crossref.org/works/10.1038/s41586-022-05485-4"
+ },
+ {
+  "folder": "2025-plitt-octopamine-compass-plasticity",
+  "doi": "10.64898/2025.12.11.693783",
+  "title": "Octopamine instructs head direction plasticity",
+  "discovery_note": "Complementary neuromodulatory mechanism; check version and compare with dopamine.",
+  "metadata_source": "https://api.crossref.org/works/10.64898/2025.12.11.693783"
+ },
+ {
+  "folder": "2025-datri-odometry",
+  "doi": "10.1101/2025.03.23.644782",
+  "title": "Neural basis of odometry in Drosophila",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2025-flores-valle-goal-learning-memory-drift",
+  "doi": "10.1101/2025.03.20.644317",
+  "title": "Goal learning, memory, and drift in the Drosophila head direction system",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2023-goulard-emergent-spatial-goals",
+  "doi": "10.1371/journal.pcbi.1011480",
+  "title": "Emergent spatial goals in an integrative model of the insect central complex",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2019-lemoel-vector-navigation",
+  "doi": "10.3389/fpsyg.2019.00690",
+  "title": "The Central Complex as a Potential Substrate for Vector Based Navigation",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2021-hardcastle-polarization-pathway",
+  "doi": "10.7554/eLife.63225",
+  "title": "A visual pathway for skylight polarization processing in Drosophila",
+  "discovery_note": "Upstream celestial-cue transformation into compass input.",
+  "metadata_source": "https://api.crossref.org/works/10.7554/eLife.63225"
+ },
+ {
+  "folder": "2023-mitchell-cue-integration",
+  "doi": "10.1098/rspb.2023.0767",
+  "title": "A model of cue integration as vector summation in the insect brain",
+  "discovery_note": "Cue reliability and vector combination; comparative model.",
+  "metadata_source": "https://api.crossref.org/works/10.1098/rspb.2023.0767"
+ },
+ {
+  "folder": "2023-hulse-visuomotor-angular-velocity",
+  "doi": "10.1101/2023.09.25.559373",
+  "title": "A rotational velocity estimate constructed through visuomotor competition updates the fly’s neural compass",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2025-may-multisensory-wind",
+  "doi": "10.1101/2025.05.09.653128",
+  "title": "Central Complex representations of self-movement are sufficient to compute wind direction in flight",
+  "discovery_note": "Disentangle ambient wind from self-motion and apparent airflow.",
+  "metadata_source": "https://api.crossref.org/works/10.1101/2025.05.09.653128"
+ },
+ {
+  "folder": "2025-rayshubskiy-walking-steering",
+  "doi": "10.7554/eLife.102230",
+  "title": "Neural circuit mechanisms for steering control in walking Drosophila",
+  "discovery_note": "Downstream conversion of navigation signals into walking steering.",
+  "metadata_source": "https://api.crossref.org/works/10.7554/eLife.102230"
+ },
+ {
+  "folder": "2024-feng-central-steering",
+  "doi": "10.1101/2024.06.27.601106",
+  "title": "Hierarchical Transformation of Navigational Variables into Coordinated Turning",
+  "discovery_note": "Descending and premotor steering circuit; verify later publication.",
+  "metadata_source": "https://api.crossref.org/works/10.1101/2024.06.27.601106"
+ },
+ {
+  "folder": "2021-scaplen-mushroom-body-output-pathways",
+  "doi": "10.7554/eLife.63379",
+  "title": "Transsynaptic mapping of Drosophila mushroom body output neurons",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2020-demir-complex-odor-plumes",
+  "doi": "10.7554/eLife.57524",
+  "title": "Walking Drosophila navigate complex plumes using stochastic decisions biased by the timing of odor encounters",
+  "discovery_note": "Behavioral policies in intermittent plumes beyond a fixed angular goal.",
+  "metadata_source": "https://api.crossref.org/works/10.7554/eLife.57524"
+ },
+ {
+  "folder": "2023-kutschireiter-bayesian-ring-attractor",
+  "doi": "10.1073/pnas.2210622120",
+  "title": "Bayesian inference in ring attractor networks",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2025-wolff-cx-neuropeptides-drivers",
+  "doi": "10.7554/eLife.104764",
+  "title": "Cell type-specific driver lines targeting the Drosophila central complex and their use to investigate neuropeptide expression and sleep regulation",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2014-aso-mushroom-body-output-valence",
+  "doi": "10.7554/eLife.04580",
+  "title": "Mushroom body output neurons encode valence and guide memory-based action selection in Drosophila",
+  "metadata_source": "https://doi.org/10.7554/eLife.04580",
+  "discovery_note": "Canonical associative-memory mechanism; connect to learned-valence navigation. Full reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2015-hige-heterosynaptic-memory-plasticity",
+  "doi": "10.1016/j.neuron.2015.11.003",
+  "title": "Heterosynaptic Plasticity Underlies Aversive Olfactory Learning in Drosophila",
+  "metadata_source": "https://doi.org/10.1016/j.neuron.2015.11.003",
+  "discovery_note": "Canonical associative-memory mechanism; connect to learned-valence navigation. Full reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+ },
+ {
+  "folder": "2020-li-mushroom-body-connectome",
+  "doi": "10.7554/eLife.62576",
+  "title": "The connectome of the adult Drosophila mushroom body provides insights into function",
+  "discovery_note": "Memory circuitry and pathways to neighboring navigation networks.",
+  "metadata_source": "https://api.crossref.org/works/10.7554/eLife.62576"
+ },
+ {
+  "title": "An Angular Working-Memory Signal that Guides Drosophila Navigational Trajectories",
+  "doi": "10.48496/zdsr-5w52",
+  "folder": "2026-avritzer-hdeltaa-angular-working-memory",
+  "discovery_note": "hΔA as a 7–10 s working memory of travel direction (Maimon lab thesis, abstract only, embargoed)."
+ },
+ {
+  "title": "The Drosophila fan-shaped body stores a vector in an allocentric coordinate system",
+  "doi": "",
+  "folder": "2025-gorko-fb-stores-allocentric-vector",
+  "discovery_note": "PFL1 coordinate transform; stored direction absent from FC1/FB2B calcium; cAMP in FB2B (Kim lab dissertation)."
+ },
+ {
+  "title": "A Neuronal Circuit Motif for Leaky Vector Integration",
+  "doi": "10.48496/947v-bw85",
+  "folder": "2025-janke-leaky-vector-integration",
+  "discovery_note": "hΔG leaky distance integrator reset at food (Maimon lab thesis, abstract only, embargoed to Oct 2026)."
+ },
+ {
+  "title": "A modulatory attentional gate promotes recent memory expression in Drosophila",
+  "doi": "10.1101/2024.12.20.629828",
+  "folder": "2024-kapoor-waddell-oa-vpm3-attentional-gate",
+  "discovery_note": "OA-VPM3 function: recent-memory gate in the mushroom body, not reward."
+ }
 ]

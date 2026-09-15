@@ -1,4 +1,4 @@
-# The fly's compass has a built-in brake that no published model includes
+# The fly's compass has a built-in brake that textbook models leave out
 
 **Summary.** The compass ring attractor is moved by the PEN shifter neurons, which every model treats as one-way conveyors: read the heading bump at position x, write it to x±1. The connectome shows each PEN receives about three times more input from the position it writes to than from the position it reads from. Both left and right shifters do this, so the effect has no direction: the neurons a shifter pushes on push back on it, and the shifters anchor the bump where it already is. In a standard ring-attractor model, adding this feedback at the measured strength collapses rotation. Real flies turn normally, so these synapses cannot be acting the way a naive reading of the wiring says.
 
@@ -36,13 +36,13 @@ Take the standard ring-attractor model with a constant turn signal, and add the 
 | 1× | 0 |
 | 2.7× (measured) | 0 |
 
-Rotation collapses as the feedback grows. The zero at high feedback is partly an artefact of rate saturation in a minimal model; the defensible claim is that rotation gain falls steeply as the anchor strengthens. The collapse does not depend on how the contact is implemented: as a presynaptic gain on the shifter's terminals that only redistributes a fixed release toward the write position, rotation falls to 25°/s at 1× and 0 at the measured ratio; with divisive normalisation of the shifter population, to 34°/s and 0. The dark bump is stable in every version.
+Rotation collapses as the feedback grows. The zero at high feedback is partly an artefact of rate saturation in a minimal model; the defensible claim is that rotation gain falls steeply as the anchor strengthens. Models fitted to the raw connectome, which include these synapses at the measured ratio, do integrate velocity (Duan, Dong & Fiete 2025; Hulse, Aneesh, Romani, Jayaraman & Hermundstad 2026), by assigning each cell-type pair its own gain; that is the first escape route below, found by fitting rather than assumed. The collapse does not depend on how the contact is implemented: as a presynaptic gain on the shifter's terminals that only redistributes a fixed release toward the write position, rotation falls to 25°/s at 1× and 0 at the measured ratio; with divisive normalisation of the shifter population, to 34°/s and 0. The dark bump is stable in every version.
 
 ## Why it matters
 
 The loop turns the shifters into anchors. Normal stalling of a ring attractor is two equal and opposite pushes cancelling. This is different: both shifter populations pile excitation onto wherever the bump already is, and the anchor feeds on itself, because a stronger turn signal drives the shifters harder and so drives the anchor harder too. A compass with this loop is very stable in darkness and very sluggish under rotation.
 
-Flies are not sluggish, so one of two things is true, and each is a different compass:
+Flies are not sluggish, so one of two things is true, and each is a different compass. A third correction applies to every model here: Δ7's glutamate inhibits EPG but excites PENa and PENb (Eddy et al. 2026), so the "Δ7-like global inhibition" onto the shifters in this model has the wrong sign.
 
 1. The write-position synapses are functionally weak despite their number, whether they drive the cell or modulate its terminals.
 2. They are cancelled by inhibition the models leave out (Δ7, ExR4, ExR6).
@@ -57,4 +57,4 @@ Flies are not sluggish, so one of two things is true, and each is a different co
 
 Synapse counts are from the hemibrain v1.2 traced adjacencies, with each synapse assigned to a brain region, and from MaleCNS v1.0. Read-position synapses are EPG→PEN synapses in the protocerebral bridge; write-position synapses are EPG→PEN synapses in the ellipsoid body, restricted to the EPG wedge the PEN projects to. The simulation is a rate-based ring attractor with eight EPG positions and left and right PEN populations, constant asymmetric drive to one PEN population, and an added EPG→PEN term from the write position whose strength is varied. Analysis: `docs/compass-recurrence.md`; script: `scripts/compass_recurrence.py`, `scripts/hemibrain_compass_comparison.py`; simulations: `simulations/eb_epg_pen_loop.py`, `simulations/eb_epg_pen_loop_variants.py` (somatic drive, presynaptic release gain, divisive normalisation).
 
-References: Turner-Evans et al. 2017, 2020; Green et al. 2017; Hulse et al. 2021; Maimon & Abbott 2026.
+References: Turner-Evans et al. 2017, 2020; Green et al. 2017; Hulse et al. 2021; Duan, Dong & Fiete 2025; Hulse et al. 2026; Eddy et al. 2026; Maimon & Abbott 2026.

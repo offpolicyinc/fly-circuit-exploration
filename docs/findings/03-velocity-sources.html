@@ -21,6 +21,9 @@
   .anim button { font:13px inherit; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
   .anim input[type=range] { width:160px; }
   .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; }
+  .status { border:1px solid var(--line); border-left:4px solid var(--warn); background:#fbf7ee; padding:10px 14px; margin:0 0 18px; font-size:14px; }
+  .status b { color:var(--warn); }
+  .status ul { margin:4px 0 0; padding-left:20px; }
   .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; margin-bottom:6px; }
   .methods { color:var(--muted); font-size:14px; } .methods h2 { color:var(--ink); }
   a { color:var(--accent2); }
@@ -29,7 +32,7 @@
 <body>
 <main>
   <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
-<div class="kicker">Finding 3 of 4 · unnamed inputs to a solved circuit</div><h1>The compass and vector systems get their motion signals from cells nobody has named</h1>
+<div class="kicker">Finding 3 of 4 · unnamed inputs to a solved circuit</div><h1>The compass and vector systems get their motion signals from cells nobody has named</h1><div class="status"><b>Status of this page.</b> Nothing here is an experiment; every claim is one of the following.<ul><li><b>Prior work:</b> PS196 as GLNO's largest input is Hulse et al. 2023.</li><li><b>Connectome observation (this work):</b> PS196_b's fan-out to ExR2, ExR4, LPsP and FB3A; the ascending neuron AN07B037 upstream; FB3A's mixed inputs.</li><li><b>Hypothesis:</b> body-derived turning signal; multimodal speed input. No recordings.</li></ul></div>
 <p class="summary"><b>Summary.</b> The compass and vector systems need rotational and translational velocity, and the neurons that deliver those signals are known (GLNO into the PEN shifters; LNO2 and SpsP into PFNd), but what drives them was left open by Hulse 2023 and Lu 2022. An unbiased screen of the connectome points at two unnamed cell types and an ascending neuron behind them. PS196_b, a posterior-slope type that Hulse 2023 flagged as GLNO's largest input, also reaches ExR2, ExR4, LPsP and FB3A, so one type feeds the rotational velocity input, the dopamine neuron that gates compass learning by rotation speed, and the translational side at once; its own largest distant input is an ascending neuron, AN07B037, which also reaches LNO2, so the signal looks body-derived rather than a motor-command copy. FB3A, four glutamatergic tangential cells, supplies 12 percent of PFNd's input and pools visual motion, antennal mechanosensation and a second ascending neuron: the candidate for the speed estimate that path integration in the dark requires.</p>
 <figure>
     <svg viewBox="0 0 900 330" width="100%" role="img" aria-label="Sources of rotational and translational velocity inputs">

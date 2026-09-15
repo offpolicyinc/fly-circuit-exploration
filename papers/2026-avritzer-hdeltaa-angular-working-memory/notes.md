@@ -1,0 +1,7 @@
+# Avritzer 2026: an angular working-memory signal in hΔA (abstract only)
+
+Claims, from the abstract: hΔA neurons integrate the fly's recent travelling direction over ~7–10 s, a working memory of the trajectory; the signal feeds the compass/goal/steering circuit and promotes continuing in the recent travel direction, "like an inertia term for the steering circuit"; it contributes to a memory-based navigation task alongside the goal signal; hΔA activity drops in a context where inertia is unhelpful; the signal is built by a circuit motif that repeats in the central complex, which the author suggests could build memories and goals with different spatiotemporal properties.
+
+Unknown until the full text is released: indicator and preparation (walking vs flight), whether the 7–10 s window is a decaying trace or sustained, the inputs (hΔB→hΔA is the obvious candidate), the output target (PFL3/PFL2 per the connectome), silencing effects, and which other types form the "repeating motif".
+
+Bearing on this repository: hΔA was the lead candidate for the synaptic home-vector store (finding 1); it is now characterised as a short activity integrator, which does not exclude a synaptic component but makes hΔH the lead candidate. The direct hΔA→PFL3 route was predicted to carry "keep going" (finding 2); the inertia result confirms that sign. The hΔA→hΔI→PFL3 rotated route predicts an anti-inertia signal in hΔI.

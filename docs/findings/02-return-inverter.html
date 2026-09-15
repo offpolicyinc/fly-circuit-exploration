@@ -21,6 +21,9 @@
   .anim button { font:13px inherit; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
   .anim input[type=range] { width:160px; }
   .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; }
+  .status { border:1px solid var(--line); border-left:4px solid var(--warn); background:#fbf7ee; padding:10px 14px; margin:0 0 18px; font-size:14px; }
+  .status b { color:var(--warn); }
+  .status ul { margin:4px 0 0; padding-left:20px; }
   .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; margin-bottom:6px; }
   .methods { color:var(--muted); font-size:14px; } .methods h2 { color:var(--ink); }
   a { color:var(--accent2); }
@@ -29,8 +32,8 @@
 <body>
 <main>
   <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
-<div class="kicker">Finding 2 of 4 · the sign problem</div><h1>The stored vector points away from food. Two unassigned neuron types, hΔM and hΔI, are the only things that turn it around</h1>
-<p class="summary"><b>Summary.</b> A stored displacement points from food to fly, but steering needs the reverse, so something between the store and the steering neurons must rotate the vector by half a turn. The store cells do not do it: hΔB's synapses land on their axonal arbors, not their dendrites, so they relay the vector unrotated. The wiring supplies exactly two rotating routes to the steering neurons PFL3 and PFL2, both through cells with no assigned function: after the goal neurons FC2, only hΔM rotates (FC2 contacts its dendrites; its axon, 178° away, contacts PFL3); before FC2, the store candidate hΔA contacts the dendrites of hΔI, whose axon reaches PFL3 half a turn away. PFL3 therefore receives the stored vector unrotated ("keep going") directly and rotated ("go back") by these two; in a closed-loop model only the rotated copies produce return.</p>
+<div class="kicker">Finding 2 of 4 · the sign problem</div><h1>The stored vector points away from food. Two unassigned neuron types, hΔM and hΔI, are the only things that turn it around</h1><div class="status"><b>Status of this page.</b> Nothing here is an experiment; every claim is one of the following.<ul><li><b>Connectome observation (this work):</b> the two rotating routes to PFL3, FC2→hΔM and hΔA→hΔI, with their measured column offsets, in two connectomes.</li><li><b>Prior work consistent with it:</b> Avritzer 2026 recorded the unrotated hΔA→PFL3 route as an inertia term.</li><li><b>Simulation:</b> a toy agent; shows the sign matters, not that these cells do it.</li><li><b>Hypothesis:</b> that these routes are the return path. No silencing or imaging of hΔM or hΔI exists.</li></ul></div>
+<p class="summary"><b>Summary.</b> A stored displacement points from food to fly, but steering needs the reverse, so something between the store and the steering neurons must rotate the vector by half a turn. The store cells do not do it: hΔB's synapses land on their axonal arbors, not their dendrites, so they relay the vector unrotated. The wiring supplies exactly two rotating routes to the steering neurons PFL3 and PFL2, both through cells with no assigned function: after the goal neurons FC2, only hΔM rotates (FC2 contacts its dendrites; its axon, 178° away, contacts PFL3); before FC2, hΔA (the recorded travel-direction integrator) contacts the dendrites of hΔI, whose axon reaches PFL3 half a turn away. PFL3 therefore receives the stored vector unrotated ("keep going") directly and rotated ("go back") by these two; in a closed-loop model only the rotated copies produce return.</p>
 <figure>
     <svg viewBox="0 0 820 200" width="100%" role="img" aria-label="The sign question">
       <defs><marker id="q" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#1b1b1f"/></marker><marker id="qr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 z" fill="#b4432c"/></marker></defs>
@@ -131,7 +134,7 @@
 <tr><td class="">hΔA → PFL3 direct</td><td class="n">3,881</td><td class="n">14°</td></tr>
 <tr><td class="">hΔA → hΔI → PFL3 (1,388 in, 3,468 out)</td><td class="n">3,468</td><td class="n">195°</td></tr>
 <tr><td class="">hΔA → hΔI → PFL2</td><td class="n">1,942</td><td class="n">197°</td></tr></table>
-<p>FC2 columns are named directly, so there is no arbor ambiguity on that step. hΔI also receives the current step from hΔB on its axon, unrotated, so if hΔA is the store, hΔI sends PFL3 the current step minus the stored vector: a comparison, not a relay.</p>
+<p>FC2 columns are named directly, so there is no arbor ambiguity on that step. hΔI also receives the current step from hΔB on its axon, unrotated, so hΔI sends PFL3 the current step minus hΔA's recent-direction memory: a comparison, not a relay.</p>
 <h2>The simulation check</h2>
 <div class="anim" id="retAnim">
   <svg viewBox="0 0 820 340" width="100%" role="img" aria-label="Animation: returning with and without the half-turn rotation">
@@ -182,10 +185,11 @@
 <h2>Consequence</h2>
 <p>PFL3 receives the same memory twice: "north" directly, meaning keep going, and "south" through hΔM and through hΔI, meaning go back. Whichever input wins decides whether the fly keeps exploring or returns. Dispersing flies do keep going for hours (Green 2019), and FB5A, a GABA neuron that inhibits FC2, PFL3, hΔM and hΔH together, is placed to set the balance. hΔM and hΔI are the return path.</p>
 <p>PFL2 also receives the rotated goal from both. PFL2 is known to fire most when the fly faces away from its goal (Westeinde 2024), which this explains with no new anatomy.</p>
+<p>The direct route has since been measured. Avritzer 2026 recorded hΔA as a working memory of the fly's recent travel direction that makes it keep going, an inertia term on steering: exactly what an unrotated hΔA→PFL3 route predicts. The rotated route through hΔI then predicts an anti-inertia signal in hΔI, untested.</p>
 <h2>What would settle it</h2>
 <ul><li>Silence hΔM, and separately hΔI, during a return to food and during straight heading maintenance: return should fail, heading should survive.</li><li>Image hΔM and FC2 together, and hΔI and hΔA together: bumps half a turn apart.</li><li>Image hΔH or hΔA during a return: bump along the outbound displacement, not toward the food.</li></ul>
 <h2>Prior work</h2>
-<p>Hulse 2021 drew the two-arbor contact motif on hΔ neurons without its sign consequence. Liao 2025 describe an anti-goal circuit further downstream in the lateral accessory lobe. Nanni &amp; Lee 2026 propose FB5A as the FC2 normaliser. The hΔM and hΔI rotations and their necessity for return are not in print.</p>
+<p>Hulse 2021 drew the two-arbor contact motif on hΔ neurons without its sign consequence. Liao 2025 describe an anti-goal circuit further downstream in the lateral accessory lobe. Nanni &amp; Lee 2026 propose FB5A as the FC2 normaliser. Avritzer 2026 (thesis, abstract) reports hΔA as a 7–10 s working memory that promotes continuing in the recent travel direction. The hΔM and hΔI rotations and their necessity for return are not in print.</p>
 <div class="methods">
 <h2>Methods</h2>
 <p>Arbor assignment uses the column offset between presynaptic and target labels, with hΔ cells named by dendritic column (Hulse 2021) and hΔB's output on its axonal arbor (Lyu 2022): 180° from a presynaptic hΔ label means contact on the target's dendrite, 0° on its axon. Route rotations are the summed mean offsets of the steps (FC2B→hΔM 336° + hΔM→PFL3 202°; hΔA→hΔI 183° + hΔI→PFL3 192°) relative to the travel bump. Route screen: every columnar intermediate with ≥ 150 synapses on both legs to PFL3, PFL2, PFL1. Closed-loop agent: rate-based, eight columns, store from finding 1, PFL3 steering as left minus right proportional to sin(goal − heading), rotation as a parameter, then each measured route with the bump at the axon column. Tables: <code>data/derived/fb_offset_stats.csv</code> (hemibrain: hΔA→hΔI 1,170 synapses, 63 % at 180°); results: <code>simulations/closed_loop_kernel_controls.json</code>, <code>closed_loop_routes_tspace_results.json</code>; notes: <code>docs/audit-2026-09-13.md</code> §2.</p>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Finding 4: The fly&#x27;s compass has a built-in brake that no published model includes</title>
+<title>Finding 4: The fly&#x27;s compass has a built-in brake that textbook models leave out</title>
 <style>
   :root { --ink:#1b1b1f; --muted:#5a5f6a; --bg:#fbfbf8; --card:#fff; --line:#e3e2dc; --accent:#b4432c; --accent2:#2a6f97; --good:#2f7d4a; --warn:#b07a12; --purple:#6a4c93; }
   body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
@@ -21,6 +21,9 @@
   .anim button { font:13px inherit; padding:3px 10px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
   .anim input[type=range] { width:160px; }
   .nav { display:flex; gap:14px; font-size:13px; margin:0 0 18px; } .nav a { color:var(--muted); text-decoration:none; }
+  .status { border:1px solid var(--line); border-left:4px solid var(--warn); background:#fbf7ee; padding:10px 14px; margin:0 0 18px; font-size:14px; }
+  .status b { color:var(--warn); }
+  .status ul { margin:4px 0 0; padding-left:20px; }
   .kicker { color:var(--accent); font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:12px; margin-bottom:6px; }
   .methods { color:var(--muted); font-size:14px; } .methods h2 { color:var(--ink); }
   a { color:var(--accent2); }
@@ -29,7 +32,7 @@
 <body>
 <main>
   <nav class="nav"><a href="../circuit.html">Circuit view</a><a href="index.html">List view</a><a href="../index.html">Home</a></nav>
-<div class="kicker">Finding 4 of 4 · most against the models</div><h1>The fly's compass has a built-in brake that no published model includes</h1>
+<div class="kicker">Finding 4 of 4 · most against the models</div><h1>The fly's compass has a built-in brake that textbook models leave out</h1><div class="status"><b>Status of this page.</b> Nothing here is an experiment; every claim is one of the following.<ul><li><b>Prior work:</b> the ellipsoid-body EPG→PEN synapses were noted by Turner-Evans 2020 and Hulse 2021; connectome-fitted compass models that include them integrate velocity (Duan 2025; Hulse 2026); Δ7 excites PEN rather than inhibiting it (Eddy 2026).</li><li><b>Connectome observation (this work):</b> the 3:1 ratio against the bridge route and its placement on the write tile, in two connectomes.</li><li><b>Simulation:</b> a textbook ring attractor with the contact added at face value stops rotating; fitted models absorb it through per-type gains.</li><li><b>Hypothesis:</b> the contact is functionally weak or cancelled. Untested.</li></ul></div>
 <p class="summary"><b>Summary.</b> The compass ring attractor is moved by the PEN shifter neurons, which every model treats as one-way conveyors: read the heading bump at position x, write it to x±1. The connectome shows each PEN receives about three times more input from the position it writes to than from the position it reads from. Both left and right shifters do this, so the effect has no direction: the neurons a shifter pushes on push back on it, and the shifters anchor the bump where it already is. In a standard ring-attractor model, adding this feedback at the measured strength collapses rotation. Real flies turn normally, so these synapses cannot be acting the way a naive reading of the wiring says.</p>
 <figure>
     <svg viewBox="0 0 900 300" width="100%" role="img" aria-label="Shifter loop: read, write and the measured feedback">
@@ -129,17 +132,17 @@
 <tr><td class="">0.5×</td><td class="n">72</td></tr>
 <tr><td class="">1×</td><td class="n">0</td></tr>
 <tr><td class="">2.7× (measured)</td><td class="n">0</td></tr></table>
-<p>Rotation collapses as the feedback grows. The zero at high feedback is partly an artefact of rate saturation in a minimal model; the defensible claim is that rotation gain falls steeply as the anchor strengthens. The collapse does not depend on how the contact is implemented: as a presynaptic gain on the shifter's terminals that only redistributes a fixed release toward the write position, rotation falls to 25°/s at 1× and 0 at the measured ratio; with divisive normalisation of the shifter population, to 34°/s and 0. The dark bump is stable in every version.</p>
+<p>Rotation collapses as the feedback grows. The zero at high feedback is partly an artefact of rate saturation in a minimal model; the defensible claim is that rotation gain falls steeply as the anchor strengthens. Models fitted to the raw connectome, which include these synapses at the measured ratio, do integrate velocity (Duan, Dong &amp; Fiete 2025; Hulse, Aneesh, Romani, Jayaraman &amp; Hermundstad 2026), by assigning each cell-type pair its own gain; that is the first escape route below, found by fitting rather than assumed. The collapse does not depend on how the contact is implemented: as a presynaptic gain on the shifter's terminals that only redistributes a fixed release toward the write position, rotation falls to 25°/s at 1× and 0 at the measured ratio; with divisive normalisation of the shifter population, to 34°/s and 0. The dark bump is stable in every version.</p>
 <h2>Why it matters</h2>
 <p>The loop turns the shifters into anchors. Normal stalling of a ring attractor is two equal and opposite pushes cancelling. This is different: both shifter populations pile excitation onto wherever the bump already is, and the anchor feeds on itself, because a stronger turn signal drives the shifters harder and so drives the anchor harder too. A compass with this loop is very stable in darkness and very sluggish under rotation.</p>
-<p>Flies are not sluggish, so one of two things is true, and each is a different compass:</p>
+<p>Flies are not sluggish, so one of two things is true, and each is a different compass. A third correction applies to every model here: Δ7's glutamate inhibits EPG but excites PENa and PENb (Eddy et al. 2026), so the "Δ7-like global inhibition" onto the shifters in this model has the wrong sign.</p>
 <ol><li>The write-position synapses are functionally weak despite their number, whether they drive the cell or modulate its terminals.</li><li>They are cancelled by inhibition the models leave out (Δ7, ExR4, ExR6).</li></ol>
 <h2>What would settle it</h2>
 <ul><li>Record a shifter while stimulating EPGs at its read position versus its write position, and compare the response.</li><li>At the EM level, check whether the write-position contacts carry the receptors of a driving synapse or of a terminal modulator.</li><li>Refit a ring-attractor model with the loop included. If rotation gain and dark stability cannot both be matched, the loop must be gated or silent.</li></ul>
 <div class="methods">
 <h2>Methods</h2>
 <p>Synapse counts are from the hemibrain v1.2 traced adjacencies, with each synapse assigned to a brain region, and from MaleCNS v1.0. Read-position synapses are EPG→PEN synapses in the protocerebral bridge; write-position synapses are EPG→PEN synapses in the ellipsoid body, restricted to the EPG wedge the PEN projects to. The simulation is a rate-based ring attractor with eight EPG positions and left and right PEN populations, constant asymmetric drive to one PEN population, and an added EPG→PEN term from the write position whose strength is varied. Analysis: <code>docs/compass-recurrence.md</code>; script: <code>scripts/compass_recurrence.py</code>, <code>scripts/hemibrain_compass_comparison.py</code>; simulations: <code>simulations/eb_epg_pen_loop.py</code>, <code>simulations/eb_epg_pen_loop_variants.py</code> (somatic drive, presynaptic release gain, divisive normalisation).</p>
-<p>References: Turner-Evans et al. 2017, 2020; Green et al. 2017; Hulse et al. 2021; Maimon &amp; Abbott 2026.</p>
+<p>References: Turner-Evans et al. 2017, 2020; Green et al. 2017; Hulse et al. 2021; Duan, Dong &amp; Fiete 2025; Hulse et al. 2026; Eddy et al. 2026; Maimon &amp; Abbott 2026.</p>
 </div>
 </main>
 </body>
