@@ -26,3 +26,5 @@ Paper notes distinguish completed full-text/figure/supplement readings from prel
 ## Attribution
 
 MaleCNS data: FlyEM/HHMI Janelia, University of Cambridge, MRC LMB, and Google Research; [project](https://male-cns.janelia.org/), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Derived connectivity tables retain this attribution. Paper PDFs retain their authors' and publishers' licenses; original research notes are separate from source documents.
+
+Code and original notes: MIT ([LICENSE](LICENSE)).
